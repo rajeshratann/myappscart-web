@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GameVault – 5 Arcade Games in 1 App</title>
+  <meta name="description" content="GameVault: five action-packed arcade games in one app. Arrow shooting, knife throwing, bubble pop, balloon pop, and coin drop. Free on Android." />
+  <style>
+    :root {
+      --primary: #FF6B35;
+      --secondary: #FFD700;
+      --dark: #0A0A1A;
+      --bg: #0f0f23;
+      --surface: #1a1a2e;
+      --surface2: #16213e;
+      --text: #f0f0f0;
+      --muted: #9ca3af;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #1a0533 0%, #0A0A1A 40%, #1a1005 100%);
+      border-bottom: 1px solid rgba(255,107,53,0.3);
+      color: #fff;
+      padding: 70px 24px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(255,107,53,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero .app-icon {
+      font-size: 80px;
+      margin-bottom: 18px;
+      display: block;
+      filter: drop-shadow(0 0 30px rgba(255,107,53,0.5));
+    }
+    .hero h1 {
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      background: linear-gradient(135deg, #FF6B35, #FFD700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero .tagline {
+      margin-top: 12px;
+      font-size: 17px;
+      color: rgba(255,255,255,0.75);
+      max-width: 500px;
+      margin-inline: auto;
+    }
+    .badge-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+    .badge {
+      background: rgba(255,107,53,0.15);
+      border: 1px solid rgba(255,107,53,0.4);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #FFD700;
+    }
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 32px;
+      background: linear-gradient(135deg, #FF6B35, #e55a25);
+      color: #fff;
+      font-weight: 800;
+      font-size: 16px;
+      padding: 14px 32px;
+      border-radius: 32px;
+      box-shadow: 0 8px 24px rgba(255,107,53,0.4);
+      transition: transform .15s, box-shadow .15s;
+      letter-spacing: 0.3px;
+    }
+    .store-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(255,107,53,0.5);
+      text-decoration: none;
+      color: #fff;
+    }
+
+    /* Sections */
+    section {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 52px 20px;
+    }
+    h2 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 24px;
+      color: #fff;
+    }
+    h2 span {
+      background: linear-gradient(135deg, #FF6B35, #FFD700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Game cards */
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+      gap: 14px;
+    }
+    .game-card {
+      border-radius: var(--radius);
+      padding: 22px 14px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .game-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: inherit;
+      filter: brightness(0.85);
+      z-index: 0;
+    }
+    .game-card > * { position: relative; z-index: 1; }
+    .game-card .g-icon { font-size: 40px; display: block; margin-bottom: 10px; }
+    .game-card h3 { font-size: 14px; font-weight: 800; color: #fff; }
+    .game-card p { font-size: 12px; color: rgba(255,255,255,0.8); margin-top: 5px; line-height: 1.4; }
+    .g-arrow  { background: linear-gradient(135deg, #43b89c, #2d8a75); }
+    .g-knife  { background: linear-gradient(135deg, #e05c5c, #b83636); }
+    .g-bubble { background: linear-gradient(135deg, #5c8ee0, #3660b8); }
+    .g-balloon { background: linear-gradient(135deg, #e0a05c, #b87030); }
+    .g-coin   { background: linear-gradient(135deg, #c9a02a, #a07820); }
+
+    /* Features */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 14px;
+    }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+    .feature-card .f-icon { font-size: 30px; margin-bottom: 10px; display: block; }
+    .feature-card h3 { font-size: 15px; font-weight: 700; color: #fff; }
+    .feature-card p { font-size: 13px; color: var(--muted); margin-top: 5px; }
+
+    /* Divider */
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* Nav links */
+    .links-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      padding: 28px 20px;
+      background: var(--surface);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .links-row a {
+      background: rgba(255,107,53,0.12);
+      color: #FF6B35;
+      border: 1px solid rgba(255,107,53,0.25);
+      border-radius: 20px;
+      padding: 7px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: background .12s;
+    }
+    .links-row a:hover { background: rgba(255,107,53,0.25); text-decoration: none; }
+
+    footer {
+      background: #050510;
+      color: #6b7280;
+      text-align: center;
+      padding: 28px;
+      font-size: 13px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    footer a { color: #6b7280; }
+    footer a:hover { color: #FF6B35; }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 30px; }
+      .hero .app-icon { font-size: 60px; }
+      .games-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+  <span class="app-icon">🕹️</span>
+  <h1>GameVault</h1>
+  <p class="tagline">Five action-packed arcade games in one app. Hours of fun — completely free.</p>
+  <div class="badge-row">
+    <span class="badge">5 Games</span>
+    <span class="badge">Free to Play</span>
+    <span class="badge">No Account Needed</span>
+    <span class="badge">Android</span>
+  </div>
+  <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.gamevault.app" target="_blank" rel="noopener">
+    ▶&nbsp; Get it on Google Play
+  </a>
+</div>
+
+<!-- Games -->
+<section>
+  <h2>Five Games, <span>One App</span></h2>
+  <div class="games-grid">
+    <div class="game-card g-arrow">
+      <span class="g-icon">🏹</span>
+      <h3>Arrow Shooting</h3>
+      <p>Stretch the bow, aim, and fire — beat the wind</p>
+    </div>
+    <div class="game-card g-knife">
+      <span class="g-icon">🔪</span>
+      <h3>Knife Throw</h3>
+      <p>Time your throw to split the spinning target</p>
+    </div>
+    <div class="game-card g-bubble">
+      <span class="g-icon">🫧</span>
+      <h3>Bubble Shooter</h3>
+      <p>Match and pop bubbles before they reach the bottom</p>
+    </div>
+    <div class="game-card g-balloon">
+      <span class="g-icon">🎈</span>
+      <h3>Balloon Pop</h3>
+      <p>Tap fast — don't let the balloons escape</p>
+    </div>
+    <div class="game-card g-coin">
+      <span class="g-icon">🪙</span>
+      <h3>Coin Drop</h3>
+      <p>Drop coins into the right slots and rack up points</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- Features -->
+<section>
+  <h2>Why <span>GameVault?</span></h2>
+  <div class="features">
+    <div class="feature-card">
+      <span class="f-icon">🏆</span>
+      <h3>High Score Leaderboard</h3>
+      <p>Compete against your own best scores across all five games</p>
+    </div>
+    <div class="feature-card">
+      <span class="f-icon">🌬️</span>
+      <h3>Dynamic Physics</h3>
+      <p>Wind, gravity, and realistic trajectories make every shot unique</p>
+    </div>
+    <div class="feature-card">
+      <span class="f-icon">🎨</span>
+      <h3>Multiple Themes</h3>
+      <p>Unlock visual themes for each game as you progress</p>
+    </div>
+    <div class="feature-card">
+      <span class="f-icon">🔊</span>
+      <h3>Immersive Sound</h3>
+      <p>Satisfying sound effects for every hit, pop, and bullseye</p>
+    </div>
+    <div class="feature-card">
+      <span class="f-icon">🎁</span>
+      <h3>Rewarded Bonuses</h3>
+      <p>Watch an ad to continue, revive, or earn extra coins</p>
+    </div>
+    <div class="feature-card">
+      <span class="f-icon">📱</span>
+      <h3>Works Offline</h3>
+      <p>All games playable without an internet connection</p>
+    </div>
+  </div>
+</section>
+
+<!-- Nav links -->
+<div class="links-row">
+  <a href="/game/gv/">Home</a>
+  <a href="/game/gv/policy.html">Privacy Policy</a>
+  <a href="/game/gv/terms.html">Terms of Service</a>
+  <a href="/game/gv/support.html">Support</a>
+  <a href="/">← MyAppsCart</a>
+</div>
+
+<footer>
+  <p>&copy; 2026 MyAppsCart &nbsp;·&nbsp; <a href="mailto:support@myappscart.com">support@myappscart.com</a></p>
+</footer>
+
+</body>
+</html>
