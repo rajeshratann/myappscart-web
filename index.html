@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyAppsCart — Indie Apps</title>
+  <meta name="description" content="MyAppsCart — small, focused, thoughtfully designed Android apps. No accounts, no bloat." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ground:       #0A0E1F;
+      --surface:      #141828;
+      --surface-2:    #1E2440;
+      --text:         #E6EAFF;
+      --text-muted:   #7B85B4;
+      --accent:       #FFB020;
+      --accent-2:     #5B7CFA;
+      --radius:       16px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--ground);
+      color: var(--text);
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    #neural-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .wrap { position: relative; z-index: 1; }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 48px;
+      border-bottom: 1px solid rgba(91,124,250,0.1);
+    }
+
+    .logo {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: -0.4px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      text-decoration: none;
+    }
+
+    .logo-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: blink 2.4s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.75); }
+    }
+
+    .nav-right {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 96px 48px 80px;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 22px;
+    }
+
+    .hero-title {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: clamp(46px, 8vw, 84px);
+      font-weight: 700;
+      line-height: 1.0;
+      letter-spacing: -2.5px;
+      color: var(--text);
+      margin-bottom: 28px;
+    }
+
+    .hero-title .blue { color: var(--accent-2); }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 440px;
+      line-height: 1.65;
+      font-weight: 400;
+    }
+
+    /* ── APPS ── */
+    .apps-section {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 48px 120px;
+    }
+
+    .section-rule {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 40px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .rule-line {
+      flex: 1;
+      height: 1px;
+      background: rgba(91,124,250,0.12);
+    }
+
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 18px;
+    }
+
+    /* ── APP CARD ── */
+    .app-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid rgba(91,124,250,0.1);
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+
+    .app-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 28% 18%, rgba(91,124,250,0.09) 0%, transparent 65%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .app-card:hover {
+      transform: translateY(-5px) rotate(-0.4deg);
+      border-color: rgba(91,124,250,0.3);
+      box-shadow: 0 24px 48px rgba(0,0,0,0.45), 0 0 0 1px rgba(91,124,250,0.18);
+    }
+
+    .app-card:hover::after { opacity: 1; }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .app-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+
+    .icon-brain {
+      background: linear-gradient(135deg, #5B7CFA 0%, #8B5CF6 100%);
+      box-shadow: 0 8px 20px rgba(91,124,250,0.28);
+    }
+
+    .app-info { flex: 1; min-width: 0; }
+
+    .app-name {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+
+    .app-cat {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .app-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .tag {
+      background: rgba(91,124,250,0.12);
+      color: #8BA4FF;
+      border-radius: 20px;
+      padding: 3px 9px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+    }
+
+    .tag.gold {
+      background: rgba(255,176,32,0.12);
+      color: var(--accent);
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-btn {
+      background: var(--accent-2);
+      color: #fff;
+      border-radius: 9px;
+      padding: 7px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      display: inline-block;
+      transition: background 0.15s;
+    }
+
+    .app-card:hover .cta-btn { background: #4a6ae8; }
+
+    .platform {
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    /* ── COMING SOON CARD ── */
+    .card-soon {
+      background: rgba(20,24,40,0.5);
+      border: 1px dashed rgba(91,124,250,0.14);
+      border-radius: var(--radius);
+      padding: 26px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .soon-ring {
+      width: 60px;
+      height: 60px;
+      border-radius: 14px;
+      border: 2px dashed rgba(91,124,250,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: rgba(123,133,180,0.4);
+      flex-shrink: 0;
+    }
+
+    .soon-text .soon-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(123,133,180,0.4);
+      margin-bottom: 5px;
+    }
+
+    .soon-text .soon-name {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: rgba(230,234,255,0.2);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid rgba(91,124,250,0.08);
+      padding: 32px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-logo {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-copy {
+      width: 100%;
+      font-size: 12px;
+      color: rgba(123,133,180,0.4);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav          { padding: 20px 22px; }
+      .nav-right   { display: none; }
+      .hero        { padding: 64px 22px 60px; }
+      .hero-title  { letter-spacing: -1.5px; }
+      .apps-section{ padding: 0 22px 80px; }
+      footer       { padding: 28px 22px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .app-card    { transition: none; }
+      .app-card:hover { transform: none; }
+      .logo-dot    { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="neural-canvas"></canvas>
+
+<div class="wrap">
+
+  <nav>
+    <a class="logo" href="/">
+      <span class="logo-dot"></span>
+      MyAppsCart
+    </a>
+    <span class="nav-right">Indie apps for curious minds</span>
+  </nav>
+
+  <section class="hero">
+    <p class="eyebrow">Independent App Studio</p>
+    <h1 class="hero-title">
+      Small apps.<br>
+      <span class="blue">Big ideas.</span>
+    </h1>
+    <p class="hero-sub">We build focused, thoughtfully crafted Android apps — no accounts required, no bloat, nothing tracked.</p>
+  </section>
+
+  <section class="apps-section">
+    <div class="section-rule">
+      <span class="section-label">Our Apps</span>
+      <div class="rule-line"></div>
+    </div>
+
+    <div class="apps-grid">
+
+      <!-- Brain Battle -->
+      <a class="app-card" href="/game/bb/">
+        <div class="card-top">
+          <div class="app-icon icon-brain">🧠</div>
+          <div class="app-info">
+            <div class="app-name">Brain Battle</div>
+            <div class="app-cat">Puzzle · Brain Training</div>
+          </div>
+        </div>
+        <p class="app-desc">Four mini-games in one — Word Connect, Number Puzzle, Memory Match, and Color Challenge. 10,000+ levels, daily challenges, fully offline.</p>
+        <div class="tags">
+          <span class="tag">Offline</span>
+          <span class="tag">No account</span>
+          <span class="tag gold">Free</span>
+        </div>
+        <div class="card-footer">
+          <span class="cta-btn">Learn more →</span>
+          <span class="platform">Android</span>
+        </div>
+      </a>
+
+      <!-- Coming soon -->
+      <div class="card-soon">
+        <div class="soon-ring">+</div>
+        <div class="soon-text">
+          <p class="soon-label">Coming soon</p>
+          <p class="soon-name">Next App</p>
+        </div>
+      </div>
+
+      <div class="card-soon">
+        <div class="soon-ring">+</div>
+        <div class="soon-text">
+          <p class="soon-label">Coming soon</p>
+          <p class="soon-name">Next App</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-logo">MyAppsCart</span>
+    <div class="footer-links">
+      <a href="mailto:support@myappscart.com">Contact</a>
+      <a href="/game/bb/policy.html">Privacy</a>
+    </div>
+    <p class="footer-copy">© 2026 MyAppsCart · All rights reserved</p>
+  </footer>
+
+</div>
+
+<script>
+  const canvas = document.getElementById('neural-canvas');
+  const ctx    = canvas.getContext('2d');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let W, H, nodes, raf;
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function spawn() {
+    nodes = Array.from({ length: 52 }, () => ({
+      x:  Math.random() * W,
+      y:  Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.28,
+      vy: (Math.random() - 0.5) * 0.28,
+      r:  Math.random() * 1.4 + 0.5,
+    }));
+  }
+
+  function tick() {
+    ctx.clearRect(0, 0, W, H);
+
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const d  = Math.sqrt(dx * dx + dy * dy);
+        if (d < 130) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(91,124,250,${(1 - d / 130) * 0.11})`;
+          ctx.lineWidth   = 0.7;
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    nodes.forEach(n => {
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(91,124,250,0.32)';
+      ctx.fill();
+      n.x += n.vx;
+      n.y += n.vy;
+      if (n.x < 0 || n.x > W) n.vx *= -1;
+      if (n.y < 0 || n.y > H) n.vy *= -1;
+    });
+
+    raf = requestAnimationFrame(tick);
+  }
+
+  if (!reduce) {
+    resize();
+    spawn();
+    tick();
+    window.addEventListener('resize', () => { resize(); spawn(); });
+  }
+</script>
+
+</body>
+</html>
