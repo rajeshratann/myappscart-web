@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kitty Gaming – Teen Patti, Call Break, 28 & Kitty</title>
+  <meta name="description" content="Kitty Gaming: India's favourite card game platform with Teen Patti, Call Break, 28, and Kitty. Play with friends or offline bots. Free on Android." />
+  <style>
+    :root {
+      --primary:  #DC143C;
+      --gold:     #FFD700;
+      --gold-dim: #b8860b;
+      --dark:     #0a0a0f;
+      --bg:       #0f0008;
+      --surface:  #1a0010;
+      --surface2: #200015;
+      --text:     #f0e8f0;
+      --muted:    #9ca3af;
+      --radius:   14px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #1a0008 0%, #0a0a0f 40%, #1a0800 100%);
+      border-bottom: 1px solid rgba(220,20,60,0.3);
+      color: #fff;
+      padding: 70px 24px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(220,20,60,0.18) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero .app-icon {
+      font-size: 88px;
+      margin-bottom: 18px;
+      display: block;
+      filter: drop-shadow(0 0 36px rgba(220,20,60,0.6));
+      animation: float 3.5s ease-in-out infinite;
+    }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    .hero h1 {
+      font-size: 46px;
+      font-weight: 900;
+      letter-spacing: -2px;
+      background: linear-gradient(135deg, var(--gold) 0%, #fff5cc 50%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero .tagline {
+      margin-top: 14px;
+      font-size: 17px;
+      color: rgba(255,255,255,0.72);
+      max-width: 520px;
+      margin-inline: auto;
+      line-height: 1.65;
+    }
+    .badge-row {
+      display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 24px;
+    }
+    .badge {
+      background: rgba(220,20,60,0.16);
+      border: 1px solid rgba(220,20,60,0.45);
+      border-radius: 20px; padding: 5px 14px;
+      font-size: 13px; font-weight: 600; color: var(--gold);
+    }
+    .store-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin-top: 32px;
+      background: linear-gradient(135deg, var(--primary), #a00028);
+      color: #fff; font-weight: 800; font-size: 16px;
+      padding: 14px 36px; border-radius: 32px;
+      box-shadow: 0 8px 28px rgba(220,20,60,0.45);
+      transition: transform .15s, box-shadow .15s;
+      letter-spacing: 0.3px;
+    }
+    .store-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 36px rgba(220,20,60,0.55);
+      text-decoration: none; color: #fff;
+    }
+
+    /* ── Sections ── */
+    section { max-width: 880px; margin: 0 auto; padding: 56px 20px; }
+    h2 {
+      font-size: 26px; font-weight: 800; margin-bottom: 28px; color: #fff;
+    }
+    h2 span {
+      background: linear-gradient(135deg, var(--primary), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Game cards ── */
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 14px;
+    }
+    .game-card {
+      border-radius: var(--radius); padding: 26px 18px;
+      text-align: center; position: relative; overflow: hidden;
+      transition: transform .2s;
+    }
+    .game-card:hover { transform: translateY(-4px); }
+    .game-card > * { position: relative; z-index: 1; }
+    .game-card .g-icon { font-size: 46px; display: block; margin-bottom: 12px; }
+    .game-card h3 { font-size: 15px; font-weight: 800; color: #fff; }
+    .game-card p { font-size: 12px; color: rgba(255,255,255,0.78); margin-top: 6px; line-height: 1.45; }
+
+    .g-kitty   { background: linear-gradient(135deg, #7b0020, #DC143C); box-shadow: 0 8px 24px rgba(220,20,60,0.3); }
+    .g-teenpatti { background: linear-gradient(135deg, #1a3a6e, #2d5aa0); box-shadow: 0 8px 24px rgba(45,90,160,0.3); }
+    .g-callbreak { background: linear-gradient(135deg, #0d5c3a, #14b87a); box-shadow: 0 8px 24px rgba(20,184,122,0.25); }
+    .g-28      { background: linear-gradient(135deg, #7a4500, #c97a00); box-shadow: 0 8px 24px rgba(201,122,0,0.3); }
+
+    /* ── Features ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 14px;
+    }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid rgba(220,20,60,0.12);
+      border-radius: var(--radius); padding: 22px;
+      transition: border-color .2s;
+    }
+    .feature-card:hover { border-color: rgba(220,20,60,0.3); }
+    .feature-card .f-icon { font-size: 32px; margin-bottom: 10px; display: block; }
+    .feature-card h3 { font-size: 15px; font-weight: 700; color: #fff; }
+    .feature-card p { font-size: 13px; color: var(--muted); margin-top: 6px; line-height: 1.55; }
+
+    /* ── How to play ── */
+    .steps { display: flex; flex-direction: column; gap: 18px; }
+    .step {
+      display: flex; gap: 18px; align-items: flex-start;
+      background: var(--surface); border: 1px solid rgba(255,215,0,0.1);
+      border-radius: var(--radius); padding: 20px;
+    }
+    .step-num {
+      width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--primary), #a00028);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 15px; color: #fff;
+      box-shadow: 0 4px 12px rgba(220,20,60,0.35);
+    }
+    .step h3 { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .step p { font-size: 13px; color: var(--muted); }
+
+    /* ── Divider ── */
+    .divider { border: none; border-top: 1px solid rgba(255,255,255,0.06); max-width: 880px; margin: 0 auto; }
+
+    /* ── Nav links ── */
+    .links-row {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      justify-content: center; padding: 28px 20px;
+      background: var(--surface);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .links-row a {
+      background: rgba(220,20,60,0.1); color: var(--primary);
+      border: 1px solid rgba(220,20,60,0.28);
+      border-radius: 20px; padding: 7px 18px;
+      font-size: 13px; font-weight: 600;
+      transition: background .12s;
+    }
+    .links-row a:hover { background: rgba(220,20,60,0.22); text-decoration: none; }
+
+    /* ── Footer ── */
+    footer {
+      background: #050005;
+      color: #6b7280; text-align: center;
+      padding: 28px; font-size: 13px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    footer a { color: #6b7280; }
+    footer a:hover { color: var(--primary); }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 32px; }
+      .hero .app-icon { font-size: 64px; }
+      .games-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+  <span class="app-icon">🃏</span>
+  <h1>Kitty Gaming</h1>
+  <p class="tagline">India's most exciting card game platform. Play Teen Patti, Call Break, 28, and Kitty with friends — or challenge smart bots offline.</p>
+  <div class="badge-row">
+    <span class="badge">4 Card Games</span>
+    <span class="badge">Multiplayer</span>
+    <span class="badge">Offline Bots</span>
+    <span class="badge">Free to Play</span>
+    <span class="badge">Android</span>
+  </div>
+  <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.kittygaming.kitty_gaming" target="_blank" rel="noopener">
+    ▶&nbsp; Get it on Google Play
+  </a>
+</div>
+
+<!-- Games -->
+<section>
+  <h2>Four Games, <span>One App</span></h2>
+  <div class="games-grid">
+    <div class="game-card g-kitty">
+      <span class="g-icon">🃏</span>
+      <h3>Kitty</h3>
+      <p>The classic kitty card game with dynamic betting rounds and high-stakes showdowns</p>
+    </div>
+    <div class="game-card g-teenpatti">
+      <span class="g-icon">♠️</span>
+      <h3>Teen Patti</h3>
+      <p>South Asia's favourite 3-card game — go blind or seen, bluff your way to the pot</p>
+    </div>
+    <div class="game-card g-callbreak">
+      <span class="g-icon">🏆</span>
+      <h3>Call Break</h3>
+      <p>Strategic trick-taking with trump suits — bid smart, play smarter</p>
+    </div>
+    <div class="game-card g-28">
+      <span class="g-icon">🎯</span>
+      <h3>28</h3>
+      <p>Kerala's iconic point-based trump card game — master the bids to rule the table</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- Features -->
+<section>
+  <h2>Why <span>Kitty Gaming?</span></h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="f-icon">🤖</span>
+      <h3>Smart Offline Bots</h3>
+      <p>Play any game anytime — intelligent AI opponents challenge you even without an internet connection</p>
+    </div>
+    <div class="feature-card">
+      <span class="f-icon">👥</span>
+      <h3>Live Multiplayer</h3>
+      <p>Invite friends or match with players worldwide in real-time online tables</p>
+    </div>
+    <div class="feature-card">
+      <span class="f-icon">🪙</span>
+      <h3>Virtual Coins</h3>
+      <p>Earn coins through gameplay, daily login streaks, and rewarded ad packs — no real money involved</p>
+    </div>
+    <div class="feature-card">
+      <span class="f-icon">🎁</span>
+      <h3>7-Day Daily Rewards</h3>
+      <p>Log in every day to grow your coin stack with escalating streak bonuses</p>
+    </div>
+    <div class="feature-card">
+      <span class="f-icon">🎨</span>
+      <h3>Theme Shop</h3>
+      <p>Unlock custom card backs and board themes to personalise your table</p>
+    </div>
+    <div class="feature-card">
+      <span class="f-icon">🏅</span>
+      <h3>Leaderboard</h3>
+      <p>Climb the global ranks and prove you rule the table across all four games</p>
+    </div>
+    <div class="feature-card">
+      <span class="f-icon">🔐</span>
+      <h3>Easy Sign-In</h3>
+      <p>Sign in with Google or Facebook in seconds — no passwords, no friction</p>
+    </div>
+    <div class="feature-card">
+      <span class="f-icon">📱</span>
+      <h3>Smooth & Lightweight</h3>
+      <p>Optimised for low-end devices — fast load times and buttery-smooth card animations</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- How to play -->
+<section>
+  <h2>Get Started <span>in Minutes</span></h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>
+        <h3>Download for free</h3>
+        <p>Install Kitty Gaming from Google Play — no payment, no subscription required.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div>
+        <h3>Pick your game</h3>
+        <p>Choose from Kitty, Teen Patti, Call Break, or 28 — each game has its own lobby and tables.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>
+        <h3>Play online or offline</h3>
+        <p>Jump into a live multiplayer room or start an instant offline game against smart AI bots.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div>
+        <h3>Win coins &amp; climb ranks</h3>
+        <p>Collect virtual coins, unlock themes, and rise on the global leaderboard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Nav links -->
+<div class="links-row">
+  <a href="/game/kg/">Home</a>
+  <a href="/game/kg/policy.html">Privacy Policy</a>
+  <a href="/game/kg/terms.html">Terms of Service</a>
+  <a href="/game/kg/support.html">Support</a>
+  <a href="/">← MyAppsCart</a>
+</div>
+
+<footer>
+  <p>&copy; 2026 MyAppsCart &nbsp;·&nbsp; <a href="mailto:support@myappscart.com">support@myappscart.com</a></p>
+</footer>
+
+</body>
+</html>
