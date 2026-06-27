@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JiVault – Privacy Policy</title>
+  <meta name="description" content="Privacy Policy for JiVault — AI document scanner and secure vault app by MyAppsCart." />
+  <style>
+    :root {
+      --primary: #1A47C8;
+      --bg: #F0F4FF;
+      --surface: #FFFFFF;
+      --text: #1B1F2E;
+      --muted: #6B7280;
+      --border: #E2E8F0;
+      --radius: 12px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      font-size: 15.5px;
+    }
+    a { color: var(--primary); }
+    a:hover { text-decoration: underline; }
+
+    header {
+      background: linear-gradient(135deg, #060F24 0%, #1A47C8 100%);
+      color: #fff;
+      padding: 44px 24px 36px;
+      text-align: center;
+    }
+    header .icon { font-size: 44px; margin-bottom: 12px; }
+    header h1 { font-size: 26px; font-weight: 800; letter-spacing: -0.4px; }
+    header p { margin-top: 6px; font-size: 13.5px; opacity: 0.75; }
+
+    main { max-width: 780px; margin: 0 auto; padding: 36px 20px 72px; }
+
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 28px 28px 24px;
+      margin-bottom: 18px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      border: 1px solid var(--border);
+    }
+    h2 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    p { color: var(--muted); margin-bottom: 12px; }
+    p:last-child { margin-bottom: 0; }
+    ul { padding-left: 20px; color: var(--muted); margin-bottom: 12px; }
+    li { margin-bottom: 6px; }
+    strong { color: var(--text); font-weight: 600; }
+    .highlight {
+      background: #EEF2FF;
+      border-left: 3px solid var(--primary);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      margin: 14px 0 0;
+      font-size: 14px;
+      color: #3730A3;
+      font-weight: 500;
+    }
+    .last-updated {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 20px;
+      margin-bottom: 24px;
+      font-size: 13.5px;
+      color: var(--muted);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .links-row {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      justify-content: center; padding: 28px 20px;
+      background: var(--surface); border-top: 1px solid var(--border);
+    }
+    .links-row a {
+      background: #EEF2FF; color: #374151; border-radius: 20px;
+      padding: 8px 18px; font-size: 13px; font-weight: 600;
+      transition: background .12s;
+    }
+    .links-row a:hover { background: #DBEAFE; color: var(--primary); text-decoration: none; }
+    footer {
+      background: #1B1F2E; color: #9CA3AF;
+      text-align: center; padding: 20px; font-size: 13px;
+    }
+    footer a { color: #9CA3AF; }
+    footer a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="icon">🔐</div>
+  <h1>JiVault — Privacy Policy</h1>
+  <p>Your documents, your privacy — here's exactly what we collect and why.</p>
+</header>
+
+<main>
+
+  <div class="last-updated">
+    📅 &nbsp; <span><strong>Last updated:</strong> June 27, 2026 &nbsp;·&nbsp; Applies to JiVault for Android, version 1.0.0+</span>
+  </div>
+
+  <div class="card">
+    <h2>🧭 Overview</h2>
+    <p>JiVault ("we", "our", or "the app") is developed and maintained by <strong>MyAppsCart</strong>. This Privacy Policy explains what information we collect, how we use it, and the choices you have. We have designed JiVault so that all document data remains on your device by default — cloud features are strictly opt-in.</p>
+    <div class="highlight">JiVault does not sell your data. It does not share your documents with any third party. All scans and files are stored locally on your device unless you explicitly enable Google Drive backup.</div>
+  </div>
+
+  <div class="card">
+    <h2>📷 Camera & Microphone</h2>
+    <p><strong>Camera:</strong> Used to scan documents, capture images for OCR, and scan QR/barcodes. Images are processed on-device or, when you use AI Enhancement features, sent to Firebase Cloud Functions for processing. Images are never stored on our servers; they are processed and immediately discarded.</p>
+    <p><strong>Microphone:</strong> Used only for voice notes and audio transcription in the Transcript feature. Audio is sent to Firebase Cloud Functions for transcription processing, then discarded. We do not retain audio recordings.</p>
+  </div>
+
+  <div class="card">
+    <h2>📁 Storage & Files</h2>
+    <p>JiVault reads from your photo library and device storage when you choose to import an existing image or file. The app writes to its own private storage directory for saving scanned documents. With Android 10+, we use scoped storage and do not access files outside the app's directory without your explicit action.</p>
+    <p>All documents, folders, notes, todos, and reminders you create in JiVault are stored locally in an encrypted Hive database on your device. <strong>No documents are synced or uploaded without your action.</strong></p>
+  </div>
+
+  <div class="card">
+    <h2>🔒 Biometric Data</h2>
+    <p>The Secure Vault feature uses Android's biometric APIs (fingerprint, face) to authenticate you. <strong>JiVault never accesses, stores, or transmits your biometric data.</strong> All biometric matching is performed entirely by your device's secure hardware (TEE/SE). We only receive a true/false authentication result.</p>
+    <p>Your vault PIN is stored as a SHA-256 hash in the device's Secure Enclave (via Android Keystore) — the original PIN is never stored or transmitted.</p>
+  </div>
+
+  <div class="card">
+    <h2>☁️ Google Sign-In & Cloud Backup</h2>
+    <p>Cloud backup is entirely <strong>optional</strong>. If you choose to enable it, JiVault requests read/write access to a dedicated folder in your Google Drive to store your documents. We only access the files JiVault created — not your other Drive contents.</p>
+    <p>We use <strong>Google Sign-In</strong> solely to authenticate cloud backup. We do not use your Google account for any other purpose, and we do not store your Google account credentials. You can revoke access at any time from your Google Account settings.</p>
+    <p>If you never enable cloud backup, JiVault never interacts with Google Drive or Google Sign-In.</p>
+  </div>
+
+  <div class="card">
+    <h2>🤖 AI Features (Hugging Face / Firebase)</h2>
+    <p>AI features (background removal, image upscaling, text summarization, audio transcription) work by sending image or text data to our <strong>Firebase Cloud Functions</strong>. These functions call AI model APIs on your behalf. The data sent is:</p>
+    <ul>
+      <li>Processed immediately and not stored on our servers</li>
+      <li>Sent only when you explicitly trigger an AI feature</li>
+      <li>Transmitted over HTTPS</li>
+    </ul>
+    <p>AI API keys are stored in Firebase Secret Manager and are never included in the app binary.</p>
+  </div>
+
+  <div class="card">
+    <h2>📊 Firebase Analytics & Crashlytics</h2>
+    <p>JiVault uses <strong>Firebase</strong> (by Google) for:</p>
+    <ul>
+      <li><strong>Firestore:</strong> Optional cloud data sync if you enable backup</li>
+      <li><strong>Cloud Functions:</strong> AI feature processing</li>
+      <li><strong>Firebase Analytics:</strong> Aggregated, anonymous usage statistics (e.g., which features are used) to help us improve the app. No personally identifiable information is collected.</li>
+    </ul>
+    <p>Firebase Analytics data is governed by <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</p>
+  </div>
+
+  <div class="card">
+    <h2>📱 Advertising (Google AdMob)</h2>
+    <p>JiVault displays ads served by <strong>Google AdMob</strong>. AdMob may collect device information, advertising identifiers (GAID), and usage data to serve relevant ads. This is governed by Google's advertising policies.</p>
+    <p>You can opt out of personalized ads by visiting your device's Privacy or Ads settings and enabling "Opt out of Ads Personalization." Premium users have the option to remove ads entirely via a one-time purchase.</p>
+  </div>
+
+  <div class="card">
+    <h2>💳 In-App Purchases</h2>
+    <p>Premium subscriptions and the lifetime purchase are processed entirely through the <strong>Google Play Billing system</strong>. JiVault does not collect or store any payment information. All transactions are handled by Google.</p>
+  </div>
+
+  <div class="card">
+    <h2>🔔 Notifications</h2>
+    <p>JiVault uses local notifications for reminders and document alerts you set yourself. These notifications are scheduled on-device and do not communicate with any external server. Push notifications are not currently used.</p>
+  </div>
+
+  <div class="card">
+    <h2>👶 Children's Privacy</h2>
+    <p>JiVault is not directed at children under 13. We do not knowingly collect personal information from children. If you believe a child has provided us with personal data, please contact us at <a href="mailto:support@myappscart.com">support@myappscart.com</a> and we will promptly delete it.</p>
+  </div>
+
+  <div class="card">
+    <h2>🌍 Data Transfers</h2>
+    <p>When you use AI features or cloud backup, data is transmitted to Google Cloud servers (Firebase / Google Drive infrastructure), which may be located outside your country. These transfers are covered by Google's standard contractual clauses and data processing agreements.</p>
+  </div>
+
+  <div class="card">
+    <h2>⚙️ Your Rights & Choices</h2>
+    <ul>
+      <li><strong>Delete your data:</strong> All documents stored locally can be deleted from within the app. See our <a href="/apps/jivault/delete-account.html">Delete Account page</a> for complete data deletion.</li>
+      <li><strong>Revoke cloud access:</strong> Remove JiVault's Google Drive access from your Google Account → Security → Third-party apps.</li>
+      <li><strong>Disable ads personalization:</strong> Via Android Privacy → Ads → Opt out of personalization.</li>
+      <li><strong>Disable analytics:</strong> Contact us to opt out of Firebase Analytics.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>🔄 Changes to this Policy</h2>
+    <p>We may update this Privacy Policy from time to time. We will notify you via an in-app notice when changes are material. The "Last updated" date at the top always reflects the current version. Continued use of JiVault after an update constitutes acceptance of the revised policy.</p>
+  </div>
+
+  <div class="card">
+    <h2>✉️ Contact Us</h2>
+    <p>Questions about this Privacy Policy or your data? We respond within 2 business days.</p>
+    <p><strong>Email:</strong> <a href="mailto:support@myappscart.com">support@myappscart.com</a><br>
+    <strong>Developer:</strong> MyAppsCart</p>
+  </div>
+
+</main>
+
+<div class="links-row">
+  <a href="/apps/jivault/">Home</a>
+  <a href="/apps/jivault/privacy.html">Privacy Policy</a>
+  <a href="/apps/jivault/terms.html">Terms of Service</a>
+  <a href="/apps/jivault/support.html">Support</a>
+  <a href="/apps/jivault/delete-account.html">Delete Account</a>
+  <a href="/">← MyAppsCart</a>
+</div>
+
+<footer>
+  <p>&copy; 2026 MyAppsCart &nbsp;·&nbsp; <a href="mailto:support@myappscart.com">support@myappscart.com</a></p>
+</footer>
+
+</body>
+</html>

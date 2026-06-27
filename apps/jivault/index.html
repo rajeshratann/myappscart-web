@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JiVault — AI Document Scanner & Secure Vault</title>
+  <meta name="description" content="JiVault: Scan, store, and protect all your documents with AI-powered scanning, 12-language OCR, biometric vault, and cloud backup." />
+  <style>
+    :root {
+      --primary:   #1A47C8;
+      --mid:       #3B82F6;
+      --light:     #60A5FA;
+      --accent:    #FFB020;
+      --bg:        #F0F4FF;
+      --surface:   #FFFFFF;
+      --text:      #1B1F2E;
+      --muted:     #6B7280;
+      --border:    #E2E8F0;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(145deg, #060F24 0%, #0D2461 45%, #1A47C8 100%);
+      color: #fff;
+      padding: 64px 24px 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(96,165,250,0.18) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 1; }
+    .hero-icon {
+      width: 88px; height: 88px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+      border: 1.5px solid rgba(255,255,255,0.22);
+      border-radius: 24px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 44px;
+      margin: 0 auto 24px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.15);
+    }
+    .hero h1 {
+      font-size: clamp(34px, 7vw, 56px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.05;
+      margin-bottom: 14px;
+    }
+    .hero-tag {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #93C5FD;
+      margin-bottom: 12px;
+    }
+    .hero p {
+      font-size: 17px;
+      opacity: 0.82;
+      max-width: 480px;
+      margin: 0 auto 28px;
+      line-height: 1.65;
+    }
+    .badge-row {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .badge {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 12.5px;
+      font-weight: 600;
+    }
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 15px;
+      padding: 14px 32px;
+      border-radius: 32px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+      transition: transform .18s, box-shadow .18s;
+    }
+    .store-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.3); text-decoration: none; }
+
+    /* ── Sections ── */
+    section { max-width: 860px; margin: 0 auto; padding: 52px 20px; }
+    section + section { padding-top: 0; }
+    h2 { font-size: 22px; font-weight: 800; margin-bottom: 22px; letter-spacing: -0.4px; }
+
+    /* ── Feature grid ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .feat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 18px;
+      transition: box-shadow .15s, transform .15s;
+    }
+    .feat:hover { box-shadow: 0 6px 24px rgba(26,71,200,.10); transform: translateY(-2px); }
+    .feat-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+    .ic-blue   { background: rgba(26,71,200,.10); }
+    .ic-green  { background: rgba(16,185,129,.10); }
+    .ic-amber  { background: rgba(245,158,11,.10); }
+    .ic-purple { background: rgba(139,92,246,.10); }
+    .ic-teal   { background: rgba(20,184,166,.10); }
+    .ic-red    { background: rgba(239,68,68,.10); }
+    .ic-indigo { background: rgba(99,102,241,.10); }
+    .ic-pink   { background: rgba(236,72,153,.10); }
+    .feat h3 { font-size: 14px; font-weight: 700; margin-bottom: 5px; }
+    .feat p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+    /* ── Highlights band ── */
+    .highlights {
+      background: linear-gradient(135deg, #060F24 0%, #0D2461 100%);
+      color: #fff;
+      padding: 56px 24px;
+    }
+    .highlights-inner { max-width: 860px; margin: 0 auto; }
+    .highlights h2 { color: #fff; margin-bottom: 32px; }
+    .hl-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 2px;
+    }
+    .hl-item {
+      background: rgba(255,255,255,0.05);
+      padding: 28px 22px;
+      border-radius: 0;
+      transition: background .15s;
+    }
+    .hl-item:first-child { border-radius: 14px 0 0 14px; }
+    .hl-item:last-child  { border-radius: 0 14px 14px 0; }
+    .hl-item:hover { background: rgba(255,255,255,0.09); }
+    .hl-num {
+      font-size: 32px;
+      font-weight: 800;
+      color: #93C5FD;
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .hl-label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      font-weight: 500;
+    }
+
+    /* ── Vault section ── */
+    .vault-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .vault-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 56px 20px;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 52px;
+      align-items: center;
+    }
+    .vault-left {}
+    .vault-badge {
+      display: inline-block;
+      background: rgba(26,71,200,.08);
+      color: var(--primary);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .vault-left h2 {
+      font-size: clamp(22px, 3vw, 30px);
+      letter-spacing: -0.8px;
+      margin-bottom: 14px;
+    }
+    .vault-left p { font-size: 15px; color: var(--muted); line-height: 1.7; }
+    .vault-perks { margin-top: 22px; display: flex; flex-direction: column; gap: 10px; }
+    .perk {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 14px; font-weight: 500; color: var(--text);
+    }
+    .perk::before {
+      content: '✓';
+      width: 22px; height: 22px;
+      background: rgba(26,71,200,.12);
+      color: var(--primary);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      flex-shrink: 0;
+      text-align: center;
+      line-height: 22px;
+    }
+    .vault-right { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .vault-card {
+      background: linear-gradient(135deg, #060F24, #1A47C8);
+      border-radius: 16px;
+      padding: 20px 16px;
+      color: #fff;
+      text-align: center;
+    }
+    .vault-card:first-child { grid-column: span 2; background: linear-gradient(135deg, #0D2461, #1A47C8, #3B82F6); }
+    .vault-card .vc-icon { font-size: 28px; margin-bottom: 8px; }
+    .vault-card h3 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+    .vault-card p { font-size: 12px; opacity: 0.65; }
+
+    /* ── Links row ── */
+    .links-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      padding: 28px 20px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+    .links-row a {
+      background: #EEF2FF;
+      color: #374151;
+      border-radius: 20px;
+      padding: 8px 18px;
+      font-size: 13.5px;
+      font-weight: 600;
+      transition: background .12s, color .12s;
+    }
+    .links-row a:hover { background: #DBEAFE; color: var(--primary); text-decoration: none; }
+
+    /* ── Footer ── */
+    footer {
+      background: #1B1F2E;
+      color: #9CA3AF;
+      text-align: center;
+      padding: 24px;
+      font-size: 13px;
+    }
+    footer a { color: #9CA3AF; }
+    footer a:hover { color: #fff; }
+
+    @media (max-width: 640px) {
+      .vault-inner { grid-template-columns: 1fr; gap: 32px; }
+      .hl-item:first-child { border-radius: 14px 14px 0 0; }
+      .hl-item:last-child  { border-radius: 0 0 14px 14px; }
+      .vault-right { grid-template-columns: 1fr 1fr; }
+      .vault-card:first-child { grid-column: span 2; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-inner">
+    <p class="hero-tag">AI Document Vault</p>
+    <div class="hero-icon">🔐</div>
+    <h1>JiVault</h1>
+    <p>Scan smarter. Store safer. Your AI-powered document vault with biometric protection, 12-language OCR, and cloud backup.</p>
+    <div class="badge-row">
+      <span class="badge">🤖 AI-Powered</span>
+      <span class="badge">🌐 12 Languages</span>
+      <span class="badge">🔒 Biometric Lock</span>
+      <span class="badge">☁️ Cloud Backup</span>
+      <span class="badge">Android</span>
+    </div>
+    <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.jivault.app" target="_blank" rel="noopener">
+      ▶ Get it on Google Play
+    </a>
+  </div>
+</div>
+
+<!-- Key numbers -->
+<div class="highlights">
+  <div class="highlights-inner">
+    <h2>Everything you need for your documents</h2>
+    <div class="hl-grid">
+      <div class="hl-item">
+        <div class="hl-num">12</div>
+        <div class="hl-label">OCR Languages</div>
+      </div>
+      <div class="hl-item">
+        <div class="hl-num">19</div>
+        <div class="hl-label">Feature Modules</div>
+      </div>
+      <div class="hl-item">
+        <div class="hl-num">14</div>
+        <div class="hl-label">Document Types</div>
+      </div>
+      <div class="hl-item">
+        <div class="hl-num">AI</div>
+        <div class="hl-label">Powered by Cloud AI</div>
+      </div>
+      <div class="hl-item">
+        <div class="hl-num">0</div>
+        <div class="hl-label">Documents left unprotected</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Features -->
+<section>
+  <h2>Everything in one vault</h2>
+  <div class="features-grid">
+
+    <div class="feat">
+      <div class="feat-icon ic-blue">📸</div>
+      <h3>AI Document Scanner</h3>
+      <p>Auto-crop, edge detection, and shadow removal. Captures crisp, print-quality scans every time.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-green">🔍</div>
+      <h3>OCR in 12 Languages</h3>
+      <p>Extract text from any image — English, Hindi, Tamil, Telugu, Gujarati, Marathi, and more.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-purple">🤖</div>
+      <h3>AI Enhancement</h3>
+      <p>Remove backgrounds, upscale images, and summarize long documents using cloud AI models.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-amber">📄</div>
+      <h3>PDF Tools</h3>
+      <p>Merge, split, compress, and annotate PDFs. Convert scans to searchable PDFs with one tap.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-teal">☁️</div>
+      <h3>Cloud Backup</h3>
+      <p>Optional Google Drive backup keeps your documents safe across devices and restores instantly.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-red">✍️</div>
+      <h3>Digital Signatures</h3>
+      <p>Draw and embed your signature directly onto documents. Export as signed PDF.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-indigo">🎙️</div>
+      <h3>Voice Transcription</h3>
+      <p>Record voice notes and let AI transcribe them to searchable text automatically.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-pink">📋</div>
+      <h3>QR Scanner</h3>
+      <p>Scan QR codes and barcodes, save history, and open links directly from the app.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-blue">🗂️</div>
+      <h3>Smart Organizer</h3>
+      <p>9 default folders — Personal, Office, Receipts, IDs, Medical, and more. Color labels included.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-amber">🔔</div>
+      <h3>Reminders & Todos</h3>
+      <p>Set reminders for document renewals, deadlines, or anything linked to your files.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-green">🔎</div>
+      <h3>Full-Text Search</h3>
+      <p>Search across all your scanned documents and notes instantly using OCR-extracted text.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-purple">🌙</div>
+      <h3>Dark Mode</h3>
+      <p>Beautiful light and dark themes. Follows your system preference automatically.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Vault deep-dive -->
+<div class="vault-section">
+  <div class="vault-inner">
+    <div class="vault-left">
+      <div class="vault-badge">Secure Vault</div>
+      <h2>Your most sensitive documents, locked down.</h2>
+      <p>JiVault's Secure Vault uses your device's biometric hardware — fingerprint or face unlock — to protect a separate, isolated space for your most sensitive files.</p>
+      <div class="vault-perks">
+        <div class="perk">4-digit PIN with SHA-256 hashing</div>
+        <div class="perk">Biometric unlock (fingerprint / Face ID)</div>
+        <div class="perk">Vault auto-locks on app background</div>
+        <div class="perk">Separate storage — invisible from main view</div>
+        <div class="perk">End-to-end encrypted local storage</div>
+      </div>
+    </div>
+    <div class="vault-right">
+      <div class="vault-card">
+        <div class="vc-icon">🔐</div>
+        <h3>Biometric Auth</h3>
+        <p>Fingerprint or Face unlock via device hardware</p>
+      </div>
+      <div class="vault-card">
+        <div class="vc-icon">🛡️</div>
+        <h3>PIN Protected</h3>
+        <p>Hashed & stored in secure enclave</p>
+      </div>
+      <div class="vault-card">
+        <div class="vc-icon">🔑</div>
+        <h3>Encrypted Storage</h3>
+        <p>AES encryption via FlutterSecureStorage</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Document types -->
+<section>
+  <h2>Organize every document type</h2>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;">
+    <span style="background:#EEF2FF;color:#3730A3;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:600;">Receipt</span>
+    <span style="background:#EEF2FF;color:#3730A3;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:600;">Invoice</span>
+    <span style="background:#EEF2FF;color:#3730A3;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:600;">Passport</span>
+    <span style="background:#EEF2FF;color:#3730A3;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:600;">Aadhaar</span>
+    <span style="background:#EEF2FF;color:#3730A3;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:600;">PAN Card</span>
+    <span style="background:#EEF2FF;color:#3730A3;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:600;">Driving License</span>
+    <span style="background:#EEF2FF;color:#3730A3;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:600;">Certificate</span>
+    <span style="background:#EEF2FF;color:#3730A3;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:600;">Resume</span>
+    <span style="background:#EEF2FF;color:#3730A3;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:600;">Medical Report</span>
+    <span style="background:#EEF2FF;color:#3730A3;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:600;">Contract</span>
+    <span style="background:#EEF2FF;color:#3730A3;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:600;">Agreement</span>
+    <span style="background:#EEF2FF;color:#3730A3;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:600;">Visiting Card</span>
+    <span style="background:#EEF2FF;color:#3730A3;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:600;">Book Page</span>
+    <span style="background:#EEF2FF;color:#3730A3;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:600;">Other</span>
+  </div>
+</section>
+
+<!-- Links -->
+<div class="links-row">
+  <a href="/apps/jivault/">Home</a>
+  <a href="/apps/jivault/privacy.html">Privacy Policy</a>
+  <a href="/apps/jivault/terms.html">Terms of Service</a>
+  <a href="/apps/jivault/support.html">Support</a>
+  <a href="/apps/jivault/delete-account.html">Delete Account</a>
+  <a href="/">← MyAppsCart</a>
+</div>
+
+<footer>
+  <p>&copy; 2026 MyAppsCart &nbsp;·&nbsp; <a href="mailto:support@myappscart.com">support@myappscart.com</a></p>
+</footer>
+
+</body>
+</html>
