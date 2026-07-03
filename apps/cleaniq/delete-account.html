@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cleaniq AI – Delete Your Data</title>
+  <meta name="description" content="How to delete all your Cleaniq AI data — a simple, step-by-step guide. No account needed; everything is stored on your device." />
+  <style>
+    :root {
+      --primary: #2563EB;
+      --danger: #DC2626;
+      --bg: #F0F6FF;
+      --surface: #FFFFFF;
+      --text: #101728;
+      --muted: #64748B;
+      --border: #E2E8F0;
+      --radius: 12px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.7; font-size: 15px;
+    }
+    a { color: var(--primary); }
+    a:hover { text-decoration: underline; }
+    header {
+      background: linear-gradient(135deg, #101728 0%, #374151 100%);
+      color: #fff; padding: 44px 24px 36px; text-align: center;
+    }
+    header .icon { font-size: 44px; margin-bottom: 12px; }
+    header h1 { font-size: 26px; font-weight: 800; letter-spacing: -0.4px; }
+    header p { margin-top: 6px; font-size: 13.5px; opacity: 0.78; }
+    main { max-width: 780px; margin: 0 auto; padding: 36px 20px 72px; }
+
+    .info-banner {
+      background: #E7FBF3; border: 1px solid #A7F3D0; border-radius: var(--radius);
+      padding: 16px 20px; margin-bottom: 24px; font-size: 14px; color: #065F46;
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .info-banner .icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+
+    .card {
+      background: var(--surface); border-radius: var(--radius); padding: 28px 28px 24px;
+      margin-bottom: 18px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); border: 1px solid var(--border);
+    }
+    .card.danger { border-left: 3px solid var(--danger); }
+    h2 { font-size: 17px; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+    h2.blue { color: var(--primary); }
+    h2.red  { color: var(--danger); }
+    p { color: var(--muted); margin-bottom: 12px; }
+    p:last-child { margin-bottom: 0; }
+    strong { color: var(--text); font-weight: 600; }
+    .steps { counter-reset: step-count; list-style: none; padding: 0; }
+    .step {
+      display: flex; gap: 16px; align-items: flex-start;
+      margin-bottom: 16px; padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .step:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .step-num {
+      width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 800; line-height: 1;
+    }
+    .step-num.blue { background: rgba(37,99,235,.1); color: var(--primary); }
+    .step-num.red  { background: rgba(220,38,38,.08); color: var(--danger); }
+    .step-body h3 { font-size: 14.5px; font-weight: 700; margin-bottom: 4px; }
+    .step-body p  { font-size: 13.5px; color: var(--muted); margin-bottom: 0; }
+
+    .data-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin-top: 4px; }
+    .data-table th {
+      background: #F5F9FF; padding: 10px 14px; text-align: left;
+      font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .5px;
+      color: var(--muted); border-bottom: 2px solid var(--border);
+    }
+    .data-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--muted); }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table td strong { color: var(--text); }
+    .badge-retained  { background: #DCFCE7; color: #166534; border-radius: 10px; padding: 2px 8px; font-size: 11px; font-weight: 600; }
+    .badge-deleted   { background: #FEE2E2; color: #991B1B; border-radius: 10px; padding: 2px 8px; font-size: 11px; font-weight: 600; }
+    .badge-optional  { background: #FEF9C3; color: #92400E; border-radius: 10px; padding: 2px 8px; font-size: 11px; font-weight: 600; }
+
+    .email-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--primary); color: #fff; font-weight: 700; font-size: 14px;
+      padding: 12px 24px; border-radius: 30px; text-decoration: none; margin-top: 12px;
+      transition: background .15s;
+    }
+    .email-btn:hover { background: #1D4ED8; text-decoration: none; }
+
+    .links-row {
+      display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+      padding: 28px 20px; background: var(--surface); border-top: 1px solid var(--border);
+    }
+    .links-row a {
+      background: #EAF2FF; color: #374151; border-radius: 20px; padding: 8px 18px;
+      font-size: 13px; font-weight: 600; transition: background .12s;
+    }
+    .links-row a:hover { background: #D6E6FF; color: var(--primary); text-decoration: none; }
+    footer { background: #101728; color: #94A3B8; text-align: center; padding: 20px; font-size: 13px; }
+    footer a { color: #94A3B8; }
+    footer a:hover { color: #fff; }
+
+    @media (max-width: 600px) {
+      .data-table { font-size: 12.5px; }
+      .data-table th, .data-table td { padding: 8px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="icon">🗑️</div>
+  <h1>Delete Your Data</h1>
+  <p>Simple, complete data removal for Cleaniq AI.</p>
+</header>
+
+<main>
+
+  <div class="info-banner">
+    <span class="icon">✅</span>
+    <span>Cleaniq AI has <strong>no account</strong> and <strong>no cloud storage</strong>. Everything the app stores lives on your device only — so deleting your data is as simple as clearing it in the app or uninstalling.</span>
+  </div>
+
+  <!-- What gets stored -->
+  <div class="card">
+    <h2 class="blue">📊 What data does Cleaniq AI store?</h2>
+    <div style="overflow-x:auto;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Data Type</th>
+            <th>Where stored</th>
+            <th>On app uninstall</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Scan index &amp; photo hashes</strong></td>
+            <td>Your device (local database)</td>
+            <td><span class="badge-deleted">Deleted</span></td>
+          </tr>
+          <tr>
+            <td><strong>Recycle bin contents</strong></td>
+            <td>Your device (local)</td>
+            <td><span class="badge-deleted">Deleted</span></td>
+          </tr>
+          <tr>
+            <td><strong>App settings &amp; preferences</strong></td>
+            <td>Your device (local)</td>
+            <td><span class="badge-deleted">Deleted</span></td>
+          </tr>
+          <tr>
+            <td><strong>Your photos, videos &amp; files</strong></td>
+            <td>Your device (never copied by us)</td>
+            <td><span class="badge-retained">Kept — the app only reads them</span></td>
+          </tr>
+          <tr>
+            <td><strong>Advertising identifier</strong></td>
+            <td>Managed by Google / your device</td>
+            <td><span class="badge-optional">Reset in Android Ad settings</span></td>
+          </tr>
+          <tr>
+            <td><strong>Anonymous analytics / crash logs</strong></td>
+            <td>Firebase (aggregated, no PII)</td>
+            <td><span class="badge-optional">Contact us to remove</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:14px;">Note: Cleaniq AI <strong>never uploads your photos, videos, or files</strong>. The table above is the complete list of what the app stores or touches.</p>
+  </div>
+
+  <!-- Option 1: Clear in app -->
+  <div class="card">
+    <h2 class="blue">✅ Option 1 — Clear data from within the app</h2>
+    <p>The quickest way to remove your Cleaniq AI data while keeping the app installed:</p>
+    <ol class="steps">
+      <li class="step">
+        <div class="step-num blue">1</div>
+        <div class="step-body">
+          <h3>Empty the Recycle Bin</h3>
+          <p>Open <strong>Recycle Bin</strong> and tap <strong>Empty</strong> to permanently remove everything you've deleted (this also reclaims the space).</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num blue">2</div>
+        <div class="step-body">
+          <h3>Clear the app's stored data</h3>
+          <p>Go to <strong>Android Settings → Apps → Cleaniq AI → Storage → Clear Data</strong>. This wipes the scan index, settings, and all app-stored data.</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num blue">3</div>
+        <div class="step-body">
+          <h3>Revoke permissions (optional)</h3>
+          <p>Under <strong>Apps → Cleaniq AI → Permissions</strong>, remove media and all-files access if you no longer want the app to read your storage.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- Option 2: Uninstall -->
+  <div class="card">
+    <h2 class="blue">📱 Option 2 — Uninstall the app</h2>
+    <p>Uninstalling Cleaniq AI permanently deletes all app-stored data — the scan index, recycle bin, and settings. Your own photos and files are never affected by uninstalling, because the app only ever <em>read</em> them; it never made its own copies.</p>
+    <ol class="steps">
+      <li class="step">
+        <div class="step-num blue">1</div>
+        <div class="step-body">
+          <h3>Long-press the Cleaniq AI icon</h3>
+          <p>Tap <strong>Uninstall</strong>, or go to <strong>Android Settings → Apps → Cleaniq AI → Uninstall</strong>.</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num blue">2</div>
+        <div class="step-body">
+          <h3>Confirm</h3>
+          <p>Android deletes all local app data immediately. There is nothing stored on our servers to remove.</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num blue">3</div>
+        <div class="step-body">
+          <h3>Empty the recycle bin first (recommended)</h3>
+          <p>If you want the space back right away, empty the app's recycle bin before uninstalling — otherwise those files remain in your storage until Android reclaims them.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- Reset ad ID -->
+  <div class="card">
+    <h2 class="blue">📱 Reset your advertising identifier</h2>
+    <p>Ads are served by Google AdMob using your device's advertising ID. To reset or delete it:</p>
+    <ol class="steps">
+      <li class="step">
+        <div class="step-num blue">1</div>
+        <div class="step-body">
+          <h3>Open Android Ad settings</h3>
+          <p>Go to <strong>Settings → Privacy → Ads</strong> (the exact path varies by device).</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num blue">2</div>
+        <div class="step-body">
+          <h3>Reset or delete the advertising ID</h3>
+          <p>Tap <strong>Reset advertising ID</strong> or <strong>Delete advertising ID</strong>, and enable <strong>Opt out of Ads Personalization</strong> if you prefer non-personalized ads.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- Contact for data deletion -->
+  <div class="card">
+    <h2 class="blue">✉️ Request analytics data deletion by email</h2>
+    <p>Cleaniq AI does not tie analytics to your identity, but if you'd like us to request removal of any anonymous analytics/crash data associated with your device, email us:</p>
+    <p><strong>Email:</strong> <a href="mailto:support@myappscart.com">support@myappscart.com</a><br>
+    <strong>Subject:</strong> Data Deletion Request — Cleaniq AI</p>
+    <p>We will respond within 5 business days and confirm the request.</p>
+    <a class="email-btn" href="mailto:support@myappscart.com?subject=Data%20Deletion%20Request%20%E2%80%94%20Cleaniq%20AI&body=Please%20delete%20any%20anonymous%20analytics%20data%20associated%20with%20my%20device.">
+      ✉️ Request via email
+    </a>
+  </div>
+
+</main>
+
+<div class="links-row">
+  <a href="/apps/cleaniq/">Home</a>
+  <a href="/apps/cleaniq/privacy.html">Privacy Policy</a>
+  <a href="/apps/cleaniq/terms.html">Terms of Service</a>
+  <a href="/apps/cleaniq/support.html">Support</a>
+  <a href="/apps/cleaniq/delete-account.html">Delete Data</a>
+  <a href="/">← MyAppsCart</a>
+</div>
+
+<footer>
+  <p>&copy; 2026 MyAppsCart &nbsp;·&nbsp; <a href="mailto:support@myappscart.com">support@myappscart.com</a></p>
+</footer>
+
+</body>
+</html>

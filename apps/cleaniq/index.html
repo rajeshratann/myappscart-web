@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cleaniq AI — Privacy-First AI Storage Cleaner</title>
+  <meta name="description" content="Cleaniq AI: free up storage with an on-device AI that finds duplicate photos, blurry shots, screenshots, junk files and more. 100% offline — nothing ever leaves your phone." />
+  <style>
+    :root {
+      --primary:   #2563EB;
+      --primary-d: #1D4ED8;
+      --mid:       #3B82F6;
+      --light:     #60A5FA;
+      --green:     #10B981;
+      --green-l:   #34D399;
+      --cyan:      #06B6D4;
+      --accent:    #34D399;
+      --bg:        #F0F6FF;
+      --surface:   #FFFFFF;
+      --text:      #101728;
+      --muted:     #64748B;
+      --border:    #E2E8F0;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(150deg, #081029 0%, #123A8A 48%, #2563EB 100%);
+      color: #fff;
+      padding: 64px 24px 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(52,211,153,0.20) 0%, transparent 58%),
+                  radial-gradient(ellipse at 85% 90%, rgba(6,182,212,0.16) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 1; }
+    .hero-icon {
+      width: 88px; height: 88px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+      border: 1.5px solid rgba(255,255,255,0.22);
+      border-radius: 24px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 44px;
+      margin: 0 auto 24px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.15);
+    }
+    .hero h1 {
+      font-size: clamp(34px, 7vw, 56px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.05;
+      margin-bottom: 14px;
+    }
+    .hero-tag {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #6EE7B7;
+      margin-bottom: 12px;
+    }
+    .hero p {
+      font-size: 17px;
+      opacity: 0.86;
+      max-width: 500px;
+      margin: 0 auto 28px;
+      line-height: 1.65;
+    }
+    .badge-row {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .badge {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 12.5px;
+      font-weight: 600;
+    }
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 15px;
+      padding: 14px 32px;
+      border-radius: 32px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+      transition: transform .18s, box-shadow .18s;
+    }
+    .store-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.3); text-decoration: none; }
+
+    /* ── Sections ── */
+    section { max-width: 860px; margin: 0 auto; padding: 52px 20px; }
+    section + section { padding-top: 0; }
+    h2 { font-size: 22px; font-weight: 800; margin-bottom: 22px; letter-spacing: -0.4px; }
+
+    /* ── Feature grid ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .feat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 18px;
+      transition: box-shadow .15s, transform .15s;
+    }
+    .feat:hover { box-shadow: 0 6px 24px rgba(37,99,235,.10); transform: translateY(-2px); }
+    .feat-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+    .ic-blue   { background: rgba(37,99,235,.10); }
+    .ic-green  { background: rgba(16,185,129,.10); }
+    .ic-amber  { background: rgba(245,158,11,.10); }
+    .ic-purple { background: rgba(139,92,246,.10); }
+    .ic-teal   { background: rgba(6,182,212,.10); }
+    .ic-red    { background: rgba(244,63,94,.10); }
+    .ic-indigo { background: rgba(99,102,241,.10); }
+    .ic-pink   { background: rgba(236,72,153,.10); }
+    .feat h3 { font-size: 14px; font-weight: 700; margin-bottom: 5px; }
+    .feat p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+    /* ── Highlights band ── */
+    .highlights {
+      background: linear-gradient(135deg, #081029 0%, #123A8A 100%);
+      color: #fff;
+      padding: 56px 24px;
+    }
+    .highlights-inner { max-width: 860px; margin: 0 auto; }
+    .highlights h2 { color: #fff; margin-bottom: 32px; }
+    .hl-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 2px;
+    }
+    .hl-item {
+      background: rgba(255,255,255,0.05);
+      padding: 28px 22px;
+      transition: background .15s;
+    }
+    .hl-item:first-child { border-radius: 14px 0 0 14px; }
+    .hl-item:last-child  { border-radius: 0 14px 14px 0; }
+    .hl-item:hover { background: rgba(255,255,255,0.09); }
+    .hl-num {
+      font-size: 32px;
+      font-weight: 800;
+      color: #6EE7B7;
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .hl-label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      font-weight: 500;
+    }
+
+    /* ── Privacy deep-dive ── */
+    .privacy-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .privacy-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 56px 20px;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 52px;
+      align-items: center;
+    }
+    .privacy-badge {
+      display: inline-block;
+      background: rgba(16,185,129,.10);
+      color: #047857;
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .privacy-left h2 {
+      font-size: clamp(22px, 3vw, 30px);
+      letter-spacing: -0.8px;
+      margin-bottom: 14px;
+    }
+    .privacy-left p { font-size: 15px; color: var(--muted); line-height: 1.7; }
+    .privacy-perks { margin-top: 22px; display: flex; flex-direction: column; gap: 10px; }
+    .perk {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 14px; font-weight: 500; color: var(--text);
+    }
+    .perk::before {
+      content: '✓';
+      width: 22px; height: 22px;
+      background: rgba(16,185,129,.14);
+      color: var(--green);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      flex-shrink: 0;
+      text-align: center;
+      line-height: 22px;
+    }
+    .privacy-right { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .privacy-card {
+      background: linear-gradient(135deg, #081029, #2563EB);
+      border-radius: 16px;
+      padding: 20px 16px;
+      color: #fff;
+      text-align: center;
+    }
+    .privacy-card:first-child { grid-column: span 2; background: linear-gradient(135deg, #123A8A, #2563EB, #06B6D4); }
+    .privacy-card .vc-icon { font-size: 28px; margin-bottom: 8px; }
+    .privacy-card h3 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+    .privacy-card p { font-size: 12px; opacity: 0.7; }
+
+    /* ── How it works ── */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 14px;
+    }
+    .stepc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 18px;
+      position: relative;
+    }
+    .stepc .n {
+      width: 30px; height: 30px; border-radius: 9px;
+      background: rgba(37,99,235,.10); color: var(--primary);
+      font-weight: 800; font-size: 14px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 12px;
+    }
+    .stepc h3 { font-size: 14px; font-weight: 700; margin-bottom: 5px; }
+    .stepc p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+    /* ── Links row ── */
+    .links-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      padding: 28px 20px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+    .links-row a {
+      background: #EAF2FF;
+      color: #374151;
+      border-radius: 20px;
+      padding: 8px 18px;
+      font-size: 13.5px;
+      font-weight: 600;
+      transition: background .12s, color .12s;
+    }
+    .links-row a:hover { background: #D6E6FF; color: var(--primary); text-decoration: none; }
+
+    /* ── Footer ── */
+    footer {
+      background: #101728;
+      color: #94A3B8;
+      text-align: center;
+      padding: 24px;
+      font-size: 13px;
+    }
+    footer a { color: #94A3B8; }
+    footer a:hover { color: #fff; }
+
+    @media (max-width: 640px) {
+      .privacy-inner { grid-template-columns: 1fr; gap: 32px; }
+      .hl-item:first-child { border-radius: 14px 14px 0 0; }
+      .hl-item:last-child  { border-radius: 0 0 14px 14px; }
+      .privacy-right { grid-template-columns: 1fr 1fr; }
+      .privacy-card:first-child { grid-column: span 2; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-inner">
+    <p class="hero-tag">Privacy-First AI Storage Cleaner</p>
+    <div class="hero-icon">🧹</div>
+    <h1>Cleaniq AI</h1>
+    <p>Reclaim gigabytes in minutes. An on-device AI finds duplicate photos, blurry shots, screenshots and junk — all analyzed on your phone, never uploaded.</p>
+    <div class="badge-row">
+      <span class="badge">🤖 On-Device AI</span>
+      <span class="badge">✈️ 100% Offline</span>
+      <span class="badge">🔒 Nothing Uploaded</span>
+      <span class="badge">♻️ 30-Day Recycle Bin</span>
+      <span class="badge">Android</span>
+    </div>
+    <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.cleaniq.cleaniq_ai" target="_blank" rel="noopener">
+      ▶ Get it on Google Play
+    </a>
+  </div>
+</div>
+
+<!-- Key numbers -->
+<div class="highlights">
+  <div class="highlights-inner">
+    <h2>A smarter way to free up space</h2>
+    <div class="hl-grid">
+      <div class="hl-item">
+        <div class="hl-num">100%</div>
+        <div class="hl-label">On-device analysis</div>
+      </div>
+      <div class="hl-item">
+        <div class="hl-num">0</div>
+        <div class="hl-label">Files uploaded</div>
+      </div>
+      <div class="hl-item">
+        <div class="hl-num">15+</div>
+        <div class="hl-label">Cleanup tools</div>
+      </div>
+      <div class="hl-item">
+        <div class="hl-num">30</div>
+        <div class="hl-label">Day recycle bin</div>
+      </div>
+      <div class="hl-item">
+        <div class="hl-num">1</div>
+        <div class="hl-label">Tap to optimize</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Features -->
+<section>
+  <h2>Everything you need to declutter</h2>
+  <div class="features-grid">
+
+    <div class="feat">
+      <div class="feat-icon ic-blue">🖼️</div>
+      <h3>Duplicate Photos</h3>
+      <p>Perceptual-hash AI groups identical and near-identical shots, then keeps the sharpest, highest-resolution copy.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-teal">🌫️</div>
+      <h3>Blurry & Bad Photos</h3>
+      <p>On-device blur and exposure analysis flags out-of-focus, too-dark and overexposed pictures for review.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-indigo">📱</div>
+      <h3>Screenshot Cleaner</h3>
+      <p>Detects screenshots across WhatsApp, Instagram, system captures and more — clear them in a tap.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-purple">🧩</div>
+      <h3>Similar Photos</h3>
+      <p>Finds burst shots and repeated selfies so you can keep the best one and drop the rest.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-green">🗑️</div>
+      <h3>Junk Cleaner</h3>
+      <p>Temporary files, logs, leftover folders and app cache that are safe to remove — all in one sweep.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-amber">📁</div>
+      <h3>Empty Folders</h3>
+      <p>Clears out empty and hidden leftover folders cluttering your storage.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-red">🎬</div>
+      <h3>Large Videos</h3>
+      <p>Surfaces your biggest videos and files first, so you free the most space with the fewest deletions.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-blue">📥</div>
+      <h3>Downloads Cleaner</h3>
+      <p>Reviews old and forgotten downloads — installers, PDFs, and files untouched for months.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-green">🤖</div>
+      <h3>APK Cleaner</h3>
+      <p>Finds leftover installer (.apk) files taking up space long after the app was installed.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-teal">🏷️</div>
+      <h3>Photo Categories</h3>
+      <p>Bundled ML Kit labeling sorts your library into categories on-device — no cloud, no upload.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-purple">📊</div>
+      <h3>Storage Analytics</h3>
+      <p>Beautiful charts break down exactly what's eating your storage, by type and size.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-indigo">✨</div>
+      <h3>Smart Recommendations</h3>
+      <p>"You can free 8.6 GB" — every AI finding gathered into one prioritized, one-tap list.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Privacy deep-dive -->
+<div class="privacy-section">
+  <div class="privacy-inner">
+    <div class="privacy-left">
+      <div class="privacy-badge">Privacy by design</div>
+      <h2>Your photos never leave your phone.</h2>
+      <p>Most cleaners upload your gallery to the cloud to analyze it. Cleaniq AI does the opposite — every scan, every AI decision, and every deletion happens entirely on your device. There's no account, no sign-in, and no server that ever sees your files.</p>
+      <div class="privacy-perks">
+        <div class="perk">100% on-device AI — works in airplane mode</div>
+        <div class="perk">No account or sign-in required</div>
+        <div class="perk">No photos, files or documents uploaded</div>
+        <div class="perk">Deleted files wait 30 days in the recycle bin</div>
+        <div class="perk">Open-and-use — nothing to configure</div>
+      </div>
+    </div>
+    <div class="privacy-right">
+      <div class="privacy-card">
+        <div class="vc-icon">✈️</div>
+        <h3>Fully Offline</h3>
+        <p>Scanning & AI run with zero network access</p>
+      </div>
+      <div class="privacy-card">
+        <div class="vc-icon">🔒</div>
+        <h3>Stays On-Device</h3>
+        <p>Files are read and analyzed locally only</p>
+      </div>
+      <div class="privacy-card">
+        <div class="vc-icon">♻️</div>
+        <h3>Safe Delete</h3>
+        <p>30-day recycle bin — restore any mistake</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- How it works -->
+<section>
+  <h2>How it works</h2>
+  <div class="steps-grid">
+    <div class="stepc">
+      <div class="n">1</div>
+      <h3>Scan</h3>
+      <p>Grant media access and let the on-device AI analyze your storage in seconds.</p>
+    </div>
+    <div class="stepc">
+      <div class="n">2</div>
+      <h3>Review</h3>
+      <p>See exactly what can be cleaned, grouped and prioritized by space saved.</p>
+    </div>
+    <div class="stepc">
+      <div class="n">3</div>
+      <h3>Clean</h3>
+      <p>Tap to move junk and duplicates to the recycle bin — never an accidental loss.</p>
+    </div>
+    <div class="stepc">
+      <div class="n">4</div>
+      <h3>Relax</h3>
+      <p>Restore anything within 30 days, or let it auto-purge. Space reclaimed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- One-tap optimizer -->
+<div class="privacy-section">
+  <div class="privacy-inner">
+    <div class="privacy-left">
+      <div class="privacy-badge" style="background:rgba(37,99,235,.08);color:var(--primary);">One-tap optimizer</div>
+      <h2>Clean & check your phone in a single tap.</h2>
+      <p>The optimizer runs a full sweep — clears junk, frees space, and runs an honest device security check based on verifiable facts only (sideloaded apps, disguised installers, root access, developer settings). No fake "virus found" scares, ever. You always approve before anything is removed.</p>
+      <div class="privacy-perks">
+        <div class="perk">Junk & cache cleanup in one pass</div>
+        <div class="perk">Real device health score</div>
+        <div class="perk">Transparent security checks — no false alarms</div>
+        <div class="perk">You confirm every action</div>
+      </div>
+    </div>
+    <div class="privacy-right">
+      <div class="privacy-card" style="background:linear-gradient(135deg,#123A8A,#2563EB,#10B981);">
+        <div class="vc-icon">⚡</div>
+        <h3>Optimize Now</h3>
+        <p>Scan, report, clean — with your approval</p>
+      </div>
+      <div class="privacy-card">
+        <div class="vc-icon">🛡️</div>
+        <h3>Honest Checks</h3>
+        <p>Verifiable device facts, no scare tactics</p>
+      </div>
+      <div class="privacy-card">
+        <div class="vc-icon">💚</div>
+        <h3>Health Score</h3>
+        <p>See your device at a glance</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Links -->
+<div class="links-row">
+  <a href="/apps/cleaniq/">Home</a>
+  <a href="/apps/cleaniq/privacy.html">Privacy Policy</a>
+  <a href="/apps/cleaniq/terms.html">Terms of Service</a>
+  <a href="/apps/cleaniq/support.html">Support</a>
+  <a href="/apps/cleaniq/delete-account.html">Delete Data</a>
+  <a href="/">← MyAppsCart</a>
+</div>
+
+<footer>
+  <p>&copy; 2026 MyAppsCart &nbsp;·&nbsp; <a href="mailto:support@myappscart.com">support@myappscart.com</a></p>
+</footer>
+
+</body>
+</html>

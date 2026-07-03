@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cleaniq AI – Privacy Policy</title>
+  <meta name="description" content="Privacy Policy for Cleaniq AI — the privacy-first, fully offline AI storage cleaner by MyAppsCart." />
+  <style>
+    :root {
+      --primary: #2563EB;
+      --green: #10B981;
+      --bg: #F0F6FF;
+      --surface: #FFFFFF;
+      --text: #101728;
+      --muted: #64748B;
+      --border: #E2E8F0;
+      --radius: 12px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      font-size: 15.5px;
+    }
+    a { color: var(--primary); }
+    a:hover { text-decoration: underline; }
+
+    header {
+      background: linear-gradient(135deg, #081029 0%, #2563EB 100%);
+      color: #fff;
+      padding: 44px 24px 36px;
+      text-align: center;
+    }
+    header .icon { font-size: 44px; margin-bottom: 12px; }
+    header h1 { font-size: 26px; font-weight: 800; letter-spacing: -0.4px; }
+    header p { margin-top: 6px; font-size: 13.5px; opacity: 0.78; }
+
+    main { max-width: 780px; margin: 0 auto; padding: 36px 20px 72px; }
+
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 28px 28px 24px;
+      margin-bottom: 18px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      border: 1px solid var(--border);
+    }
+    h2 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    p { color: var(--muted); margin-bottom: 12px; }
+    p:last-child { margin-bottom: 0; }
+    ul { padding-left: 20px; color: var(--muted); margin-bottom: 12px; }
+    li { margin-bottom: 6px; }
+    strong { color: var(--text); font-weight: 600; }
+    .highlight {
+      background: #E7FBF3;
+      border-left: 3px solid var(--green);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      margin: 14px 0 0;
+      font-size: 14px;
+      color: #065F46;
+      font-weight: 500;
+    }
+    .last-updated {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 20px;
+      margin-bottom: 24px;
+      font-size: 13.5px;
+      color: var(--muted);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .links-row {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      justify-content: center; padding: 28px 20px;
+      background: var(--surface); border-top: 1px solid var(--border);
+    }
+    .links-row a {
+      background: #EAF2FF; color: #374151; border-radius: 20px;
+      padding: 8px 18px; font-size: 13px; font-weight: 600;
+      transition: background .12s;
+    }
+    .links-row a:hover { background: #D6E6FF; color: var(--primary); text-decoration: none; }
+    footer {
+      background: #101728; color: #94A3B8;
+      text-align: center; padding: 20px; font-size: 13px;
+    }
+    footer a { color: #94A3B8; }
+    footer a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="icon">🧹</div>
+  <h1>Cleaniq AI — Privacy Policy</h1>
+  <p>The short version: your files never leave your phone. Here's the detail.</p>
+</header>
+
+<main>
+
+  <div class="last-updated">
+    📅 &nbsp; <span><strong>Last updated:</strong> July 3, 2026 &nbsp;·&nbsp; Applies to Cleaniq AI for Android, version 1.0.0+</span>
+  </div>
+
+  <div class="card">
+    <h2>🧭 Overview</h2>
+    <p>Cleaniq AI ("we", "our", or "the app") is developed and maintained by <strong>MyAppsCart</strong>. This Privacy Policy explains what information the app accesses, how it is used, and the choices you have.</p>
+    <p>Cleaniq AI is built to be <strong>privacy-first and fully offline</strong>. All storage scanning and AI analysis happens entirely on your device. The app has no user accounts and no cloud storage.</p>
+    <div class="highlight">Cleaniq AI does not upload, transmit, sell, or share your photos, videos, files, or documents. There is no server that ever receives your content. Everything the AI does happens on your phone.</div>
+  </div>
+
+  <div class="card">
+    <h2>📂 Access to Your Photos, Videos & Files</h2>
+    <p>To find duplicates, blurry photos, screenshots, junk, and large files, Cleaniq AI needs permission to read your device's media and storage:</p>
+    <ul>
+      <li><strong>Photos &amp; media (READ_MEDIA_IMAGES / VIDEO / AUDIO):</strong> so the AI can analyze images and list large media for cleanup.</li>
+      <li><strong>All files access (MANAGE_EXTERNAL_STORAGE):</strong> optional — needed only to clean junk files, empty folders and downloads. Media features work without it.</li>
+    </ul>
+    <p><strong>This access is used entirely on-device.</strong> Your files are read, analyzed, and (when you choose) deleted locally. They are never copied to us or to any third party.</p>
+  </div>
+
+  <div class="card">
+    <h2>🤖 On-Device AI</h2>
+    <p>The "AI" in Cleaniq AI runs completely on your phone. It uses:</p>
+    <ul>
+      <li><strong>Perceptual hashing (pHash):</strong> to detect duplicate and near-duplicate images.</li>
+      <li><strong>Blur &amp; exposure analysis:</strong> to flag out-of-focus or poorly-exposed photos.</li>
+      <li><strong>Bundled ML Kit image labeling:</strong> to sort photos into categories. The model ships inside the app — it does not call any server.</li>
+    </ul>
+    <p>None of this analysis requires an internet connection, and no image data is ever sent off your device.</p>
+  </div>
+
+  <div class="card">
+    <h2>♻️ Deletion &amp; the Recycle Bin</h2>
+    <p>When you delete files in Cleaniq AI, they are first moved to an in-app <strong>Recycle Bin</strong>, where they remain for <strong>30 days</strong> so you can restore anything by mistake. After 30 days they are permanently removed. You can also empty the recycle bin manually at any time. All of this happens locally on your device.</p>
+  </div>
+
+  <div class="card">
+    <h2>🛡️ Device Optimizer &amp; Security Check</h2>
+    <p>The one-tap optimizer includes a device security check. It reports only <strong>verifiable, on-device facts</strong> — such as whether apps were installed from outside the Play Store, whether an installer file uses a disguised extension, whether root access or developer options are enabled. It is <strong>not</strong> an antivirus and makes no malware-scanning claims. This check runs on-device and sends nothing externally. If you choose to uninstall a flagged app, Android's own uninstall dialog always asks you to confirm.</p>
+  </div>
+
+  <div class="card">
+    <h2>📱 Advertising (Google AdMob)</h2>
+    <p>Cleaniq AI is free and supported by ads served through <strong>Google AdMob</strong>. To show ads, AdMob may collect device information and an advertising identifier, and it may process data as described in Google's policies.</p>
+    <ul>
+      <li>Where required by law, Cleaniq AI shows a <strong>consent request (Google UMP)</strong> before any personalized ads are loaded.</li>
+      <li>You can watch an optional rewarded ad to turn <strong>all ads off for 24 hours</strong>.</li>
+      <li>You can reset or limit ad personalization anytime via your device's <strong>Settings → Privacy → Ads</strong>.</li>
+    </ul>
+    <p>Ad activity is governed by <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">Google's advertising policies</a>. The first session (before onboarding is completed) is deliberately ad-free.</p>
+  </div>
+
+  <div class="card">
+    <h2>📊 Analytics &amp; Crash Reporting (Firebase)</h2>
+    <p>To understand which features are used and to fix crashes, Cleaniq AI may use <strong>Firebase Analytics</strong> and <strong>Firebase Crashlytics</strong> (by Google). These collect <strong>aggregated, anonymous</strong> data such as feature usage events and crash diagnostics (device model, OS version, stack traces).</p>
+    <ul>
+      <li>No photos, files, filenames, or file contents are ever included in analytics or crash reports.</li>
+      <li>No personally identifiable information is collected.</li>
+    </ul>
+    <p>Firebase data is governed by <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Google's privacy terms</a>.</p>
+  </div>
+
+  <div class="card">
+    <h2>🔔 Notifications</h2>
+    <p>Cleaniq AI can send optional local reminders (for example, a weekly "time for a cleanup" nudge). These are scheduled on your device and do not communicate with any server. You can turn them off in the app's Settings or in your Android notification settings.</p>
+  </div>
+
+  <div class="card">
+    <h2>🌐 Network Use</h2>
+    <p>The app requests the Internet permission for exactly two purposes: <strong>serving ads (AdMob)</strong> and <strong>optional analytics/crash reporting (Firebase)</strong>. Your storage scanning and AI features never use the network. The app remains fully functional offline.</p>
+  </div>
+
+  <div class="card">
+    <h2>👶 Children's Privacy</h2>
+    <p>Cleaniq AI is not directed at children under 13. We do not knowingly collect personal information from children. If you believe a child has provided personal data, contact us at <a href="mailto:support@myappscart.com">support@myappscart.com</a> and we will address it promptly.</p>
+  </div>
+
+  <div class="card">
+    <h2>⚙️ Your Rights &amp; Choices</h2>
+    <ul>
+      <li><strong>Delete your data:</strong> Uninstalling the app removes all local data. See our <a href="/apps/cleaniq/delete-account.html">Delete Data page</a>.</li>
+      <li><strong>Control ads:</strong> Adjust ad personalization via Android → Settings → Privacy → Ads, or watch a rewarded ad for a 24-hour ad-free period.</li>
+      <li><strong>Revoke permissions:</strong> Remove media or all-files access anytime in Android → Settings → Apps → Cleaniq AI → Permissions.</li>
+      <li><strong>Opt out of analytics:</strong> Contact us to request analytics opt-out.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>🔄 Changes to this Policy</h2>
+    <p>We may update this Privacy Policy from time to time. The "Last updated" date above always reflects the current version. Material changes will be highlighted via an in-app notice. Continued use after an update constitutes acceptance of the revised policy.</p>
+  </div>
+
+  <div class="card">
+    <h2>✉️ Contact Us</h2>
+    <p>Questions about this Privacy Policy or your data? We respond within 2 business days.</p>
+    <p><strong>Email:</strong> <a href="mailto:support@myappscart.com">support@myappscart.com</a><br>
+    <strong>Developer:</strong> MyAppsCart</p>
+  </div>
+
+</main>
+
+<div class="links-row">
+  <a href="/apps/cleaniq/">Home</a>
+  <a href="/apps/cleaniq/privacy.html">Privacy Policy</a>
+  <a href="/apps/cleaniq/terms.html">Terms of Service</a>
+  <a href="/apps/cleaniq/support.html">Support</a>
+  <a href="/apps/cleaniq/delete-account.html">Delete Data</a>
+  <a href="/">← MyAppsCart</a>
+</div>
+
+<footer>
+  <p>&copy; 2026 MyAppsCart &nbsp;·&nbsp; <a href="mailto:support@myappscart.com">support@myappscart.com</a></p>
+</footer>
+
+</body>
+</html>

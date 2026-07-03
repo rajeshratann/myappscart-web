@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cleaniq AI – Support</title>
+  <meta name="description" content="Support, FAQ, and contact information for Cleaniq AI — the privacy-first, fully offline AI storage cleaner." />
+  <style>
+    :root {
+      --primary: #2563EB;
+      --green: #10B981;
+      --bg: #F0F6FF;
+      --surface: #FFFFFF;
+      --text: #101728;
+      --muted: #64748B;
+      --border: #E2E8F0;
+      --radius: 12px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.7; font-size: 15px;
+    }
+    a { color: var(--primary); }
+    a:hover { text-decoration: underline; }
+    header {
+      background: linear-gradient(135deg, #081029 0%, #2563EB 100%);
+      color: #fff; padding: 44px 24px 36px; text-align: center;
+    }
+    header .icon { font-size: 44px; margin-bottom: 12px; }
+    header h1 { font-size: 26px; font-weight: 800; letter-spacing: -0.4px; }
+    header p { margin-top: 6px; font-size: 13.5px; opacity: 0.78; }
+    main { max-width: 780px; margin: 0 auto; padding: 36px 20px 72px; }
+
+    /* Contact card */
+    .contact-card {
+      background: linear-gradient(135deg, #123A8A, #2563EB);
+      border-radius: 16px; padding: 28px 28px 24px;
+      color: #fff; margin-bottom: 28px; text-align: center;
+    }
+    .contact-card h2 { font-size: 20px; font-weight: 800; margin-bottom: 8px; color: #fff; }
+    .contact-card p { opacity: 0.85; margin-bottom: 20px; }
+    .email-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #fff; color: var(--primary); font-weight: 700; font-size: 14px;
+      padding: 12px 24px; border-radius: 30px; text-decoration: none;
+      transition: transform .15s;
+    }
+    .email-btn:hover { transform: translateY(-1px); text-decoration: none; }
+    .response-note { margin-top: 14px; font-size: 12.5px; opacity: 0.65; }
+
+    /* Section label */
+    .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--primary); margin-bottom: 16px;
+    }
+
+    /* FAQ */
+    .faq { margin-bottom: 28px; }
+    details {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); margin-bottom: 10px; overflow: hidden;
+    }
+    summary {
+      padding: 18px 20px; font-size: 14.5px; font-weight: 600;
+      cursor: pointer; list-style: none; display: flex;
+      justify-content: space-between; align-items: center;
+      transition: background .12s;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary:hover { background: #F5F9FF; }
+    summary::after { content: '+'; font-size: 18px; font-weight: 400; color: var(--primary); transition: transform .2s; }
+    details[open] summary::after { transform: rotate(45deg); }
+    .faq-body { padding: 0 20px 18px; font-size: 14px; color: var(--muted); line-height: 1.65; }
+    .faq-body p { margin-bottom: 8px; }
+    .faq-body p:last-child { margin-bottom: 0; }
+    .faq-body strong { color: var(--text); font-weight: 600; }
+    .faq-body ol, .faq-body ul { padding-left: 18px; margin-top: 6px; }
+    .faq-body li { margin-bottom: 4px; }
+
+    /* Tips grid */
+    .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; margin-top: 16px; }
+    .tip {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px;
+    }
+    .tip-icon { font-size: 24px; margin-bottom: 8px; }
+    .tip h3 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .tip p { font-size: 13px; color: var(--muted); }
+
+    .links-row {
+      display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+      padding: 28px 20px; background: var(--surface); border-top: 1px solid var(--border);
+    }
+    .links-row a {
+      background: #EAF2FF; color: #374151; border-radius: 20px; padding: 8px 18px;
+      font-size: 13px; font-weight: 600; transition: background .12s;
+    }
+    .links-row a:hover { background: #D6E6FF; color: var(--primary); text-decoration: none; }
+    footer { background: #101728; color: #94A3B8; text-align: center; padding: 20px; font-size: 13px; }
+    footer a { color: #94A3B8; }
+    footer a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="icon">💬</div>
+  <h1>Cleaniq AI Support</h1>
+  <p>Find answers or reach us directly — we're here to help.</p>
+</header>
+
+<main>
+
+  <!-- Contact card -->
+  <div class="contact-card">
+    <h2>Get in touch</h2>
+    <p>Can't find what you need below? Email our support team directly.</p>
+    <a class="email-btn" href="mailto:support@myappscart.com">
+      ✉️ support@myappscart.com
+    </a>
+    <p class="response-note">We respond within 2 business days</p>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq">
+    <div class="section-label">Frequently Asked Questions</div>
+
+    <details>
+      <summary>Does Cleaniq AI upload my photos or files anywhere?</summary>
+      <div class="faq-body">
+        <p><strong>No.</strong> All scanning and AI analysis happen entirely on your device. Your photos, videos, and files are never uploaded to us or to any third party. Cleaniq AI works fully offline — you can even use it in airplane mode.</p>
+        <p>The only time the app uses the internet is to load ads and optional, anonymous crash/analytics data — never your file content.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Why does the app need "All files access"?</summary>
+      <div class="faq-body">
+        <p>Android requires the "All files access" permission (MANAGE_EXTERNAL_STORAGE) to clean junk files, empty folders, and old downloads that live outside your media library.</p>
+        <p>It is <strong>optional</strong> — if you prefer not to grant it, the photo and media cleanup features still work using standard media permissions. You can grant or revoke it anytime in <strong>Android Settings → Apps → Cleaniq AI → Permissions</strong>.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>I deleted something by mistake. Can I get it back?</summary>
+      <div class="faq-body">
+        <p>Yes. Deleted files are moved to the in-app <strong>Recycle Bin</strong>, where they stay for <strong>30 days</strong>. Open <strong>Recycle Bin</strong> from the app, find the item, and tap <strong>Restore</strong>.</p>
+        <p>After 30 days — or if you manually empty the recycle bin — items are permanently removed and cannot be recovered.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>How does the AI decide which photos are duplicates or blurry?</summary>
+      <div class="faq-body">
+        <p>Cleaniq AI uses on-device techniques: <strong>perceptual hashing</strong> to group visually identical or near-identical images, and <strong>blur/exposure analysis</strong> to flag out-of-focus, too-dark, or overexposed shots. For duplicate groups, it suggests keeping the sharpest, highest-resolution copy.</p>
+        <p>These are helpful suggestions — you can always review and adjust the selection before deleting anything.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Is the "security check" an antivirus?</summary>
+      <div class="faq-body">
+        <p>No. The optimizer's security check reports only verifiable device facts — such as apps installed from outside the Play Store, disguised installer files, root access, or enabled developer options. It does not scan files for viruses and makes no malware claims.</p>
+        <p>It's designed to be <strong>honest</strong>: you'll never see fake "virus detected!" scares. If it suggests uninstalling an app, Android's own dialog always asks you to confirm.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>How do I remove ads?</summary>
+      <div class="faq-body">
+        <p>Cleaniq AI is free and ad-supported. Go to <strong>Settings → Support Cleaniq</strong> and tap <strong>"Watch an ad, go ad-free"</strong>. Watching one short rewarded ad turns off <strong>all</strong> ads for 24 hours.</p>
+        <p>We keep ads non-intrusive — for example, the first session is completely ad-free, and ads never block a cleaning action.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Does it really work offline?</summary>
+      <div class="faq-body">
+        <p>Yes. Every scan and AI decision runs on your device with no network needed. The bundled photo-labeling model ships inside the app. You can turn off Wi-Fi and mobile data and the cleaning features work exactly the same.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Will cleaning delete anything important?</summary>
+      <div class="faq-body">
+        <p>Cleaniq AI is conservative by design. It targets clearly safe items (cache, temp files, empty folders, leftover installers, duplicates) and never pre-selects your personal downloads for deletion. Everything you remove goes to the 30-day recycle bin first.</p>
+        <p>Still, we recommend reviewing selections before confirming — you know your files best.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>How do I set up cleanup reminders?</summary>
+      <div class="faq-body">
+        <p>Go to <strong>Settings → Cleanup reminders</strong> and toggle the weekly scan reminder. Reminders are scheduled entirely on your device and never contact a server. You can disable them anytime here or in your Android notification settings.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>The app crashed or a scan seems stuck. What should I do?</summary>
+      <div class="faq-body">
+        <p>First, force-close the app and reopen it. If the issue persists:</p>
+        <ol>
+          <li>Check for an app update in the Play Store</li>
+          <li>Restart your device</li>
+          <li>Make sure Cleaniq AI has the media/storage permissions it needs</li>
+          <li>If it still fails, email <a href="mailto:support@myappscart.com">support@myappscart.com</a> with your device model, Android version, and what you were doing when it happened.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details>
+      <summary>How do I delete all my data?</summary>
+      <div class="faq-body">
+        <p>Cleaniq AI has no account and stores everything locally. Uninstalling the app removes all app data (recycle bin, settings, and cached indexes). See our <a href="/apps/cleaniq/delete-account.html">Delete Data page</a> for full details.</p>
+      </div>
+    </details>
+  </div>
+
+  <!-- Tips -->
+  <div class="section-label">Tips for Best Results</div>
+  <div class="tips-grid">
+    <div class="tip">
+      <div class="tip-icon">🔍</div>
+      <h3>Start with recommendations</h3>
+      <p>The Smart Recommendations screen shows your biggest wins first — the fastest way to free space.</p>
+    </div>
+    <div class="tip">
+      <div class="tip-icon">🎬</div>
+      <h3>Target large videos</h3>
+      <p>A single large video can free more space than hundreds of photos. Check Large Videos first.</p>
+    </div>
+    <div class="tip">
+      <div class="tip-icon">♻️</div>
+      <h3>Empty the bin when sure</h3>
+      <p>Deleted files still take space for 30 days. Empty the recycle bin to reclaim it immediately.</p>
+    </div>
+    <div class="tip">
+      <div class="tip-icon">⚡</div>
+      <h3>Use one-tap optimize</h3>
+      <p>In a hurry? The optimizer cleans junk and checks your device in a single pass.</p>
+    </div>
+  </div>
+
+</main>
+
+<div class="links-row">
+  <a href="/apps/cleaniq/">Home</a>
+  <a href="/apps/cleaniq/privacy.html">Privacy Policy</a>
+  <a href="/apps/cleaniq/terms.html">Terms of Service</a>
+  <a href="/apps/cleaniq/support.html">Support</a>
+  <a href="/apps/cleaniq/delete-account.html">Delete Data</a>
+  <a href="/">← MyAppsCart</a>
+</div>
+
+<footer>
+  <p>&copy; 2026 MyAppsCart &nbsp;·&nbsp; <a href="mailto:support@myappscart.com">support@myappscart.com</a></p>
+</footer>
+
+</body>
+</html>
