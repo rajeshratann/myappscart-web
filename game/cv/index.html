@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChessVerse – Chess, Puzzles, Story Mode &amp; Academy</title>
+  <meta name="description" content="ChessVerse: an offline-first chess platform with a 1000-level AI, story campaign, puzzles, arena tournaments, survival battles, and a chess academy. Free on Android." />
+  <style>
+    :root {
+      --primary:  #D4AF37;
+      --gold-2:   #F4D03F;
+      --gold-dim: #9c7a1e;
+      --dark:     #05070E;
+      --bg:       #05070E;
+      --surface:  #0D1220;
+      --surface2: #131A2E;
+      --text:     #EDEAE0;
+      --muted:    #8A92A8;
+      --radius:   14px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #05070E 0%, #0A0E1C 45%, #120A05 100%);
+      border-bottom: 1px solid rgba(212,175,55,0.25);
+      color: #fff;
+      padding: 64px 24px 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(212,175,55,0.14) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero .app-icon {
+      width: 96px; height: 96px;
+      border-radius: 22px;
+      margin-bottom: 18px;
+      display: block;
+      margin-inline: auto;
+      box-shadow: 0 0 40px rgba(212,175,55,0.35);
+      animation: float 3.5s ease-in-out infinite;
+    }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    .hero h1 {
+      font-size: 46px;
+      font-weight: 900;
+      letter-spacing: -2px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--gold-2) 50%, var(--primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero .tagline {
+      margin-top: 14px;
+      font-size: 17px;
+      color: rgba(255,255,255,0.72);
+      max-width: 560px;
+      margin-inline: auto;
+      line-height: 1.65;
+    }
+    .badge-row {
+      display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 24px;
+    }
+    .badge {
+      background: rgba(212,175,55,0.14);
+      border: 1px solid rgba(212,175,55,0.4);
+      border-radius: 20px; padding: 5px 14px;
+      font-size: 13px; font-weight: 600; color: var(--gold-2);
+    }
+    .store-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin-top: 32px;
+      background: linear-gradient(135deg, var(--primary), var(--gold-dim));
+      color: #1a1400; font-weight: 800; font-size: 16px;
+      padding: 14px 36px; border-radius: 32px;
+      box-shadow: 0 8px 28px rgba(212,175,55,0.4);
+      transition: transform .15s, box-shadow .15s;
+      letter-spacing: 0.3px;
+    }
+    .store-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 36px rgba(212,175,55,0.5);
+      text-decoration: none; color: #1a1400;
+    }
+
+    /* ── Sections ── */
+    section { max-width: 880px; margin: 0 auto; padding: 56px 20px; }
+    h2 {
+      font-size: 26px; font-weight: 800; margin-bottom: 28px; color: #fff;
+    }
+    h2 span {
+      background: linear-gradient(135deg, var(--primary), var(--gold-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Mode cards ── */
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 14px;
+    }
+    .game-card {
+      border-radius: var(--radius); padding: 26px 18px;
+      text-align: center; position: relative; overflow: hidden;
+      transition: transform .2s;
+    }
+    .game-card:hover { transform: translateY(-4px); }
+    .game-card > * { position: relative; z-index: 1; }
+    .game-card .g-icon { font-size: 42px; display: block; margin-bottom: 12px; }
+    .game-card h3 { font-size: 15px; font-weight: 800; color: #fff; }
+    .game-card p { font-size: 12px; color: rgba(255,255,255,0.78); margin-top: 6px; line-height: 1.45; }
+
+    .g-classic  { background: linear-gradient(135deg, #1a1400, #6b5312); box-shadow: 0 8px 24px rgba(212,175,55,0.22); }
+    .g-story    { background: linear-gradient(135deg, #2d0f45, #6a2caf); box-shadow: 0 8px 24px rgba(139,92,246,0.25); }
+    .g-puzzles  { background: linear-gradient(135deg, #0d2e5c, #1f6fb8); box-shadow: 0 8px 24px rgba(31,111,184,0.25); }
+    .g-arena    { background: linear-gradient(135deg, #5c1414, #b82c2c); box-shadow: 0 8px 24px rgba(184,44,44,0.25); }
+    .g-survival { background: linear-gradient(135deg, #143a1a, #1f8a3d); box-shadow: 0 8px 24px rgba(31,138,61,0.25); }
+    .g-academy  { background: linear-gradient(135deg, #3a2a05, #b8790f); box-shadow: 0 8px 24px rgba(184,121,15,0.25); }
+
+    /* ── Features ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 14px;
+    }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid rgba(212,175,55,0.12);
+      border-radius: var(--radius); padding: 22px;
+      transition: border-color .2s;
+    }
+    .feature-card:hover { border-color: rgba(212,175,55,0.3); }
+    .feature-card .f-icon { font-size: 32px; margin-bottom: 10px; display: block; }
+    .feature-card h3 { font-size: 15px; font-weight: 700; color: #fff; }
+    .feature-card p { font-size: 13px; color: var(--muted); margin-top: 6px; line-height: 1.55; }
+
+    /* ── How to play ── */
+    .steps { display: flex; flex-direction: column; gap: 18px; }
+    .step {
+      display: flex; gap: 18px; align-items: flex-start;
+      background: var(--surface); border: 1px solid rgba(212,175,55,0.1);
+      border-radius: var(--radius); padding: 20px;
+    }
+    .step-num {
+      width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--primary), var(--gold-dim));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 15px; color: #1a1400;
+      box-shadow: 0 4px 12px rgba(212,175,55,0.3);
+    }
+    .step h3 { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .step p { font-size: 13px; color: var(--muted); }
+
+    /* ── Divider ── */
+    .divider { border: none; border-top: 1px solid rgba(255,255,255,0.06); max-width: 880px; margin: 0 auto; }
+
+    /* ── Nav links ── */
+    .links-row {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      justify-content: center; padding: 28px 20px;
+      background: var(--surface);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .links-row a {
+      background: rgba(212,175,55,0.1); color: var(--primary);
+      border: 1px solid rgba(212,175,55,0.28);
+      border-radius: 20px; padding: 7px 18px;
+      font-size: 13px; font-weight: 600;
+      transition: background .12s;
+    }
+    .links-row a:hover { background: rgba(212,175,55,0.22); text-decoration: none; }
+
+    /* ── Footer ── */
+    footer {
+      background: #030408;
+      color: #6b7280; text-align: center;
+      padding: 28px; font-size: 13px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    footer a { color: #6b7280; }
+    footer a:hover { color: var(--primary); }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 32px; }
+      .hero .app-icon { width: 72px; height: 72px; }
+      .games-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+  <img class="app-icon" src="/game/cv/icon-256.png" alt="ChessVerse app icon" width="96" height="96" />
+  <h1>ChessVerse</h1>
+  <p class="tagline">An offline-first chess universe: classic chess against a 1000-level AI, a story campaign, mate puzzles, arena tournaments, survival battles, and a chess academy — all in one app.</p>
+  <div class="badge-row">
+    <span class="badge">1000-Level AI</span>
+    <span class="badge">Story Mode</span>
+    <span class="badge">Offline First</span>
+    <span class="badge">No Account Needed</span>
+    <span class="badge">Android</span>
+  </div>
+  <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.chessverse.chess_universe" target="_blank" rel="noopener">
+    ▶&nbsp; Get it on Google Play
+  </a>
+</div>
+
+<!-- Modes -->
+<section>
+  <h2>Six Ways to <span>Play Chess</span></h2>
+  <div class="games-grid">
+    <div class="game-card g-classic">
+      <span class="g-icon">♟️</span>
+      <h3>Classic Chess</h3>
+      <p>Play the full game against an AI that improves like a human across 1000 levels — hints, undo, save/resume</p>
+    </div>
+    <div class="game-card g-story">
+      <span class="g-icon">📖</span>
+      <h3>Story Mode</h3>
+      <p>Six chapters, 23 NPC battles with dialogue, bosses, and custom positions</p>
+    </div>
+    <div class="game-card g-puzzles">
+      <span class="g-icon">🧩</span>
+      <h3>Puzzles</h3>
+      <p>Machine-verified mate puzzles that rotate weekly, playable fully offline</p>
+    </div>
+    <div class="game-card g-arena">
+      <span class="g-icon">🏟️</span>
+      <h3>Arena</h3>
+      <p>8- and 16-player offline knockout tournaments with brackets and trophies</p>
+    </div>
+    <div class="game-card g-survival">
+      <span class="g-icon">🛡️</span>
+      <h3>Survival</h3>
+      <p>Ten asymmetric scenarios including a boss battle — win or just survive</p>
+    </div>
+    <div class="game-card g-academy">
+      <span class="g-icon">🎓</span>
+      <h3>Learn Chess</h3>
+      <p>An 8-lesson academy with quizzes and rewards for every skill level</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- Features -->
+<section>
+  <h2>Why <span>ChessVerse?</span></h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="f-icon">🧠</span>
+      <h3>Human-Like AI</h3>
+      <p>A custom engine with a personality layer — search depth, blunder chance, and aggression scale smoothly across 1000 levels, not just a deeper search</p>
+    </div>
+    <div class="feature-card">
+      <span class="f-icon">✈️</span>
+      <h3>Fully Offline</h3>
+      <p>No internet required for gameplay — every mode works from a cold start with no loading spinners</p>
+    </div>
+    <div class="feature-card">
+      <span class="f-icon">🎨</span>
+      <h3>3D Board Themes</h3>
+      <p>Perspective-projected boards with animated camera toggle (top-down ↔ 3D), five board/piece themes to unlock</p>
+    </div>
+    <div class="feature-card">
+      <span class="f-icon">☁️</span>
+      <h3>Optional Cloud Sync</h3>
+      <p>Sign in with Google or Play Games to back up progress and appear on the global leaderboard — or stay fully local as a Guest</p>
+    </div>
+    <div class="feature-card">
+      <span class="f-icon">🏅</span>
+      <h3>Global Leaderboard</h3>
+      <p>Climb the ranks by XP once signed in — no chat, no player-to-player contact, ever</p>
+    </div>
+    <div class="feature-card">
+      <span class="f-icon">🔒</span>
+      <h3>No Account Required</h3>
+      <p>Play instantly as a Guest — progress stays on your device with nothing sent anywhere</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- How to play -->
+<section>
+  <h2>Get Started <span>in Minutes</span></h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>
+        <h3>Download for free</h3>
+        <p>Install ChessVerse from Google Play — play instantly as a Guest, no sign-up required.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div>
+        <h3>Pick a mode</h3>
+        <p>Classic Chess, Story, Puzzles, Arena, Survival, or the Learn Chess academy — jump into whichever fits your mood.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>
+        <h3>Level up the AI</h3>
+        <p>The 1000-level difficulty curve grows with you — from your very first game to grandmaster-adjacent play.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div>
+        <h3>Sync &amp; compete (optional)</h3>
+        <p>Sign in with Google or Play Games anytime to back up your progress and join the global leaderboard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Nav links -->
+<div class="links-row">
+  <a href="/game/cv/">Home</a>
+  <a href="/game/cv/policy.html">Privacy Policy</a>
+  <a href="/game/cv/terms.html">Terms of Service</a>
+  <a href="/game/cv/support.html">Support</a>
+  <a href="/">← MyAppsCart</a>
+</div>
+
+<footer>
+  <p>&copy; 2026 MyAppsCart &nbsp;·&nbsp; <a href="mailto:support@myappscart.com">support@myappscart.com</a></p>
+</footer>
+
+</body>
+</html>

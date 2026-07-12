@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChessVerse – Privacy Policy</title>
+  <link rel="icon" type="image/png" href="/game/cv/icon-256.png" />
+  <link rel="apple-touch-icon" href="/game/cv/icon-1024.png" />
+  <style>
+    :root { --primary:#D4AF37; --gold2:#F4D03F; --bg:#05070E; --surface:#0D1220; --text:#EDEAE0; --muted:#8A92A8; --radius:12px; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.75; font-size:15px; }
+    header { background:linear-gradient(135deg,#05070E 0%,#0A0E1C 50%,#120A05 100%); border-bottom:1px solid rgba(212,175,55,0.3); color:#fff; padding:44px 24px 36px; text-align:center; }
+    header .icon { font-size:52px; margin-bottom:14px; display:block; filter:drop-shadow(0 0 20px rgba(212,175,55,0.5)); }
+    header h1 { font-size:28px; font-weight:900; background:linear-gradient(135deg,var(--primary),var(--gold2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    header p { margin-top:6px; font-size:14px; color:rgba(255,255,255,0.6); }
+    main { max-width:760px; margin:0 auto; padding:40px 20px 72px; }
+    .card { background:var(--surface); border:1px solid rgba(212,175,55,0.12); border-radius:var(--radius); padding:28px 28px 24px; margin-bottom:16px; }
+    h2 { font-size:17px; font-weight:700; color:var(--primary); margin-bottom:14px; }
+    h3 { font-size:15px; font-weight:700; color:var(--text); margin-top:18px; margin-bottom:6px; }
+    h3:first-child { margin-top:0; }
+    p { color:#c4c8d6; font-size:14.5px; margin-bottom:10px; }
+    table { width:100%; border-collapse:collapse; margin:10px 0 14px; font-size:13.5px; }
+    th, td { text-align:left; padding:8px 10px; border-bottom:1px solid rgba(255,255,255,0.06); color:#c4c8d6; vertical-align:top; }
+    th { color:var(--text); font-weight:700; }
+    ul { margin:8px 0 10px 20px; }
+    li { color:#c4c8d6; font-size:14.5px; margin-bottom:5px; }
+    strong { color:var(--text); }
+    a { color:var(--primary); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    .effective { background:rgba(212,175,55,0.08); border:1px solid rgba(212,175,55,0.22); border-radius:8px; padding:12px 16px; font-size:13px; color:#c4c8d6; margin-bottom:20px; }
+    .page-links { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:32px; }
+    .page-links a { background:rgba(212,175,55,0.1); color:var(--primary); border:1px solid rgba(212,175,55,0.28); border-radius:20px; padding:7px 16px; font-size:13px; font-weight:600; }
+    .page-links a:hover { background:rgba(212,175,55,0.2); text-decoration:none; }
+    footer { background:#030408; color:#6b7280; text-align:center; padding:24px; font-size:13px; border-top:1px solid rgba(255,255,255,0.04); }
+    footer a { color:#6b7280; }
+    footer a:hover { color:var(--primary); }
+  </style>
+</head>
+<body>
+
+<header>
+  <span class="icon">♛</span>
+  <h1>ChessVerse</h1>
+  <p>Privacy Policy</p>
+</header>
+
+<main>
+
+  <p class="effective">Effective date: July 12, 2026 &nbsp;·&nbsp; Last updated: July 12, 2026</p>
+
+  <div class="card">
+    <h2>Overview</h2>
+    <p>
+      ChessVerse ("the App") is published by MyAppsCart (operated by Kirosys). This Privacy Policy
+      explains what information we collect, why, and how you can control it. By using the App, you
+      agree to the terms described here.
+    </p>
+    <p>
+      ChessVerse is designed to be safe for players of every age: there is no chat, no user-generated
+      content, and no player-to-player communication of any kind — only chess against the AI, the
+      story campaign, puzzles, and a shared leaderboard.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Play as Guest — nothing leaves your device</h2>
+    <p>
+      If you choose <strong>Guest</strong> at the sign-in screen, the App never creates an account and
+      never contacts our servers. Progress (coins, gems, unlocked levels, puzzle history, settings) is
+      stored only in the app's private storage on your device and is deleted if you uninstall the App.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Information We Collect</h2>
+    <h3>If you sign in with Google or Play Games</h3>
+    <table>
+      <tr><th>Data</th><th>Why we collect it</th><th>Where it's stored</th></tr>
+      <tr><td>Display name, email, profile photo</td><td>To create your account and show your name/photo on the leaderboard</td><td>Firebase Authentication</td></tr>
+      <tr><td>Leaderboard row: name, XP/points, rating, games won, photo</td><td>To power the public global leaderboard</td><td>Cloud Firestore, readable by other signed-in players</td></tr>
+      <tr><td>Private save: coins, gems, unlocked levels, solved puzzles, completed lessons, story progress, theme settings</td><td>To back up and restore your progress across devices</td><td>Cloud Firestore, readable only by you</td></tr>
+    </table>
+    <p>We never see your Google account password — sign-in is handled entirely by Google's/Play Games' own sign-in flow.</p>
+    <h3>Automatically collected</h3>
+    <ul>
+      <li><strong>Advertising identifiers</strong> — Google AdMob may collect an advertising ID and device/usage data to select and measure ads. Because ChessVerse may be played by children as well as adults, <strong>every ad request is marked child-directed and only non-personalized, general-audience ads are served — to every player, regardless of age.</strong></li>
+      <li><strong>Purchase status</strong> — if you buy the optional "Remove Ads" subscription, Google Play Billing tells us only whether the purchase succeeded. We never see your payment details.</li>
+    </ul>
+    <h3>Information we do NOT collect</h3>
+    <ul>
+      <li>Payment or card details — Google Play Billing handles all payments directly</li>
+      <li>Precise location data</li>
+      <li>Contacts, camera, microphone, or file access</li>
+      <li>Any chat messages or player-to-player communication — there is none in the App</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Redeeming a Coupon Code</h2>
+    <p>
+      Settings → Redeem Coupon Code links a single-use code to your signed-in account ID so it can't be
+      reused by someone else. The code text itself is not personal data, and redemption requires you to
+      be signed in with Google or Play Games first (Guests are prompted to sign in).
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>How We Use Your Information</h2>
+    <ul>
+      <li>To create and maintain your account, if you choose to sign in</li>
+      <li>To back up and restore your coins, gems, unlocks, and progress across devices</li>
+      <li>To display your name/photo on the public leaderboard (you can change your display name anytime)</li>
+      <li>To show non-personalized, family-safe ads via Google AdMob</li>
+      <li>To unlock the "Remove Ads" subscription or a redeemed coupon code</li>
+      <li>To respond to support requests</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Third-Party Services</h2>
+    <p>The App integrates the following third-party services, each governed by its own privacy policy:</p>
+    <ul>
+      <li><strong>Firebase Authentication &amp; Cloud Firestore</strong> (Google) — sign-in, cloud save, leaderboard</li>
+      <li><strong>Google Sign-In</strong> — optional authentication</li>
+      <li><strong>Google Play Games Services</strong> — optional authentication</li>
+      <li><strong>Google AdMob</strong> — advertising (banner, interstitial, rewarded), always non-personalized</li>
+      <li><strong>Google Play Billing</strong> — the optional Remove Ads subscription</li>
+    </ul>
+    <p>We do not sell or rent your personal data to any third party.</p>
+  </div>
+
+  <div class="card">
+    <h2>Children's Privacy</h2>
+    <p>
+      ChessVerse is a mixed-audience app that may be played by both children and adults. There is no
+      chat, no user-generated content, and no player-to-player contact of any kind. As described above,
+      every ad shown in the App is treated as child-directed and non-personalized, for every player,
+      regardless of age, since the App has no age-verification step.
+    </p>
+    <p>
+      If you are a parent or guardian and believe your child has an account with personal data (from
+      Google/Play Games sign-in) that you'd like removed, contact us using the details below and we
+      will delete it.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Your Choices</h2>
+    <ul>
+      <li><strong>Play as Guest</strong> to avoid creating any account or sending any data off your device</li>
+      <li><strong>Sign out / switch accounts</strong> anytime from Settings → Account</li>
+      <li><strong>Restore purchases</strong> and <strong>manage/cancel your subscription</strong> anytime through the Google Play Store app (Play Store → Payments &amp; subscriptions)</li>
+      <li><strong>Opt out of personalized advertising</strong> — not applicable here, since the App never requests personalized ads for anyone</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Data Retention &amp; Deletion</h2>
+    <p>
+      Cloud data (your leaderboard row and save backup) is kept for as long as your account exists, so
+      we can restore your progress on a new device. To request deletion of your account and all
+      associated cloud data, email us at
+      <a href="mailto:support@myappscart.com?subject=Delete%20ChessVerse%20Account">support@myappscart.com</a>
+      with the subject "Delete ChessVerse Account" and the email/profile you signed in with. We will
+      process your request within 30 days.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Changes to This Policy</h2>
+    <p>
+      We may update this Privacy Policy from time to time. The effective date at the top of this page
+      reflects when the latest revision was made. Continued use of the App after changes are posted
+      constitutes acceptance of the revised policy.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Contact Us</h2>
+    <p>
+      For any privacy-related questions or requests, contact us at:<br />
+      <a href="mailto:support@myappscart.com">support@myappscart.com</a>
+    </p>
+  </div>
+
+  <div class="page-links">
+    <a href="/game/cv/">← ChessVerse Home</a>
+    <a href="/game/cv/support.html">Support</a>
+    <a href="/game/cv/terms.html">Terms of Service</a>
+    <a href="/">MyAppsCart</a>
+  </div>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 MyAppsCart &nbsp;·&nbsp; <a href="mailto:support@myappscart.com">support@myappscart.com</a></p>
+</footer>
+
+</body>
+</html>
