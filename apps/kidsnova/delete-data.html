@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KidsNova – Delete Your Data</title>
+  <meta name="description" content="How to delete your child's profile and all KidsNova data. KidsNova stores everything on your device and has no online account." />
+  <link rel="icon" type="image/png" href="/apps/kidsnova/icon-512.png" />
+  <link rel="apple-touch-icon" href="/apps/kidsnova/icon-512.png" />
+  <style>
+    :root {
+      --primary: #7C3AED;
+      --green: #22C55E;
+      --danger: #EF4444;
+      --bg: #F4F6FF;
+      --surface: #FFFFFF;
+      --text: #1E2749;
+      --muted: #5B6485;
+      --border: #E4E8F5;
+      --radius: 12px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      font-size: 15.5px;
+    }
+    a { color: var(--primary); }
+    a:hover { text-decoration: underline; }
+
+    header {
+      background: linear-gradient(135deg, #2B2160 0%, #7C3AED 100%);
+      color: #fff;
+      padding: 44px 24px 36px;
+      text-align: center;
+    }
+    header .icon { font-size: 44px; margin-bottom: 12px; }
+    header h1 { font-size: 26px; font-weight: 800; letter-spacing: -0.4px; }
+    header p { margin-top: 6px; font-size: 13.5px; opacity: 0.78; }
+
+    main { max-width: 780px; margin: 0 auto; padding: 36px 20px 72px; }
+
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 28px 28px 24px;
+      margin-bottom: 18px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      border: 1px solid var(--border);
+    }
+    h2 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    p { color: var(--muted); margin-bottom: 12px; }
+    p:last-child { margin-bottom: 0; }
+    ul, ol { padding-left: 20px; color: var(--muted); margin-bottom: 12px; }
+    li { margin-bottom: 8px; }
+    strong { color: var(--text); font-weight: 600; }
+    .highlight {
+      background: #E9FBF0;
+      border-left: 3px solid var(--green);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      margin: 14px 0 0;
+      font-size: 14px;
+      color: #14683A;
+      font-weight: 500;
+    }
+    .warn {
+      background: #FEF2F2;
+      border-left: 3px solid var(--danger);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      margin: 14px 0 0;
+      font-size: 14px;
+      color: #991B1B;
+      font-weight: 500;
+    }
+    .steps {
+      counter-reset: step;
+      list-style: none;
+      padding-left: 0;
+    }
+    .steps li {
+      counter-increment: step;
+      position: relative;
+      padding-left: 42px;
+      margin-bottom: 14px;
+      color: var(--muted);
+    }
+    .steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0; top: 2px;
+      width: 28px; height: 28px;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700;
+      line-height: 1;
+    }
+    .links-row {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      justify-content: center; padding: 28px 20px;
+      background: var(--surface); border-top: 1px solid var(--border);
+    }
+    .links-row a {
+      background: #F0EAFE; color: #374151; border-radius: 20px;
+      padding: 8px 18px; font-size: 13px; font-weight: 600;
+      transition: background .12s;
+    }
+    .links-row a:hover { background: #E1D5FD; color: var(--primary); text-decoration: none; }
+    footer {
+      background: #1E2749; color: #A5AEC8;
+      text-align: center; padding: 20px; font-size: 13px;
+    }
+    footer a { color: #A5AEC8; }
+    footer a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="icon">🗑️</div>
+  <h1>KidsNova — Delete Your Data</h1>
+  <p>You are always in control. Here's exactly how to erase everything.</p>
+</header>
+
+<main>
+
+  <div class="card">
+    <h2>ℹ️ First, the important part</h2>
+    <p>KidsNova has <strong>no user accounts and no servers</strong>. We never receive your child's name, age, or progress — all of it is stored only in the app's private storage on your own device.</p>
+    <div class="highlight">There is no online account to close and no remote data for us to delete, because we never had a copy in the first place. Deleting on your device is deletion, full stop.</div>
+  </div>
+
+  <div class="card">
+    <h2>👤 Delete a single child profile</h2>
+    <p>Use this when you want to remove one child but keep the others:</p>
+    <ol class="steps">
+      <li>Open <strong>KidsNova</strong>.</li>
+      <li>Tap the <strong>parent icon</strong> in the top-right of the home screen.</li>
+      <li>Pass the parent gate (your 4-digit PIN, or the multiplication question).</li>
+      <li>Go to <strong>Settings → Profiles</strong>.</li>
+      <li>Select the child, then choose <strong>Delete profile</strong> and confirm.</li>
+    </ol>
+    <p>That child's name, age, avatar and all of their progress are removed from the device immediately.</p>
+  </div>
+
+  <div class="card">
+    <h2>♻️ Erase everything from inside the app</h2>
+    <p>To wipe all profiles, progress and settings while keeping the app installed:</p>
+    <ol class="steps">
+      <li>Open <strong>KidsNova</strong> and enter the <strong>Parent Zone</strong>.</li>
+      <li>Go to <strong>Settings</strong>.</li>
+      <li>Choose <strong>Reset all data</strong> and confirm.</li>
+    </ol>
+    <p>The app returns to a fresh state, exactly as after a first install.</p>
+  </div>
+
+  <div class="card">
+    <h2>📱 Erase everything from Android settings</h2>
+    <p>This works even if you've forgotten the parent PIN:</p>
+    <ol class="steps">
+      <li>Open Android <strong>Settings</strong>.</li>
+      <li>Go to <strong>Apps</strong> (or "Apps &amp; notifications") → <strong>KidsNova</strong>.</li>
+      <li>Tap <strong>Storage &amp; cache</strong>.</li>
+      <li>Tap <strong>Clear storage</strong> (sometimes "Clear data") and confirm.</li>
+    </ol>
+    <div class="warn">Clearing storage erases every profile, all progress and the parent PIN. This cannot be undone and we cannot recover it.</div>
+  </div>
+
+  <div class="card">
+    <h2>🚮 Uninstall the app</h2>
+    <p>Uninstalling KidsNova removes the app together with all of its local data:</p>
+    <ol class="steps">
+      <li>Press and hold the <strong>KidsNova</strong> icon on your home screen or app drawer.</li>
+      <li>Choose <strong>Uninstall</strong> and confirm.</li>
+    </ol>
+    <p>Alternatively, uninstall from the Google Play Store, or from Android → Settings → Apps → KidsNova → Uninstall.</p>
+  </div>
+
+  <div class="card">
+    <h2>📋 What gets deleted</h2>
+    <p>Any of the methods above removes all of the following from your device:</p>
+    <ul>
+      <li>Child profiles — first name or nickname, age, and avatar.</li>
+      <li>Learning progress — completed lessons, stars, XP, coins and streaks.</li>
+      <li>Parent settings — daily goal, sound, voice and language preferences.</li>
+      <li>The parent PIN.</li>
+      <li>Any scheduled daily reminder.</li>
+    </ul>
+    <p>Nothing about your child is retained anywhere else, because nothing was ever sent anywhere else.</p>
+  </div>
+
+  <div class="card">
+    <h2>✉️ Need help?</h2>
+    <p>If you have any question about deleting data, email us and we'll reply within 2 business days.</p>
+    <p><strong>Email:</strong> <a href="mailto:support@myappscart.com?subject=KidsNova%20Data%20Deletion">support@myappscart.com</a><br>
+    <strong>Developer:</strong> MyAppsCart</p>
+  </div>
+
+</main>
+
+<div class="links-row">
+  <a href="/apps/kidsnova/">Home</a>
+  <a href="/apps/kidsnova/privacy.html">Privacy Policy</a>
+  <a href="/apps/kidsnova/terms.html">Terms of Service</a>
+  <a href="/apps/kidsnova/support.html">Support</a>
+  <a href="/apps/kidsnova/delete-data.html">Delete Data</a>
+  <a href="/">← MyAppsCart</a>
+</div>
+
+<footer>
+  <p>&copy; 2026 MyAppsCart &nbsp;·&nbsp; <a href="mailto:support@myappscart.com">support@myappscart.com</a></p>
+</footer>
+
+</body>
+</html>
