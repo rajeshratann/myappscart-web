@@ -263,6 +263,45 @@
     .stepc h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
     .stepc p { font-size: 14px; color: var(--muted); }
 
+    /* ── Screenshots ── */
+    .shots-band { background: #F7F5FF; border-block: 1px solid var(--border); }
+    .shots-scroll {
+      display: flex; gap: 20px;
+      overflow-x: auto;
+      /* Aligns with the 1080px sections above rather than bleeding to the
+         viewport edge, which left the first card out of line with the copy. */
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 6px 22px 18px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .shots-scroll::-webkit-scrollbar { height: 8px; }
+    .shots-scroll::-webkit-scrollbar-thumb {
+      background: #D9CFF7; border-radius: 4px;
+    }
+    .shot {
+      flex: 0 0 auto;
+      scroll-snap-align: center;
+      width: 232px;
+      text-align: center;
+    }
+    .shot img {
+      width: 100%;
+      display: block;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 28px rgba(30,39,73,0.14);
+      background: var(--surface);
+    }
+    .shot span {
+      display: block;
+      margin-top: 12px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
     /* ── Links / footer ── */
     .links-row {
       display: flex; flex-wrap: wrap; gap: 10px;
@@ -318,8 +357,8 @@
 
 <!-- Worlds -->
 <section id="worlds">
-  <h2>Six worlds to explore</h2>
-  <p class="lead">Each world is a self-contained slice of early learning, with its own colours, scenery and characters — recognisable from across the room.</p>
+  <h2>Six worlds, 91 lessons</h2>
+  <p class="lead">Each world is a self-contained slice of early learning, with its own colours, scenery and characters — recognisable from across the room. Every lesson ships inside the app.</p>
   <div class="worlds-grid">
 
     <div class="world">
@@ -361,6 +400,36 @@
   </div>
 </section>
 
+<!-- Screenshots -->
+<div class="shots-band">
+  <section style="padding-bottom:34px;">
+    <h2>A look inside</h2>
+    <p class="lead">Real screens from the app — nothing staged.</p>
+  </section>
+  <div class="shots-scroll">
+    <div class="shot">
+      <img src="/apps/kidsnova/shots/1-home.jpg" alt="KidsNova home screen showing the daily adventure, today's mission and the world map" width="232" height="516" loading="lazy" />
+      <span>Home &amp; daily adventure</span>
+    </div>
+    <div class="shot">
+      <img src="/apps/kidsnova/shots/2-play.jpg" alt="The Play and Learn screen with six mini-game tiles" width="232" height="516" loading="lazy" />
+      <span>Six games to play</span>
+    </div>
+    <div class="shot">
+      <img src="/apps/kidsnova/shots/3-world.jpg" alt="Colour Garden world screen listing colour lessons with star ratings" width="232" height="516" loading="lazy" />
+      <span>Inside a world</span>
+    </div>
+    <div class="shot">
+      <img src="/apps/kidsnova/shots/4-rewards.jpg" alt="Rewards screen showing level, streak calendar, stars, coins and badges" width="232" height="516" loading="lazy" />
+      <span>Stars, streaks &amp; badges</span>
+    </div>
+    <div class="shot">
+      <img src="/apps/kidsnova/shots/5-pet.jpg" alt="The pet companion screen" width="232" height="516" loading="lazy" />
+      <span>A pet to look after</span>
+    </div>
+  </div>
+</div>
+
 <!-- Features -->
 <section>
   <h2>Built for small hands and short attention spans</h2>
@@ -369,8 +438,8 @@
 
     <div class="feat">
       <div class="feat-icon ic-purple">🎮</div>
-      <h3>Six mini-games</h3>
-      <p>Counting, matching, memory, colouring, shape puzzles and more — each one quietly practising a skill from the worlds.</p>
+      <h3>Six games</h3>
+      <p>Matching, Memory, Counting, Colouring, Shape Puzzle and a Daily Quiz — each one quietly practising a skill from the worlds.</p>
     </div>
 
     <div class="feat">
@@ -381,8 +450,8 @@
 
     <div class="feat">
       <div class="feat-icon ic-orange">⭐</div>
-      <h3>Stars, XP &amp; streaks</h3>
-      <p>Stars, coins, levels and a daily streak turn practice into something a child actually wants to come back to.</p>
+      <h3>Stars, XP &amp; 15 badges</h3>
+      <p>Stars, coins, levels, a daily streak with streak freezes, and 15 badges to earn — practice turned into something a child wants to come back to.</p>
     </div>
 
     <div class="feat">
