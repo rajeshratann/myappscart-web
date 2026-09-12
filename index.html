@@ -877,6 +877,190 @@
       .iso-stack { animation: none; }
     }
 
+
+    /* ═══════════════════════ ARCADE BAND (memory game) ═══════════════════════ */
+    .arcade { position: relative; overflow: hidden; background: var(--navy-950); color: var(--d-text); }
+    .arcade::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(820px 460px at 14% 0%, rgba(0,87,253,0.34), transparent 62%),
+        radial-gradient(680px 420px at 88% 100%, rgba(18,213,253,0.16), transparent 60%);
+    }
+    .arcade .shell { position: relative; z-index: 1; }
+    .arcade .section-head h2 { color: #fff; }
+    .arcade .section-head p { color: var(--d-muted); }
+    .arcade .eyebrow { color: var(--cyan-400); }
+    .arcade .eyebrow::before { background: var(--cyan-400); }
+
+    /* decorative floating 3D cubes */
+    .cube-field { position: absolute; inset: 0; pointer-events: none; perspective: 900px; }
+    .cube {
+      position: absolute; transform-style: preserve-3d;
+      width: var(--cs, 64px); height: var(--cs, 64px);
+      animation: spin3d var(--dur, 26s) linear infinite;
+      opacity: 0.5;
+    }
+    .cube span {
+      position: absolute; inset: 0;
+      border: 1px solid rgba(120,180,255,0.5);
+      background: rgba(0,87,253,0.07);
+    }
+    .cube span:nth-child(1) { transform: translateZ(calc(var(--cs,64px) / 2)); }
+    .cube span:nth-child(2) { transform: rotateY(180deg) translateZ(calc(var(--cs,64px) / 2)); }
+    .cube span:nth-child(3) { transform: rotateY(90deg)  translateZ(calc(var(--cs,64px) / 2)); }
+    .cube span:nth-child(4) { transform: rotateY(-90deg) translateZ(calc(var(--cs,64px) / 2)); }
+    .cube span:nth-child(5) { transform: rotateX(90deg)  translateZ(calc(var(--cs,64px) / 2)); }
+    .cube span:nth-child(6) { transform: rotateX(-90deg) translateZ(calc(var(--cs,64px) / 2)); }
+    @keyframes spin3d {
+      0%   { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+      100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(180deg); }
+    }
+    .cube.k1 { top: 12%; left: 4%;  --cs: 72px; --dur: 30s; }
+    .cube.k2 { top: 64%; left: 9%;  --cs: 44px; --dur: 22s; opacity: 0.34; }
+    .cube.k3 { top: 18%; right: 6%; --cs: 56px; --dur: 26s; opacity: 0.4; }
+    .cube.k4 { bottom: 12%; right: 12%; --cs: 88px; --dur: 34s; opacity: 0.26; }
+
+    /* ── game shell ── */
+    .game-wrap {
+      position: relative; max-width: 760px; margin: 0 auto;
+      background: rgba(255,255,255,0.05); border: 1px solid var(--d-line);
+      border-radius: 24px; padding: 26px;
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 40px 90px rgba(0,0,0,0.45);
+    }
+
+    .game-bar { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-bottom: 20px; }
+    .game-stats { display: flex; gap: 10px; flex-wrap: wrap; }
+    .g-stat {
+      background: rgba(255,255,255,0.07); border: 1px solid var(--d-line);
+      border-radius: 11px; padding: 8px 14px; min-width: 86px;
+    }
+    .g-stat span { display: block; font-size: 9.5px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--d-muted); }
+    .g-stat b {
+      display: block; font-family: 'Space Grotesk', sans-serif; font-size: 19px;
+      font-weight: 700; color: #fff; font-variant-numeric: tabular-nums; line-height: 1.25;
+    }
+    .g-reset {
+      font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.24);
+      color: #fff; border-radius: 11px; padding: 10px 18px; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: background 0.18s ease, transform 0.18s var(--spring);
+    }
+    .g-reset:hover { background: rgba(255,255,255,0.18); transform: translateY(-2px); }
+
+    /* ── board ── */
+    .board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+    .mem-card {
+      position: relative; aspect-ratio: 1 / 1; perspective: 900px;
+      background: none; border: 0; padding: 0; cursor: pointer; font-family: inherit;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .mem-card:disabled { cursor: default; }
+    .mem-card:focus-visible { outline: 3px solid var(--cyan-400); outline-offset: 3px; border-radius: 16px; }
+
+    .mem-inner {
+      position: absolute; inset: 0; transform-style: preserve-3d;
+      transition: transform 0.55s var(--ease);
+    }
+    .mem-card.flipped .mem-inner, .mem-card.matched .mem-inner { transform: rotateY(180deg); }
+
+    .mem-face {
+      position: absolute; inset: 0; border-radius: 16px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+      backface-visibility: hidden; -webkit-backface-visibility: hidden;
+      overflow: hidden;
+    }
+
+    .mem-back {
+      background: linear-gradient(150deg, #0B3FA8, #062A73 55%, #041A33);
+      border: 1px solid rgba(120,180,255,0.3);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.16);
+    }
+    .mem-back::after {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(to right,  rgba(120,180,255,0.14) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(120,180,255,0.14) 1px, transparent 1px);
+      background-size: 18px 18px;
+    }
+    .mem-back i {
+      position: relative; z-index: 1; font-style: normal;
+      font-family: 'Space Grotesk', sans-serif; font-size: 26px; font-weight: 700;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .mem-front {
+      transform: rotateY(180deg);
+      background: #fff; border: 1px solid rgba(255,255,255,0.4);
+      padding: 10px;
+    }
+    .mem-front img, .mem-front .g-glyph {
+      width: 50%; max-width: 54px; aspect-ratio: 1/1; border-radius: 13px; display: block;
+      box-shadow: 0 6px 14px rgba(6,20,40,0.2);
+    }
+    .mem-front .g-glyph { display: flex; align-items: center; justify-content: center; font-size: 26px; }
+    .mem-front b { font-size: 10.5px; font-weight: 700; color: var(--ink-700); text-align: center; line-height: 1.25; }
+
+    .mem-card.matched .mem-front { border-color: #34D399; box-shadow: 0 0 0 2px rgba(52,211,153,0.55), 0 10px 26px rgba(0,0,0,0.3); }
+    .mem-card.matched { animation: pop 0.45s var(--spring); }
+    @keyframes pop { 0% { transform: scale(1) } 45% { transform: scale(1.07) } 100% { transform: scale(1) } }
+
+    /* ── win panel ── */
+    .game-win {
+      position: absolute; inset: 0; z-index: 5; border-radius: 24px;
+      display: none; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+      text-align: center; padding: 30px;
+      background: rgba(4,18,44,0.93);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    }
+    .game-win.show { display: flex; animation: winIn 0.45s var(--ease); }
+    @keyframes winIn { from { opacity: 0; transform: scale(0.96) } to { opacity: 1; transform: none } }
+    .game-win h3 { font-size: 26px; font-weight: 700; color: #fff; letter-spacing: -0.8px; }
+    .game-win .win-line { font-size: 14.5px; color: var(--blue-100); }
+    .game-win .win-best { font-size: 12.5px; color: var(--cyan-400); font-weight: 600; }
+    .game-win .win-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 14px; }
+
+    .game-foot { margin-top: 18px; font-size: 12px; color: var(--d-muted); text-align: center; }
+    .game-foot b { color: #fff; font-weight: 600; }
+
+    @media (max-width: 720px) {
+      .board { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+      .game-wrap { padding: 18px; border-radius: 20px; }
+      .mem-front b { font-size: 9px; }
+      .cube { display: none; }
+      .g-stat { min-width: 72px; padding: 7px 11px; }
+      .g-stat b { font-size: 16px; }
+    }
+
+    /* ═══════════════════════ 3D STAT TILES ═══════════════════════ */
+    .stats-inner { perspective: 1000px; }
+    .stat {
+      transform-style: preserve-3d;
+      transform: rotateX(-70deg); opacity: 0;
+      transition: transform 0.8s var(--ease), opacity 0.6s ease;
+    }
+    .stats-band.lit .stat { transform: none; opacity: 1; }
+    .stats-band.lit .stat:nth-child(1) { transition-delay: 0.05s; }
+    .stats-band.lit .stat:nth-child(2) { transition-delay: 0.17s; }
+    .stats-band.lit .stat:nth-child(3) { transition-delay: 0.29s; }
+    .stats-band.lit .stat:nth-child(4) { transition-delay: 0.41s; }
+
+    /* ═══════════════════════ 3D BENTO TILT ═══════════════════════ */
+    .bento { perspective: 1400px; }
+    .bento-tile {
+      transform-style: preserve-3d;
+      transform: rotateX(var(--bx, 0deg)) rotateY(var(--by, 0deg)) translateY(var(--bl, 0px));
+    }
+    .bento-tile:hover { transform: rotateX(var(--bx, 0deg)) rotateY(var(--by, 0deg)) translateY(-6px); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .stat { transform: none !important; opacity: 1 !important; }
+      .cube { animation: none; }
+      .mem-inner { transition-duration: 0.01ms !important; }
+    }
+
     /* ═══════════ RESPONSIVE ═══════════ */
     @media (max-width: 980px) {
       .hero-grid { grid-template-columns: 1fr; gap: 48px; }
@@ -964,6 +1148,7 @@
 
     <nav class="nav-links" aria-label="Primary">
       <a href="#apps">Apps</a>
+      <a href="#play">Play</a>
       <a href="#start">Get started</a>
       <a href="#insights">Insights</a>
       <a href="#why">Why us</a>
@@ -983,6 +1168,7 @@
   <div class="mobile-panel" id="mobile-panel">
     <nav aria-label="Mobile">
       <a href="#apps">Apps</a>
+      <a href="#play">Play</a>
       <a href="#start">Get started</a>
       <a href="#insights">Insights</a>
       <a href="#why">Why us</a>
@@ -1196,6 +1382,54 @@
         </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════ ARCADE / MINI GAME ═══════════ -->
+<section class="section arcade" id="play">
+  <div class="cube-field" aria-hidden="true">
+    <div class="cube k1"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="cube k2"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="cube k3"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="cube k4"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  </div>
+
+  <div class="shell">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Have a go</span>
+      <h2>Match the cart.</h2>
+      <p>A tiny memory game, right here in the page. No download, no account, and it keeps running if your connection drops — the same rules our apps play by.</p>
+    </div>
+
+    <div class="game-wrap reveal" id="game">
+      <div class="game-bar">
+        <div class="game-stats">
+          <div class="g-stat"><span>Moves</span><b id="g-moves">0</b></div>
+          <div class="g-stat"><span>Time</span><b id="g-time">0:00</b></div>
+          <div class="g-stat"><span>Pairs</span><b id="g-pairs">0 / 6</b></div>
+          <div class="g-stat"><span>Best</span><b id="g-best">—</b></div>
+        </div>
+        <button class="g-reset" id="g-reset" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+          New game
+        </button>
+      </div>
+
+      <div class="board" id="board" role="grid" aria-label="Memory game board"></div>
+
+      <div class="game-win" id="g-win" role="alertdialog" aria-labelledby="g-win-title" aria-modal="false">
+        <h3 id="g-win-title">Cleared it! 🎉</h3>
+        <p class="win-line" id="g-win-line">Six pairs in 0 moves · 0:00</p>
+        <p class="win-best" id="g-win-best"></p>
+        <div class="win-actions">
+          <button class="g-reset" id="g-again" type="button">Play again</button>
+          <a class="g-reset" href="/game/bb/">Brain Battle has 10,000+ levels →</a>
+        </div>
+      </div>
+
+      <p class="game-foot">Built with nothing but the page you're already on — <b>no scripts loaded from anywhere else</b>, and your best score stays in this browser.</p>
     </div>
   </div>
 </section>
@@ -1534,6 +1768,7 @@
         <ul>
           <li><a href="https://kirosys.in" target="_blank" rel="noopener">Kirosys Technologies ↗</a></li>
           <li><a href="#start">Get started</a></li>
+          <li><a href="#play">Play a game</a></li>
           <li><a href="#insights">By the numbers</a></li>
           <li><a href="#about">About us</a></li>
           <li><a href="mailto:support@myappscart.com">Support</a></li>
@@ -1699,8 +1934,6 @@
   function activate(el) {
     el.classList.add('in');
 
-    el.querySelectorAll('[data-count]').forEach(countUp);
-
     el.querySelectorAll('.donut-seg').forEach(function (seg, i) {
       var dash = seg.getAttribute('data-dash');
       if (!dash) return;
@@ -1865,6 +2098,194 @@
       hideTip();
     });
   });
+
+
+  /* ───────── 3D: stat tiles flip up on scroll ───────── */
+  var statsBand = document.querySelector('.stats-band');
+  if (statsBand && 'IntersectionObserver' in window) {
+    var sObs = new IntersectionObserver(function (en) {
+      en.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        statsBand.classList.add('lit');
+        e.target.querySelectorAll('[data-count]').forEach(countUp);
+        sObs.unobserve(e.target);
+      });
+    }, { threshold: 0.35 });
+    sObs.observe(statsBand);
+  } else if (statsBand) {
+    statsBand.classList.add('lit');
+  }
+
+  /* ───────── 3D: bento tilt ───────── */
+  if (!noMotion && canHover && !isNarrow) {
+    document.querySelectorAll('.bento-tile').forEach(function (tile) {
+      var bRaf = null, bEv = null;
+      tile.addEventListener('pointermove', function (e) {
+        bEv = e;
+        if (bRaf) return;
+        bRaf = requestAnimationFrame(function () {
+          bRaf = null;
+          var r = tile.getBoundingClientRect();
+          tile.style.setProperty('--by', (((bEv.clientX - r.left) / r.width - 0.5) * 8).toFixed(2) + 'deg');
+          tile.style.setProperty('--bx', ((0.5 - (bEv.clientY - r.top) / r.height) * 7).toFixed(2) + 'deg');
+        });
+      });
+      tile.addEventListener('pointerleave', function () {
+        tile.style.setProperty('--by', '0deg');
+        tile.style.setProperty('--bx', '0deg');
+      });
+    });
+  }
+
+  /* ───────── memory game ───────── */
+  (function memoryGame() {
+    var board = document.getElementById('board');
+    if (!board) return;
+
+    var DECK = [
+      { key: 'hisabnova', name: 'HisabNova', img: '/apps/hisabnova/icon-512.png' },
+      { key: 'shubhzo',   name: 'Shubhzo',   img: '/apps/shubhzo/icon-512.png' },
+      { key: 'kidsnova',  name: 'KidsNova',  img: '/apps/kidsnova/icon-512.png' },
+      { key: 'cleaniq',   name: 'Cleaniq AI', img: '/apps/cleaniq/icon.svg' },
+      { key: 'chessverse', name: 'ChessVerse', img: '/game/cv/icon-256.png' },
+      { key: 'brainbattle', name: 'Brain Battle', glyph: '🧠', bg: 'linear-gradient(135deg,#0057FD,#12D5FD)' }
+    ];
+    var TOTAL = DECK.length;
+    var BEST_KEY = 'mac_memory_best_v1';
+
+    var elMoves = document.getElementById('g-moves');
+    var elTime  = document.getElementById('g-time');
+    var elPairs = document.getElementById('g-pairs');
+    var elBest  = document.getElementById('g-best');
+    var elWin   = document.getElementById('g-win');
+    var elWinLine = document.getElementById('g-win-line');
+    var elWinBest = document.getElementById('g-win-best');
+
+    var first = null, lock = false, moves = 0, matched = 0;
+    var started = false, t0 = 0, timer = null;
+
+    function readBest() {
+      try {
+        var raw = localStorage.getItem(BEST_KEY);
+        return raw ? JSON.parse(raw) : null;
+      } catch (err) { return null; }
+    }
+    function writeBest(v) {
+      try { localStorage.setItem(BEST_KEY, JSON.stringify(v)); } catch (err) { /* private mode */ }
+    }
+    function fmt(ms) {
+      var s = Math.floor(ms / 1000);
+      return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2);
+    }
+    function showBest() {
+      var b = readBest();
+      elBest.textContent = b ? (b.moves + ' mv') : '—';
+      elBest.title = b ? (b.moves + ' moves in ' + fmt(b.ms)) : 'No score yet';
+    }
+
+    function tick() { elTime.textContent = fmt(Date.now() - t0); }
+
+    function startClock() {
+      if (started) return;
+      started = true; t0 = Date.now();
+      timer = setInterval(tick, 250);
+    }
+    function stopClock() { if (timer) { clearInterval(timer); timer = null; } }
+
+    function shuffle(a) {
+      for (var i = a.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+      }
+      return a;
+    }
+
+    function faceHTML(c) {
+      var art = c.img
+        ? '<img src="' + c.img + '" alt="" width="54" height="54" loading="lazy" />'
+        : '<span class="g-glyph" style="background:' + c.bg + '">' + c.glyph + '</span>';
+      return '<span class="mem-inner">' +
+               '<span class="mem-face mem-back"><i>?</i></span>' +
+               '<span class="mem-face mem-front">' + art + '<b>' + c.name + '</b></span>' +
+             '</span>';
+    }
+
+    function build() {
+      stopClock();
+      first = null; lock = false; moves = 0; matched = 0; started = false;
+      elMoves.textContent = '0';
+      elTime.textContent = '0:00';
+      elPairs.textContent = '0 / ' + TOTAL;
+      elWin.classList.remove('show');
+      showBest();
+
+      var cards = shuffle(DECK.concat(DECK).slice());
+      board.innerHTML = '';
+      cards.forEach(function (c, i) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'mem-card';
+        btn.setAttribute('data-key', c.key);
+        btn.setAttribute('aria-label', 'Hidden card ' + (i + 1));
+        btn.innerHTML = faceHTML(c);
+        btn.addEventListener('click', function () { pick(btn, c); });
+        board.appendChild(btn);
+      });
+    }
+
+    function pick(btn, c) {
+      if (lock || btn.classList.contains('flipped') || btn.classList.contains('matched')) return;
+      startClock();
+      btn.classList.add('flipped');
+      btn.setAttribute('aria-label', c.name);
+
+      if (!first) { first = { btn: btn, c: c }; return; }
+
+      moves++;
+      elMoves.textContent = moves;
+
+      if (first.c.key === c.key) {
+        first.btn.classList.add('matched');
+        btn.classList.add('matched');
+        first.btn.disabled = true;
+        btn.disabled = true;
+        first = null;
+        matched++;
+        elPairs.textContent = matched + ' / ' + TOTAL;
+        if (matched === TOTAL) finish();
+      } else {
+        lock = true;
+        var a = first.btn, bC = first.c;
+        first = null;
+        setTimeout(function () {
+          a.classList.remove('flipped');
+          btn.classList.remove('flipped');
+          a.setAttribute('aria-label', 'Hidden card');
+          btn.setAttribute('aria-label', 'Hidden card');
+          lock = false;
+        }, noMotion ? 260 : 780);
+      }
+    }
+
+    function finish() {
+      stopClock();
+      var ms = Date.now() - t0;
+      elTime.textContent = fmt(ms);
+      var best = readBest();
+      var isBest = !best || moves < best.moves || (moves === best.moves && ms < best.ms);
+      if (isBest) writeBest({ moves: moves, ms: ms });
+      showBest();
+
+      elWinLine.textContent = TOTAL + ' pairs in ' + moves + ' moves · ' + fmt(ms);
+      elWinBest.textContent = isBest ? 'New personal best!' :
+        (best ? 'Your best: ' + best.moves + ' moves in ' + fmt(best.ms) : '');
+      setTimeout(function () { elWin.classList.add('show'); }, noMotion ? 0 : 620);
+    }
+
+    document.getElementById('g-reset').addEventListener('click', build);
+    document.getElementById('g-again').addEventListener('click', build);
+    build();
+  })();
 
   /* ───────── logomark easter egg ───────── */
   document.querySelectorAll('.logo .mark').forEach(function (mark) {
