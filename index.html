@@ -870,14 +870,15 @@
 
       /* the hero keeps its depth on phones — there is no pointer, so the
          scene sways on its own and the panels stack clear of the device */
-      .stage { perspective: 1000px; perspective-origin: 50% 42%; }
-      .scene { animation: sway 10s ease-in-out infinite; }
+      /* short perspective = strong foreshortening on a narrow stage */
+      .stage { perspective: 620px; perspective-origin: 52% 40%; }
+      .scene { animation: sway 11s ease-in-out infinite; }
       @keyframes sway {
-        0%, 100% { transform: rotateX(8deg) rotateY(-14deg); }
-        50%      { transform: rotateX(4deg) rotateY(-3deg); }
+        0%, 100% { transform: rotateX(14deg) rotateY(-26deg) rotateZ(2deg); }
+        50%      { transform: rotateX(6deg)  rotateY(7deg)   rotateZ(-2deg); }
       }
 
-      .hero-visual { min-height: 700px; }
+      .hero-visual { min-height: 830px; }
       .phone { width: 226px; }
       .phone-screen { min-height: 408px; padding: 22px 15px 17px; }
       .phone-apps { gap: 13px 8px; margin-top: 19px; }
@@ -894,18 +895,22 @@
       .depth-card .dc-row { font-size: 9.5px; margin-bottom: 5px; }
       .depth-card .dc-bar { width: 52px; }
 
+      /* pushed far apart in Z so one recedes and one pops toward the reader */
       .depth-card.d-back {
-        top: auto; left: -6px; bottom: calc(100% + 18px);
-        transform: translateZ(-70px) rotateY(12deg);
+        top: auto; left: -16px; bottom: calc(100% + 64px);
+        transform: translateZ(-130px) rotateY(22deg);
+        box-shadow: 0 20px 44px rgba(0,0,0,0.5);
       }
       .depth-card.d-front {
-        bottom: auto; right: -6px; top: calc(100% + 18px);
-        transform: translateZ(70px) rotateY(-10deg);
+        bottom: auto; right: -16px; top: calc(100% + 30px);
+        transform: translateZ(85px) rotateY(-18deg);
+        box-shadow: 0 34px 60px rgba(0,0,0,0.62);
       }
+      .scene .phone { box-shadow: 0 46px 80px rgba(0,0,0,0.66), -22px 26px 60px rgba(0,60,160,0.4); }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .scene { transform: rotateX(6deg) rotateY(-14deg); animation: none; }
+      .scene { transform: rotateX(12deg) rotateY(-22deg); animation: none; }
       .iso-stack { animation: none; }
     }
 
@@ -1134,7 +1139,7 @@
       .bar-row .name { font-size: 12px; }
       .axis-ticks { margin-left: 93px; margin-right: 33px; }
       .footer-grid { grid-template-columns: 1fr; gap: 32px; padding-block: 44px 30px; }
-      .phone { width: 244px; }
+      .phone { width: 226px; }
       .float-chip { display: none; }
       .parent-card { flex-direction: column; gap: 12px; }
     }
