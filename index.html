@@ -233,8 +233,9 @@
     .hero {
       position: relative; overflow: hidden;
       background: var(--navy-950); color: var(--d-text);
-      padding: 82px 0 78px;
+      padding: 82px 0 0;
     }
+    .hero > .divider { position: relative; z-index: 1; margin-top: 78px; }
     .hero::before {
       content: ''; position: absolute; inset: 0; pointer-events: none;
       background:
@@ -299,9 +300,9 @@
     .trust-row span { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; color: var(--d-muted); }
 
     /* phone mockup */
-    .hero-visual { display: flex; justify-content: center; position: relative; }
+    .hero-visual { display: flex; justify-content: center; position: relative; min-height: 560px; align-items: center; }
     .phone {
-      position: relative; width: 272px; padding: 13px; border-radius: 40px;
+      position: relative; width: 252px; padding: 12px; border-radius: 38px;
       background: linear-gradient(160deg, rgba(255,255,255,0.2), rgba(255,255,255,0.04));
       border: 1px solid rgba(255,255,255,0.18);
       box-shadow: 0 44px 90px rgba(0,0,0,0.55);
@@ -701,6 +702,181 @@
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
     .reveal.in { opacity: 1; transform: none; }
 
+
+    /* ═══════════════════════ 3D HERO STAGE ═══════════════════════ */
+    .stage { perspective: 1500px; perspective-origin: 55% 40%; width: 100%; display: flex; justify-content: center; }
+
+    .scene {
+      position: relative; transform-style: preserve-3d;
+      transform: rotateX(var(--rx, 7deg)) rotateY(var(--ry, -17deg));
+      transition: transform 0.5s var(--ease);
+      will-change: transform;
+    }
+
+    /* receding grid plane under the device */
+    .grid-floor {
+      position: absolute; left: 50%; bottom: -90px; width: 700px; height: 420px;
+      transform: translateX(-50%) rotateX(72deg) translateZ(-30px);
+      transform-origin: 50% 100%;
+      background-image:
+        linear-gradient(to right,  rgba(130,190,255,0.40) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(130,190,255,0.40) 1px, transparent 1px);
+      background-size: 44px 44px;
+      -webkit-mask-image: radial-gradient(ellipse 58% 62% at 50% 78%, #000 10%, transparent 72%);
+      mask-image: radial-gradient(ellipse 58% 62% at 50% 78%, #000 10%, transparent 72%);
+      pointer-events: none;
+    }
+
+    /* the device itself — depth comes from the scene, float stays vertical only */
+    .scene .phone {
+      transform-style: preserve-3d;
+      animation: bob 7s ease-in-out infinite;
+      box-shadow: 0 50px 90px rgba(0,0,0,0.6), -30px 30px 70px rgba(0,60,160,0.35);
+    }
+    @keyframes bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-14px) } }
+
+    /* glass panels floating at different depths */
+    .depth-card {
+      position: absolute; width: 170px; padding: 14px 16px; border-radius: 15px;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 24px 50px rgba(0,0,0,0.42);
+      color: #fff;
+    }
+    .depth-card .dc-title { font-size: 12px; font-weight: 700; letter-spacing: 0.2px; margin-bottom: 9px; display: flex; align-items: center; gap: 7px; }
+    .depth-card .dc-title em { font-style: normal; color: var(--cyan-400); }
+    .depth-card .dc-row { display: flex; align-items: center; justify-content: space-between; font-size: 10.5px; color: var(--blue-100); margin-bottom: 7px; }
+    .depth-card .dc-row:last-child { margin-bottom: 0; }
+    .depth-card .dc-bar { width: 62px; height: 5px; border-radius: 3px; background: rgba(255,255,255,0.18); overflow: hidden; }
+    .depth-card .dc-bar i { display: block; height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--blue-500), var(--cyan-400)); }
+
+    .depth-card.d-back  { top: -6%;     left: -186px;  transform: translateZ(-130px) rotateY(14deg);  animation: bob 8.5s ease-in-out infinite 0.6s; }
+    .depth-card.d-front { bottom: -12%; right: -152px; transform: translateZ(130px)  rotateY(-11deg); animation: bob 7.6s ease-in-out infinite 1.2s; }
+
+
+    /* ═══════════════════════ CURVED BAND DIVIDER ═══════════════════════ */
+    .divider { position: relative; line-height: 0; }
+    .divider svg { display: block; width: 100%; height: 72px; }
+
+    /* ═══════════════════════ 3D TILT CARDS ═══════════════════════ */
+    .tilt-wrap { perspective: 1100px; }
+    .tilt-wrap > .app-card {
+      transform-style: preserve-3d;
+      transform: rotateX(var(--tx, 0deg)) rotateY(var(--ty, 0deg)) translateY(var(--lift, 0px));
+      transition: transform 0.35s var(--ease), box-shadow 0.3s ease, border-color 0.3s ease;
+      height: 100%;
+    }
+    .tilt-wrap > .app-card::after {
+      content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+      background: radial-gradient(420px circle at var(--gx, 50%) var(--gy, 0%), rgba(0,87,253,0.09), transparent 48%);
+      opacity: 0; transition: opacity 0.3s ease;
+    }
+    .tilt-wrap:hover > .app-card::after { opacity: 1; }
+    .tilt-wrap:hover > .app-card { --lift: -6px; box-shadow: var(--sh-lg); border-color: #D3DEEC; }
+    .tilt-wrap.hidden { display: none; }
+
+    /* ═══════════════════════ BENTO (principles) ═══════════════════════ */
+    .bento { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .bento-tile {
+      position: relative; overflow: hidden;
+      background: var(--white); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 30px 28px; box-shadow: var(--sh-sm);
+      transition: transform 0.3s var(--ease), box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .bento-tile:hover { transform: translateY(-6px); box-shadow: var(--sh-lg); border-color: #D3DEEC; }
+    .bento-tile h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.35px; margin-bottom: 10px; color: var(--ink-900); }
+    .bento-tile p { font-size: 13.5px; color: var(--ink-500); line-height: 1.7; }
+
+    .bento-a { grid-column: span 2; grid-row: span 2; display: flex; flex-direction: column; background: linear-gradient(165deg, #F7FAFF, #FFFFFF 60%); }
+    .bento-b { grid-column: span 2; }
+    .bento-c { grid-column: span 1; }
+    .bento-d { grid-column: span 1; }
+
+    .bento-a h3 { font-size: 24px; letter-spacing: -0.8px; }
+    .bento-a p { font-size: 14.5px; max-width: 380px; }
+
+    /* isometric 3D layer stack inside the feature tile */
+    .iso { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 34px; min-height: 240px; perspective: 900px; margin-top: 18px; }
+    .iso-stack {
+      position: relative; width: 190px; height: 150px;
+      transform-style: preserve-3d;
+      transform: rotateX(58deg) rotateZ(-38deg);
+      animation: iso-turn 16s linear infinite;
+    }
+    @keyframes iso-turn {
+      0%   { transform: rotateX(58deg) rotateZ(-38deg); }
+      50%  { transform: rotateX(58deg) rotateZ(-22deg); }
+      100% { transform: rotateX(58deg) rotateZ(-38deg); }
+    }
+    .iso-layer {
+      position: absolute; inset: 0; border-radius: 16px;
+      border: 1.5px solid rgba(0,87,253,0.28);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.6px; color: var(--blue-700);
+      box-shadow: 0 14px 26px rgba(6,20,40,0.13);
+    }
+    .iso-layer.l1 { transform: translateZ(0px);  background: rgba(237,243,255,0.96); }
+    .iso-layer.l2 { transform: translateZ(34px); background: rgba(216,230,255,0.94); }
+    .iso-layer.l3 {
+      transform: translateZ(68px); color: #fff; border-color: rgba(255,255,255,0.35);
+      background: linear-gradient(135deg, var(--blue-600), var(--blue-800));
+      box-shadow: 0 22px 38px rgba(0,87,253,0.34);
+    }
+    .iso-cap { font-size: 11.5px; color: var(--ink-500); text-align: center; }
+
+    .bento-icon {
+      width: 46px; height: 46px; border-radius: 13px; margin-bottom: 18px;
+      display: flex; align-items: center; justify-content: center; font-size: 21px;
+      background: var(--blue-050); border: 1px solid var(--blue-100);
+    }
+
+    /* ═══════════════════════ 3D STEP COINS ═══════════════════════ */
+    .steps.lit .step-num { animation: coin 0.9s var(--ease) both; }
+    .steps.lit .step:nth-child(2) .step-num { animation-delay: 0.3s; }
+    .steps.lit .step:nth-child(3) .step-num { animation-delay: 0.6s; }
+    @keyframes coin {
+      0%   { transform: perspective(600px) rotateY(-90deg) scale(0.85); }
+      100% { transform: perspective(600px) rotateY(0deg) scale(1.06); }
+    }
+
+    /* ═══════════════════════ CTA DEPTH ═══════════════════════ */
+    .cta-banner::after {
+      content: ''; position: absolute; left: 50%; bottom: -50px; width: 150%; height: 240px;
+      transform: translateX(-50%) perspective(600px) rotateX(64deg);
+      background-image:
+        linear-gradient(to right,  rgba(255,255,255,0.16) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.16) 1px, transparent 1px);
+      background-size: 52px 52px;
+      -webkit-mask-image: linear-gradient(to bottom, #000, transparent 72%);
+      mask-image: linear-gradient(to bottom, #000, transparent 72%);
+      pointer-events: none;
+    }
+
+    @media (max-width: 980px) {
+      .bento { grid-template-columns: repeat(2, 1fr); }
+      .bento-a { grid-column: span 2; grid-row: span 1; }
+      .bento-b { grid-column: span 2; }
+      .bento-c, .bento-d { grid-column: span 1; }
+      .depth-card.d-back { left: -86px; }
+      .depth-card.d-front { right: -76px; }
+    }
+
+    @media (max-width: 720px) {
+      .bento { grid-template-columns: 1fr; }
+      .bento-a, .bento-b, .bento-c, .bento-d { grid-column: span 1; }
+      .depth-card, .grid-floor { display: none; }
+      .scene { transform: none; }
+      .stage { perspective: none; }
+      .divider svg { height: 42px; }
+      .iso { min-height: 200px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .scene { transform: rotateX(6deg) rotateY(-14deg); }
+      .iso-stack { animation: none; }
+    }
+
     /* ═══════════ RESPONSIVE ═══════════ */
     @media (max-width: 980px) {
       .hero-grid { grid-template-columns: 1fr; gap: 48px; }
@@ -848,9 +1024,25 @@
     </div>
 
     <div class="hero-visual">
-      <span class="float-chip c1"><span class="tick">●</span> Offline ready</span>
-      <span class="float-chip c2"><span class="tick">★</span> 25 games inside</span>
-      <div class="phone" aria-hidden="true">
+     <div class="stage" id="stage">
+      <div class="scene" id="scene">
+       <div class="grid-floor" aria-hidden="true"></div>
+
+       <div class="depth-card d-back" aria-hidden="true">
+         <p class="dc-title"><em>◉</em> On this device</p>
+         <p class="dc-row">Local database <span class="dc-bar"><i style="width:100%"></i></span></p>
+         <p class="dc-row">Cloud copies <span class="dc-bar"><i style="width:0%"></i></span></p>
+         <p class="dc-row">Trackers <span class="dc-bar"><i style="width:0%"></i></span></p>
+       </div>
+
+       <div class="depth-card d-front" aria-hidden="true">
+         <p class="dc-title"><em>▲</em> Inside the cart</p>
+         <p class="dc-row">Apps &amp; tools <span class="dc-bar"><i style="width:56%"></i></span></p>
+         <p class="dc-row">Games <span class="dc-bar"><i style="width:44%"></i></span></p>
+         <p class="dc-row">Free to start <span class="dc-bar"><i style="width:100%"></i></span></p>
+       </div>
+
+       <div class="phone" aria-hidden="true">
         <div class="phone-screen">
           <span class="phone-notch"></span>
           <p class="phone-time">9:41</p>
@@ -868,8 +1060,14 @@
             <p><b>0 KB uploaded</b>Everything stays on the device</p>
           </div>
         </div>
+       </div>
       </div>
+     </div>
     </div>
+  </div>
+
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 1440 72" preserveAspectRatio="none"><path d="M0 72V30c240 34 480 40 720 18S1200-4 1440 24v48z" fill="#FFFFFF"/></svg>
   </div>
 </section>
 
@@ -900,7 +1098,7 @@
 
     <div class="apps-grid" id="apps-grid">
 
-      <a class="app-card reveal" data-type="app" href="/apps/hisabnova/" style="--tint-app:#16A34A;">
+      <div class="tilt-wrap reveal"><a class="app-card" data-type="app" href="/apps/hisabnova/" style="--tint-app:#16A34A;">
         <div class="card-top">
           <div class="app-icon"><img src="/apps/hisabnova/icon-512.png" alt="HisabNova logo" width="60" height="60" /></div>
           <div class="app-info"><div class="app-name">HisabNova</div><div class="app-cat">Business · GST Billing &amp; Inventory</div></div>
@@ -908,9 +1106,9 @@
         <p class="app-desc">Offline-first GST billing, stock and khata for Indian shops. Bills are written to your own device first, so the counter never waits for a signal. 11 Indian languages.</p>
         <div class="tags"><span class="tag">Works Offline</span><span class="tag">GST-Ready</span><span class="tag gold">Free Trial</span></div>
         <div class="card-footer"><span class="cta-btn">Learn more <i>→</i></span><span class="platform">Mobile · Desktop</span></div>
-      </a>
+      </a></div>
 
-      <a class="app-card reveal" data-type="app" href="/apps/shubhzo/" style="--tint-app:#C2185B;">
+      <div class="tilt-wrap reveal"><a class="app-card" data-type="app" href="/apps/shubhzo/" style="--tint-app:#C2185B;">
         <div class="card-top">
           <div class="app-icon"><img src="/apps/shubhzo/icon-512.png" alt="Shubhzo logo" width="60" height="60" /></div>
           <div class="app-info"><div class="app-name">Shubhzo</div><div class="app-cat">Events · Weddings &amp; Vendors</div></div>
@@ -918,9 +1116,9 @@
         <p class="app-desc">Plan an Indian wedding, puja or first birthday from one screen — 29 categories, 189 bookable services, and a refundable token that holds your date for 24 hours. Vendors get a partner app in the same install.</p>
         <div class="tags"><span class="tag">11 Languages</span><span class="tag">Two apps in one</span><span class="tag gold">Free</span></div>
         <div class="card-footer"><span class="cta-btn">Learn more <i>→</i></span><span class="platform">Android</span></div>
-      </a>
+      </a></div>
 
-      <a class="app-card reveal" data-type="app" href="/apps/kidsnova/" style="--tint-app:#7C3AED;">
+      <div class="tilt-wrap reveal"><a class="app-card" data-type="app" href="/apps/kidsnova/" style="--tint-app:#7C3AED;">
         <div class="card-top">
           <div class="app-icon"><img src="/apps/kidsnova/icon-512.png" alt="KidsNova logo" width="60" height="60" /></div>
           <div class="app-info"><div class="app-name">KidsNova</div><div class="app-cat">Education · Ages 3–8</div></div>
@@ -928,9 +1126,9 @@
         <p class="app-desc">A learning universe for young children — six worlds, six mini-games and a daily adventure. Fully offline, no ads, and it collects nothing.</p>
         <div class="tags"><span class="tag">Ad-Free</span><span class="tag">100% Offline</span><span class="tag gold">Free</span></div>
         <div class="card-footer"><span class="cta-btn">Learn more <i>→</i></span><span class="platform">Android</span></div>
-      </a>
+      </a></div>
 
-      <a class="app-card reveal" data-type="app" href="/apps/jivault/" style="--tint-app:#1A47C8;">
+      <div class="tilt-wrap reveal"><a class="app-card" data-type="app" href="/apps/jivault/" style="--tint-app:#1A47C8;">
         <div class="card-top">
           <div class="app-icon" style="background:linear-gradient(135deg,#060F24,#1A47C8);">🔐</div>
           <div class="app-info"><div class="app-name">JiVault</div><div class="app-cat">Productivity · Document Scanner</div></div>
@@ -938,9 +1136,9 @@
         <p class="app-desc">AI-powered document scanner with biometric vault, 12-language OCR, PDF tools, cloud backup, digital signatures, and voice transcription.</p>
         <div class="tags"><span class="tag">AI-Powered</span><span class="tag">Biometric Vault</span><span class="tag gold">Free + Premium</span></div>
         <div class="card-footer"><span class="cta-btn">Learn more <i>→</i></span><span class="platform">Android</span></div>
-      </a>
+      </a></div>
 
-      <a class="app-card reveal" data-type="app" href="/apps/cleaniq/" style="--tint-app:#0891B2;">
+      <div class="tilt-wrap reveal"><a class="app-card" data-type="app" href="/apps/cleaniq/" style="--tint-app:#0891B2;">
         <div class="card-top">
           <div class="app-icon"><img src="/apps/cleaniq/icon.svg" alt="Cleaniq AI logo" width="60" height="60" /></div>
           <div class="app-info"><div class="app-name">Cleaniq AI</div><div class="app-cat">Utilities · Storage Cleaner</div></div>
@@ -948,9 +1146,9 @@
         <p class="app-desc">Privacy-first AI storage cleaner. Finds duplicate photos, blurry shots, screenshots and junk — all analyzed on-device. Nothing is ever uploaded.</p>
         <div class="tags"><span class="tag">On-Device AI</span><span class="tag">100% Offline</span><span class="tag gold">Free</span></div>
         <div class="card-footer"><span class="cta-btn">Learn more <i>→</i></span><span class="platform">Android</span></div>
-      </a>
+      </a></div>
 
-      <a class="app-card reveal" data-type="game" href="/game/bb/" style="--tint-app:#4F46E5;">
+      <div class="tilt-wrap reveal"><a class="app-card" data-type="game" href="/game/bb/" style="--tint-app:#4F46E5;">
         <div class="card-top">
           <div class="app-icon" style="background:linear-gradient(135deg,#0057FD,#12D5FD);">🧠</div>
           <div class="app-info"><div class="app-name">Brain Battle</div><div class="app-cat">Puzzle · Brain Training</div></div>
@@ -958,9 +1156,9 @@
         <p class="app-desc">Four mini-games in one — Word Connect, Number Puzzle, Memory Match, and Color Challenge. 10,000+ levels, daily challenges, fully offline.</p>
         <div class="tags"><span class="tag">Offline</span><span class="tag">No account</span><span class="tag gold">Free</span></div>
         <div class="card-footer"><span class="cta-btn">Learn more <i>→</i></span><span class="platform">Android</span></div>
-      </a>
+      </a></div>
 
-      <a class="app-card reveal" data-type="game" href="/game/gv/" style="--tint-app:#EA580C;">
+      <div class="tilt-wrap reveal"><a class="app-card" data-type="game" href="/game/gv/" style="--tint-app:#EA580C;">
         <div class="card-top">
           <div class="app-icon" style="background:linear-gradient(135deg,#FF6B35,#e05000);">🕹️</div>
           <div class="app-info"><div class="app-name">GameVault</div><div class="app-cat">Arcade · Action Games</div></div>
@@ -968,9 +1166,9 @@
         <p class="app-desc">Five action-packed arcade games in one app — Arrow Shooting, Knife Throw, Bubble Shooter, Balloon Pop, and Coin Drop. Hours of fun, zero cost.</p>
         <div class="tags"><span class="tag">5 Games</span><span class="tag">Offline</span><span class="tag gold">Free</span></div>
         <div class="card-footer"><span class="cta-btn">Learn more <i>→</i></span><span class="platform">Android</span></div>
-      </a>
+      </a></div>
 
-      <a class="app-card reveal" data-type="game" href="/game/kg/" style="--tint-app:#DC143C;">
+      <div class="tilt-wrap reveal"><a class="app-card" data-type="game" href="/game/kg/" style="--tint-app:#DC143C;">
         <div class="card-top">
           <div class="app-icon" style="background:linear-gradient(135deg,#8B0000,#DC143C);">🃏</div>
           <div class="app-info"><div class="app-name">Kitty Gaming</div><div class="app-cat">Card Games · Multiplayer</div></div>
@@ -978,9 +1176,9 @@
         <p class="app-desc">India's most exciting card game platform — Teen Patti, Call Break, 28, and Kitty. Play live with friends or battle smart bots offline.</p>
         <div class="tags"><span class="tag">4 Card Games</span><span class="tag">Multiplayer</span><span class="tag gold">Free</span></div>
         <div class="card-footer"><span class="cta-btn">Learn more <i>→</i></span><span class="platform">Android</span></div>
-      </a>
+      </a></div>
 
-      <a class="app-card reveal" data-type="game" href="/game/cv/" style="--tint-app:#A17C0B;">
+      <div class="tilt-wrap reveal"><a class="app-card" data-type="game" href="/game/cv/" style="--tint-app:#A17C0B;">
         <div class="card-top">
           <div class="app-icon"><img src="/game/cv/icon-256.png" alt="ChessVerse logo" width="60" height="60" /></div>
           <div class="app-info"><div class="app-name">ChessVerse</div><div class="app-cat">Board · Chess Universe</div></div>
@@ -988,7 +1186,7 @@
         <p class="app-desc">Classic chess vs. a 1000-level AI, a 6-chapter story campaign, offline puzzles, arena tournaments, survival battles, and a chess academy — all in one app.</p>
         <div class="tags"><span class="tag">1000-Level AI</span><span class="tag">Offline</span><span class="tag gold">Free</span></div>
         <div class="card-footer"><span class="cta-btn">Learn more <i>→</i></span><span class="platform">Android</span></div>
-      </a>
+      </a></div>
 
       <div class="card-soon reveal" data-type="all">
         <div class="soon-ring">+</div>
@@ -1189,8 +1387,12 @@
   </div>
 </section>
 
+<div class="divider band-tint" aria-hidden="true">
+  <svg viewBox="0 0 1440 72" preserveAspectRatio="none"><path d="M0 72V34c260 30 520 34 720 14S1190 6 1440 30v42z" fill="#FFFFFF"/></svg>
+</div>
+
 <!-- ═══════════ WHY US ═══════════ -->
-<section class="section band-white" id="why">
+<section class="section band-white" id="why" style="padding-top:36px;">
   <div class="shell">
     <div class="section-head reveal">
       <span class="eyebrow">Our principles</span>
@@ -1198,26 +1400,37 @@
       <p>Most apps ask too much — sign up, allow notifications, share your location. We build the opposite: lean apps that just work.</p>
     </div>
 
-    <div class="principles">
-      <div class="principle reveal">
-        <div class="principle-icon">✈️</div>
+    <div class="bento">
+      <div class="bento-tile bento-a reveal">
+        <div class="bento-icon">✈️</div>
         <h3>Offline first</h3>
-        <p>Every app works without an internet connection. No loading spinners, no "check your network" — just open and use.</p>
+        <p>Every app works without an internet connection. Your data is written to the device first — no loading spinners, no "check your network", and nothing waiting on a server that might not answer.</p>
+        <div class="iso" aria-hidden="true">
+          <div class="iso-stack">
+            <div class="iso-layer l1">DEVICE STORAGE</div>
+            <div class="iso-layer l2">APP DATA</div>
+            <div class="iso-layer l3">WHAT YOU SEE</div>
+          </div>
+          <span class="iso-cap">Three layers, and none of them is a server</span>
+        </div>
       </div>
-      <div class="principle reveal">
-        <div class="principle-icon">🔒</div>
+
+      <div class="bento-tile bento-b reveal">
+        <div class="bento-icon">🔒</div>
         <h3>No accounts</h3>
         <p>Download and start — no sign-up wall. Your data lives on your device, and anything that syncs off it is something you switch on. We never sell it.</p>
       </div>
-      <div class="principle reveal">
-        <div class="principle-icon">🎯</div>
+
+      <div class="bento-tile bento-c reveal">
+        <div class="bento-icon">🎯</div>
         <h3>One thing well</h3>
-        <p>Each app has a clear, focused purpose. No feature bloat, no upsell loops — just the experience you came for.</p>
+        <p>A clear, focused purpose per app. No feature bloat, no upsell loops.</p>
       </div>
-      <div class="principle reveal">
-        <div class="principle-icon">♾️</div>
+
+      <div class="bento-tile bento-d reveal">
+        <div class="bento-icon">♾️</div>
         <h3>Keep growing</h3>
-        <p>We ship, listen, and improve. Each update makes the app better — not bigger for the sake of it.</p>
+        <p>We ship, listen, and improve — better, not bigger for its own sake.</p>
       </div>
     </div>
   </div>
@@ -1539,18 +1752,67 @@
       cards.forEach(function (card) {
         var t = card.getAttribute('data-type');
         var show = f === 'all' || t === f || t === 'all';
-        card.classList.toggle('hidden', !show);
+        var target = card.closest('.tilt-wrap') || card;
+        target.classList.toggle('hidden', !show);
       });
     });
   });
 
-  /* ───────── card cursor glow ───────── */
-  if (!noMotion && window.matchMedia('(hover: hover)').matches) {
-    document.querySelectorAll('.app-card').forEach(function (card) {
-      card.addEventListener('pointermove', function (e) {
-        var r = card.getBoundingClientRect();
-        card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
-        card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+  /* ───────── 3D: hero stage parallax ───────── */
+  var canHover = window.matchMedia('(hover: hover)').matches;
+  var isNarrow = window.matchMedia('(max-width: 720px)').matches;
+
+  if (!noMotion && canHover && !isNarrow) {
+    var hero = document.querySelector('.hero');
+    var scene = document.getElementById('scene');
+    if (hero && scene) {
+      var raf = null, pend = null;
+      hero.addEventListener('pointermove', function (e) {
+        pend = e;
+        if (raf) return;
+        raf = requestAnimationFrame(function () {
+          raf = null;
+          var r = hero.getBoundingClientRect();
+          var px = (pend.clientX - r.left) / r.width - 0.5;
+          var py = (pend.clientY - r.top) / r.height - 0.5;
+          scene.style.setProperty('--ry', (-17 + px * 20).toFixed(2) + 'deg');
+          scene.style.setProperty('--rx', (7 - py * 14).toFixed(2) + 'deg');
+        });
+      });
+      hero.addEventListener('pointerleave', function () {
+        scene.style.setProperty('--ry', '-17deg');
+        scene.style.setProperty('--rx', '7deg');
+      });
+    }
+  }
+
+  /* ───────── 3D: card tilt + glare ───────── */
+  if (!noMotion && canHover && !isNarrow) {
+    document.querySelectorAll('.tilt-wrap').forEach(function (wrap) {
+      var card = wrap.querySelector('.app-card');
+      if (!card) return;
+      var tRaf = null, tEv = null;
+
+      wrap.addEventListener('pointermove', function (e) {
+        tEv = e;
+        if (tRaf) return;
+        tRaf = requestAnimationFrame(function () {
+          tRaf = null;
+          var r = wrap.getBoundingClientRect();
+          var px = (tEv.clientX - r.left) / r.width;
+          var py = (tEv.clientY - r.top) / r.height;
+          card.style.setProperty('--ty', ((px - 0.5) * 13).toFixed(2) + 'deg');
+          card.style.setProperty('--tx', ((0.5 - py) * 11).toFixed(2) + 'deg');
+          card.style.setProperty('--lift', '-8px');
+          card.style.setProperty('--gx', (px * 100).toFixed(1) + '%');
+          card.style.setProperty('--gy', (py * 100).toFixed(1) + '%');
+        });
+      });
+
+      wrap.addEventListener('pointerleave', function () {
+        card.style.setProperty('--ty', '0deg');
+        card.style.setProperty('--tx', '0deg');
+        card.style.setProperty('--lift', '0px');
       });
     });
   }
