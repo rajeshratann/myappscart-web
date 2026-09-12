@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shubhzo — The Complete Tutorial</title>
+  <meta name="description" content="A screen-by-screen walkthrough of Shubhzo: create an event, book a vendor with a refundable token, run the day from the event workspace — and the vendor's side, from registration and KYC to scanning a token and getting paid." />
+  <link rel="icon" type="image/png" href="/apps/shubhzo/icon-512.png" />
+  <link rel="apple-touch-icon" href="/apps/shubhzo/icon-512.png" />
+  <meta property="og:title" content="Shubhzo — The Complete Tutorial" />
+  <meta property="og:description" content="Every screen of both apps, explained in order — including the parts that are meant to fail." />
+  <meta property="og:image" content="https://myappscart.com/apps/shubhzo/icon-512.png" />
+  <style>
+    :root {
+      --maroon: #8E1537; --maroon-d: #6B0F29; --maroon-l: #B8395C;
+      --gold: #C9A227; --gold-l: #E8CE6E; --marigold: #F4890B;
+      --indigo: #2A3A8C; --indigo-l: #5566BE; --teal: #00957E;
+      --primary: #8E1537;
+      --bg: #FDF6EC; --bg-deep: #F8EDDD; --surface: #FFFFFF;
+      --text: #171A1F; --muted: #5A6270; --faint: #8C93A1; --border: #E9E0D2;
+      --grid: #E8E3DA;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.68; font-size: 16px; overflow-x: hidden;
+    }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Header ── */
+    header.top {
+      background: linear-gradient(155deg, #4A0A1D 0%, #8E1537 56%, #B10201 100%);
+      color: #fff; padding: 52px 22px 44px; text-align: center; position: relative; overflow: hidden;
+    }
+    header.top::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% -10%, rgba(232,206,110,0.2) 0%, transparent 58%);
+      pointer-events: none;
+    }
+    header.top > * { position: relative; z-index: 1; }
+    header.top .icon {
+      width: 74px; height: 74px; margin: 0 auto 18px; border-radius: 20px; overflow: hidden;
+      border: 1.5px solid rgba(232,206,110,0.34); box-shadow: 0 10px 28px rgba(0,0,0,0.36);
+    }
+    header.top .icon img { display: block; width: 100%; height: 100%; }
+    header.top .kicker {
+      font-size: 12.5px; font-weight: 700; letter-spacing: 1.6px;
+      text-transform: uppercase; color: var(--gold-l); margin-bottom: 8px;
+    }
+    header.top h1 { font-size: clamp(28px, 5.6vw, 42px); font-weight: 800; letter-spacing: -1px; line-height: 1.12; }
+    header.top p { margin: 14px auto 0; max-width: 620px; font-size: 16px; opacity: 0.88; }
+
+    /* ── Contents ── */
+    .toc { background: var(--surface); border-bottom: 1px solid var(--border); }
+    .toc-inner { max-width: 900px; margin: 0 auto; padding: 26px 22px; }
+    .toc h2 { font-size: 12.5px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--faint); margin-bottom: 14px; }
+    .toc ol { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 8px 22px; }
+    .toc li { font-size: 14.5px; }
+    .toc li a { color: var(--text); font-weight: 600; }
+    .toc li a:hover { color: var(--primary); }
+    .toc li span { color: var(--faint); font-variant-numeric: tabular-nums; margin-right: 8px; font-weight: 700; }
+
+    /* ── Layout ── */
+    main { max-width: 900px; margin: 0 auto; padding: 10px 22px 60px; }
+    .part {
+      margin-top: 54px; padding-top: 30px; border-top: 2px solid var(--border);
+    }
+    .part:first-of-type { border-top: 0; }
+    .part-kicker {
+      font-size: 12.5px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase;
+      color: var(--maroon-l); margin-bottom: 8px;
+    }
+    .part.partner .part-kicker { color: var(--indigo); }
+    .part > h2 { font-size: clamp(24px, 4.4vw, 32px); font-weight: 800; letter-spacing: -0.7px; line-height: 1.16; }
+    .part > .intro { color: var(--muted); margin-top: 12px; font-size: 16.5px; }
+
+    section.step { margin-top: 38px; scroll-margin-top: 16px; }
+    section.step > h3 {
+      font-size: 20px; font-weight: 800; letter-spacing: -0.3px;
+      margin-bottom: 12px; display: flex; gap: 12px; align-items: baseline;
+    }
+    section.step > h3 .num {
+      flex: 0 0 auto; font-size: 13px; font-weight: 800;
+      color: #fff; background: var(--maroon);
+      border-radius: 8px; padding: 3px 9px; letter-spacing: 0;
+      position: relative; top: -2px;
+    }
+    .part.partner section.step > h3 .num { background: var(--indigo); }
+    section.step p { color: var(--muted); margin-bottom: 14px; }
+    section.step p strong, li strong { color: var(--text); font-weight: 650; }
+    section.step ul, section.step ol { color: var(--muted); margin: 0 0 14px 20px; }
+    section.step li { margin-bottom: 7px; }
+
+    /* ── Figure with a phone shot ── */
+    .with-shot { display: grid; grid-template-columns: 1fr 230px; gap: 30px; align-items: start; }
+    .with-shot.flip { grid-template-columns: 230px 1fr; }
+    .with-shot .shot img {
+      width: 100%; display: block; border-radius: 18px;
+      border: 1px solid var(--border); box-shadow: 0 10px 28px rgba(107,15,41,0.13);
+      background: var(--surface);
+    }
+    .with-shot .shot figcaption {
+      margin-top: 10px; font-size: 12.5px; color: var(--faint); text-align: center; line-height: 1.45;
+    }
+    .shot-row {
+      display: grid; gap: 18px; margin: 22px 0 6px;
+      /* Cap each column: these are phone screenshots, and a 430px-wide one in a
+         two-up row reads as a tablet mock-up rather than a phone. */
+      grid-template-columns: repeat(auto-fit, minmax(150px, 224px));
+      justify-content: center;
+    }
+    .shot-row figure { margin: 0; background: none; border: 0; padding: 0; box-shadow: none; }
+    .shot-row img {
+      width: 100%; display: block; border-radius: 16px;
+      border: 1px solid var(--border); box-shadow: 0 8px 22px rgba(107,15,41,0.12);
+      background: var(--surface);
+    }
+    .shot-row figcaption { margin-top: 9px; font-size: 12.5px; color: var(--faint); text-align: center; line-height: 1.45; }
+
+    /* ── Callouts ── */
+    .note, .warn, .tip {
+      border-radius: 0 10px 10px 0; padding: 14px 18px;
+      font-size: 15px; margin: 18px 0;
+    }
+    .note { background: #FFF8E8; border-left: 3px solid var(--gold); color: #6B5305; }
+    .note strong { color: #4A3900; }
+    .warn { background: #FDECEC; border-left: 3px solid #C62828; color: #8A3A3A; }
+    .warn strong { color: #7A1F1F; }
+    .tip { background: #E9F5F1; border-left: 3px solid var(--teal); color: #15604F; }
+    .tip strong { color: #0B4437; }
+
+    /* ── Charts / diagrams ── */
+    figure.chart {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 24px 22px 18px; margin: 24px 0;
+      box-shadow: 0 2px 10px rgba(107,15,41,0.05);
+    }
+    figure.chart > h4 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    figure.chart > .cap { font-size: 14px; color: var(--muted); margin-bottom: 18px; }
+    figure.chart figcaption {
+      font-size: 13px; color: var(--faint);
+      border-top: 1px solid var(--border); margin-top: 14px; padding-top: 12px;
+    }
+    .chart-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .chart-scroll::-webkit-scrollbar { height: 8px; }
+    .chart-scroll::-webkit-scrollbar-thumb { background: #E0CDB4; border-radius: 4px; }
+    svg { display: block; }
+    svg text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; }
+    .t-lbl { font-size: 13px; fill: var(--text); }
+    .t-val { font-size: 13px; font-weight: 700; fill: var(--text); }
+    .t-mut { font-size: 12px; fill: var(--muted); }
+    .t-axis { font-size: 11.5px; fill: var(--faint); }
+
+    /* ── Table ── */
+    .table-scroll { overflow-x: auto; margin: 20px 0; }
+    table {
+      width: 100%; border-collapse: collapse; font-size: 15px; min-width: 520px;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+    }
+    th, td { text-align: left; padding: 13px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { font-size: 12px; letter-spacing: 0.6px; text-transform: uppercase; color: var(--faint); font-weight: 700; }
+    td { color: var(--muted); }
+    td:first-child { color: var(--text); font-weight: 600; }
+    tbody tr:last-child td { border-bottom: 0; }
+
+    /* ── Key-value strip ── */
+    .kv { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 20px 0; }
+    .kv div {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 13px; padding: 16px 18px;
+    }
+    .kv b { display: block; font-size: 19px; font-weight: 800; letter-spacing: -0.3px; }
+    .kv span { font-size: 13.5px; color: var(--muted); }
+
+    /* ── FAQ ── */
+    details {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 13px; padding: 16px 20px; margin-bottom: 10px;
+    }
+    details summary {
+      font-weight: 700; font-size: 16px; cursor: pointer; list-style: none;
+      display: flex; justify-content: space-between; gap: 14px; align-items: center;
+    }
+    details summary::-webkit-details-marker { display: none; }
+    details summary::after { content: '+'; color: var(--maroon-l); font-size: 20px; font-weight: 700; flex: 0 0 auto; }
+    details[open] summary::after { content: '–'; }
+    details p { color: var(--muted); margin-top: 10px; font-size: 15px; }
+    details p:last-child { margin-bottom: 0; }
+
+    /* ── Footer ── */
+    .links-row {
+      display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+      padding: 28px 20px; background: var(--surface); border-top: 1px solid var(--border);
+    }
+    .links-row a {
+      background: #F7EDE0; color: #4A3A2C; border-radius: 20px;
+      padding: 8px 18px; font-size: 13px; font-weight: 600; transition: background .12s;
+    }
+    .links-row a:hover { background: #EEDFCB; color: var(--primary); text-decoration: none; }
+    footer { background: #250711; color: #BCA994; text-align: center; padding: 20px; font-size: 13px; }
+    footer a { color: #BCA994; }
+    footer a:hover { color: #fff; }
+
+    @media (max-width: 700px) {
+      .with-shot, .with-shot.flip { grid-template-columns: 1fr; gap: 20px; }
+      .with-shot .shot { max-width: 240px; margin: 0 auto; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="top">
+  <div class="icon"><img src="/apps/shubhzo/icon-512.png" alt="Shubhzo app icon" width="74" height="74" /></div>
+  <div class="kicker">The complete tutorial</div>
+  <h1>Shubhzo, screen by screen</h1>
+  <p>Both apps, in the order you actually meet them — planning an event, and running a business off it. Every screenshot below is from a running build.</p>
+</header>
+
+<nav class="toc">
+  <div class="toc-inner">
+    <h2>What's in here</h2>
+    <ol>
+      <li><span>0</span><a href="#start">First run &amp; signing in</a></li>
+      <li><span>1</span><a href="#event">Create your event</a></li>
+      <li><span>2</span><a href="#find">Find a vendor</a></li>
+      <li><span>3</span><a href="#profile">Read a vendor's profile</a></li>
+      <li><span>4</span><a href="#book">Book, and pay the token</a></li>
+      <li><span>5</span><a href="#token">Your token and QR</a></li>
+      <li><span>6</span><a href="#quote">The quote and the balance</a></li>
+      <li><span>7</span><a href="#workspace">The event workspace</a></li>
+      <li><span>8</span><a href="#guests">Guests and invitations</a></li>
+      <li><span>9</span><a href="#tools">The five free tools</a></li>
+      <li><span>10</span><a href="#finish">Completion and review</a></li>
+      <li><span>11</span><a href="#register">Register your business</a></li>
+      <li><span>12</span><a href="#golive">KYC and going live</a></li>
+      <li><span>13</span><a href="#storefront">Storefront and calendar</a></li>
+      <li><span>14</span><a href="#job">Take a job: scan and accept</a></li>
+      <li><span>15</span><a href="#paid">Getting paid</a></li>
+      <li><span>16</span><a href="#insights">Insights, offers and plans</a></li>
+      <li><span>17</span><a href="#fail">Things meant to fail</a></li>
+      <li><span>18</span><a href="#faq">FAQ</a></li>
+    </ol>
+  </div>
+</nav>
+
+<main>
+
+<!-- ══════════════ PART 0 ══════════════ -->
+<div class="part">
+  <div class="part-kicker">Part 0 · Both apps</div>
+  <h2>Before anything else</h2>
+  <p class="intro">One install contains the customer app and the partner app. Three screens stand between opening it and using it, and they take about a minute.</p>
+
+  <section class="step" id="start">
+    <h3><span class="num">0</span> First run &amp; signing in</h3>
+    <div class="with-shot">
+      <div>
+        <p><strong>Pick your language.</strong> Eleven appear, each written in its own script — Hindi, English, Marathi, Gujarati, Bengali, Tamil, Telugu, Kannada, Malayalam, Punjabi and Urdu, which lays itself out right-to-left. The choice takes effect immediately and lives in <strong>Settings → Language</strong> afterwards.</p>
+        <p><strong>Then pick your side.</strong> <em>Plan an event</em> gives you the customer app in maroon and gold. <em>Grow my business</em> gives you the partner app in indigo and teal. You are not locked in — <strong>Settings → Switch app</strong> moves you across, though it signs you out on the way, because a session belongs to an account with one role.</p>
+        <p><strong>Sign in with your mobile number</strong> and the one-time code that follows. The customer side then asks for an email and verifies that too: the app treats a profile as complete only when it has both, because a booking needs a way to reach you that isn't a phone call.</p>
+        <p>The partner side skips the email step and takes you straight to business registration, which is where a vendor's work starts anyway.</p>
+      </div>
+      <figure class="shot">
+        <img src="/apps/shubhzo/shots/s2-chooser.jpg" alt="The What brings you here screen offering Plan an event and Grow my business" width="480" height="1040" loading="lazy" />
+        <figcaption>The second screen decides which of the two apps you get.</figcaption>
+      </figure>
+    </div>
+    <div class="note"><strong>Signing in always wins.</strong> If the account you sign in with is a vendor account, you land in the Partner app whatever you tapped on this screen. That is what stops one install from ever showing someone the wrong product.</div>
+  </section>
+</div>
+
+<!-- ══════════════ PART 1 ══════════════ -->
+<div class="part">
+  <div class="part-kicker">Part 1 · Planning an event</div>
+  <h2>The customer app</h2>
+  <p class="intro">The app is built around an <em>event</em>, not around a shopping cart. Make the event first and everything afterwards — the checklist, the budget, the guest list, the reminders — hangs off it.</p>
+
+  <section class="step" id="event">
+    <h3><span class="num">1</span> Create your event</h3>
+    <p><strong>My events → New event.</strong> Pick the occasion, the date, the city and a guest count. From those four answers the app builds a checklist of the services that occasion usually needs — twelve for a wedding, five for a first birthday — and from then on every card that mentions your event shows real progress against it: <em>2 of 12 confirmed</em>, with a bar.</p>
+    <p>You do not have to book in any order, and you can add a service the checklist didn't think of. What the checklist buys you is that nothing is quietly forgotten in month three.</p>
+    <div class="shot-row">
+      <figure><img src="/apps/shubhzo/shots/c1-home.jpg" alt="Home screen showing two events with countdowns and confirmation progress" width="480" height="1040" loading="lazy" /><figcaption>Home — your events, with days to go and progress</figcaption></figure>
+      <figure><img src="/apps/shubhzo/shots/c2-categories.jpg" alt="The What are you planning grid showing 13 illustrated event categories" width="480" height="1040" loading="lazy" /><figcaption>The illustrated grid — 13 of the catalogue’s 29</figcaption></figure>
+      <figure><img src="/apps/shubhzo/shots/c7-workspace.jpg" alt="The event workspace with progress, spend and what needs attention" width="480" height="1040" loading="lazy" /><figcaption>The event itself, once it exists</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="step" id="find">
+    <h3><span class="num">2</span> Find a vendor</h3>
+    <p>Either tap a service on your checklist — which takes you straight to the right list — or browse from home. The grid shows the thirteen categories the app has artwork for; the other sixteen of the twenty-nine are reached through search. Every category, every service and every tile colour comes from the server, so the catalogue can grow without you updating the app.</p>
+    <p><strong>The filters are worth using.</strong> City, price range, guest capacity, minimum rating, free on a particular date, specific facilities, verified only. The price and capacity sliders are built from the results actually in front of you, so there is no filter position that returns nothing.</p>
+    <p><strong>Compare before you commit.</strong> Tap the compare icon on two to four cards and open the compare bar. The table marks the best value in each row — cheapest, highest rated, most experienced — instead of leaving you to scan across columns.</p>
+    <div class="with-shot flip">
+      <figure class="shot">
+        <img src="/apps/shubhzo/shots/c3-providers.jpg" alt="A venue list with ratings, capacity and starting prices" width="480" height="1040" loading="lazy" />
+        <figcaption>Ten venues, sorted six ways, filtered seven.</figcaption>
+      </figure>
+      <div>
+        <p><strong>What you will not see</strong> is a phone number. Until a booking with that vendor is confirmed, the app shows <code>+91 98765•••10</code> and says why. This is not the app hiding a field it was given — the server does not send the number at all.</p>
+        <p><strong>Sorting</strong> offers six orders, including relevance, price up and down, rating, and how quickly a vendor usually replies. Response rate matters more than most people expect: a vendor who answers in twenty minutes is worth more than one who is ₹2,000 cheaper and answers on Thursday.</p>
+        <div class="tip"><strong>Shortlist as you go.</strong> The heart icon saves a vendor to your wishlist, which survives closing the app and is where the compare screen pulls from.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="step" id="profile">
+    <h3><span class="num">3</span> Read a vendor's profile</h3>
+    <p>A profile is deliberately dense, because this is the screen where the decision actually gets made:</p>
+    <ul>
+      <li><strong>A labelled gallery</strong> — each photo says what it is of (hall, mandap, entrance), so seven pictures of the same corner are obvious.</li>
+      <li><strong>The facts</strong> — capacity range, starting price, parking, rooms, food types, whether alcohol is allowed, indoor or outdoor, and which languages the staff speak.</li>
+      <li><strong>Packages</strong> with inclusions <em>and</em> exclusions spelled out, plus optional add-ons with a running total.</li>
+      <li><strong>The trust panel</strong> — years in business, verification status, completed bookings, response rate.</li>
+      <li><strong>Reviews</strong> with a rating histogram, so you can see whether a 4.6 is everyone agreeing or a fight between fives and ones.</li>
+    </ul>
+    <div class="shot-row">
+      <figure><img src="/apps/shubhzo/shots/c4-provider.jpg" alt="A venue profile showing facts, facilities and reasons to trust them" width="480" height="1040" loading="lazy" /><figcaption>Facts and facilities, then why you can trust them</figcaption></figure>
+      <figure><img src="/apps/shubhzo/shots/c5-packages.jpg" alt="Four packages with inclusions and exclusions" width="480" height="1040" loading="lazy" /><figcaption>Packages, with what is <em>not</em> included</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="step" id="book">
+    <h3><span class="num">4</span> Book, and pay the token</h3>
+    <p><strong>Request Booking</strong> opens a form: which event this is for, the date, the time slot, the package, any add-ons, and a note. The date picker knows the vendor's calendar, so a date they have already sold is not offered to you.</p>
+    <p>At the bottom sits the <strong>token amount for that service</strong> — ₹1,001 for a venue, ₹501 for a photographer, ₹201 for decoration or makeup, ₹101 for a pandit or a mehndi artist. The form says plainly that the token comes back if the vendor does not accept within 24 hours.</p>
+
+    <figure class="chart">
+      <h4>What the token is for</h4>
+      <p class="cap">It is not a deposit against the price. It is a small, refundable cost that makes a request mean something on both sides — which is what stops vendors being buried in enquiries that go nowhere.</p>
+      <div class="chart-scroll">
+        <svg viewBox="0 0 840 210" width="820" height="205" role="img" aria-label="Diagram of three outcomes when paying a token. Paying successfully creates a booking request with a countdown. A failed payment creates nothing at all. A cancelled payment also creates nothing.">
+          <rect x="0" y="18" width="190" height="58" rx="12" fill="#FFF8E8" stroke="#E6D6A8"/>
+          <text class="t-val" x="95" y="42" text-anchor="middle">You tap Pay</text>
+          <text class="t-mut" x="95" y="60" text-anchor="middle">UPI, card, netbanking</text>
+
+          <g stroke="#8C93A1" stroke-width="1.5" fill="none">
+            <path d="M190 47 H236"/>
+            <path d="M212 47 V112 H236"/>
+            <path d="M212 112 V172 H236"/>
+          </g>
+
+          <rect x="240" y="18" width="200" height="58" rx="12" fill="#E6F4EC" stroke="#BEE3CF"/>
+          <text x="340" y="42" text-anchor="middle" font-size="13" font-weight="700" fill="#0F6B3F">Payment succeeds</text>
+          <text x="340" y="60" text-anchor="middle" font-size="12" fill="#2F6B4F">verified server-side</text>
+
+          <rect x="240" y="84" width="200" height="56" rx="12" fill="#FDECEC" stroke="#F0C9C9"/>
+          <text x="340" y="107" text-anchor="middle" font-size="13" font-weight="700" fill="#A02020">Payment fails</text>
+          <text x="340" y="125" text-anchor="middle" font-size="12" fill="#8A4444">gateway declines it</text>
+
+          <rect x="240" y="148" width="200" height="56" rx="12" fill="#F4F5F7" stroke="#DCDFE5"/>
+          <text class="t-val" x="340" y="171" text-anchor="middle">You cancel</text>
+          <text class="t-mut" x="340" y="189" text-anchor="middle">back out of the sheet</text>
+
+          <g stroke="#8C93A1" stroke-width="1.5" fill="none">
+            <path d="M440 47 H486"/><path d="M440 112 H486"/><path d="M440 176 H486"/>
+          </g>
+
+          <rect x="490" y="18" width="330" height="58" rx="12" fill="#8E1537"/>
+          <text x="510" y="42" font-size="13" font-weight="700" fill="#FFFFFF">Request created · 24h countdown starts</text>
+          <text x="510" y="60" font-size="12" fill="#F2D8A8">QR issued · vendor notified · contacts still masked</text>
+
+          <rect x="490" y="84" width="330" height="120" rx="12" fill="#FFFFFF" stroke="#E3E6EC"/>
+          <text class="t-val" x="510" y="110">Nothing is created. At all.</text>
+          <text class="t-mut" x="510" y="132">No booking, no payment row, no notification —</text>
+          <text class="t-mut" x="510" y="150">an unverified payment did not happen, and</text>
+          <text class="t-mut" x="510" y="168">recording one would be inventing a record.</text>
+          <text class="t-mut" x="510" y="190">Try again and nothing is left behind from the first go.</text>
+        </svg>
+      </div>
+      <figcaption>Failed and cancelled payments behave identically, which is the point: a half-made booking is worse than no booking.</figcaption>
+    </figure>
+  </section>
+
+  <section class="step" id="token">
+    <h3><span class="num">5</span> Your token and QR</h3>
+    <div class="with-shot">
+      <div>
+        <p>The moment the payment clears you get a <strong>token screen</strong>: a token number like <code>TKN-6612-9087</code>, a QR code, the booking reference, the amount paid, and a countdown that says how long the vendor has left.</p>
+        <p><strong>What you do with it.</strong> Nothing, usually — most vendors accept from their phone. If you are meeting them, or standing at the venue, they scan this QR and the booking is confirmed in front of you.</p>
+        <p><strong>What happens if nobody answers.</strong> At twenty-four hours the request expires by itself. Your token is refunded to your Shubhzo wallet, both you and the vendor are told why, and the date is released. You do not have to chase anyone, and there is nothing to cancel.</p>
+        <p>Until the vendor accepts, both phone numbers stay masked and the message thread stays shut. A vendor cannot use an incoming request to harvest your number.</p>
+      </div>
+      <figure class="shot">
+        <img src="/apps/shubhzo/shots/c6-token.jpg" alt="The booking token screen with QR code, token number and a countdown reading 22 hours 59 minutes" width="480" height="1040" loading="lazy" />
+        <figcaption>The countdown is live and server-driven — closing the app doesn't pause it.</figcaption>
+      </figure>
+    </div>
+    <div class="tip"><strong>Track everything in one place.</strong> <em>My bookings</em> lists every request with its status chip — Pending, Confirmed, Completed, Expired — and the one action each one is waiting for.</div>
+  </section>
+
+  <section class="step" id="quote">
+    <h3><span class="num">6</span> The quote and the balance</h3>
+    <p>The token holds the date. The <strong>quote settles the price</strong> — which is why a quote arrives against a booking that is <em>already confirmed</em>. A green Confirmed chip sitting next to an "Accept quote" button is not a contradiction; it means the date is yours and the number is still being agreed.</p>
+    <p>A quote arrives as line items, not a lump sum: the package, each extra (drone coverage ×2, a pre-wedding shoot, the album), a discount if the vendor offered one, 18% GST, and then <strong>your token credited off the total</strong>. Accept it and the balance payment appears in the Payment tab. Reject it and the vendor is asked to revise rather than the booking dying.</p>
+    <div class="shot-row">
+      <figure><img src="/apps/shubhzo/shots/c13-bookings.jpg" alt="My bookings listing requests with status chips and next actions" width="480" height="1040" loading="lazy" /><figcaption>Every booking with the one thing it needs next</figcaption></figure>
+      <figure><img src="/apps/shubhzo/shots/c11-payments.jpg" alt="Payment history showing paid, outstanding, refunded and wallet balance" width="480" height="1040" loading="lazy" /><figcaption>Paid, outstanding, refunded — with receipts</figcaption></figure>
+      <figure><img src="/apps/shubhzo/shots/c14-notifications.jpg" alt="The notification centre listing expiry warnings, RSVPs, quotes and payments" width="480" height="1040" loading="lazy" /><figcaption>Expiries, RSVPs, quotes and payments</figcaption></figure>
+    </div>
+    <div class="note"><strong>Refunds are rows, not silence.</strong> An expired token shows up in Payment history as its own line with the reason attached, and the money lands in your wallet where you can see it and spend it on the next token.</div>
+  </section>
+
+  <section class="step" id="workspace">
+    <h3><span class="num">7</span> The event workspace</h3>
+    <p>Open the event itself and you get what the app calls the digital control room. In one scroll:</p>
+    <ul>
+      <li><strong>The header</strong> — occasion, dates, guest count, city, and how many of the checklist's services are confirmed.</li>
+      <li><strong>Three numbers</strong> — spent so far, remaining against your budget, and guests accepted.</li>
+      <li><strong>What needs your attention</strong> — a short, ranked list: a completion to confirm, a quote awaiting a reply, three services not started. Each row goes straight to the screen that clears it.</li>
+      <li><strong>The services checklist</strong> — every service with its vendor, its status and its amount, including the optional ones you haven't started, each showing what its token would cost.</li>
+      <li><strong>The day plan</strong> — the running order for the event itself.</li>
+    </ul>
+    <div class="shot-row">
+      <figure><img src="/apps/shubhzo/shots/c7-workspace.jpg" alt="The event workspace header with progress, spend and attention list" width="480" height="1040" loading="lazy" /><figcaption>Progress, money and what needs you today</figcaption></figure>
+      <figure><img src="/apps/shubhzo/shots/c10-guests.jpg" alt="Guest management showing invited count, RSVP states and check-in buttons" width="480" height="1040" loading="lazy" /><figcaption>Guests, with RSVP state per family</figcaption></figure>
+      <figure><img src="/apps/shubhzo/shots/c8-budget.jpg" alt="The budget calculator with an estimated total and category-wise sliders" width="480" height="1040" loading="lazy" /><figcaption>Budget, split by category and adjustable per line</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="step" id="guests">
+    <h3><span class="num">8</span> Guests and invitations</h3>
+    <p><strong>Guests.</strong> Add them one at a time or paste a list — <code>Name, 9876543210</code>, one per line — and the server de-duplicates on the phone number. Group them into family, friends, colleagues and neighbours, track RSVPs, and watch the head count move against the venue's capacity. Beyond the list there are tabs for <strong>hotel rooms, transport, seating and welcome desks</strong>, because at five hundred guests those stop being details.</p>
+    <p><strong>Invitations.</strong> Pick a design — digital card, WhatsApp square, video invite, printed order, or a wedding website — and the preview fills in your real event details. Every guest gets their <em>own</em> RSVP link, so a reply is attributable to one person instead of arriving on a link shared to four hundred people.</p>
+    <div class="shot-row">
+      <figure><img src="/apps/shubhzo/shots/c12-invitations.jpg" alt="Invitation designs in digital, WhatsApp and video formats with prices" width="480" height="1040" loading="lazy" /><figcaption>Digital, WhatsApp, video and printed</figcaption></figure>
+      <figure><img src="/apps/shubhzo/shots/c9-muhurat.jpg" alt="Shubh Muhurat listing auspicious dates with tithi and nakshatra" width="480" height="1040" loading="lazy" /><figcaption>Shubh Muhurat, with the disclaimer alongside</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="step" id="tools">
+    <h3><span class="num">9</span> The five free tools</h3>
+    <p>These need no booking and no vendor. They are reached from the home screen or from <strong>☰ → Free tools</strong>.</p>
+    <div class="kv">
+      <div><b>Budget calculator</b><span>Enter a total and a style tier; it splits by category using typical shares, lets you override any line, and compares the plan against what you have actually booked.</span></div>
+      <div><b>Guest estimator</b><span>Invitations sent per group against realistic turnout, so you cater for who will come rather than who was asked.</span></div>
+      <div><b>Food quantity</b><span>Per-head quantities by menu style, which is the number the caterer will ask you for.</span></div>
+      <div><b>Decor area</b><span>Square footage for the mandap, stage and entrance from the guest count and layout.</span></div>
+      <div><b>Shubh Muhurat</b><span>Auspicious windows for eleven occasions with tithi and nakshatra — and a plain note that these are for guidance and your family priest has the last word.</span></div>
+    </div>
+    <div class="note"><strong>The budget calculator links out.</strong> Every category row has a <em>Find providers</em> link, so a number you just set becomes a search with the right filters already applied.</div>
+  </section>
+
+  <section class="step" id="finish">
+    <h3><span class="num">10</span> Completion and review</h3>
+    <p>After the event the vendor marks the service complete, and your booking moves to <em>Awaiting your confirmation</em>. Nothing is released until you agree it happened: your confirmation is the gate that lets the vendor's settlement run and that unlocks your review.</p>
+    <p>Then rate them one to five, write what you want, and attach photos. Your review moves their aggregate by the correct weighted amount — one new five-star does not swing a vendor with 240 reviews from 4.6 to 5.0 — and the vendor can reply to it publicly.</p>
+  </section>
+</div>
+
+<!-- ══════════════ PART 2 ══════════════ -->
+<div class="part partner">
+  <div class="part-kicker">Part 2 · Running a business</div>
+  <h2>The partner app</h2>
+  <p class="intro">Five tabs — Home, Jobs, Calendar, Earnings, Business — with the QR scanner floating above all of them, because a vendor opens it standing in front of a customer. Everything else is a module reached from the Business hub.</p>
+
+  <section class="step" id="register">
+    <h3><span class="num">11</span> Register your business</h3>
+    <p>The first screen is the pitch, not a form. Then it asks how you work — <em>I run a business</em> or <em>I work on my own</em> — because a halwai with a van and a banquet chain do not need the same twenty questions. Picking a trade on the light path pre-selects that service, so you never hunt for it in a catalogue of nearly two hundred.</p>
+    <p>Then four steps, not one long form:</p>
+    <ol>
+      <li><strong>You</strong> — your name, the business name and type, and a tagline. The tagline is the single line that shows under your name in search results, so it is worth twenty seconds.</li>
+      <li><strong>Work</strong> — every service you offer, multi-selected across the catalogue or tapped from the commonly-picked chips, a starting price, years in business, and the languages you speak. Each service becomes its own listing.</li>
+      <li><strong>Place</strong> — city from a picker with a <em>Use my current location</em> shortcut, your area, address and PIN, every area you serve and how far you will travel.</li>
+      <li><strong>Review</strong> — your listing <em>as a customer will see it</em>, a summary of what is about to be registered, and the partner terms as four plain sentences with a checkbox. Reading your own card is the only reliable way to notice it says nothing.</li>
+    </ol>
+    <div class="warn"><strong>It refuses things on purpose.</strong> No services picked, no registration — a business with nothing to sell has an empty storefront. Terms unticked, no registration — commission and payouts hang off that consent. Register a name that already exists in your city and it is refused as a duplicate, matched through accents and casing, so "royal decor studio" will not slip past "Royal Décor Studio".</div>
+    <p>If the server objects to something after you submit, the app takes you <em>back to the step that owns the complaint</em> rather than leaving a red line on a screen you can no longer see.</p>
+  </section>
+
+  <section class="step" id="golive">
+    <h3><span class="num">12</span> KYC, and the three gates before a first booking</h3>
+    <p>Registering does not make you visible. Three things do, and the app is explicit about which one you are standing at.</p>
+    <figure class="chart">
+      <h4>What has to be true before customers can find you</h4>
+      <p class="cap">Each gate is checked server-side. Trying to skip one doesn't fail silently — it names the gate that is still shut.</p>
+      <div class="chart-scroll">
+        <svg viewBox="0 0 880 190" width="820" height="177" role="img" aria-label="Four stage diagram. Register your business, then complete KYC with identity address and bank details, then get at least one listing approved by an admin, then switch yourself live. Only after all four can customers find you.">
+          <defs>
+            <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="#8C93A1"/>
+            </marker>
+          </defs>
+          <g>
+            <rect x="0" y="40" width="190" height="76" rx="12" fill="#EEF0F9" stroke="#C7CDE8"/>
+            <text class="t-val" x="95" y="66" text-anchor="middle">1 · Register</text>
+            <text class="t-mut" x="95" y="86" text-anchor="middle">four steps, services</text>
+            <text class="t-mut" x="95" y="103" text-anchor="middle">and service area</text>
+
+            <rect x="230" y="40" width="190" height="76" rx="12" fill="#EEF0F9" stroke="#C7CDE8"/>
+            <text class="t-val" x="325" y="66" text-anchor="middle">2 · KYC approved</text>
+            <text class="t-mut" x="325" y="86" text-anchor="middle">PAN, address, bank</text>
+            <text class="t-mut" x="325" y="103" text-anchor="middle">unlocks the payout account</text>
+
+            <rect x="460" y="40" width="190" height="76" rx="12" fill="#EEF0F9" stroke="#C7CDE8"/>
+            <text class="t-val" x="555" y="66" text-anchor="middle">3 · Listing approved</text>
+            <text class="t-mut" x="555" y="86" text-anchor="middle">an admin reviews it</text>
+            <text class="t-mut" x="555" y="103" text-anchor="middle">one listing is enough</text>
+
+            <rect x="690" y="32" width="190" height="92" rx="12" fill="#00957E"/>
+            <text x="785" y="62" text-anchor="middle" font-size="13" font-weight="700" fill="#FFFFFF">4 · Switch to Live</text>
+            <text x="785" y="82" text-anchor="middle" font-size="12" fill="#CFF0E8">the toggle on Home</text>
+            <text x="785" y="102" text-anchor="middle" font-size="12" fill="#CFF0E8">requests start arriving</text>
+          </g>
+          <g stroke="#8C93A1" stroke-width="1.5" marker-end="url(#ar2)" fill="none">
+            <path d="M190 78 H224"/><path d="M420 78 H454"/><path d="M650 78 H684"/>
+          </g>
+          <text class="t-axis" x="0" y="18">Registration alone does not put you in search results</text>
+          <text class="t-axis" x="0" y="160">The Payout account tile stays visibly locked until gate 2 clears — it is greyed out, not hidden, so you know what is missing.</text>
+          <text class="t-axis" x="0" y="178">Switching yourself Live before gate 3 is refused, and the message names the listing that is still waiting.</text>
+        </svg>
+      </div>
+    </figure>
+    <p><strong>KYC</strong> takes identity and address documents by camera, gallery or file, plus PAN and bank details. The PAN and IFSC fields are validated as you type, so a malformed IFSC is a per-field error rather than a rejection three days later. If something is rejected you re-upload just that document.</p>
+    <div class="shot-row">
+      <figure><img src="/apps/shubhzo/shots/p9-storefront.jpg" alt="The business profile editor with a customer's-eye preview button" width="480" height="1040" loading="lazy" /><figcaption>Your storefront, with a preview of how it reads</figcaption></figure>
+      <figure><img src="/apps/shubhzo/shots/p15-portfolio.jpg" alt="A portfolio of labelled photos with a progress strip" width="480" height="1040" loading="lazy" /><figcaption>Portfolio — labelled, and counted against eight</figcaption></figure>
+      <figure><img src="/apps/shubhzo/shots/p14-documents.jpg" alt="Documents list showing an expired fire NOC and an insurance policy nearing expiry" width="480" height="1040" loading="lazy" /><figcaption>Licences and insurance, with expiry warnings</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="step" id="storefront">
+    <h3><span class="num">13</span> Storefront, packages and the calendar</h3>
+    <p><strong>Your storefront</strong> is what a customer reads: name, tagline, the story of the business, service areas, starting price and photos. There is a preview button that shows it exactly as a customer sees it, which is the only reliable way to notice your own profile says nothing.</p>
+    <p><strong>Packages</strong> work best as three tiers with a clear middle. Spell out exclusions as carefully as inclusions — the app gives them equal space because that is where disputes come from. Add-ons sit alongside, so a customer can build up from a base rather than negotiating.</p>
+    <p><strong>The portfolio</strong> tracks you against eight labelled photos, which is roughly where enquiries stop improving. Label them: "mandap", "entrance", "reception stage" — a labelled gallery is why a customer can tell seven angles of one corner from seven jobs.</p>
+    <p><strong>The calendar</strong> has four states: available, blocked, booked and weekly off, with a range blocker for a holiday. <em>Booked</em> dates come from confirmed bookings and cannot be unblocked by hand — tapping one opens the job instead of pretending to be editable. That single rule is what makes double-selling a date impossible rather than merely discouraged.</p>
+    <div class="tip"><strong>Block before the requests arrive, not after.</strong> A blocked date never reaches a customer's date picker, so it never turns into a request you have to decline — and declines are visible in your response stats.</div>
+  </section>
+
+  <section class="step" id="job">
+    <h3><span class="num">14</span> Take a job: scan, check, accept</h3>
+    <p>A request arrives with its own countdown. Open it and you get the customer's requirement, the date, the package they picked, the money position, and the single action it is waiting for. What you do <em>not</em> get, yet, is their phone number.</p>
+    <p>Tap the floating <strong>QR button</strong> — it is on every tab — and scan the customer's token, or type the token number if the camera is unavailable. Six checks run, and each is reported on its own line:</p>
+
+    <figure class="chart">
+      <h4>The six checks, and what a failure does not say</h4>
+      <p class="cap">Left: a token issued to you. Right: a real token issued to a different vendor. Both are honest; only one names anybody.</p>
+      <div class="chart-scroll">
+        <svg viewBox="0 0 860 300" width="820" height="286" role="img" aria-label="Comparison of a passing and a failing token scan. On a passing scan all six checks pass: valid token, valid booking, valid provider, payment done, not expired, belongs to this customer, and the booking and customer name are shown with an Accept button. On a failing scan where the token belongs to another vendor, the valid provider check fails, Accept is disabled, and no booking code or customer name is shown anywhere.">
+          <rect x="0" y="0" width="415" height="300" rx="14" fill="#E6F4EC" stroke="#BEE3CF"/>
+          <text x="22" y="32" font-size="14" font-weight="700" fill="#0F6B3F">Your token — all six pass</text>
+          <g font-size="13" fill="#20553E">
+            <text x="22" y="64">✓  Valid token</text>
+            <text x="22" y="90">✓  Valid booking</text>
+            <text x="22" y="116">✓  Valid provider — issued to you</text>
+            <text x="22" y="142">✓  Payment done</text>
+            <text x="22" y="168">✓  Not expired</text>
+            <text x="22" y="194">✓  Belongs to this customer</text>
+          </g>
+          <rect x="22" y="212" width="371" height="64" rx="10" fill="#FFFFFF" stroke="#BEE3CF"/>
+          <text class="t-mut" x="38" y="234">Booking SBG-2026-000188 · Issued to Rohan Patil</text>
+          <text x="38" y="256" font-size="13" font-weight="700" fill="#0F6B3F">Accept  ▸  request becomes Confirmed</text>
+
+          <rect x="445" y="0" width="415" height="300" rx="14" fill="#FDECEC" stroke="#F0C9C9"/>
+          <text x="467" y="32" font-size="14" font-weight="700" fill="#A02020">Someone else's token — one fails</text>
+          <g font-size="13" fill="#7A4444">
+            <text x="467" y="64">✓  Valid token</text>
+            <text x="467" y="90">✓  Valid booking</text>
+            <text x="467" y="116" font-weight="700" fill="#A02020">✕  Valid provider — not issued to you</text>
+            <text x="467" y="142">✓  Payment done</text>
+            <text x="467" y="168">✓  Not expired</text>
+            <text x="467" y="194">✓  Belongs to this customer</text>
+          </g>
+          <rect x="467" y="212" width="371" height="64" rx="10" fill="#FFFFFF" stroke="#F0C9C9"/>
+          <text class="t-mut" x="483" y="234">No booking code. No customer name. Nothing.</text>
+          <text x="483" y="256" font-size="13" font-weight="700" fill="#9A8888">Accept — disabled</text>
+        </svg>
+      </div>
+      <figcaption>A token number is short enough to guess. If a failed scan still printed "Issued to Aarti Sharma", typing numbers would tell you who a competitor's customers are — so the checks answer without naming anyone who isn't yours.</figcaption>
+    </figure>
+
+    <p><strong>Accepting</strong> confirms the booking, writes the date into your calendar, opens the message thread, and reveals the customer's contact details to both of you at the same moment. <strong>Declining</strong> refunds their token immediately.</p>
+    <div class="shot-row">
+      <figure><img src="/apps/shubhzo/shots/p2-jobs.jpg" alt="The jobs pipeline showing pending requests with countdowns and accept buttons" width="480" height="1040" loading="lazy" /><figcaption>The pipeline — five stages, one next action each</figcaption></figure>
+      <figure><img src="/apps/shubhzo/shots/p7-scan.jpg" alt="The token verification screen offering a scan or manual token entry" width="480" height="1040" loading="lazy" /><figcaption>No camera? Type the token instead</figcaption></figure>
+      <figure><img src="/apps/shubhzo/shots/p6-calendar.jpg" alt="The availability calendar with available, blocked, booked and weekly off states" width="480" height="1040" loading="lazy" /><figcaption>Booked dates can't be quietly resold</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="step" id="paid">
+    <h3><span class="num">15</span> Getting paid</h3>
+    <p>Send a quote from the <strong>quote builder</strong>, which arrives pre-filled with what the customer actually selected. Add line items, a discount, tax — and watch the live preview of what you will be paid after commission, so you are pricing against your own take-home rather than a gross number. Save it as a template and the next one takes a minute.</p>
+
+    <figure class="chart">
+      <h4>From request to bank account</h4>
+      <p class="cap">Five money events, in the order they happen. Commission and TDS come off once, at settlement.</p>
+      <div class="chart-scroll">
+        <svg viewBox="0 0 820 232" width="820" height="232" role="img" aria-label="Timeline of five money events: the customer pays a token which is not yours yet, you send a quote and they accept it, they pay the balance, the event happens and both sides confirm completion, and three days later the settlement lands in your bank net of commission and TDS.">
+          <path d="M12 76 H668" stroke="#E0DCD2" stroke-width="3"/>
+          <g>
+            <circle cx="12" cy="76" r="8" fill="#5566BE" stroke="#FFFFFF" stroke-width="2"/>
+            <text class="t-val" x="0" y="44">Token paid</text>
+            <text class="t-mut" x="0" y="110">₹101 – ₹1,001, paid by</text>
+            <text class="t-mut" x="0" y="126">the customer. Held.</text>
+
+            <circle cx="176" cy="76" r="8" fill="#5566BE" stroke="#FFFFFF" stroke-width="2"/>
+            <text class="t-val" x="164" y="44">Quote accepted</text>
+            <text class="t-mut" x="164" y="110">Line items, 18% GST,</text>
+            <text class="t-mut" x="164" y="126">token credited off.</text>
+
+            <circle cx="340" cy="76" r="8" fill="#5566BE" stroke="#FFFFFF" stroke-width="2"/>
+            <text class="t-val" x="328" y="44">Balance paid</text>
+            <text class="t-mut" x="328" y="110">Settled by the customer</text>
+            <text class="t-mut" x="328" y="126">before the event.</text>
+
+            <circle cx="504" cy="76" r="8" fill="#C9A227" stroke="#FFFFFF" stroke-width="2"/>
+            <text class="t-val" x="492" y="44">Both confirm</text>
+            <text class="t-mut" x="492" y="110">You mark it done, they</text>
+            <text class="t-mut" x="492" y="126">confirm. This is the gate.</text>
+
+            <circle cx="668" cy="76" r="9" fill="#00957E" stroke="#FFFFFF" stroke-width="2"/>
+            <text class="t-val" x="656" y="44">+3 days · settled</text>
+            <text class="t-mut" x="656" y="110">Net of commission and</text>
+            <text class="t-mut" x="656" y="126">TDS, with a UTR.</text>
+          </g>
+          <rect x="0" y="160" width="820" height="58" rx="12" fill="#F7F4EE" stroke="#E3DED2"/>
+          <text class="t-val" x="18" y="184">On ₹1,00,000 at the Starter rate: ₹10,000 commission, ₹1,000 TDS (10% of it), ₹89,000 to you.</text>
+          <text class="t-mut" x="18" y="204">Growth takes the commission to 8% and Pro to 6%. Every settlement carries its own invoice and a line-by-line ledger.</text>
+        </svg>
+      </div>
+      <figcaption>Nothing is released before the customer confirms the service happened — which is also what unlocks their review.</figcaption>
+    </figure>
+
+    <p>The <strong>Earnings</strong> tab has four views: <em>Overview</em> (this month, lifetime, payout pending, what customers still owe), <em>Payment history</em> with the commission on each receipt, <em>Payouts</em> as settlement batches with their UTRs, and <em>Invoices</em> — GST invoices for the commission you paid, which is the document your accountant wants.</p>
+    <div class="shot-row">
+      <figure><img src="/apps/shubhzo/shots/p5-earnings.jpg" alt="Earnings overview showing this month, lifetime, payout pending and how you get paid" width="480" height="1040" loading="lazy" /><figcaption>Commission, TDS and net, itemised</figcaption></figure>
+      <figure><img src="/apps/shubhzo/shots/p11-quote.jpg" alt="The quote builder with reusable templates" width="480" height="1040" loading="lazy" /><figcaption>Quote templates, reused per job type</figcaption></figure>
+      <figure><img src="/apps/shubhzo/shots/p10-reviews.jpg" alt="Reviews received, with unanswered ones first and a reply box" width="480" height="1040" loading="lazy" /><figcaption>Reviews — unanswered ones first</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="step" id="insights">
+    <h3><span class="num">16</span> Insights, offers and plans</h3>
+    <p><strong>Insights</strong> is the screen to open weekly. It tells you five things, and each one ends in a link to the screen that fixes it:</p>
+    <ul>
+      <li><strong>The funnel</strong> — views, enquiries, tokens paid, confirmed, completed. Where you leak tells you what to fix; a big drop from views to enquiries is a photo and pricing problem, not a service problem.</li>
+      <li><strong>Your season</strong> — a twelve-month demand curve of when requests actually arrive, so you block holidays in the quiet months instead of the busy ones.</li>
+      <li><strong>How customers find you</strong> — the exact searches you appear in, how many looked, how many clicked, and your average rank in each.</li>
+      <li><strong>Where your customers are</strong> — the area mix, which is how you decide whether the travel radius is worth widening.</li>
+      <li><strong>You vs vendors like you</strong> — response time, rating, photo count and conversion against comparable businesses, plus a reputation score and the four things that move it.</li>
+    </ul>
+    <p><strong>Offers</strong> fill quiet months: a percentage, a flat amount, or a free add-on, with an audience, a validity window and a redemption cap. There are guard rails — a discount over the operator's cap is refused, and deleting an offer customers have already redeemed <em>pauses</em> it instead, so the price someone was quoted keeps working.</p>
+    <p><strong>Plans</strong> change one number that matters: commission. Starter is free at 10%; Growth is ₹999 a month at 8% with 1.8× search visibility and 60 lead credits; Pro is ₹2,499 at 6% with 2.5× and 200. Subscribing recalculates immediately — open a job and the payout line has already changed.</p>
+    <p>The rest of the Business hub: <strong>Team</strong> (crew with roles, permissions and per-job assignment), <strong>Messages</strong> (per-booking threads, shut until you accept), <strong>Documents</strong> (licences and insurance, with expiry warnings that surface on Home), <strong>Disputes</strong> (raised on a thread with an evidence list rather than argued over the phone), <strong>Academy</strong> and <strong>Referrals</strong>, and <strong>Business settings</strong> — lead time, jobs per day, weekly offs, travel radius and charge, advance percentage, cancellation policy, and a notification matrix with quiet hours.</p>
+    <div class="shot-row">
+      <figure><img src="/apps/shubhzo/shots/p3-funnel.jpg" alt="Insights showing the enquiry funnel and revenue trend" width="480" height="1040" loading="lazy" /><figcaption>Funnel and revenue trend</figcaption></figure>
+      <figure><img src="/apps/shubhzo/shots/p4-season.jpg" alt="Insights showing the twelve-month demand curve and search rankings" width="480" height="1040" loading="lazy" /><figcaption>Your season, and what you rank for</figcaption></figure>
+      <figure><img src="/apps/shubhzo/shots/p12-offers.jpg" alt="Offers with redemption counts and validity windows" width="480" height="1040" loading="lazy" /><figcaption>Offers, capped and redemption-tracked</figcaption></figure>
+    </div>
+    <div class="note"><strong>Advance and cancellation policy go public.</strong> Whatever you set in Business settings appears on your storefront the moment you save it — which is the point, since a policy a customer only meets after booking is not a policy.</div>
+  </section>
+</div>
+
+<!-- ══════════════ PART 3 ══════════════ -->
+<div class="part">
+  <div class="part-kicker">Part 3 · Worth knowing</div>
+  <h2>Things that are meant to fail</h2>
+  <p class="intro">Most of what makes a marketplace trustworthy is what it refuses to do. All of these are enforced by the server, so they hold however the app is asked.</p>
+
+  <section class="step" id="fail">
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>If this happens</th><th>What the app does</th></tr></thead>
+        <tbody>
+          <tr><td>A token payment fails or is cancelled</td><td>No booking, no payment row, no notification — nothing is left behind to clean up.</td></tr>
+          <tr><td>You book the same vendor for the same date twice</td><td>Rejected as a duplicate before any money moves.</td></tr>
+          <tr><td>You book a venue for more guests than it holds</td><td>Rejected, with the venue's actual capacity in the message.</td></tr>
+          <tr><td>A request sits unanswered for 24 hours</td><td>It expires, the token is refunded to your wallet, and both sides are notified.</td></tr>
+          <tr><td>A vendor scans a token issued to someone else</td><td>The "valid provider" check fails, Accept is disabled, and no booking or customer is named.</td></tr>
+          <tr><td>A vendor scans a token for an already-confirmed booking</td><td>Reported plainly as already confirmed. No second acceptance.</td></tr>
+          <tr><td>Someone scans a QR that isn't a Shubhzo token</td><td>"This QR code is not a Shubhzo token."</td></tr>
+          <tr><td>Either side asks for the other's phone number early</td><td>Masked, with the reason shown — the server never sends it.</td></tr>
+          <tr><td>A vendor messages a customer whose request they haven't accepted</td><td>The thread is locked, with the privacy reason stated.</td></tr>
+          <tr><td>A vendor submits a listing before KYC is approved</td><td>Blocked, naming exactly what is missing.</td></tr>
+          <tr><td>A vendor switches themselves Live before a listing is approved</td><td>Refused, naming the gate that is still shut.</td></tr>
+          <tr><td>A vendor creates a 60% discount, or a fourth running offer</td><td>Refused against the operator's caps.</td></tr>
+          <tr><td>A vendor deletes an offer customers already redeemed</td><td>Paused instead of deleted, so quoted prices keep working.</td></tr>
+          <tr><td>A vendor adds a payout account with a malformed IFSC</td><td>A per-field error on the IFSC box, not a generic failure.</td></tr>
+          <tr><td>A vendor uploads insurance with no expiry date</td><td>Refused — the app cannot warn you about a date it does not have.</td></tr>
+          <tr><td>The network drops mid-flow</td><td>An offline banner stays up, cached screens still render, and the retry is on the failure rather than a dead end.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════ FAQ ══════════════ -->
+<div class="part">
+  <div class="part-kicker">Part 4</div>
+  <h2>Questions people actually ask</h2>
+  <section class="step" id="faq">
+    <details>
+      <summary>Is the token the same as a deposit?</summary>
+      <p>No. A deposit is part of the price; the token is a small refundable amount — between ₹101 and ₹1,001 depending on the service — that makes a request cost something on both sides. It is credited against the final bill once the booking goes through, and refunded in full if the vendor does not accept within 24 hours.</p>
+    </details>
+    <details>
+      <summary>What if the vendor never replies?</summary>
+      <p>Nothing is required of you. At twenty-four hours the request expires on its own, the token goes back to your wallet, the date is released, and both sides are told why. You can book someone else immediately — you do not have to wait for the window to close first.</p>
+    </details>
+    <details>
+      <summary>When does the vendor get my phone number?</summary>
+      <p>When they accept your booking, and not before. Until then both numbers are masked and the message thread is locked. This is enforced on the server, so there is nothing for a modified app to reveal.</p>
+    </details>
+    <details>
+      <summary>Can a vendor sell the same date twice?</summary>
+      <p>No. Accepting a booking writes the date into the vendor's booked set, and the availability filter, your date picker and the accept endpoint all read from the same set. A booked date cannot be manually unblocked — tapping it opens the job instead.</p>
+    </details>
+    <details>
+      <summary>Do I need an account to use the calculators?</summary>
+      <p>The budget calculator, guest estimator, food quantity, decor area and Shubh Muhurat are free and need no booking. You do need to be signed in, because they save what you enter against your event.</p>
+    </details>
+    <details>
+      <summary>Can I use one phone number for both the customer and partner app?</summary>
+      <p>Accounts are keyed by number <em>and</em> role, so the same number on the Partner side is a separate vendor account, not your customer account with extra screens. Switching sides signs you out for that reason.</p>
+    </details>
+    <details>
+      <summary>How much does Shubhzo take from a vendor?</summary>
+      <p>A commission on what the customer paid — 10% on the free Starter plan, 8% on Growth, 6% on Pro — plus TDS at 10% of that commission, which is deducted and deposited. On a ₹1,00,000 booking at the Starter rate the vendor is settled ₹89,000, three days after the event, with a UTR and a GST invoice for the commission.</p>
+    </details>
+    <details>
+      <summary>What happens after the event?</summary>
+      <p>The vendor marks the service complete and you confirm it. Your confirmation is the gate: it releases the vendor's settlement and unlocks your review. Nothing moves until you agree the service happened.</p>
+    </details>
+    <details>
+      <summary>Which languages are fully translated?</summary>
+      <p>English and Hindi are complete at 1,360 keys each. The other nine — Marathi, Gujarati, Bengali, Tamil, Telugu, Kannada, Malayalam, Punjabi and Urdu — carry a 217-key working subset covering navigation, primary actions, status chips, authentication and errors, and fall back to English for the rest. They are waiting on a native-speaker pass rather than a machine translation.</p>
+    </details>
+    <details>
+      <summary>Where can I get the app?</summary>
+      <p>Shubhzo is an Android app and is coming to Google Play. <a href="/apps/shubhzo/support.html">Get in touch</a> if you want to be told when it lands, or if you are a vendor who wants to be on it at launch.</p>
+    </details>
+  </section>
+</div>
+
+</main>
+
+<div class="links-row">
+  <a href="/apps/shubhzo/">App home</a>
+  <a href="/apps/shubhzo/tutorial.html">Tutorial</a>
+  <a href="/apps/shubhzo/privacy.html">Privacy Policy</a>
+  <a href="/apps/shubhzo/terms.html">Terms of Service</a>
+  <a href="/apps/shubhzo/support.html">Support</a>
+  <a href="/apps/shubhzo/delete-account.html">Delete Account</a>
+  <a href="/">← MyAppsCart</a>
+</div>
+
+<footer>
+  <p>&copy; 2026 MyAppsCart &nbsp;·&nbsp; <a href="mailto:support@myappscart.com">support@myappscart.com</a></p>
+</footer>
+
+</body>
+</html>

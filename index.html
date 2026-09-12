@@ -538,7 +538,7 @@
       color: var(--text-muted);
     }
 
-    .footer-links { display: flex; gap: 24px; }
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; row-gap: 10px; }
     .footer-links a { font-size: 13px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
     .footer-links a:hover { color: var(--text); }
 
@@ -601,14 +601,14 @@
     </div>
     <p class="hero-eyebrow">Independent App Studio</p>
     <h1>Small apps.<br><span class="blue">Big ideas.</span></h1>
-    <p class="hero-sub">We build focused, thoughtfully crafted apps for phones and desktops — offline-first, no accounts, nothing tracked.</p>
+    <p class="hero-sub">We build focused, thoughtfully crafted apps for phones and desktops — offline-first wherever they can be, and never paid for with your data.</p>
   </section>
 
   <!-- STATS BAND -->
   <div class="stats-band">
     <div class="stats-inner">
       <div class="stat">
-        <span class="stat-n">8</span>
+        <span class="stat-n">9</span>
         <span class="stat-l">Apps shipped</span>
       </div>
       <div class="stat">
@@ -616,8 +616,8 @@
         <span class="stat-l">Games inside</span>
       </div>
       <div class="stat">
-        <span class="stat-n">0</span>
-        <span class="stat-l">Accounts needed</span>
+        <span class="stat-n">8</span>
+        <span class="stat-l">Need no account</span>
       </div>
       <div class="stat">
         <span class="stat-n">100%</span>
@@ -653,6 +653,28 @@
         <div class="card-footer">
           <span class="cta-btn">Learn more →</span>
           <span class="platform">Mobile · Desktop</span>
+        </div>
+      </a>
+
+      <a class="app-card" href="/apps/shubhzo/" style="--card-glow:rgba(142,21,55,0.20);">
+        <div class="card-top">
+          <div class="app-icon" style="padding:0;overflow:hidden;box-shadow:0 8px 20px rgba(142,21,55,0.38);">
+            <img src="/apps/shubhzo/icon-512.png" alt="Shubhzo logo" width="58" height="58" style="display:block;width:100%;height:100%;border-radius:14px;" />
+          </div>
+          <div class="app-info">
+            <div class="app-name">Shubhzo</div>
+            <div class="app-cat">Events · Weddings &amp; Vendors</div>
+          </div>
+        </div>
+        <p class="app-desc">Plan an Indian wedding, puja or first birthday from one screen — 29 categories, 189 bookable services, and a refundable token that holds your date for 24 hours. Vendors get a partner app in the same install.</p>
+        <div class="tags">
+          <span class="tag">11 Languages</span>
+          <span class="tag">Two apps in one</span>
+          <span class="tag gold">Free</span>
+        </div>
+        <div class="card-footer">
+          <span class="cta-btn">Learn more →</span>
+          <span class="platform">Android</span>
         </div>
       </a>
 
@@ -852,7 +874,7 @@
     <div class="about-right">
       <p>MyAppsCart started with a simple frustration: <strong>most mobile apps are cluttered, demand too much, and break the moment you go offline.</strong> We set out to build the opposite — lean, honest apps that respect your time, your storage, and your privacy.</p>
       <p>The name comes from the idea of a curated cart: a small collection of hand-picked apps, each built with care, each with a clear purpose. No filler. We'd rather ship one app that does its job beautifully than ten that feel rushed.</p>
-      <p>Every app we release follows the same rules: <strong>works offline</strong>, <strong>needs no account</strong>, and <strong>has no hidden tracking</strong>. That's the contract — and we intend to keep it with every app in the cart.</p>
+      <p>Almost every app we release follows the same rules: <strong>works offline</strong>, <strong>needs no account</strong>, and <strong>has no hidden tracking</strong>. Where an app genuinely cannot — Shubhzo connects you to real vendors and real money, so it needs a server and a sign-in — the contract becomes <strong>collect only what the job needs, and never sell it</strong>. That much holds for everything in the cart.</p>
       <a class="contact-chip" href="mailto:support@myappscart.com">
         <span class="dot"></span>
         support@myappscart.com
@@ -867,6 +889,7 @@
       <a href="mailto:support@myappscart.com">Contact</a>
       <a href="/apps/hisabnova/">HisabNova</a>
       <a href="/game/bb/">Brain Battle</a>
+      <a href="/apps/shubhzo/">Shubhzo</a>
       <a href="/apps/jivault/">JiVault</a>
       <a href="/apps/cleaniq/">Cleaniq AI</a>
       <a href="/game/gv/">GameVault</a>

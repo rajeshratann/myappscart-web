@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shubhzo – Support</title>
+  <meta name="description" content="Support for Shubhzo — answers for bookings, tokens, refunds, vendor payouts and token scanning, and how to reach a human." />
+  <link rel="icon" type="image/png" href="/apps/shubhzo/icon-512.png" />
+  <link rel="apple-touch-icon" href="/apps/shubhzo/icon-512.png" />
+  <style>
+    :root {
+      --maroon: #8E1537; --maroon-d: #6B0F29; --gold: #C9A227; --teal: #00957E;
+      --primary: #8E1537;
+      --bg: #FDF6EC; --surface: #FFFFFF;
+      --text: #171A1F; --muted: #5A6270; --faint: #8C93A1; --border: #E9E0D2;
+      --radius: 13px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.75; font-size: 15.5px;
+    }
+    a { color: var(--primary); }
+    a:hover { text-decoration: underline; }
+    header {
+      background: linear-gradient(150deg, #4A0A1D 0%, #8E1537 58%, #B10201 100%);
+      color: #fff; padding: 44px 24px 36px; text-align: center;
+    }
+    header .icon {
+      width: 58px; height: 58px; margin: 0 auto 14px; border-radius: 15px; overflow: hidden;
+      border: 1.5px solid rgba(232,206,110,0.34); box-shadow: 0 8px 22px rgba(0,0,0,0.34);
+    }
+    header .icon img { display: block; width: 100%; height: 100%; }
+    header h1 { font-size: 26px; font-weight: 800; letter-spacing: -0.4px; }
+    header p { margin-top: 6px; font-size: 13.5px; opacity: 0.8; }
+    main { max-width: 780px; margin: 0 auto; padding: 36px 20px 72px; }
+    .card {
+      background: var(--surface); border-radius: var(--radius);
+      padding: 26px 28px 22px; margin-bottom: 16px;
+      box-shadow: 0 1px 4px rgba(107,15,41,0.05); border: 1px solid var(--border);
+    }
+    h2 {
+      font-size: 17px; font-weight: 700; color: var(--primary);
+      margin-bottom: 12px; display: flex; align-items: center; gap: 9px;
+    }
+    h3 { font-size: 15px; font-weight: 700; margin: 18px 0 8px; }
+    p { color: var(--muted); margin-bottom: 12px; }
+    p:last-child { margin-bottom: 0; }
+    ul, ol { padding-left: 20px; color: var(--muted); margin-bottom: 12px; }
+    li { margin-bottom: 6px; }
+    strong { color: var(--text); font-weight: 650; }
+    code {
+      background: #F4EDE2; border-radius: 5px; padding: 1px 6px;
+      font-size: 13.5px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    .highlight {
+      background: #E9F5F1; border-left: 3px solid var(--teal);
+      border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 14px 0 0;
+      font-size: 14.5px; color: #15604F; font-weight: 500;
+    }
+    .highlight strong { color: #0B4437; }
+    .warnbox {
+      background: #FFF8E8; border-left: 3px solid var(--gold);
+      border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 14px 0 0;
+      font-size: 14.5px; color: #6B5305;
+    }
+    .warnbox strong { color: #4A3900; }
+    .last-updated {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 13px 20px; margin-bottom: 22px;
+      font-size: 13.5px; color: var(--muted); display: flex; align-items: center; gap: 10px;
+    }
+    .table-scroll { overflow-x: auto; margin: 14px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14.5px; min-width: 460px; }
+    th, td { text-align: left; padding: 11px 13px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { font-size: 12px; letter-spacing: 0.6px; text-transform: uppercase; color: var(--faint); font-weight: 700; }
+    td { color: var(--muted); }
+    td:first-child { color: var(--text); font-weight: 600; }
+    tbody tr:last-child td { border-bottom: 0; }
+    .links-row {
+      display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+      padding: 28px 20px; background: var(--surface); border-top: 1px solid var(--border);
+    }
+    .links-row a {
+      background: #F7EDE0; color: #4A3A2C; border-radius: 20px;
+      padding: 8px 18px; font-size: 13px; font-weight: 600;
+      text-decoration: none; transition: background .12s;
+    }
+    .links-row a:hover { background: #EEDFCB; color: var(--primary); text-decoration: none; }
+    footer { background: #250711; color: #BCA994; text-align: center; padding: 20px; font-size: 13px; }
+    footer a { color: #BCA994; }
+    footer a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="icon"><img src="/apps/shubhzo/icon-512.png" alt="Shubhzo app icon" width="58" height="58" /></div>
+  <h1>Support</h1>
+  <p>Shubhzo · Har Shubh Pal Ka Saathi</p>
+</header>
+
+<main>
+  <div class="card">
+    <h2>✉️ Reach a human</h2>
+    <p>Email <a href="mailto:support@myappscart.com">support@myappscart.com</a>. Please include your registered mobile number and, if it is about a booking, the booking reference — it looks like <code>SBG-2026-000210</code> and is on the booking screen. We aim to reply within two working days.</p>
+    <p>Vendors also have <strong>Business → Help and support</strong> inside the app, which opens a ticket attached to your account and your job, so nothing has to be explained twice.</p>
+  </div>
+
+  <div class="card">
+    <h2>📖 Before you write</h2>
+    <p>The <a href="/apps/shubhzo/tutorial.html">complete tutorial</a> walks both apps screen by screen, and its final section lists the things the app refuses to do <em>on purpose</em> — which covers a good share of "is this broken?" questions.</p>
+  </div>
+
+  <div class="card">
+    <h2>🎟️ Bookings and tokens</h2>
+    <h3>The vendor hasn't responded</h3>
+    <p>Nothing is required of you. At 24 hours the request expires by itself, your token returns to your wallet, and both sides are told. You can book someone else straight away — you do not have to wait for the window to close first.</p>
+    <h3>I can't see the vendor's phone number</h3>
+    <p>That is deliberate. Numbers are masked on both sides until a booking is confirmed, and the message thread unlocks at the same moment. If your booking shows <em>Confirmed</em> and the number is still masked, pull to refresh; if it persists, write to us.</p>
+    <h3>My token payment failed</h3>
+    <p>Then no booking was created and nothing was charged — there is no half-made booking to clean up. Try again. If your bank shows a debit with no booking against it, send us the date, amount and reference and we will trace it.</p>
+    <h3>My refund hasn't arrived</h3>
+    <p>Refunds land in your Shubhzo wallet, not your bank, and appear as their own row in <strong>Payment → Payment history</strong> with the reason attached. The wallet balance can be spent on the next token.</p>
+    <h3>There's a quote on a booking that already says Confirmed</h3>
+    <p>That is correct. The token confirms the <em>date</em>; the quote settles the <em>price</em>. A green Confirmed chip next to an "Accept quote" button means the date is yours and the number is still being agreed.</p>
+  </div>
+
+  <div class="card">
+    <h2>🏪 Vendors</h2>
+    <h3>I registered but no customers can find me</h3>
+    <p>Registration is the first of four gates. You also need KYC approved, at least one listing approved by our team, and then to switch yourself <strong>Live</strong> on the Home tab. The app names whichever gate is still shut — the Payout account tile, for example, stays visibly locked rather than hidden until KYC clears.</p>
+    <h3>A token scan failed</h3>
+    <p>The scanner reports all six checks separately, so read which one failed. The common case is <em>valid provider</em> — that token was issued to a different vendor. A failed scan deliberately does not show the booking code or the customer's name.</p>
+    <h3>I can't unblock a booked date</h3>
+    <p>Booked dates belong to confirmed bookings and cannot be unblocked by hand; tapping one opens the job. This is what stops a date being sold twice. If a booking should not exist, cancel the job rather than the date.</p>
+    <h3>The camera won't open for a scan</h3>
+    <p>Grant camera permission in your phone's settings, or use <strong>Enter token number instead</strong> — typing the token runs exactly the same six checks.</p>
+    <h3>When do I get paid?</h3>
+    <p>After the customer confirms the service was delivered, on the payout cycle shown in Earnings — by default three days after the event. Every settlement shows the gross, the commission at your plan's rate, the TDS, the net and a UTR.</p>
+  </div>
+
+  <div class="card">
+    <h2>⚙️ App and account</h2>
+    <h3>I'm in the wrong app</h3>
+    <p><strong>Settings → Switch app.</strong> It signs you out on the way across, because a session belongs to an account with one role. Note that the same mobile number on the other side is a separate account, not your existing one with extra screens.</p>
+    <h3>The app is in the wrong language</h3>
+    <p><strong>Settings → Language</strong>, or the language button on the login screen. Eleven are available and the change is instant. English and Hindi are complete; the other nine carry a working subset and fall back to English for anything not yet translated.</p>
+    <h3>I'm not getting notifications</h3>
+    <p>Check the notification permission for Shubhzo in your phone's settings, then <strong>Settings → Notifications</strong> in the app, which has a per-channel matrix and quiet hours that may be muting them.</p>
+    <h3>I want to delete my account</h3>
+    <p>See <a href="/apps/shubhzo/delete-account.html">Delete Account</a> — it can be done from inside the app.</p>
+  </div>
+
+  <div class="card">
+    <h2>🐞 Reporting a problem</h2>
+    <p>What helps us most, in one email: your phone model and Android version, the app version from <strong>Settings → About</strong>, the booking reference if there is one, what you expected, what happened, and a screenshot. That is usually enough to reproduce it on the first try.</p>
+  </div>
+</main>
+<div class="links-row">
+  <a href="/apps/shubhzo/">App home</a>
+  <a href="/apps/shubhzo/tutorial.html">Tutorial</a>
+  <a href="/apps/shubhzo/privacy.html">Privacy Policy</a>
+  <a href="/apps/shubhzo/terms.html">Terms of Service</a>
+  <a href="/apps/shubhzo/support.html">Support</a>
+  <a href="/apps/shubhzo/delete-account.html">Delete Account</a>
+  <a href="/">← MyAppsCart</a>
+</div>
+
+<footer>
+  <p>&copy; 2026 MyAppsCart &nbsp;·&nbsp; <a href="mailto:support@myappscart.com">support@myappscart.com</a></p>
+</footer>
+
+</body>
+</html>

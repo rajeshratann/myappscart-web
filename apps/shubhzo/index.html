@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shubhzo — Har Shubh Pal Ka Saathi</title>
+  <meta name="description" content="Shubhzo plans Indian events end to end — 29 categories, 189 bookable services, a refundable token that holds your date for 24 hours, and a Partner app for the vendors on the other side. In 11 languages." />
+  <link rel="icon" type="image/png" href="/apps/shubhzo/icon-512.png" />
+  <link rel="apple-touch-icon" href="/apps/shubhzo/icon-512.png" />
+  <meta property="og:title" content="Shubhzo — Har Shubh Pal Ka Saathi" />
+  <meta property="og:description" content="Plan a wedding, a puja or a first birthday from one screen — and the app vendors use to take the work. Two apps in one install, 11 languages." />
+  <meta property="og:image" content="https://myappscart.com/apps/shubhzo/icon-512.png" />
+  <meta property="og:type" content="website" />
+  <style>
+    :root {
+      --maroon:     #8E1537;
+      --maroon-d:   #6B0F29;
+      --maroon-l:   #B8395C;
+      --brand-red:  #B10201;
+      --gold:       #C9A227;
+      --gold-l:     #E8CE6E;
+      --marigold:   #F4890B;
+      --indigo:     #2A3A8C;
+      --indigo-l:   #5566BE;
+      --teal:       #00957E;
+      --primary:    #8E1537;
+
+      --bg:         #FDF6EC;
+      --bg-deep:    #F8EDDD;
+      --surface:    #FFFFFF;
+      --text:       #171A1F;
+      --muted:      #5A6270;
+      --faint:      #8C93A1;
+      --border:     #E9E0D2;
+
+      /* Chart palette — the app's own indigo/gold/teal, validated for
+         colour-vision separation against a white chart surface. */
+      --s1: #5566BE;
+      --s2: #C9A227;
+      --s3: #00957E;
+      --grid: #E8E3DA;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(155deg, #4A0A1D 0%, #8E1537 52%, #B10201 100%);
+      color: #fff;
+      padding: 64px 22px 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% -5%, rgba(232,206,110,0.22) 0%, transparent 58%),
+                  radial-gradient(ellipse at 88% 92%, rgba(244,137,11,0.16) 0%, transparent 52%),
+                  radial-gradient(ellipse at 8% 78%, rgba(201,162,39,0.14) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 1; }
+    .hero-icon {
+      width: 106px; height: 106px;
+      margin: 0 auto 24px;
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.18);
+      border: 1.5px solid rgba(232,206,110,0.34);
+    }
+    .hero-icon img { display: block; width: 100%; height: 100%; }
+    .hero h1 {
+      font-size: clamp(36px, 7.4vw, 58px);
+      font-weight: 800;
+      letter-spacing: -1.3px;
+      line-height: 1.06;
+    }
+    .hero .tagline {
+      margin-top: 10px;
+      font-size: clamp(15px, 2.7vw, 20px);
+      font-weight: 600;
+      color: var(--gold-l);
+      letter-spacing: 0.5px;
+    }
+    .hero .sub {
+      margin: 18px auto 0;
+      max-width: 660px;
+      font-size: clamp(15px, 2.4vw, 17.5px);
+      opacity: 0.9;
+    }
+    .badges { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 28px; }
+    .badge {
+      background: rgba(255,255,255,0.13);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 22px;
+      padding: 8px 18px;
+      font-size: 13.5px; font-weight: 600;
+      backdrop-filter: blur(6px);
+    }
+    .hero-cta { margin-top: 30px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .store {
+      display: inline-block;
+      background: var(--gold); color: #2A1A00;
+      border-radius: 26px; padding: 13px 30px;
+      font-weight: 700; font-size: 15px;
+      box-shadow: 0 8px 22px rgba(201,162,39,0.34);
+    }
+    .store:hover { background: var(--gold-l); text-decoration: none; }
+    .store.ghost {
+      background: rgba(255,255,255,0.1); color: #fff;
+      border: 1px solid rgba(255,255,255,0.3); box-shadow: none;
+    }
+    .store.ghost:hover { background: rgba(255,255,255,0.18); }
+    .store-note { margin-top: 14px; font-size: 13px; opacity: 0.72; }
+
+    /* ── Stats band ── */
+    .stats { background: var(--maroon-d); color: #fff; }
+    .stats-inner {
+      max-width: 1080px; margin: 0 auto;
+      padding: 30px 22px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+      text-align: center;
+    }
+    .stat-n {
+      display: block;
+      font-size: clamp(22px, 4vw, 32px); font-weight: 800;
+      color: var(--gold-l); letter-spacing: -0.6px;
+    }
+    .stat-l { display: block; font-size: 12.5px; opacity: 0.76; margin-top: 2px; }
+
+    /* ── Sections ── */
+    section { max-width: 1080px; margin: 0 auto; padding: 62px 22px; }
+    section > h2 {
+      text-align: center;
+      font-size: clamp(24px, 4vw, 33px);
+      font-weight: 800; letter-spacing: -0.6px;
+      margin-bottom: 10px;
+    }
+    section > .lead {
+      text-align: center; color: var(--muted);
+      max-width: 660px; margin: 0 auto 40px; font-size: 16px;
+    }
+    .eyebrow {
+      text-align: center; font-size: 12.5px; font-weight: 700;
+      letter-spacing: 1.4px; text-transform: uppercase;
+      color: var(--maroon-l); margin-bottom: 10px;
+    }
+
+    /* ── Cards ── */
+    .feat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(268px, 1fr)); gap: 18px; }
+    .feat {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 26px 24px;
+      box-shadow: 0 2px 10px rgba(107,15,41,0.05);
+    }
+    .feat-icon {
+      width: 50px; height: 50px; border-radius: 15px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 25px; margin-bottom: 15px;
+    }
+    .ic-maroon { background: rgba(142,21,55,0.10); }
+    .ic-gold   { background: rgba(201,162,39,0.16); }
+    .ic-indigo { background: rgba(42,58,140,0.10); }
+    .ic-teal   { background: rgba(0,149,126,0.12); }
+    .ic-mari   { background: rgba(244,137,11,0.13); }
+    .feat h3 { font-size: 16.5px; font-weight: 700; margin-bottom: 7px; }
+    .feat p { font-size: 14.5px; color: var(--muted); }
+
+    /* ── Two-up split ── */
+    .split {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 40px; align-items: center;
+    }
+    .split h3 { font-size: clamp(20px, 3vw, 26px); font-weight: 800; letter-spacing: -0.4px; margin-bottom: 12px; }
+    .split p { color: var(--muted); font-size: 15.5px; margin-bottom: 12px; }
+    .split-shots { display: flex; gap: 14px; justify-content: center; }
+    .split-shots img {
+      width: 46%; max-width: 216px; height: auto;
+      border-radius: 18px; border: 1px solid var(--border);
+      box-shadow: 0 12px 30px rgba(107,15,41,0.14);
+      background: var(--surface);
+    }
+
+    /* ── Screenshot rail ── */
+    .shots-band { background: var(--bg-deep); border-block: 1px solid var(--border); }
+    .shots-scroll {
+      display: flex; gap: 20px; overflow-x: auto;
+      max-width: 1080px; margin: 0 auto;
+      padding: 6px 22px 20px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .shots-scroll::-webkit-scrollbar { height: 8px; }
+    .shots-scroll::-webkit-scrollbar-thumb { background: #E0CDB4; border-radius: 4px; }
+    .shot { flex: 0 0 auto; scroll-snap-align: center; width: 232px; text-align: center; }
+    .shot img {
+      width: 100%; display: block; border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 28px rgba(107,15,41,0.13);
+      background: var(--surface);
+    }
+    .shot span {
+      display: block; margin-top: 12px;
+      font-size: 13.5px; font-weight: 600; color: var(--muted);
+    }
+
+    /* ── Figures & charts ── */
+    figure {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 18px; padding: 26px 24px 20px;
+      box-shadow: 0 2px 10px rgba(107,15,41,0.05);
+      margin-bottom: 20px;
+    }
+    figure > h3 { font-size: 17px; font-weight: 700; margin-bottom: 5px; }
+    figure > .cap { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
+    figcaption {
+      font-size: 13px; color: var(--faint);
+      border-top: 1px solid var(--border);
+      margin-top: 16px; padding-top: 12px;
+    }
+    .chart-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .chart-scroll::-webkit-scrollbar { height: 8px; }
+    .chart-scroll::-webkit-scrollbar-thumb { background: #E0CDB4; border-radius: 4px; }
+    svg { display: block; }
+    svg text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; }
+    .t-lbl   { font-size: 13px; fill: var(--text); }
+    .t-val   { font-size: 13px; font-weight: 700; fill: var(--text); }
+    .t-mut   { font-size: 12px; fill: var(--muted); }
+    .t-axis  { font-size: 11.5px; fill: var(--faint); }
+    .gridline { stroke: var(--grid); stroke-width: 1; }
+
+    .legend { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 16px; }
+    .lg { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--muted); }
+    .lg i { width: 11px; height: 11px; border-radius: 3px; flex: 0 0 11px; }
+    .lg b { color: var(--text); font-weight: 700; }
+
+    /* ── Dark band ── */
+    .band { background: #250711; color: #fff; }
+    .band-inner {
+      max-width: 1080px; margin: 0 auto; padding: 66px 22px;
+      display: grid; grid-template-columns: 1fr 1.05fr; gap: 52px; align-items: center;
+    }
+    .band-badge {
+      display: inline-block;
+      background: rgba(201,162,39,0.16); color: var(--gold-l);
+      border-radius: 20px; padding: 6px 16px;
+      font-size: 12.5px; font-weight: 700; letter-spacing: 0.3px;
+      margin-bottom: 16px;
+    }
+    .band h2 { font-size: clamp(23px, 3.6vw, 32px); font-weight: 800; letter-spacing: -0.6px; line-height: 1.22; margin-bottom: 14px; }
+    .band p { color: #D6C6B4; font-size: 15.5px; margin-bottom: 20px; }
+    .perks { display: flex; flex-direction: column; gap: 11px; }
+    .perk { display: flex; align-items: flex-start; gap: 10px; font-size: 14.5px; color: #F2E7DA; }
+    .perk::before {
+      content: '✓'; flex: 0 0 20px; width: 20px; height: 20px; margin-top: 2px;
+      background: var(--gold); color: #2A1A00; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700;
+    }
+    .band-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .bcard {
+      background: rgba(255,255,255,0.055); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px; padding: 22px 18px; text-align: center;
+    }
+    .bcard .vc-icon { font-size: 28px; margin-bottom: 10px; }
+    .bcard h3 { font-size: 15px; font-weight: 700; margin-bottom: 5px; }
+    .bcard p { font-size: 13px; color: #BCA994; margin: 0; }
+
+    /* ── Checks grid ── */
+    .checks { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+    .check {
+      display: flex; gap: 12px; align-items: flex-start;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 13px; padding: 15px 16px;
+    }
+    .check .tick {
+      flex: 0 0 22px; width: 22px; height: 22px; border-radius: 50%;
+      background: rgba(0,149,126,0.13); color: var(--teal);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 800; margin-top: 1px;
+    }
+    .check b { display: block; font-size: 14.5px; font-weight: 700; }
+    .check span { font-size: 13.5px; color: var(--muted); }
+
+    /* ── Table ── */
+    .table-scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 14.5px; min-width: 520px; }
+    th, td { text-align: left; padding: 13px 14px; border-bottom: 1px solid var(--border); }
+    th { font-size: 12.5px; letter-spacing: 0.6px; text-transform: uppercase; color: var(--faint); font-weight: 700; }
+    td strong { font-weight: 700; }
+    tbody tr:last-child td { border-bottom: 0; }
+    td.num { font-variant-numeric: tabular-nums; }
+    .pill {
+      display: inline-block; background: rgba(201,162,39,0.18); color: #6B5305;
+      border-radius: 11px; padding: 1px 9px; font-size: 11.5px; font-weight: 700;
+      margin-left: 6px; vertical-align: 1px;
+    }
+
+    /* ── Steps ── */
+    .steps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(228px, 1fr)); gap: 18px; }
+    .stepc {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 26px 22px; text-align: center;
+      box-shadow: 0 2px 10px rgba(107,15,41,0.05);
+    }
+    .stepc .n {
+      width: 38px; height: 38px; margin: 0 auto 14px;
+      background: var(--maroon); color: #fff; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 16px;
+    }
+    .stepc h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .stepc p { font-size: 14px; color: var(--muted); }
+
+    /* ── Callout ── */
+    .note {
+      background: #FFF8E8; border-left: 3px solid var(--gold);
+      border-radius: 0 10px 10px 0; padding: 14px 18px;
+      font-size: 14.5px; color: #6B5305; margin-top: 22px;
+    }
+    .note strong { color: #4A3900; }
+
+    /* ── Links / footer ── */
+    .links-row {
+      display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+      padding: 28px 20px; background: var(--surface); border-top: 1px solid var(--border);
+    }
+    .links-row a {
+      background: #F7EDE0; color: #4A3A2C; border-radius: 20px;
+      padding: 8px 18px; font-size: 13px; font-weight: 600; transition: background .12s;
+    }
+    .links-row a:hover { background: #EEDFCB; color: var(--primary); text-decoration: none; }
+    footer { background: #250711; color: #BCA994; text-align: center; padding: 20px; font-size: 13px; }
+    footer a { color: #BCA994; }
+    footer a:hover { color: #fff; }
+
+    @media (max-width: 860px) {
+      .band-inner { grid-template-columns: 1fr; gap: 34px; padding: 54px 22px; }
+      .split { grid-template-columns: 1fr; gap: 30px; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 24px 12px; }
+    }
+    @media (max-width: 480px) {
+      .band-cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════ HERO ═══════════ -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-icon">
+      <img src="/apps/shubhzo/icon-512.png" alt="Shubhzo app icon" width="106" height="106" />
+    </div>
+    <h1>Shubhzo</h1>
+    <div class="tagline">Har Shubh Pal Ka Saathi</div>
+    <p class="sub">An Indian wedding takes twelve vendors, four months and a hundred phone calls. Shubhzo puts all of it on one screen — and gives the vendors on the other side an app of their own.</p>
+    <div class="badges">
+      <span class="badge">💍 29 categories</span>
+      <span class="badge">🧾 189 bookable services</span>
+      <span class="badge">🗣️ 11 languages</span>
+      <span class="badge">🎟️ Refundable token</span>
+      <span class="badge">🤝 Two apps, one install</span>
+    </div>
+    <div class="hero-cta">
+      <a class="store" href="/apps/shubhzo/tutorial.html">Read the full tutorial →</a>
+      <a class="store ghost" href="#journey">How a booking works</a>
+    </div>
+    <p class="store-note">Android · coming soon to Google Play</p>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stats-inner">
+    <div><span class="stat-n">29</span><span class="stat-l">Event categories</span></div>
+    <div><span class="stat-n">189</span><span class="stat-l">Bookable services</span></div>
+    <div><span class="stat-n">11</span><span class="stat-l">Languages</span></div>
+    <div><span class="stat-n">2</span><span class="stat-l">Apps in one install</span></div>
+  </div>
+</div>
+
+<!-- ═══════════ WHAT IT IS ═══════════ -->
+<section>
+  <p class="eyebrow">What Shubhzo is</p>
+  <h2>One app for the family. One for the vendor.</h2>
+  <p class="lead">Install it once. The first screen asks what brings you here — <em>Plan an event</em> or <em>Grow my business</em> — and you get an entirely different product, down to the colours. Sign in with a vendor account and you land on the Partner side no matter what you picked.</p>
+
+  <div class="split">
+    <div>
+      <h3>The side you get is a runtime choice</h3>
+      <p>Most marketplaces ship two apps and ask you to find the right one. Shubhzo ships one binary that contains both. The theme, the navigation and the whole route table follow whichever side you are on — maroon and gold for the customer, indigo and teal for the partner — so a decorator who also plans her own daughter's wedding never has to wonder which app she is looking at.</p>
+      <p>Switching later lives in <strong>Settings → Switch app</strong>. It signs you out, because a session belongs to an account with one role.</p>
+      <p>Before any of that, the app asks which language to speak. Eleven are on the list, each in its own script, and the choice applies instantly — no restart, no re-download.</p>
+    </div>
+    <div class="split-shots">
+      <img src="/apps/shubhzo/shots/s2-chooser.jpg" alt="The first-run screen asking What brings you here, offering Plan an event or Grow my business" width="480" height="1040" loading="lazy" />
+      <img src="/apps/shubhzo/shots/s1-language.jpg" alt="The language chooser listing Hindi, English, Marathi, Gujarati, Bengali, Tamil, Telugu and Kannada in their own scripts" width="480" height="1040" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ THE JOURNEY ═══════════ -->
+<div class="shots-band">
+  <section id="journey" style="padding-bottom:30px;">
+    <p class="eyebrow">The spine of the product</p>
+    <h2>How a booking actually works</h2>
+    <p class="lead">A small refundable token holds your date. The vendor verifies it in person by scanning your QR. Only when they accept do the two of you get each other's phone numbers.</p>
+
+    <figure>
+      <h3>The booking lifecycle</h3>
+      <p class="cap">Every state the app can be in, and the one thing that moves it to the next. The lower path is what happens when a vendor never answers.</p>
+      <div class="chart-scroll">
+        <svg viewBox="0 0 940 300" width="940" height="300" role="img" aria-label="Flow diagram. Browse and choose, then pay a token, creates a request that is sent to the vendor with a 24 hour window. If the vendor scans the QR and accepts, the booking is confirmed and contact details unlock, then a quote is sent and the balance paid, the service is delivered, both sides confirm completion, and the vendor is settled while the customer leaves a review. If 24 hours pass with no response, the booking expires and the token is refunded to the customer's wallet.">
+          <defs>
+            <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="#8C93A1"/>
+            </marker>
+          </defs>
+
+          <!-- row 1 -->
+          <g>
+            <rect x="8"   y="60" width="132" height="60" rx="12" fill="#FFF8E8" stroke="#E6D6A8"/>
+            <text class="t-val" x="74" y="84" text-anchor="middle">Browse</text>
+            <text class="t-mut" x="74" y="102" text-anchor="middle">pick a vendor</text>
+
+            <rect x="176" y="60" width="132" height="60" rx="12" fill="#FFF8E8" stroke="#E6D6A8"/>
+            <text class="t-val" x="242" y="84" text-anchor="middle">Pay token</text>
+            <text class="t-mut" x="242" y="102" text-anchor="middle">₹101 – ₹1,001</text>
+
+            <rect x="344" y="52" width="150" height="76" rx="12" fill="#8E1537" stroke="#8E1537"/>
+            <text x="419" y="78" text-anchor="middle" font-size="13" font-weight="700" fill="#FFFFFF">Request sent</text>
+            <text x="419" y="97" text-anchor="middle" font-size="12" fill="#F2D8A8">QR + 24h countdown</text>
+            <text x="419" y="114" text-anchor="middle" font-size="11.5" fill="#E8B9C6">contacts masked</text>
+
+            <rect x="530" y="60" width="150" height="60" rx="12" fill="#EEF0F9" stroke="#C7CDE8"/>
+            <text class="t-val" x="605" y="84" text-anchor="middle">Vendor scans QR</text>
+            <text class="t-mut" x="605" y="102" text-anchor="middle">six checks run</text>
+
+            <rect x="716" y="52" width="150" height="76" rx="12" fill="#00957E" stroke="#00957E"/>
+            <text x="791" y="78" text-anchor="middle" font-size="13" font-weight="700" fill="#FFFFFF">Confirmed</text>
+            <text x="791" y="97" text-anchor="middle" font-size="12" fill="#CFF0E8">date is locked</text>
+            <text x="791" y="114" text-anchor="middle" font-size="11.5" fill="#CFF0E8">contacts unlock</text>
+          </g>
+          <g stroke="#8C93A1" stroke-width="1.5" marker-end="url(#ar)" fill="none">
+            <path d="M144 90 H170"/>
+            <path d="M312 90 H338"/>
+            <path d="M498 90 H524"/>
+            <path d="M684 90 H710"/>
+          </g>
+
+          <!-- expiry branch -->
+          <path d="M419 132 V176 H240" stroke="#8C93A1" stroke-width="1.5" fill="none" marker-end="url(#ar)"/>
+          <text class="t-axis" x="430" y="158">no answer in 24h</text>
+          <rect x="8" y="150" width="224" height="52" rx="12" fill="#FDECEC" stroke="#F0C9C9"/>
+          <text class="t-val" x="120" y="172" text-anchor="middle" fill="#A02020">Expired → token refunded</text>
+          <text class="t-mut" x="120" y="190" text-anchor="middle">straight back to your wallet</text>
+
+          <!-- row 2 -->
+          <g>
+            <rect x="530" y="212" width="150" height="60" rx="12" fill="#FFFFFF" stroke="#E3E6EC"/>
+            <text class="t-val" x="605" y="236" text-anchor="middle">Quote → balance</text>
+            <text class="t-mut" x="605" y="254" text-anchor="middle">token credited off</text>
+
+            <rect x="344" y="212" width="150" height="60" rx="12" fill="#FFFFFF" stroke="#E3E6EC"/>
+            <text class="t-val" x="419" y="236" text-anchor="middle">Service delivered</text>
+            <text class="t-mut" x="419" y="254" text-anchor="middle">both sides confirm</text>
+
+            <rect x="158" y="212" width="150" height="60" rx="12" fill="#FFFFFF" stroke="#E3E6EC"/>
+            <text class="t-val" x="233" y="236" text-anchor="middle">Vendor settled</text>
+            <text class="t-mut" x="233" y="254" text-anchor="middle">3 days after</text>
+
+            <rect x="716" y="212" width="150" height="60" rx="12" fill="#FFF8E8" stroke="#E6D6A8"/>
+            <text class="t-val" x="791" y="236" text-anchor="middle">You leave a review</text>
+            <text class="t-mut" x="791" y="254" text-anchor="middle">stars + photos</text>
+          </g>
+          <path d="M791 132 V242 H686" stroke="#8C93A1" stroke-width="1.5" fill="none" marker-end="url(#ar)"/>
+          <g stroke="#8C93A1" stroke-width="1.5" marker-end="url(#ar)" fill="none">
+            <path d="M526 242 H500"/>
+            <path d="M340 242 H314"/>
+          </g>
+        </svg>
+      </div>
+      <figcaption>The gate that matters is the scan. A vendor cannot see your phone number by receiving a request — only by accepting one. That rule is enforced by the server, not hidden in the app.</figcaption>
+    </figure>
+
+    <figure>
+      <h3>The 24-hour token window</h3>
+      <p class="cap">The token is what makes a request cost something on both sides. It is small, it is refundable, and it expires on a clock neither party can nudge.</p>
+      <div class="chart-scroll">
+        <svg viewBox="0 0 900 230" width="900" height="230" role="img" aria-label="Timeline of the 24 hour token window. At hour zero the customer pays the token and the request is created. Between hour zero and hour 24 the vendor can scan and accept, which confirms the booking. At hour 24, if nothing has happened, the booking expires and the token is refunded to the wallet and both sides are notified.">
+          <!-- track -->
+          <rect x="60" y="74" width="780" height="14" rx="7" fill="#F1EDE4"/>
+          <rect x="60" y="74" width="360" height="14" rx="7" fill="#8E1537"/>
+          <rect x="424" y="74" width="416" height="14" rx="7" fill="#E8DFD0"/>
+
+          <!-- ticks -->
+          <g class="t-axis" text-anchor="middle">
+            <text x="60"  y="116">0h</text>
+            <text x="255" y="116">6h</text>
+            <text x="450" y="116">12h</text>
+            <text x="645" y="116">18h</text>
+            <text x="840" y="116">24h</text>
+          </g>
+          <g stroke="#E8E3DA" stroke-width="1">
+            <path d="M255 66 V96"/><path d="M450 66 V96"/><path d="M645 66 V96"/>
+          </g>
+
+          <!-- start marker -->
+          <circle cx="60" cy="81" r="9" fill="#8E1537" stroke="#FFFFFF" stroke-width="2"/>
+          <text class="t-val" x="60" y="46" text-anchor="start">Token paid</text>
+          <text class="t-mut" x="60" y="30" text-anchor="start">request created, QR issued</text>
+
+          <!-- accept marker -->
+          <circle cx="420" cy="81" r="9" fill="#00957E" stroke="#FFFFFF" stroke-width="2"/>
+          <text class="t-val" x="420" y="46" text-anchor="middle">Vendor scans &amp; accepts</text>
+          <text class="t-mut" x="420" y="30" text-anchor="middle">any time inside the window</text>
+
+          <!-- expiry marker -->
+          <circle cx="840" cy="81" r="9" fill="#C62828" stroke="#FFFFFF" stroke-width="2"/>
+          <text class="t-val" x="840" y="46" text-anchor="end">Window closes</text>
+          <text class="t-mut" x="840" y="30" text-anchor="end">nothing happened</text>
+
+          <!-- outcomes -->
+          <rect x="30" y="140" width="410" height="66" rx="12" fill="#E6F4EC" stroke="#BEE3CF"/>
+          <text x="50" y="164" font-size="13" font-weight="700" fill="#0F6B3F">Accepted → Confirmed</text>
+          <text x="50" y="182" font-size="12.5" fill="#2F6B4F">The date is blocked on the vendor's calendar.</text>
+          <text x="50" y="198" font-size="12.5" fill="#2F6B4F">Phone numbers unlock for both sides.</text>
+
+          <rect x="470" y="140" width="400" height="66" rx="12" fill="#FDECEC" stroke="#F0C9C9"/>
+          <text x="490" y="164" font-size="13" font-weight="700" fill="#A02020">Expired → Refunded</text>
+          <text x="490" y="182" font-size="12.5" fill="#8A4444">The token returns to your wallet on its own.</text>
+          <text x="490" y="198" font-size="12.5" fill="#8A4444">Both sides are told why.</text>
+        </svg>
+      </div>
+      <figcaption>Twenty-four hours is a server-side policy, not a constant in the app — an operator can change it without shipping a release.</figcaption>
+    </figure>
+
+    <figure>
+      <h3>What a token costs, by service</h3>
+      <p class="cap">The token scales with what is being held. A venue is a bigger commitment than a pandit, so it costs more to hold. Bar length is the number of services priced at that rung.</p>
+      <div class="chart-scroll">
+        <svg viewBox="0 0 760 262" width="760" height="262" role="img" aria-label="Bar chart of token price rungs. 1,001 rupees covers 8 services such as venue and destination wedding. 501 rupees covers 34 services such as catering and photography. 201 rupees covers 86 services such as decoration and bridal makeup. 101 rupees covers 61 services such as pandit and mehndi artist.">
+            <g>
+              <text class="t-val" x="0" y="34">₹1,001</text>
+              <rect x="92" y="20" width="35" height="22" rx="4" fill="#5566BE"/>
+              <text class="t-val" x="139" y="37">8</text>
+              <text class="t-mut" x="168" y="37">venue · destination wedding · full-service planner</text>
+            </g>
+            <g>
+              <text class="t-val" x="0" y="94">₹501</text>
+              <rect x="92" y="80" width="150" height="22" rx="4" fill="#5566BE"/>
+              <text class="t-val" x="254" y="97">34</text>
+              <text class="t-mut" x="288" y="97">catering · photography · accommodation</text>
+            </g>
+            <g>
+              <text class="t-val" x="0" y="154">₹201</text>
+              <rect x="92" y="140" width="380" height="22" rx="4" fill="#5566BE"/>
+              <text class="t-val" x="484" y="157">86</text>
+              <text class="t-mut" x="518" y="157">decoration · makeup · DJ</text>
+            </g>
+            <g>
+              <text class="t-val" x="0" y="214">₹101</text>
+              <rect x="92" y="200" width="270" height="22" rx="4" fill="#5566BE"/>
+              <text class="t-val" x="374" y="217">61</text>
+              <text class="t-mut" x="408" y="217">pandit · mehndi · cake designer</text>
+            </g>
+            <path d="M92 238 H472" stroke="#D9D2C6" stroke-width="1"/>
+            <text class="t-axis" x="92" y="252">0</text>
+            <text class="t-axis" x="472" y="252" text-anchor="end">86 services</text>
+        </svg>
+      </div>
+      <figcaption>Five more services — the budget calculator, guest estimator, food quantity, decor area and Shubh Muhurat — cost nothing at all. They are tools, not bookings. Every amount is set by the operator and read live, so a price change needs no app update.</figcaption>
+    </figure>
+  </section>
+</div>
+
+<!-- ═══════════ CUSTOMER ═══════════ -->
+<section>
+  <p class="eyebrow">The customer app</p>
+  <h2>Everything one event needs, in one workspace</h2>
+  <p class="lead">Create the event first, and the app builds the checklist for you — twelve services for a wedding, five for a first birthday — then tracks every one of them against it.</p>
+
+  <div class="feat-grid">
+    <div class="feat">
+      <div class="feat-icon ic-maroon">🗂️</div>
+      <h3>The event workspace</h3>
+      <p>A live checklist of every service the event needs, what needs your attention today, what you have spent against what is left, and the day plan — all on one screen.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon ic-gold">🔍</div>
+      <h3>Search that filters honestly</h3>
+      <p>City, price, capacity, rating, free-on-a-date, facilities, verified only. The price and capacity ranges come from the actual results, so there are no dead filter positions.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon ic-indigo">⚖️</div>
+      <h3>Compare two to four vendors</h3>
+      <p>Side by side, with the best value in each row highlighted — cheapest, highest rated, most experienced — rather than just laid out for you to squint at.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon ic-teal">🎟️</div>
+      <h3>Token, QR and a live countdown</h3>
+      <p>Pay the token, get a QR and a token number. The countdown is real: if nobody answers in 24 hours the money comes back to your wallet on its own.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon ic-mari">🧮</div>
+      <h3>Five free planning tools</h3>
+      <p>Budget calculator with per-line overrides, guest estimator, food quantity, decor area, and Shubh Muhurat for eleven occasions. No booking required to use any of them.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon ic-maroon">👥</div>
+      <h3>Guests, RSVPs and rooms</h3>
+      <p>Invite by list or by paste, group by family, track RSVPs against venue capacity, and hold hotel rooms, transport, seating and welcome desks in the same place.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon ic-gold">💌</div>
+      <h3>Invitations</h3>
+      <p>Digital cards, WhatsApp formats, video invites, printed orders and a wedding website. Every guest gets their own RSVP link, so a reply belongs to one guest.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon ic-indigo">🧾</div>
+      <h3>Quotes and payments</h3>
+      <p>A final quote arrives as line items with the discount, the 18% GST and your token credited off. Accept it and the balance appears. Every receipt is downloadable.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon ic-teal">🕉️</div>
+      <h3>Shubh Muhurat</h3>
+      <p>Auspicious windows for eleven occasions with the tithi and nakshatra, each one carrying the disclaimer alongside it rather than buried in a settings page.</p>
+    </div>
+  </div>
+</section>
+
+<div class="shots-band">
+  <section style="padding-bottom:34px;">
+    <h2>The customer app, screen by screen</h2>
+    <p class="lead">Real screens, captured from a running build — nothing staged, nothing mocked up in a design tool.</p>
+  </section>
+  <div class="shots-scroll">
+    <div class="shot"><img src="/apps/shubhzo/shots/c1-home.jpg" alt="Customer home screen with the user's events, category tiles and popular services" width="480" height="1040" loading="lazy" /><span>Home &amp; your events</span></div>
+    <div class="shot"><img src="/apps/shubhzo/shots/c2-categories.jpg" alt="The What are you planning grid showing 13 illustrated event categories" width="480" height="1040" loading="lazy" /><span>13 illustrated, 29 in all</span></div>
+    <div class="shot"><img src="/apps/shubhzo/shots/c3-providers.jpg" alt="A list of venues with ratings, capacity and starting price" width="480" height="1040" loading="lazy" /><span>Browse &amp; filter</span></div>
+    <div class="shot"><img src="/apps/shubhzo/shots/c4-provider.jpg" alt="A venue profile showing facts, facilities and the reasons to trust them" width="480" height="1040" loading="lazy" /><span>Venue facts &amp; trust</span></div>
+    <div class="shot"><img src="/apps/shubhzo/shots/c5-packages.jpg" alt="Packages with inclusions and exclusions and selectable add-ons" width="480" height="1040" loading="lazy" /><span>Packages &amp; add-ons</span></div>
+    <div class="shot"><img src="/apps/shubhzo/shots/c6-token.jpg" alt="The booking token screen with a QR code, token number and a live countdown" width="480" height="1040" loading="lazy" /><span>Your token &amp; QR</span></div>
+    <div class="shot"><img src="/apps/shubhzo/shots/c7-workspace.jpg" alt="The event workspace showing progress, budget and what needs attention" width="480" height="1040" loading="lazy" /><span>Event workspace</span></div>
+    <div class="shot"><img src="/apps/shubhzo/shots/c8-budget.jpg" alt="The budget calculator showing an estimated total and a category-wise split" width="480" height="1040" loading="lazy" /><span>Budget calculator</span></div>
+    <div class="shot"><img src="/apps/shubhzo/shots/c9-muhurat.jpg" alt="Shubh Muhurat listing auspicious dates with tithi and nakshatra" width="480" height="1040" loading="lazy" /><span>Shubh Muhurat</span></div>
+    <div class="shot"><img src="/apps/shubhzo/shots/c10-guests.jpg" alt="Guest management with RSVP states and check-in" width="480" height="1040" loading="lazy" /><span>Guests &amp; RSVP</span></div>
+    <div class="shot"><img src="/apps/shubhzo/shots/c12-invitations.jpg" alt="Invitation card designs including digital, WhatsApp and video formats" width="480" height="1040" loading="lazy" /><span>Invitations</span></div>
+    <div class="shot"><img src="/apps/shubhzo/shots/c11-payments.jpg" alt="Payment history showing paid, outstanding and refunded amounts" width="480" height="1040" loading="lazy" /><span>Payments &amp; receipts</span></div>
+  </div>
+</div>
+
+<!-- ═══════════ PARTNER ═══════════ -->
+<section>
+  <p class="eyebrow">The partner app</p>
+  <h2>The other half of the marketplace</h2>
+  <p class="lead">Vendors get a real business app, not a lead inbox: a pipeline, a calendar that cannot be double-sold, earnings arithmetic you can check, and insights that end in something to do.</p>
+
+  <div class="feat-grid">
+    <div class="feat">
+      <div class="feat-icon ic-indigo">📋</div>
+      <h3>A pipeline in five stages</h3>
+      <p>New, upcoming, awaiting confirmation, completed, archive. Every card carries its single next action, so there is never a job you have to work out what to do with.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon ic-teal">📷</div>
+      <h3>QR verification, six checks</h3>
+      <p>The scanner runs all six of the platform's checks and reports each one separately, so a failure tells you exactly which one failed — and nothing about a customer who isn't yours.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon ic-gold">📅</div>
+      <h3>A calendar that can't double-sell</h3>
+      <p>Accepting a job writes the date into your booked set, and the availability filter, the customer's date picker and the accept endpoint all read from it. Booked dates cannot be unblocked by hand.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon ic-maroon">💰</div>
+      <h3>Earnings you can audit</h3>
+      <p>Gross, commission, TDS, net. Settlement batches with UTRs, an account ledger, GST invoices you can share with your accountant, and a payout account gated behind KYC.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon ic-mari">📈</div>
+      <h3>Insights that end in an action</h3>
+      <p>Where you rank on the searches you appear in, your twelve-month demand curve, the areas your customers come from, and how you compare with vendors like you — each finding links to the screen that fixes it.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon ic-indigo">🧾</div>
+      <h3>Quote builder</h3>
+      <p>Pre-filled from what the customer actually picked, with reusable templates, a discount and tax line, and a live preview of what you will be paid after commission.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon ic-teal">🏪</div>
+      <h3>Storefront, packages, portfolio</h3>
+      <p>Your public profile with a customer's-eye preview, three package tiers with inclusions and exclusions, and a portfolio with a progress strip against the eight-photo mark.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon ic-gold">🎁</div>
+      <h3>Offers and plans</h3>
+      <p>Percentage, flat or free add-on offers with audience, validity and redemption caps. Three plans where commission, search weight and lead credits move together.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon ic-maroon">👷</div>
+      <h3>Team, documents, disputes</h3>
+      <p>Crew with roles and per-job assignment, licences and insurance with expiry warnings that surface on Home, and disputes raised on a thread instead of over the phone.</p>
+    </div>
+  </div>
+</section>
+
+<div class="shots-band">
+  <section style="padding-bottom:34px;">
+    <h2>The partner app, screen by screen</h2>
+    <p class="lead">The Partner side runs indigo and teal, so a vendor who switches never mistakes one app for the other.</p>
+  </section>
+  <div class="shots-scroll">
+    <div class="shot"><img src="/apps/shubhzo/shots/p1-home.jpg" alt="Partner home with KPI tiles for new requests, earnings, payout pending and rating" width="480" height="1040" loading="lazy" /><span>Composed home</span></div>
+    <div class="shot"><img src="/apps/shubhzo/shots/p2-jobs.jpg" alt="The job pipeline with pending requests and their countdowns" width="480" height="1040" loading="lazy" /><span>Job pipeline</span></div>
+    <div class="shot"><img src="/apps/shubhzo/shots/p7-scan.jpg" alt="The token verification screen offering a QR scan or manual token entry" width="480" height="1040" loading="lazy" /><span>Verify a token</span></div>
+    <div class="shot"><img src="/apps/shubhzo/shots/p6-calendar.jpg" alt="The availability calendar showing available, blocked, booked and weekly off days" width="480" height="1040" loading="lazy" /><span>Calendar</span></div>
+    <div class="shot"><img src="/apps/shubhzo/shots/p5-earnings.jpg" alt="Earnings overview with this month, lifetime, payout pending and the commission breakdown" width="480" height="1040" loading="lazy" /><span>Earnings</span></div>
+    <div class="shot"><img src="/apps/shubhzo/shots/p3-funnel.jpg" alt="Insights showing the enquiry funnel and a revenue trend chart" width="480" height="1040" loading="lazy" /><span>Funnel &amp; revenue</span></div>
+    <div class="shot"><img src="/apps/shubhzo/shots/p4-season.jpg" alt="Insights showing the twelve-month demand curve and the searches the vendor ranks for" width="480" height="1040" loading="lazy" /><span>Season &amp; search rank</span></div>
+    <div class="shot"><img src="/apps/shubhzo/shots/p13-reputation.jpg" alt="A reputation score with the factors that move it" width="480" height="1040" loading="lazy" /><span>Reputation score</span></div>
+    <div class="shot"><img src="/apps/shubhzo/shots/p11-quote.jpg" alt="The quote builder with reusable templates" width="480" height="1040" loading="lazy" /><span>Quote builder</span></div>
+    <div class="shot"><img src="/apps/shubhzo/shots/p9-storefront.jpg" alt="The business profile editor with a customer's-eye preview" width="480" height="1040" loading="lazy" /><span>Storefront</span></div>
+    <div class="shot"><img src="/apps/shubhzo/shots/p12-offers.jpg" alt="Offers with redemption counts and validity windows" width="480" height="1040" loading="lazy" /><span>Offers</span></div>
+    <div class="shot"><img src="/apps/shubhzo/shots/p8-plans.jpg" alt="Plans and visibility showing the Starter tier with its commission and lead credits" width="480" height="1040" loading="lazy" /><span>Plans</span></div>
+  </div>
+</div>
+
+<!-- ═══════════ GRAPHS ═══════════ -->
+<section>
+  <p class="eyebrow">Explained in numbers</p>
+  <h2>What the Partner app actually shows a vendor</h2>
+  <p class="lead">The three charts below are the ones a vendor opens most. The figures are from a running build — a Pune decorator with live traffic — so the shapes are the shapes the app really draws.</p>
+
+  <figure>
+    <h3>Where enquiries leak</h3>
+    <p class="cap">Each bar is that stage as a share of the stage above it, which is the number a vendor can actually act on. Absolute counts are on the right.</p>
+    <div class="chart-scroll">
+      <svg viewBox="0 0 720 290" width="720" height="290" role="img" aria-label="Conversion chart. Profile views 1,284 is the starting point at 100 percent. Enquiries 46 is 3.6 percent of views. Token paid 23 is 50 percent of enquiries. Confirmed 18 is 78 percent of token paid. Completed 14 is 78 percent of confirmed.">
+        <g>
+          <text class="t-lbl" x="0" y="34">Profile views</text>
+          <rect x="150" y="20" width="440" height="24" rx="4" fill="#5566BE"/>
+          <text x="163" y="37" font-size="12.5" font-weight="700" fill="#FFFFFF">100%</text>
+          <text class="t-val" x="610" y="37">1,284</text>
+        </g>
+        <g>
+          <text class="t-lbl" x="0" y="88">Enquiries</text>
+          <rect x="150" y="74" width="16" height="24" rx="4" fill="#5566BE"/>
+          <text x="176" y="91" font-size="12.5" font-weight="700" fill="#171A1F">3.6% of views</text>
+          <text class="t-val" x="610" y="91">46</text>
+        </g>
+        <g>
+          <text class="t-lbl" x="0" y="142">Token paid</text>
+          <rect x="150" y="128" width="220" height="24" rx="4" fill="#5566BE"/>
+          <text x="163" y="145" font-size="12.5" font-weight="700" fill="#FFFFFF">50% of enquiries</text>
+          <text class="t-val" x="610" y="145">23</text>
+        </g>
+        <g>
+          <text class="t-lbl" x="0" y="196">Confirmed</text>
+          <rect x="150" y="182" width="343" height="24" rx="4" fill="#5566BE"/>
+          <text x="163" y="199" font-size="12.5" font-weight="700" fill="#FFFFFF">78% of tokens paid</text>
+          <text class="t-val" x="610" y="199">18</text>
+        </g>
+        <g>
+          <text class="t-lbl" x="0" y="250">Completed</text>
+          <rect x="150" y="236" width="343" height="24" rx="4" fill="#5566BE"/>
+          <text x="163" y="253" font-size="12.5" font-weight="700" fill="#FFFFFF">78% of confirmed</text>
+          <text class="t-val" x="610" y="253">14</text>
+        </g>
+      </svg>
+    </div>
+    <figcaption>The leak is at the top: 1,284 people looked and 46 asked. That is why the app's first recommendation to this vendor is "add three more photos" — vendors like them show eleven.</figcaption>
+  </figure>
+
+  <figure>
+    <h3>Your season — when requests actually arrive</h3>
+    <p class="cap">Twelve months of booking requests for one decorator. November is the peak; June and March are the months worth running an offer in.</p>
+    <div class="chart-scroll">
+      <svg viewBox="0 0 720 250" width="720" height="250" role="img" aria-label="Bar chart of booking requests by month for one vendor: January 4, February 6, March 3, April 7, May 9, June 3, July 4, August 6, September 8, October 11, November 12, December 11. November is the highest.">
+        <g class="gridline">
+          <path d="M40 30 H700"/><path d="M40 78 H700"/><path d="M40 126 H700"/><path d="M40 174 H700"/>
+        </g>
+        <g class="t-axis" text-anchor="end">
+          <text x="32" y="34">12</text><text x="32" y="82">9</text><text x="32" y="130">6</text><text x="32" y="178">3</text><text x="32" y="226">0</text>
+        </g>
+        <path d="M40 222 H700" stroke="#D9D2C6" stroke-width="1"/>
+        <g>
+          <rect x="52"  y="158" width="38" height="64"  rx="4" fill="#C3CAE6"/><text class="t-val" x="71"  y="150" text-anchor="middle">4</text>
+          <rect x="106" y="126" width="38" height="96"  rx="4" fill="#C3CAE6"/><text class="t-val" x="125" y="118" text-anchor="middle">6</text>
+          <rect x="160" y="174" width="38" height="48"  rx="4" fill="#C3CAE6"/><text class="t-val" x="179" y="166" text-anchor="middle">3</text>
+          <rect x="214" y="110" width="38" height="112" rx="4" fill="#C3CAE6"/><text class="t-val" x="233" y="102" text-anchor="middle">7</text>
+          <rect x="268" y="78"  width="38" height="144" rx="4" fill="#C3CAE6"/><text class="t-val" x="287" y="70"  text-anchor="middle">9</text>
+          <rect x="322" y="174" width="38" height="48"  rx="4" fill="#C3CAE6"/><text class="t-val" x="341" y="166" text-anchor="middle">3</text>
+          <rect x="376" y="158" width="38" height="64"  rx="4" fill="#C3CAE6"/><text class="t-val" x="395" y="150" text-anchor="middle">4</text>
+          <rect x="430" y="126" width="38" height="96"  rx="4" fill="#C3CAE6"/><text class="t-val" x="449" y="118" text-anchor="middle">6</text>
+          <rect x="484" y="94"  width="38" height="128" rx="4" fill="#C3CAE6"/><text class="t-val" x="503" y="86"  text-anchor="middle">8</text>
+          <rect x="538" y="46"  width="38" height="176" rx="4" fill="#C3CAE6"/><text class="t-val" x="557" y="38"  text-anchor="middle">11</text>
+          <rect x="592" y="30"  width="38" height="192" rx="4" fill="#2A3A8C"/><text class="t-val" x="611" y="22"  text-anchor="middle">12</text>
+          <rect x="646" y="46"  width="38" height="176" rx="4" fill="#C3CAE6"/><text class="t-val" x="665" y="38"  text-anchor="middle">11</text>
+        </g>
+        <g class="t-axis" text-anchor="middle">
+          <text x="71" y="240">Jan</text><text x="125" y="240">Feb</text><text x="179" y="240">Mar</text><text x="233" y="240">Apr</text>
+          <text x="287" y="240">May</text><text x="341" y="240">Jun</text><text x="395" y="240">Jul</text><text x="449" y="240">Aug</text>
+          <text x="503" y="240">Sep</text><text x="557" y="240">Oct</text><text x="611" y="240">Nov</text><text x="665" y="240">Dec</text>
+        </g>
+      </svg>
+    </div>
+    <figcaption>The app pairs this with the calendar: block your weekly offs in the quiet months and keep the peak wide open.</figcaption>
+  </figure>
+
+  <figure>
+    <h3>Where the money goes on a ₹1,00,000 booking</h3>
+    <p class="cap">Commission is a percentage of what the customer paid; TDS is 10% of the commission, deducted and deposited; the rest is settled to the vendor's bank three days after the event.</p>
+    <div class="chart-scroll">
+      <svg viewBox="0 0 720 100" width="720" height="100" role="img" aria-label="A one hundred percent stacked bar for a one lakh rupee booking on the Starter plan: 89,000 rupees or 89 percent settled to the vendor, 10,000 rupees or 10 percent platform commission, and 1,000 rupees or 1 percent TDS.">
+        <rect x="0"   y="24" width="622" height="40" rx="5" fill="#5566BE"/>
+        <rect x="624" y="24" width="66"  height="40" rx="5" fill="#C9A227"/>
+        <rect x="692" y="24" width="28"  height="40" rx="5" fill="#00957E"/>
+        <text x="16" y="49" font-size="13.5" font-weight="700" fill="#FFFFFF">₹89,000 settled to the vendor</text>
+        <text x="0" y="16" class="t-axis">₹1,00,000 paid by the customer</text>
+        <text x="720" y="88" class="t-axis" text-anchor="end">the two slivers on the right are itemised below</text>
+      </svg>
+    </div>
+    <div class="legend">
+      <span class="lg"><i style="background:#5566BE"></i>Vendor payout <b>₹89,000 · 89%</b></span>
+      <span class="lg"><i style="background:#C9A227"></i>Platform commission (Starter, 10%) <b>₹10,000</b></span>
+      <span class="lg"><i style="background:#00957E"></i>TDS, 10% of commission <b>₹1,000</b></span>
+    </div>
+    <figcaption>The commission rate is the one number a plan changes, and it changes immediately — open a job after subscribing and the payout line has already recalculated.</figcaption>
+  </figure>
+
+  <figure>
+    <h3>Commission falls as the plan rises</h3>
+    <p class="cap">Three plans, and the only thing that really matters in them is the rate. Search visibility and lead credits move with it.</p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Plan</th><th>Price</th><th>Commission</th><th>Search visibility</th><th>Lead credits</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Starter</strong><br><span style="color:var(--muted);font-size:13px">Take your first booking</span></td><td class="num">Free</td><td class="num"><strong>10%</strong></td><td class="num">1.0×</td><td class="num">10</td></tr>
+          <tr><td><strong>Growth</strong><span class="pill">Popular</span><br><span style="color:var(--muted);font-size:13px">Get seen across your city</span></td><td class="num">₹999 / mo<br><span style="color:var(--muted);font-size:13px">₹9,990 / yr</span></td><td class="num"><strong>8%</strong></td><td class="num">1.8×</td><td class="num">60</td></tr>
+          <tr><td><strong>Pro</strong><br><span style="color:var(--muted);font-size:13px">Studios and venues running a full calendar</span></td><td class="num">₹2,499 / mo<br><span style="color:var(--muted);font-size:13px">₹24,990 / yr</span></td><td class="num"><strong>6%</strong></td><td class="num">2.5×</td><td class="num">200</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <figcaption>On the ₹1,00,000 booking above, moving from Starter to Pro takes the platform's cut from ₹10,000 to ₹6,000 — which pays for the plan roughly two and a half times over on a single job.</figcaption>
+  </figure>
+</section>
+
+<!-- ═══════════ TRUST BAND ═══════════ -->
+<div class="band">
+  <div class="band-inner">
+    <div>
+      <div class="band-badge">Privacy is a server rule, not a UI trick</div>
+      <h2>Nobody gets your number for asking.</h2>
+      <p>On most marketplaces, an enquiry is a phone number handed to a stranger. Shubhzo does not send either party's phone or email to the other until the booking is <em>confirmed</em> — and it is the server that withholds them, returning masked values and a locked flag, so there is nothing for a modified app to reveal.</p>
+      <div class="perks">
+        <div class="perk">Phone and email masked until a booking is confirmed by both sides</div>
+        <div class="perk">A vendor's message thread stays shut until they accept the request</div>
+        <div class="perk">A failed token scan names no booking and no customer</div>
+        <div class="perk">Tokens refund automatically — you never have to chase one</div>
+        <div class="perk">Booked dates cannot be quietly unblocked and resold</div>
+        <div class="perk">Delete your account and its data from inside the app</div>
+      </div>
+    </div>
+    <div class="band-cards">
+      <div class="bcard"><div class="vc-icon">🔒</div><h3>Masked by default</h3><p>+91 98765•••10 until confirmed</p></div>
+      <div class="bcard"><div class="vc-icon">↩️</div><h3>Automatic refunds</h3><p>No answer in 24h, money back</p></div>
+      <div class="bcard"><div class="vc-icon">🧿</div><h3>Six-point verification</h3><p>Every scan, every check reported</p></div>
+      <div class="bcard"><div class="vc-icon">🗣️</div><h3>Eleven languages</h3><p>Switchable with no restart</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SIX CHECKS ═══════════ -->
+<section>
+  <p class="eyebrow">At the venue</p>
+  <h2>What the vendor's scanner checks</h2>
+  <p class="lead">The vendor opens the scanner standing in front of you. Six things have to be true before the Accept button appears, and each is reported on its own line — so a failure says which one, not just "invalid".</p>
+  <div class="checks">
+    <div class="check"><span class="tick">✓</span><span><b>Valid token</b><span>The code exists and was issued by the platform.</span></span></div>
+    <div class="check"><span class="tick">✓</span><span><b>Valid booking</b><span>It points at a real booking, not a stale one.</span></span></div>
+    <div class="check"><span class="tick">✓</span><span><b>Valid provider</b><span>It was issued to <em>this</em> vendor, not a competitor.</span></span></div>
+    <div class="check"><span class="tick">✓</span><span><b>Payment done</b><span>The token was actually paid and verified.</span></span></div>
+    <div class="check"><span class="tick">✓</span><span><b>Not expired</b><span>The 24-hour window is still open.</span></span></div>
+    <div class="check"><span class="tick">✓</span><span><b>Belongs to this customer</b><span>The person holding the phone is the one who booked.</span></span></div>
+  </div>
+  <div class="note"><strong>The interesting case is the failure.</strong> Scan a token that belongs to another vendor and the "valid provider" check fails — and the other five checks stop naming anyone. No booking code, no customer name. A token number is guessable, so a failed scan tells you the token is not yours and nothing whatsoever about whose it is.</div>
+</section>
+
+<!-- ═══════════ LANGUAGES ═══════════ -->
+<div class="shots-band">
+  <section>
+    <p class="eyebrow">Localisation</p>
+    <h2>Eleven languages, switched without a restart</h2>
+    <p class="lead">Each language is one file. A missing key falls back to English rather than showing a blank label, which is what lets a partially translated language ship at all.</p>
+    <figure>
+      <h3>Translation coverage today</h3>
+      <p class="cap">English and Hindi are complete. The other nine carry a 217-key working subset — navigation, primary actions, status chips, auth and errors — and fall back to English for the rest.</p>
+      <div class="chart-scroll">
+        <svg viewBox="0 0 700 430" width="700" height="430" role="img" aria-label="Bar chart of translated keys per language. English 1,360 keys and Hindi 1,360 keys are complete. Marathi, Gujarati, Bengali, Tamil, Telugu, Kannada, Malayalam, Punjabi and Urdu each carry 217 keys.">
+          <g>
+            <text class="t-lbl" x="0" y="22">English</text>
+            <rect x="120" y="8" width="480" height="20" rx="4" fill="#8E1537"/>
+            <text class="t-val" x="612" y="23">1,360</text>
+          </g>
+          <g>
+            <text class="t-lbl" x="0" y="58">हिन्दी</text>
+            <rect x="120" y="44" width="480" height="20" rx="4" fill="#8E1537"/>
+            <text class="t-val" x="612" y="59">1,360</text>
+          </g>
+          <g>
+            <text class="t-lbl" x="0" y="94">मराठी</text>
+            <rect x="120" y="80" width="77" height="20" rx="4" fill="#D9B8C2"/>
+            <text class="t-val" x="209" y="95">217</text>
+          </g>
+          <g>
+            <text class="t-lbl" x="0" y="130">ગુજરાતી</text>
+            <rect x="120" y="116" width="77" height="20" rx="4" fill="#D9B8C2"/>
+            <text class="t-val" x="209" y="131">217</text>
+          </g>
+          <g>
+            <text class="t-lbl" x="0" y="166">বাংলা</text>
+            <rect x="120" y="152" width="77" height="20" rx="4" fill="#D9B8C2"/>
+            <text class="t-val" x="209" y="167">217</text>
+          </g>
+          <g>
+            <text class="t-lbl" x="0" y="202">தமிழ்</text>
+            <rect x="120" y="188" width="77" height="20" rx="4" fill="#D9B8C2"/>
+            <text class="t-val" x="209" y="203">217</text>
+          </g>
+          <g>
+            <text class="t-lbl" x="0" y="238">తెలుగు</text>
+            <rect x="120" y="224" width="77" height="20" rx="4" fill="#D9B8C2"/>
+            <text class="t-val" x="209" y="239">217</text>
+          </g>
+          <g>
+            <text class="t-lbl" x="0" y="274">ಕನ್ನಡ</text>
+            <rect x="120" y="260" width="77" height="20" rx="4" fill="#D9B8C2"/>
+            <text class="t-val" x="209" y="275">217</text>
+          </g>
+          <g>
+            <text class="t-lbl" x="0" y="310">മലയാളം</text>
+            <rect x="120" y="296" width="77" height="20" rx="4" fill="#D9B8C2"/>
+            <text class="t-val" x="209" y="311">217</text>
+          </g>
+          <g>
+            <text class="t-lbl" x="0" y="346">ਪੰਜਾਬੀ</text>
+            <rect x="120" y="332" width="77" height="20" rx="4" fill="#D9B8C2"/>
+            <text class="t-val" x="209" y="347">217</text>
+          </g>
+          <g>
+            <text class="t-lbl" x="0" y="382">اردو</text>
+            <rect x="120" y="368" width="77" height="20" rx="4" fill="#D9B8C2"/>
+            <text class="t-val" x="209" y="383">217 · right-to-left</text>
+          </g>
+          <path d="M120 400 H600" stroke="#D9D2C6" stroke-width="1"/>
+          <g class="t-axis"><text x="120" y="418">0</text><text x="600" y="418" text-anchor="end">1,360 keys</text></g>
+        </svg>
+      </div>
+      <div class="legend">
+        <span class="lg"><i style="background:#8E1537"></i>Complete <b>2 languages</b></span>
+        <span class="lg"><i style="background:#D9B8C2"></i>Working subset, English fallback <b>9 languages</b></span>
+      </div>
+      <figcaption>The nine partial files are waiting on a native-speaker pass rather than a machine translation, which would have looked complete while reading worse than the visible fallback. Numbers and dates follow Indian conventions throughout — ₹1,75,000, ₹1.8 Lakh, ₹1 Cr.</figcaption>
+    </figure>
+  </section>
+</div>
+
+<!-- ═══════════ GET STARTED ═══════════ -->
+<section>
+  <h2>Getting started takes about a minute</h2>
+  <p class="lead">Both sides start the same way and diverge on the second screen.</p>
+  <div class="steps-grid">
+    <div class="stepc"><div class="n">1</div><h3>Pick your language</h3><p>Eleven, each in its own script. Changeable later from Settings at any time.</p></div>
+    <div class="stepc"><div class="n">2</div><h3>Choose your side</h3><p><em>Plan an event</em> or <em>Grow my business</em>. Signing in with a vendor account overrides the choice.</p></div>
+    <div class="stepc"><div class="n">3</div><h3>Sign in with your number</h3><p>Mobile and a one-time code. The customer side also asks for a verified email before it opens.</p></div>
+    <div class="stepc"><div class="n">4</div><h3>Create the event, or the business</h3><p>Customers get a checklist built for the occasion. Vendors walk a four-step registration and then KYC.</p></div>
+  </div>
+  <div class="note">Want the whole thing walked through, screen by screen, including the parts that are <em>meant</em> to fail? <a href="/apps/shubhzo/tutorial.html"><strong>Read the full tutorial →</strong></a></div>
+</section>
+
+<div class="links-row">
+  <a href="/apps/shubhzo/">Home</a>
+  <a href="/apps/shubhzo/tutorial.html">Tutorial</a>
+  <a href="/apps/shubhzo/privacy.html">Privacy Policy</a>
+  <a href="/apps/shubhzo/terms.html">Terms of Service</a>
+  <a href="/apps/shubhzo/support.html">Support</a>
+  <a href="/apps/shubhzo/delete-account.html">Delete Account</a>
+  <a href="/">← MyAppsCart</a>
+</div>
+
+<footer>
+  <p>&copy; 2026 MyAppsCart &nbsp;·&nbsp; <a href="mailto:support@myappscart.com">support@myappscart.com</a></p>
+</footer>
+
+</body>
+</html>

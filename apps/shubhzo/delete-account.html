@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shubhzo – Delete Account</title>
+  <meta name="description" content="How to delete your Shubhzo account and data, from inside the app or by email — and exactly what is deleted and what is retained." />
+  <link rel="icon" type="image/png" href="/apps/shubhzo/icon-512.png" />
+  <link rel="apple-touch-icon" href="/apps/shubhzo/icon-512.png" />
+  <style>
+    :root {
+      --maroon: #8E1537; --maroon-d: #6B0F29; --gold: #C9A227; --teal: #00957E;
+      --primary: #8E1537;
+      --bg: #FDF6EC; --surface: #FFFFFF;
+      --text: #171A1F; --muted: #5A6270; --faint: #8C93A1; --border: #E9E0D2;
+      --radius: 13px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.75; font-size: 15.5px;
+    }
+    a { color: var(--primary); }
+    a:hover { text-decoration: underline; }
+    header {
+      background: linear-gradient(150deg, #4A0A1D 0%, #8E1537 58%, #B10201 100%);
+      color: #fff; padding: 44px 24px 36px; text-align: center;
+    }
+    header .icon {
+      width: 58px; height: 58px; margin: 0 auto 14px; border-radius: 15px; overflow: hidden;
+      border: 1.5px solid rgba(232,206,110,0.34); box-shadow: 0 8px 22px rgba(0,0,0,0.34);
+    }
+    header .icon img { display: block; width: 100%; height: 100%; }
+    header h1 { font-size: 26px; font-weight: 800; letter-spacing: -0.4px; }
+    header p { margin-top: 6px; font-size: 13.5px; opacity: 0.8; }
+    main { max-width: 780px; margin: 0 auto; padding: 36px 20px 72px; }
+    .card {
+      background: var(--surface); border-radius: var(--radius);
+      padding: 26px 28px 22px; margin-bottom: 16px;
+      box-shadow: 0 1px 4px rgba(107,15,41,0.05); border: 1px solid var(--border);
+    }
+    h2 {
+      font-size: 17px; font-weight: 700; color: var(--primary);
+      margin-bottom: 12px; display: flex; align-items: center; gap: 9px;
+    }
+    h3 { font-size: 15px; font-weight: 700; margin: 18px 0 8px; }
+    p { color: var(--muted); margin-bottom: 12px; }
+    p:last-child { margin-bottom: 0; }
+    ul, ol { padding-left: 20px; color: var(--muted); margin-bottom: 12px; }
+    li { margin-bottom: 6px; }
+    strong { color: var(--text); font-weight: 650; }
+    code {
+      background: #F4EDE2; border-radius: 5px; padding: 1px 6px;
+      font-size: 13.5px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    .highlight {
+      background: #E9F5F1; border-left: 3px solid var(--teal);
+      border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 14px 0 0;
+      font-size: 14.5px; color: #15604F; font-weight: 500;
+    }
+    .highlight strong { color: #0B4437; }
+    .warnbox {
+      background: #FFF8E8; border-left: 3px solid var(--gold);
+      border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 14px 0 0;
+      font-size: 14.5px; color: #6B5305;
+    }
+    .warnbox strong { color: #4A3900; }
+    .last-updated {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 13px 20px; margin-bottom: 22px;
+      font-size: 13.5px; color: var(--muted); display: flex; align-items: center; gap: 10px;
+    }
+    .table-scroll { overflow-x: auto; margin: 14px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14.5px; min-width: 460px; }
+    th, td { text-align: left; padding: 11px 13px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { font-size: 12px; letter-spacing: 0.6px; text-transform: uppercase; color: var(--faint); font-weight: 700; }
+    td { color: var(--muted); }
+    td:first-child { color: var(--text); font-weight: 600; }
+    tbody tr:last-child td { border-bottom: 0; }
+    .links-row {
+      display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+      padding: 28px 20px; background: var(--surface); border-top: 1px solid var(--border);
+    }
+    .links-row a {
+      background: #F7EDE0; color: #4A3A2C; border-radius: 20px;
+      padding: 8px 18px; font-size: 13px; font-weight: 600;
+      text-decoration: none; transition: background .12s;
+    }
+    .links-row a:hover { background: #EEDFCB; color: var(--primary); text-decoration: none; }
+    footer { background: #250711; color: #BCA994; text-align: center; padding: 20px; font-size: 13px; }
+    footer a { color: #BCA994; }
+    footer a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="icon"><img src="/apps/shubhzo/icon-512.png" alt="Shubhzo app icon" width="58" height="58" /></div>
+  <h1>Delete Your Account</h1>
+  <p>Shubhzo · Har Shubh Pal Ka Saathi</p>
+</header>
+
+<main>
+  <div class="card">
+    <h2>🗑️ Delete from inside the app</h2>
+    <p>This is the quickest route and needs nothing from us.</p>
+    <ol>
+      <li>Open Shubhzo and go to the <strong>Account</strong> tab (customer) or <strong>Business → Settings</strong> (vendor).</li>
+      <li>Open <strong>Settings</strong>.</li>
+      <li>Scroll to <strong>Delete account</strong>.</li>
+      <li>Confirm. You will be signed out, and the request begins immediately.</li>
+    </ol>
+    <div class="warnbox"><strong>This cannot be undone.</strong> Your events, bookings, guest lists and wishlist go with the account, and a vendor's storefront, listings and portfolio disappear from search.</div>
+  </div>
+
+  <div class="card">
+    <h2>✉️ Delete by email</h2>
+    <p>If you have lost access to the app or to the number on the account, write to <a href="mailto:support@myappscart.com?subject=Delete%20my%20Shubhzo%20account">support@myappscart.com</a> from the email address registered on the account, with the subject <strong>Delete my Shubhzo account</strong>, and include the registered mobile number.</p>
+    <p>We will verify that the request is genuinely yours before acting on it, and confirm when it is done — normally within seven working days.</p>
+  </div>
+
+  <div class="card">
+    <h2>⏸️ Finish what is running first</h2>
+    <p>Deletion is blocked while there is money or an obligation in flight, because we cannot refund or settle an account that no longer exists. Please close these off first:</p>
+    <ul>
+      <li>A booking request still inside its 24-hour window — let it be accepted, or declined, or expire.</li>
+      <li>A confirmed booking that has not yet taken place.</li>
+      <li>An outstanding balance, or a refund on its way to you.</li>
+      <li><strong>Vendors:</strong> a settlement not yet paid out, and any open dispute.</li>
+    </ul>
+    <p>The app will tell you which of these is in the way rather than simply refusing.</p>
+  </div>
+
+  <div class="card">
+    <h2>📦 What is deleted, and what is kept</h2>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Data</th><th>What happens</th></tr></thead>
+        <tbody>
+          <tr><td>Name, mobile, email, profile</td><td><strong>Deleted.</strong></td></tr>
+          <tr><td>Events, checklists, budgets, guest lists</td><td><strong>Deleted.</strong></td></tr>
+          <tr><td>Wishlist, comparisons, saved searches</td><td><strong>Deleted.</strong></td></tr>
+          <tr><td>Vendor storefront, listings, packages, portfolio</td><td><strong>Deleted</strong> and removed from search.</td></tr>
+          <tr><td>KYC documents</td><td><strong>Deleted</strong>, except where we are required to retain identity records for a completed financial transaction.</td></tr>
+          <tr><td>Reviews you wrote</td><td><strong>Detached from your name</strong> but left in place, so the vendor's rating history stays honest.</td></tr>
+          <tr><td>Payments, invoices, settlements, TDS records</td><td><strong>Retained</strong> for as long as tax and accounting law requires. These are financial records, not profile data, and are not used to contact you.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="highlight"><strong>Why anything is kept at all:</strong> a receipt, an invoice and a TDS deposit are records the law requires us to hold for a fixed period. Everything that identifies you as a user of the app goes.</div>
+  </div>
+
+  <div class="card">
+    <h2>↩️ Alternatives to deleting</h2>
+    <ul>
+      <li><strong>Just want the notifications to stop?</strong> Settings → Notifications has a per-channel matrix and quiet hours.</li>
+      <li><strong>Vendor taking a break?</strong> Switch yourself off <strong>Live</strong> on the Home tab. You stop appearing in search and stop receiving requests, and your listings, reviews and history are all still there when you come back.</li>
+      <li><strong>Want your data corrected rather than removed?</strong> Account → Profile, or write to us.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>✉️ Questions</h2>
+    <p><a href="mailto:support@myappscart.com">support@myappscart.com</a> — we aim to answer within two working days.</p>
+  </div>
+</main>
+<div class="links-row">
+  <a href="/apps/shubhzo/">App home</a>
+  <a href="/apps/shubhzo/tutorial.html">Tutorial</a>
+  <a href="/apps/shubhzo/privacy.html">Privacy Policy</a>
+  <a href="/apps/shubhzo/terms.html">Terms of Service</a>
+  <a href="/apps/shubhzo/support.html">Support</a>
+  <a href="/apps/shubhzo/delete-account.html">Delete Account</a>
+  <a href="/">← MyAppsCart</a>
+</div>
+
+<footer>
+  <p>&copy; 2026 MyAppsCart &nbsp;·&nbsp; <a href="mailto:support@myappscart.com">support@myappscart.com</a></p>
+</footer>
+
+</body>
+</html>
