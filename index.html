@@ -865,15 +865,47 @@
     @media (max-width: 720px) {
       .bento { grid-template-columns: 1fr; }
       .bento-a, .bento-b, .bento-c, .bento-d { grid-column: span 1; }
-      .depth-card, .grid-floor { display: none; }
-      .scene { transform: none; }
-      .stage { perspective: none; }
       .divider svg { height: 42px; }
       .iso { min-height: 200px; }
+
+      /* the hero keeps its depth on phones — there is no pointer, so the
+         scene sways on its own and the panels stack clear of the device */
+      .stage { perspective: 1000px; perspective-origin: 50% 42%; }
+      .scene { animation: sway 10s ease-in-out infinite; }
+      @keyframes sway {
+        0%, 100% { transform: rotateX(8deg) rotateY(-14deg); }
+        50%      { transform: rotateX(4deg) rotateY(-3deg); }
+      }
+
+      .hero-visual { min-height: 700px; }
+      .phone { width: 226px; }
+      .phone-screen { min-height: 408px; padding: 22px 15px 17px; }
+      .phone-apps { gap: 13px 8px; margin-top: 19px; }
+      .phone-app img, .phone-app .glyph { width: 46px; height: 46px; border-radius: 13px; }
+
+      .grid-floor {
+        display: block; width: 430px; height: 260px; bottom: -58px;
+        background-size: 32px 32px;
+      }
+
+      /* stacked above and below the device, never across it */
+      .depth-card { display: block; width: 154px; padding: 11px 13px; }
+      .depth-card .dc-title { font-size: 11px; margin-bottom: 7px; }
+      .depth-card .dc-row { font-size: 9.5px; margin-bottom: 5px; }
+      .depth-card .dc-bar { width: 52px; }
+
+      .depth-card.d-back {
+        top: auto; left: -6px; bottom: calc(100% + 18px);
+        transform: translateZ(-70px) rotateY(12deg);
+      }
+      .depth-card.d-front {
+        bottom: auto; right: -6px; top: calc(100% + 18px);
+        transform: translateZ(70px) rotateY(-10deg);
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .scene { transform: rotateX(6deg) rotateY(-14deg); }
+      .scene { transform: rotateX(6deg) rotateY(-14deg); animation: none; }
       .iso-stack { animation: none; }
     }
 
@@ -1089,7 +1121,7 @@
     @media (max-width: 720px) {
       .shell { padding-inline: 20px; }
       .section { padding-block: 64px; }
-      .hero { padding: 52px 0 46px; }
+      .hero { padding: 52px 0 0; }
       .hero h1 { letter-spacing: -1.5px; }
       .stats-inner { grid-template-columns: 1fr 1fr; gap: 24px 0; padding-block: 28px; }
       .stat:nth-child(2) { border-right: none; }
