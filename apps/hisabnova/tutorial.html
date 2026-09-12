@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HisabNova — The Complete Guide</title>
+  <meta name="description" content="The full HisabNova manual: setup, billing, khata, stock, GST returns, team sync, backups, desktop shortcuts and troubleshooting — for Android, iOS, macOS and Windows." />
+  <link rel="icon" type="image/png" href="/apps/hisabnova/icon-512.png" />
+  <link rel="apple-touch-icon" href="/apps/hisabnova/icon-512.png" />
+  <meta property="og:title" content="HisabNova — The Complete Guide" />
+  <meta property="og:description" content="Setup, billing, khata, GST filing, team sync, backups and troubleshooting, in one page." />
+  <meta property="og:image" content="https://myappscart.com/apps/hisabnova/icon-512.png" />
+  <style>
+    :root {
+      --navy: #0B1E42; --navy-mid: #143A73; --navy-card: #12315C;
+      --green: #16A34A; --green-br: #22C55E; --gold: #F6C544; --orange: #EF6C1A;
+      --bg: #F4F7FA; --surface: #FFFFFF; --surface-2: #EEF3F8;
+      --text: #0F1B32; --muted: #56657F; --faint: #7A8AA3; --border: #DFE7F0;
+      --s1: #2a78d6; --s2: #1baf7a; --s3: #eda100; --bad: #e34948;
+      --radius: 14px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.7; font-size: 15.5px;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--green); }
+    a:hover { text-decoration: underline; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.88em; background: var(--surface-2);
+      border-radius: 5px; padding: 1.5px 6px; color: #23406E;
+    }
+    kbd {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.84em; background: #fff; border: 1px solid var(--border);
+      border-bottom-width: 2px; border-radius: 5px; padding: 1.5px 6px;
+      color: var(--text); white-space: nowrap;
+    }
+
+    /* ── Header ── */
+    header.top {
+      background: linear-gradient(150deg, #06142E 0%, var(--navy) 45%, var(--navy-mid) 100%);
+      color: #fff; padding: 46px 24px 40px; text-align: center;
+    }
+    header.top .ico {
+      width: 66px; height: 66px; margin: 0 auto 16px; border-radius: 18px;
+      overflow: hidden; border: 1.5px solid rgba(255,255,255,0.2);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
+    header.top .ico img { display: block; width: 100%; height: 100%; }
+    header.top .eyebrow {
+      font-size: 12px; font-weight: 700; letter-spacing: 1.6px;
+      text-transform: uppercase; color: var(--green-br); margin-bottom: 8px;
+    }
+    header.top h1 { font-size: clamp(27px, 5vw, 38px); font-weight: 800; letter-spacing: -0.9px; line-height: 1.15; }
+    header.top p { margin-top: 10px; font-size: 15px; opacity: 0.82; max-width: 620px; margin-inline: auto; }
+    .crumb { margin-top: 18px; font-size: 13px; opacity: 0.7; }
+    .crumb a { color: #9FD8B6; }
+
+    /* ── Layout ── */
+    .wrap {
+      max-width: 1160px; margin: 0 auto; padding: 34px 22px 80px;
+      display: grid; grid-template-columns: 244px 1fr; gap: 40px; align-items: start;
+    }
+    nav.toc {
+      position: sticky; top: 20px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 18px 16px;
+      max-height: calc(100vh - 40px); overflow-y: auto;
+    }
+    nav.toc h2 {
+      font-size: 11px; font-weight: 800; letter-spacing: 1.2px;
+      text-transform: uppercase; color: var(--faint); margin-bottom: 10px;
+    }
+    nav.toc ol { list-style: none; counter-reset: t; }
+    nav.toc li { counter-increment: t; }
+    nav.toc a {
+      display: flex; gap: 9px; align-items: baseline;
+      font-size: 13.5px; color: var(--muted); text-decoration: none;
+      padding: 5px 8px; border-radius: 7px; line-height: 1.4;
+    }
+    nav.toc a::before {
+      content: counter(t); font-size: 11px; font-weight: 700;
+      color: var(--faint); flex: 0 0 16px; text-align: right;
+    }
+    nav.toc a:hover { background: var(--surface-2); color: var(--text); text-decoration: none; }
+
+    main { min-width: 0; }
+    section.doc {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 30px 30px 26px;
+      margin-bottom: 20px; scroll-margin-top: 18px;
+      box-shadow: 0 2px 10px rgba(15,27,50,0.04);
+    }
+    section.doc > h2 {
+      font-size: 21px; font-weight: 800; letter-spacing: -0.5px;
+      margin-bottom: 6px; display: flex; align-items: center; gap: 11px;
+    }
+    section.doc > h2 .n {
+      flex: 0 0 30px; width: 30px; height: 30px; border-radius: 10px;
+      background: var(--navy); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13.5px; font-weight: 700;
+    }
+    section.doc > .intro { color: var(--muted); margin-bottom: 20px; }
+    h3 {
+      font-size: 16px; font-weight: 700; margin: 26px 0 8px;
+      padding-top: 4px;
+    }
+    h3:first-of-type { margin-top: 8px; }
+    h4 { font-size: 14.5px; font-weight: 700; margin: 18px 0 6px; color: #23406E; }
+    p { color: var(--muted); margin-bottom: 12px; }
+    p:last-child, ul:last-child, ol:last-child { margin-bottom: 0; }
+    ul, ol { color: var(--muted); padding-left: 22px; margin-bottom: 14px; }
+    li { margin-bottom: 6px; }
+    li::marker { color: var(--faint); }
+    strong { color: var(--text); font-weight: 650; }
+
+    /* ── Numbered steps ── */
+    ol.steps { list-style: none; padding-left: 0; counter-reset: s; }
+    ol.steps > li {
+      counter-increment: s; position: relative;
+      padding-left: 40px; margin-bottom: 16px;
+    }
+    ol.steps > li::before {
+      content: counter(s); position: absolute; left: 0; top: 1px;
+      width: 26px; height: 26px; border-radius: 50%;
+      background: rgba(22,163,74,0.13); color: var(--green);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12.5px; font-weight: 800;
+    }
+    ol.steps > li b { display: block; color: var(--text); font-weight: 650; }
+
+    /* ── Callouts ── */
+    .note, .warn, .tip {
+      border-radius: 0 10px 10px 0; padding: 13px 17px;
+      margin: 16px 0; font-size: 14.5px; border-left: 3px solid;
+    }
+    .note { background: #EDF3FB; border-left-color: var(--s1); color: #1D3E6B; }
+    .tip  { background: #E8F7EF; border-left-color: var(--green); color: #135C34; }
+    .warn { background: #FDF6E3; border-left-color: var(--s3); color: #6B4E06; }
+    .note strong, .tip strong, .warn strong { color: inherit; }
+    .note p, .tip p, .warn p { color: inherit; margin-bottom: 8px; }
+    .note p:last-child, .tip p:last-child, .warn p:last-child { margin-bottom: 0; }
+
+    /* ── Path chip ── */
+    .path {
+      display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap;
+      background: var(--navy); color: #fff; border-radius: 8px;
+      padding: 5px 12px; font-size: 13px; font-weight: 600;
+      margin: 4px 0 12px;
+    }
+    .path em { font-style: normal; opacity: 0.5; }
+
+    /* ── Tables ── */
+    .table-wrap { overflow-x: auto; margin: 16px 0; }
+    table {
+      width: 100%; border-collapse: collapse; font-size: 14px; min-width: 520px;
+    }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+    thead th {
+      font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.7px;
+      color: var(--faint); font-weight: 700; border-bottom: 1.5px solid var(--border);
+    }
+    td { color: var(--muted); }
+    td strong { color: var(--text); }
+    tbody tr:last-child td { border-bottom: none; }
+    .c { text-align: center; }
+    .yes { color: var(--s2); font-weight: 700; }
+    .no { color: #9AA8BD; font-weight: 700; }
+
+    /* ── Figures ── */
+    figure {
+      background: var(--surface-2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px 18px 14px; margin: 18px 0;
+      overflow-x: auto;
+    }
+    figure svg { display: block; width: 100%; height: auto; }
+    figure svg.wide { min-width: 600px; }
+    figcaption { font-size: 13px; color: var(--faint); margin-top: 12px; text-align: center; }
+
+    /* ── FAQ-ish disclosure ── */
+    details.q {
+      background: var(--surface-2); border-radius: 10px;
+      padding: 13px 16px; margin-bottom: 9px;
+    }
+    details.q summary {
+      font-weight: 650; font-size: 14.5px; cursor: pointer; list-style: none;
+      display: flex; justify-content: space-between; gap: 12px; color: var(--text);
+    }
+    details.q summary::-webkit-details-marker { display: none; }
+    details.q summary::after { content: '+'; color: var(--green); font-weight: 700; font-size: 18px; line-height: 1.2; }
+    details.q[open] summary::after { content: '−'; }
+    details.q p { font-size: 14px; margin-top: 9px; }
+    details.q p:last-child { margin-bottom: 0; }
+
+    /* ── Links / footer ── */
+    .links-row {
+      display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+      padding: 28px 20px; background: var(--surface); border-top: 1px solid var(--border);
+    }
+    .links-row a {
+      background: var(--surface-2); color: #374151; border-radius: 20px;
+      padding: 8px 18px; font-size: 13px; font-weight: 600; text-decoration: none;
+    }
+    .links-row a:hover { background: #DCE7F3; color: var(--green); }
+    footer { background: #0F1B32; color: #9AABC4; text-align: center; padding: 22px; font-size: 13px; }
+    footer a { color: #9AABC4; }
+    footer a:hover { color: #fff; }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 22px; padding-top: 24px; }
+      nav.toc { position: static; max-height: none; }
+      nav.toc ol { columns: 2; column-gap: 16px; }
+      section.doc { padding: 24px 20px 20px; }
+    }
+    @media (max-width: 520px) {
+      nav.toc ol { columns: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="top">
+  <div class="ico"><img src="/apps/hisabnova/icon-512.png" alt="HisabNova icon" width="66" height="66" /></div>
+  <div class="eyebrow">HisabNova</div>
+  <h1>The Complete Guide</h1>
+  <p>Everything from your first bill to filing a return, written for a shopkeeper rather than an accountant. Read it end to end once, then come back to the section you need.</p>
+  <p class="crumb"><a href="/apps/hisabnova/">← Back to HisabNova</a> &nbsp;·&nbsp; <a href="/">MyAppsCart</a></p>
+</header>
+
+<div class="wrap">
+
+<nav class="toc" aria-label="Contents">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#install">Installing &amp; first run</a></li>
+    <li><a href="#setup">Setting up your shop</a></li>
+    <li><a href="#firstbill">Your first bill</a></li>
+    <li><a href="#docs">The five document types</a></li>
+    <li><a href="#payment">Getting paid</a></li>
+    <li><a href="#stock">Products &amp; stock</a></li>
+    <li><a href="#khata">Customers &amp; khata</a></li>
+    <li><a href="#spend">Purchases &amp; expenses</a></li>
+    <li><a href="#reports">Reports &amp; health</a></li>
+    <li><a href="#gst">GST returns &amp; e-invoice</a></li>
+    <li><a href="#team">Working as a team</a></li>
+    <li><a href="#backup">Backup &amp; restore</a></li>
+    <li><a href="#brand">Making it yours</a></li>
+    <li><a href="#desktop">On a Windows or Mac</a></li>
+    <li><a href="#ai">AI assistant</a></li>
+    <li><a href="#plans">Plans &amp; billing</a></li>
+    <li><a href="#trouble">Troubleshooting</a></li>
+    <li><a href="#ref">Quick reference</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ═══ 1 ═══ -->
+<section class="doc" id="install">
+  <h2><span class="n">1</span>Installing &amp; first run</h2>
+  <p class="intro">HisabNova ships to four platforms from one codebase. Whichever you install, the books, the GST engine and the invoice PDFs are identical — only the hardware around them differs.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Platform</th><th>Where it comes from</th><th>What it's best at</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Android</strong></td><td>Google Play</td><td>The everyday till. Camera scanning, bill OCR, push alerts.</td></tr>
+        <tr><td><strong>iOS</strong></td><td>App Store</td><td>The owner's phone — the same books, read anywhere.</td></tr>
+        <tr><td><strong>macOS</strong></td><td>Download (<code>.dmg</code>)</td><td>A desk counter with a real keyboard, a USB gun and a printer.</td></tr>
+        <tr><td><strong>Windows</strong></td><td>Download (installer or <code>.zip</code>)</td><td>The classic shop PC. USB barcode gun, one-press printing.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>What happens the first time you open it</h3>
+  <p>Nothing asks you to sign up. There is no OTP, no email and no waiting screen — the app creates a local database on the device and drops you into a working till. The onboarding sheet that appears is four short questions, and you can dismiss it and come back later from <span class="path">More <em>›</em> Business profile</span></p>
+
+  <div class="tip">
+    <strong>You can bill before you enter anything.</strong> A product does not have to exist in the catalogue to go on a bill — type a name, a price and a rate and it prints. Add the catalogue properly when the counter is quiet.
+  </div>
+
+  <h3>Do I need an account?</h3>
+  <p>Only for cloud backup. Signing in with Google or an email address turns on off-site sync; skipping it changes nothing about how the app works. If you later want cloud backup without giving an email, there is a guest sign-in that can be upgraded to a real account afterwards.</p>
+</section>
+
+<!-- ═══ 2 ═══ -->
+<section class="doc" id="setup">
+  <h2><span class="n">2</span>Setting up your shop</h2>
+  <p class="intro">Five minutes here decides what the rest of the app looks like. Three of these five answers change real behaviour, not just wording.</p>
+
+  <h3>1 · Business profile</h3>
+  <span class="path">More <em>›</em> Business profile</span>
+  <ul>
+    <li><strong>Shop name and address</strong> — printed at the top of every document, and used as the transaction note when a customer pays you by UPI.</li>
+    <li><strong>State</strong> — this is the important one. The state code is compared against the customer's place of supply to decide whether a bill carries CGST + SGST or a single IGST. Get it wrong and every inter-state bill is taxed incorrectly.</li>
+    <li><strong>GSTIN</strong> — optional. Without it you can still bill, hold stock and run a khata; add it later and it appears on documents from that point on, with nothing already recorded disturbed.</li>
+    <li><strong>Phone, email, UPI ID</strong> — the UPI ID is what the payment QR on your bills points at.</li>
+    <li><strong>Financial year and invoice prefix</strong> — controls numbering, e.g. <code>INV/2026-27/0001</code>.</li>
+  </ul>
+
+  <h3>2 · Pick your trade</h3>
+  <p>Twenty categories, and the choice switches real features on and off. The rule is <em>hide what cannot apply</em>, never <em>hide what is unlikely</em> — so a restaurant loses IMEI capture (it can never have one) but a bookshop keeps weighed items (it might).</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>If you pick…</th><th>You get</th></tr></thead>
+      <tbody>
+        <tr><td>Kirana, hardware, bakery, dairy, jewellery</td><td><strong>Weighed items</strong> — sell by kg, g, L or m with decimals</td></tr>
+        <tr><td>Pharmacy, FMCG distributor, cosmetics, bakery, dairy</td><td><strong>Batches &amp; expiry</strong> — batch numbers, expiry dates, FEFO consumption</td></tr>
+        <tr><td>Mobile / electronics, auto parts</td><td><strong>Serial &amp; IMEI</strong> capture at the point of sale</td></tr>
+        <tr><td>Garment / footwear</td><td><strong>Variants</strong> — size and colour as real stock lines</td></tr>
+        <tr><td>Restaurant / café</td><td><strong>Kitchen orders (KOT)</strong> and table billing</td></tr>
+        <tr><td>Salon, service provider, freelancer</td><td><strong>Service mode</strong> — SAC codes, no stock to carry</td></tr>
+        <tr><td>General store / other, or nothing</td><td><strong>Everything</strong> except kitchen orders</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note">
+    <strong>Changed your mind?</strong> Change the category any time. Features that were hidden reappear; nothing you recorded while they were hidden is lost. And if you have already saved a weighed product, weighed billing stays available whatever the category says — hiding a feature somebody is using would be a bug, not a simplification.
+  </div>
+
+  <h3>3 · Choose a language</h3>
+  <span class="path">More <em>›</em> Language</span>
+  <p>Eleven languages, each listed in its own script first: English, हिन्दी, বাংলা, मराठी, తెలుగు, தமிழ், ગુજરાતી, اُردُو, ಕನ್ನಡ, ଓଡ଼ିଆ, മലയാളം. Urdu runs right to left and the whole layout follows. Change it whenever you like — it is a display setting, not a data one.</p>
+
+  <h3>4 · Lock the app</h3>
+  <span class="path">More <em>›</em> App lock</span>
+  <p>Set a PIN, and turn on biometric unlock if the device has it — fingerprint on Android, Face or Touch ID on iPhone and Mac, Windows Hello on a PC. Set the <strong>owner PIN</strong> too: it is a second gate on the six actions that can rewrite money (see <a href="#team">§11</a>), and it is what keeps a tablet left on the counter from being used to cancel bills.</p>
+  <div class="warn">
+    <strong>Write the owner PIN down somewhere safe.</strong> It is stored only as a stretched hash — there is no "forgot PIN" e-mail, because there is no server that knows it.
+  </div>
+
+  <h3>5 · Try it with demo data first (optional)</h3>
+  <span class="path">More <em>›</em> Demo data</span>
+  <p>Loads a fictional shop — products, customers, bills, a khata with real balances — so you can explore every screen with something in it. Clear it in one tap before you start billing for real.</p>
+</section>
+
+<!-- ═══ 3 ═══ -->
+<section class="doc" id="firstbill">
+  <h2><span class="n">3</span>Your first bill</h2>
+  <p class="intro">This is the screen you will spend your working life in, so it is worth ten minutes now.</p>
+
+  <ol class="steps">
+    <li><b>Open it</b> Tap the green <strong>＋</strong> and choose <strong>New sale</strong>. On a desktop it is <kbd>Ctrl/⌘ N</kbd>.</li>
+    <li><b>Say who it's for — or don't</b> Pick a saved customer, add a new one, or leave it blank for a walk-in. A named customer unlocks the khata; a walk-in still gets every payment option.</li>
+    <li><b>Put the items on</b> Three ways, and they mix freely on one bill:
+      <ul>
+        <li><strong>Search</strong> — type two or three letters of the name.</li>
+        <li><strong>Scan</strong> — the camera on a phone, or just pull the trigger on a USB gun at a desktop counter; no button, nothing to focus first.</li>
+        <li><strong>Speak</strong> — tap the mic and dictate. What the app heard is shown for you to confirm before anything is added.</li>
+      </ul>
+    </li>
+    <li><b>Fix the quantity</b> Whole numbers for pieces; decimals for weighed goods — <code>2.5</code> kg, <code>1.75</code> m, <code>250</code> g. The unit rides along with the number all the way to the printed bill.</li>
+    <li><b>Discount, if any</b> Per line, or one discount on the whole bill. A bill-level discount is <em>spread across the lines in proportion to their taxable value</em>, which is what the GST documented-discount rule requires — see the figure below.</li>
+    <li><b>Check the totals</b> Taxable value, then CGST and SGST (or IGST), then the round-off, then the total. Every figure is computed from the lines, never typed.</li>
+    <li><b>Say how it is being paid</b> Cash, Credit, or Split. See <a href="#payment">§5</a>.</li>
+    <li><b>Save</b> The bill, its lines, its stock movements and its ledger postings are written in one transaction. If the device dies half a second later, either all of it is there or none of it is — never half.</li>
+    <li><b>Hand it over</b> Print it, or share the PDF to WhatsApp. Either way the sale is already recorded; sharing is a separate act, not part of saving.</li>
+  </ol>
+
+  <figure>
+    <svg class="wide" viewBox="0 0 720 250" role="img" aria-label="Diagram: a ₹1,000 bill-level discount split between two lines in proportion to their taxable value — ₹800 of taxable value takes ₹800 of discount, ₹200 takes ₹200.">
+      <text x="0" y="16" font-size="13" font-weight="700" fill="#0F1B32">A ₹1,000 discount on the whole bill, spread correctly</text>
+
+      <rect x="0" y="34" width="330" height="86" rx="10" fill="#fff" stroke="#DFE7F0"/>
+      <text x="16" y="56" font-size="12" font-weight="700" fill="#0F1B32">Line A · Mixer Grinder</text>
+      <text x="16" y="76" font-size="11.5" fill="#56657F">Taxable before discount</text>
+      <text x="314" y="76" font-size="12" font-weight="650" fill="#0F1B32" text-anchor="end">₹8,000.00</text>
+      <text x="16" y="96" font-size="11.5" fill="#56657F">Share of the ₹1,000 (80%)</text>
+      <text x="314" y="96" font-size="12" font-weight="650" fill="#e34948" text-anchor="end">− ₹800.00</text>
+      <line x1="16" y1="104" x2="314" y2="104" stroke="#EEF3F8"/>
+      <text x="16" y="114" font-size="11.5" font-weight="700" fill="#0F1B32">Taxed on</text>
+      <text x="314" y="114" font-size="12" font-weight="800" fill="#16A34A" text-anchor="end">₹7,200.00</text>
+
+      <rect x="390" y="34" width="330" height="86" rx="10" fill="#fff" stroke="#DFE7F0"/>
+      <text x="406" y="56" font-size="12" font-weight="700" fill="#0F1B32">Line B · Steel Tiffin Box</text>
+      <text x="406" y="76" font-size="11.5" fill="#56657F">Taxable before discount</text>
+      <text x="704" y="76" font-size="12" font-weight="650" fill="#0F1B32" text-anchor="end">₹2,000.00</text>
+      <text x="406" y="96" font-size="11.5" fill="#56657F">Share of the ₹1,000 (20%)</text>
+      <text x="704" y="96" font-size="12" font-weight="650" fill="#e34948" text-anchor="end">− ₹200.00</text>
+      <line x1="406" y1="104" x2="704" y2="104" stroke="#EEF3F8"/>
+      <text x="406" y="114" font-size="11.5" font-weight="700" fill="#0F1B32">Taxed on</text>
+      <text x="704" y="114" font-size="12" font-weight="800" fill="#16A34A" text-anchor="end">₹1,800.00</text>
+
+      <rect x="0" y="140" width="720" height="46" rx="10" fill="#E8F7EF" stroke="#B6E3CB"/>
+      <text x="16" y="160" font-size="12" font-weight="700" fill="#135C34">The shares always sum back to the discount exactly</text>
+      <text x="16" y="178" font-size="12" fill="#135C34">₹800.00 + ₹200.00 = ₹1,000.00 — no paise invented, none lost, whatever the ratio</text>
+
+      <rect x="0" y="200" width="720" height="44" rx="10" fill="#FDF6E3" stroke="#F0DCA8"/>
+      <text x="16" y="220" font-size="12" font-weight="700" fill="#6B4E06">Why it matters</text>
+      <text x="16" y="237" font-size="11.5" fill="#8A6D22">The two lines are at different GST rates. Discounting them unequally would change the tax you owe.</text>
+    </svg>
+    <figcaption>Figure · Why a bill-level discount is split by value rather than shared equally.</figcaption>
+  </figure>
+
+  <h3>Inclusive (MRP) pricing</h3>
+  <p>If a product is priced at MRP — tax already inside the number — mark it inclusive and the app pulls the taxable value back out with <code>taxable = inclusive × 100 ÷ (100 + rate + cess)</code>. It does not approximate by subtracting a percentage, which is a different and wrong number.</p>
+
+  <h3>Editing and cancelling</h3>
+  <ul>
+    <li>A <strong>draft</strong> can be changed freely until it is saved.</li>
+    <li>A <strong>saved bill</strong> can be edited if your role allows it, and the change is versioned rather than overwritten.</li>
+    <li><strong>Cancelling</strong> a bill asks for the owner PIN, even from an owner. It reverses the stock and the ledger rather than erasing the record — the number stays used, because a missing invoice number in a series is exactly what an audit asks about.</li>
+  </ul>
+</section>
+
+<!-- ═══ 4 ═══ -->
+<section class="doc" id="docs">
+  <h2><span class="n">4</span>The five document types</h2>
+  <p class="intro">All five use the same calculation engine and the same storage. They differ in their numbering series, what they do to stock, and whether they count as revenue.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Document</th><th>Series</th><th>Stock</th><th>Counts as sales?</th><th>Use it when</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Tax invoice</strong></td><td><code>INV</code> (or your own prefix)</td><td class="c">Out ↓</td><td class="c yes">Yes</td><td>The real sale. The only document that posts to a customer's khata.</td></tr>
+        <tr><td><strong>Quotation</strong></td><td><code>QTN</code></td><td class="c no">—</td><td class="c no">No</td><td>A price you are offering. Nothing has been sold yet.</td></tr>
+        <tr><td><strong>Delivery challan</strong></td><td><code>DCH</code></td><td class="c">Out ↓</td><td class="c no">No</td><td>Goods have gone out but are not yet a demand for payment.</td></tr>
+        <tr><td><strong>Sales return</strong></td><td><code>RET</code></td><td class="c">In ↑</td><td class="c">Reduces sales</td><td>The customer brought goods back. Stock comes back with them.</td></tr>
+        <tr><td><strong>Credit note</strong></td><td><code>CRN</code></td><td class="c no">—</td><td class="c">Reduces sales</td><td>You owe the customer money back, with no goods moving.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <strong>Why a quotation is not in your sales figure.</strong> Every screen that totals sales — the dashboard, the charts, the reports — reads the same rule from the same place. That is what stops the dashboard and the reports quietly disagreeing about whether a quotation is income.
+  </div>
+</section>
+
+<!-- ═══ 5 ═══ -->
+<section class="doc" id="payment">
+  <h2><span class="n">5</span>Getting paid</h2>
+  <p class="intro">Every bill is settled one of three ways, chosen on the billing screen before you save.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Mode</th><th>Collected now</th><th>Goes on the khata</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Cash</strong></td><td>The whole bill</td><td>Nothing</td></tr>
+        <tr><td><strong>Credit</strong></td><td>Nothing</td><td>The whole bill</td></tr>
+        <tr><td><strong>Cash + Credit (split)</strong></td><td>The part you enter</td><td>The rest</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>The app enforces one rule everywhere: <code>collected + balance = total</code>, and the collected amount can never be negative or more than the total. A "split" of the whole bill is stored as cash, and a split of nothing is stored as credit — otherwise a bill would print "Cash + Credit" with nothing actually collected against it.</p>
+
+  <h3>Walk-ins can be given credit too</h3>
+  <p>A counter customer paying ₹600 of a ₹1,000 bill is an ordinary transaction, so the app records it. What it cannot do is chase it: there is no khata for an unnamed customer, so the balance sits on the bill and not in anyone's outstanding. The payment sheet says exactly that, once, rather than taking the option away:</p>
+  <div class="warn">"₹400 will show as unpaid on this bill. A walk-in has no khata, so it will not appear in anyone's outstanding — add a customer to track it."</div>
+
+  <h3>Collecting by UPI</h3>
+  <ol class="steps">
+    <li><b>Set your UPI ID once</b> <span class="path" style="margin:0;">More <em>›</em> Business profile</span></li>
+    <li><b>Pick UPI as the instrument on the bill</b> A <strong>UPI Pay</strong> button appears beside Save &amp; Continue.</li>
+    <li><b>Show the QR</b> The amount is what is being collected <em>now</em>, never the total — asking a customer paying half to transfer the whole bill would be worse than not offering the button at all.</li>
+    <li><b>Save the bill</b> This is the step that records the money.</li>
+  </ol>
+  <div class="warn">
+    <strong>A UPI app cannot tell HisabNova whether the transfer went through.</strong> Nothing is recorded by the QR sheet itself — the cashier saving the bill is the only honest record. Always confirm the money arrived before you save it as collected.
+  </div>
+  <p>The transaction note carries <strong>your shop's name</strong>, because that is the string that lands in the customer's bank statement and UPI history — an invoice number they have not been handed yet helps nobody. UPI collection is offered on a tax invoice only: a quotation is a price, and a delivery challan is not a demand for payment.</p>
+
+  <h3>Recording a payment later</h3>
+  <span class="path">＋ <em>›</em> Record payment</span>
+  <p>Money received against one bill, against several, or on account with no bill named. Money paid out to a supplier works the same way. Receipts show on the customer statement under the bill they settle, and money on account is listed separately so it is never mistaken for a paid bill.</p>
+
+  <h3>Credit limits</h3>
+  <p>Set a credit limit per customer. Going over it <strong>warns rather than blocks</strong> — an owner at their own counter may have every reason to extend a regular a little more, and a hard refusal would only push them to bill it as cash and lose the record entirely.</p>
+</section>
+
+<!-- ═══ 6 ═══ -->
+<section class="doc" id="stock">
+  <h2><span class="n">6</span>Products &amp; stock</h2>
+  <p class="intro">You can bill without a catalogue, but a catalogue is what makes the bill fast, the tax right and the stock figure real.</p>
+
+  <h3>Adding a product</h3>
+  <span class="path">＋ <em>›</em> Add product</span>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Field</th><th>Why it matters</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Name</strong></td><td>What you search for. Two or three letters should be enough to find it at the counter.</td></tr>
+        <tr><td><strong>Selling price</strong></td><td>Mark it <em>inclusive</em> if it is an MRP with tax already inside.</td></tr>
+        <tr><td><strong>Purchase price</strong></td><td>What margin and profit are computed from. Hidden from roles without the purchase-price permission.</td></tr>
+        <tr><td><strong>GST rate</strong></td><td>0, 5, 12, 18, 28 — or a non-taxable category (nil-rated, exempt, non-GST, zero-rated), which is not the same as 0%.</td></tr>
+        <tr><td><strong>HSN / SAC</strong></td><td>The classification your return is built from. See below.</td></tr>
+        <tr><td><strong>Barcode</strong></td><td>Type it, scan it, or let the app mint one. See below.</td></tr>
+        <tr><td><strong>Unit</strong></td><td>pcs, kg, g, L, ml, m — this is what makes an item weighable.</td></tr>
+        <tr><td><strong>Reorder level</strong></td><td>Below this, the item appears in <em>Needs attention</em> on the dashboard.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Barcodes: one is generated, the other is not</h3>
+  <p>The form offers a one-tap fill for both the barcode and the HSN. They look like the same feature and are deliberately opposite.</p>
+  <div class="tip">
+    <p><strong>A barcode is an identifier, so the app can mint one.</strong> Loose grain, repacked goods and a tailor's own work still have to scan at the till. HisabNova builds a real EAN-13 with a correct check digit on GS1 prefix <strong>2</strong> — the range reserved for restricted circulation inside a company. Staying in that range is the whole safety argument: a code minted here can never be some manufacturer's real barcode, so it can never make two products answer to one scan.</p>
+  </div>
+  <div class="warn">
+    <p><strong>An HSN is a classification, so the app must not.</strong> 1905 means bakery products, and the GST rate follows from the code. A generated HSN would be a legally wrong classification printed on a real tax invoice, and it would travel as far as a filed GSTR-1 before anyone noticed. So the app <em>suggests</em> — from your own catalogue first, then from a short table of common headings — and you confirm. For anything it doesn't know, "ask your accountant" is a better answer than a confident wrong one.</p>
+  </div>
+
+  <h3>Selling by weight or measure</h3>
+  <p>Set the unit to kg, g, L, ml or m and the quantity field accepts decimals. <code>2.5</code> kg of rice at ₹92 is billed as ₹230.00 — not rounded up to 3 kg, and not stored as a float that drifts. The unit prints on the bill, so the customer can check the arithmetic.</p>
+  <p>For unlabelled loose stock, mint an in-store barcode (above) and stick it on the packet; it then scans like anything else.</p>
+
+  <h3>Batches &amp; expiry</h3>
+  <p>Available to pharmacy, FMCG distribution, cosmetics, bakery and dairy. Each inward lot carries a batch number and an expiry date, and a sale consumes stock under one of three strategies:</p>
+  <ul>
+    <li><strong>FEFO</strong> — first expiring, first out. The right default for anything that goes off.</li>
+    <li><strong>FIFO</strong> — first in, first out. For goods that do not expire but do age.</li>
+    <li><strong>Manual</strong> — you pick the batch, for when the customer asked for a specific one.</li>
+  </ul>
+  <p>If there is not enough stock across batches, the app reports the shortfall rather than silently going negative — and lets you override deliberately if you sell it anyway.</p>
+  <span class="path">More <em>›</em> Expiry report</span>
+  <p>Lists what is expiring and when, so slow stock gets moved before it becomes a write-off.</p>
+
+  <h3>Why the stock figure can be trusted</h3>
+  <p>Stock is never a number somebody edits. Every change is an immutable movement with a signed quantity and a typed reason, and the balance is what those movements add up to. A "sale" that tried to <em>add</em> stock is rejected rather than recorded. That is why a crash mid-sale, or two devices syncing in an odd order, cannot leave you with a stock figure that is quietly wrong.</p>
+
+  <h3>Adjusting stock</h3>
+  <p>Damage, theft, expiry write-off, a stock-take correction — all of them are recorded as movements with a reason, not as an edit to a number. That means your stock history explains itself six months later.</p>
+
+  <h3>Branches &amp; godowns</h3>
+  <span class="path">More <em>›</em> Branches &amp; warehouses</span>
+  <p>Stock balances per location, with transfers between them recorded as movements like everything else. A <em>Business</em>-plan feature.</p>
+</section>
+
+<!-- ═══ 7 ═══ -->
+<section class="doc" id="khata">
+  <h2><span class="n">7</span>Customers &amp; khata</h2>
+  <p class="intro">The khata is the part of a small shop's books that most often lives in someone's head. This is the part of the app worth being strict about.</p>
+
+  <h3>Adding a customer</h3>
+  <span class="path">＋ <em>›</em> Add customer</span>
+  <p>Name and phone are enough. Add a GSTIN if they are registered — that is what makes their bills B2B in your GSTR-1. Set a credit limit if you want a warning when they go past it.</p>
+
+  <h3>What lands on the khata, and when</h3>
+  <p>When you save a tax invoice for a named customer, three things happen inside the same transaction as the bill:</p>
+  <ol class="steps">
+    <li><b>A debit for the grand total</b> The whole bill goes on their account.</li>
+    <li><b>A receipt for anything collected</b> Recorded as a real payment, not just a ledger line — because receivables ageing, the payments list and the statement all read the payments table.</li>
+    <li><b>A credit settling that receipt</b> So the ledger and the money agree.</li>
+    </ol>
+  <div class="note">
+    <strong>Three deliberate restrictions.</strong> Only a <em>named</em> customer gets a khata (a walk-in has none to post to). Only a <em>tax invoice</em> posts to it (a quotation is not money owed, and a challan is not a demand for payment). And the <em>credit limit warns rather than blocks</em>.
+  </div>
+
+  <h3>Reading a statement</h3>
+  <span class="path">Customers <em>›</em> pick one</span>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Tab</th><th>What it answers</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Ledger</strong></td><td>The money statement with a running balance — and, below it, the items behind those figures with returns netted off.</td></tr>
+        <tr><td><strong>Payments</strong></td><td>One row per <em>bill</em>: date, bill amount, paid, balance. That is the line you read out when a customer asks what is left. Open a row to see the individual receipts behind its paid figure.</td></tr>
+        <tr><td><strong>Items</strong></td><td>Everything they have bought or returned, with prices — useful when they ask "what did I pay for this last time?"</td></tr>
+        <tr><td><strong>Documents</strong></td><td>Every bill, return and credit note, with what has come back against each.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Date ranges, and why the balance never resets</h3>
+  <p>Two independent date fields — From and To — either of which can be left open. "What has this customer done since Diwali?" sets one end and leaves the other running.</p>
+  <p>The statement is always computed from the customer's <strong>whole</strong> history, then windowed. That is deliberate: the opening balance is precisely the part that falls outside your window, and a receipt recorded this month can settle a bill from last year. A window with no entries still carries the balance forward — a khata that reset to zero whenever you narrowed the dates would tell the customer they owe only this month's bills.</p>
+
+  <h3>Sending it to the customer</h3>
+  <p>Share the statement as a PDF, Excel or CSV, straight to WhatsApp. The screen, the PDF and the share are all built from the same computed statement, so the copy you read and the copy they receive cannot disagree.</p>
+
+  <h3>Chasing what is owed</h3>
+  <span class="path">More <em>›</em> Reports <em>›</em> Receivables</span>
+  <p>Ageing buckets — 0–30, 31–60, 60+ days — across every customer, so you can see what is genuinely old rather than merely unpaid. From a customer's screen, a one-tap WhatsApp reminder attaches their statement.</p>
+</section>
+
+<!-- ═══ 8 ═══ -->
+<section class="doc" id="spend">
+  <h2><span class="n">8</span>Purchases, expenses &amp; the cash book</h2>
+  <p class="intro">Sales alone cannot tell you whether the shop made money. These three screens are what turn turnover into profit.</p>
+
+  <h3>Purchases</h3>
+  <span class="path">＋ <em>›</em> New purchase</span>
+  <p>Record a supplier's bill. Inward stock lands as movements, the supplier's account is credited with what you owe, and the purchase price feeds your margin. Pay it later from <strong>Record payment</strong>.</p>
+
+  <h3>Scanning a supplier bill instead of typing it</h3>
+  <span class="path">More <em>›</em> Scan bill (OCR)</span>
+  <p>Point the camera at the bill and on-device text recognition reads it into a draft. Two things worth knowing:</p>
+  <ul>
+    <li><strong>The image never leaves the phone.</strong> Recognition runs on the device, not on a server.</li>
+    <li><strong>You confirm before it saves.</strong> Machine output is always shown for checking first — the same rule as voice input. OCR misreads a smudged 8 as a 3 often enough that a silent save would be a liability.</li>
+  </ul>
+  <p>Not available on macOS or Windows — the text-recognition library has no desktop implementation, so the menu row is hidden there rather than left to fail.</p>
+
+  <h3>Expenses</h3>
+  <span class="path">More <em>›</em> Expenses</span>
+  <p>Rent, electricity, transport, wages, packing — categorised and dated, and netted against sales in the profit-and-loss report. Recurring expenses can be entered once a month in a few taps.</p>
+
+  <h3>Cash &amp; bank</h3>
+  <span class="path">More <em>›</em> Cash &amp; bank</span>
+  <p>Accounts with running balances. Every receipt and payment names the account it moved through, so the balance on screen is the balance you should find in the drawer.</p>
+</section>
+
+<!-- ═══ 9 ═══ -->
+<section class="doc" id="reports">
+  <h2><span class="n">9</span>Reports &amp; the health score</h2>
+  <p class="intro">The dashboard answers "how is today going". The reports answer "how is the shop doing".</p>
+
+  <h3>What the dashboard shows</h3>
+  <ul>
+    <li><strong>Today's sales</strong>, and how that compares with yesterday.</li>
+    <li><strong>Collected</strong> versus <strong>on khata</strong> — the difference between turnover and money.</li>
+    <li><strong>Business health</strong>, out of 100, with the four figures behind it.</li>
+    <li><strong>Needs attention</strong> — low stock, expiring batches, overdue khata.</li>
+  </ul>
+
+  <h3>The health score</h3>
+  <p>One number built from margin, receivable days, stock cover and expiry exposure. The four inputs are shown alongside it, because a score with no working shown is a horoscope.</p>
+  <div class="note">
+    <strong>Why a cashier does not see it.</strong> A shop's margin is the number its owner least wants read off a tablet left on the counter. So the health card — and everything else that carries or implies purchase cost, including the AI's advice — is tied to the profit permission. A role without it gets a plain counter summary in its place, not a blank gap.
+  </div>
+
+  <h3>Reports</h3>
+  <span class="path">More <em>›</em> Reports</span>
+  <ul>
+    <li>Sales by day, month, item, customer and category</li>
+    <li>Profit &amp; loss</li>
+    <li>Receivables ageing</li>
+    <li>Stock valuation and slow-moving stock</li>
+    <li>Expiry</li>
+  </ul>
+  <p>Every report exports as PDF, Excel or CSV. On a phone that goes to the share sheet; on a desktop it opens a Save dialog, because the owner of a counter PC wants the file in the folder their accountant collects from.</p>
+
+  <h3>Charts</h3>
+  <span class="path">More <em>›</em> Charts</span>
+  <p>Trends over time, category mix, top items and top customers — the same figures as the reports, drawn.</p>
+
+  <h3>Benchmarks &amp; coaching</h3>
+  <div class="warn">
+    <strong>Read this before you use the benchmark screen.</strong> The comparison targets are sensible reference figures a small retailer might aim at — they are <em>not</em> anonymised data from real shops near you, and the screen says so on its face. Treat them as a target, not as evidence about your competitors.
+  </div>
+</section>
+
+<!-- ═══ 10 ═══ -->
+<section class="doc" id="gst">
+  <h2><span class="n">10</span>GST returns &amp; e-invoice</h2>
+  <p class="intro">HisabNova prepares your return. It does not file it — the upload still happens on the government portal, and nothing in the app pretends otherwise.</p>
+
+  <h3>GSTR-1</h3>
+  <span class="path">More <em>›</em> GST</span>
+  <p>Pick a period — this month, last month, this financial year, or all time (the financial year runs 1 April to 31 March). You get:</p>
+  <ul>
+    <li><strong>B2B</strong> — sales to customers with a GSTIN, invoice by invoice.</li>
+    <li><strong>B2C</strong> — sales to unregistered customers, summarised.</li>
+    <li><strong>Rate-wise</strong> taxable value, CGST, SGST, IGST and cess.</li>
+    <li><strong>HSN summary</strong> — value and tax per code.</li>
+    <li><strong>Document series</strong> — the numbers issued, so gaps are visible.</li>
+  </ul>
+  <p>Export writes CSVs your accountant can work from. On a desktop it asks once for a folder and writes all three files into it.</p>
+
+  <div class="tip">
+    <strong>Fix the warnings before you file, not after.</strong> The screen flags bills with no HSN, a missing customer GSTIN on a B2B sale, or a place of supply that doesn't match the tax charged. Each one is a tap through to the bill that caused it.
+  </div>
+
+  <h3>GSTR-3B</h3>
+  <p>A summary view of outward supplies and tax payable, laid out the way the form asks for them, reconciled against the same invoice rows that printed the bills. It is a view of your own data, not a filing.</p>
+
+  <h3>e-Invoice (IRN) &amp; e-way bill</h3>
+  <span class="path">More <em>›</em> e-Invoice &amp; e-way bill</span>
+  <p>Generates the JSON payload in the schema the portal expects, with validation done here rather than after an upload is rejected. Upload it on the portal and bring the IRN and signed QR back to the bill.</p>
+  <p>A <em>Business</em>-plan feature, since e-invoicing applies above a turnover threshold most small shops sit below.</p>
+
+  <h3>The numbers you file are the numbers you billed</h3>
+  <p>Nothing in the return pipeline recomputes tax. The return reads the figures stored on each invoice at the moment it was saved. That is why a rate change next year cannot retroactively alter a return you have already filed.</p>
+</section>
+
+<!-- ═══ 11 ═══ -->
+<section class="doc" id="team">
+  <h2><span class="n">11</span>Working as a team</h2>
+  <p class="intro">A second till usually arrives before a broadband line does. This section covers roles, staff sign-in, Wi-Fi sync and what happens when two devices disagree.</p>
+
+  <h3>Roles</h3>
+  <span class="path">More <em>›</em> Team &amp; users</span>
+  <p>Nine roles: owner, admin, manager, accountant, cashier, salesperson, inventory manager, delivery staff, viewer. Sixteen permissions between them. The matrix that guards the writes is the same one that decides what a screen shows, so nobody is offered a figure the app will then refuse them.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Permission</th><th class="c">Owner</th><th class="c">Admin</th><th class="c">Manager</th><th class="c">Accountant</th><th class="c">Cashier</th><th class="c">Viewer</th></tr></thead>
+      <tbody>
+        <tr><td>Raise a bill</td><td class="c yes">●</td><td class="c yes">●</td><td class="c yes">●</td><td class="c no">—</td><td class="c yes">●</td><td class="c no">—</td></tr>
+        <tr><td>Edit a bill</td><td class="c yes">●</td><td class="c yes">●</td><td class="c yes">●</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td></tr>
+        <tr><td>Cancel a bill</td><td class="c yes">●</td><td class="c yes">●</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td></tr>
+        <tr><td>See purchase price</td><td class="c yes">●</td><td class="c yes">●</td><td class="c yes">●</td><td class="c yes">●</td><td class="c no">—</td><td class="c no">—</td></tr>
+        <tr><td>See profit &amp; margin</td><td class="c yes">●</td><td class="c yes">●</td><td class="c yes">●</td><td class="c yes">●</td><td class="c no">—</td><td class="c no">—</td></tr>
+        <tr><td>Change selling price</td><td class="c yes">●</td><td class="c yes">●</td><td class="c yes">●</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td></tr>
+        <tr><td>Apply a discount</td><td class="c yes">●</td><td class="c yes">●</td><td class="c yes">●</td><td class="c no">—</td><td class="c yes">●</td><td class="c no">—</td></tr>
+        <tr><td>Exceed the discount limit</td><td class="c yes">●</td><td class="c yes">●</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td></tr>
+        <tr><td>Record expenses</td><td class="c yes">●</td><td class="c yes">●</td><td class="c yes">●</td><td class="c yes">●</td><td class="c no">—</td><td class="c no">—</td></tr>
+        <tr><td>Manage stock</td><td class="c yes">●</td><td class="c yes">●</td><td class="c yes">●</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td></tr>
+        <tr><td>Export reports</td><td class="c yes">●</td><td class="c yes">●</td><td class="c yes">●</td><td class="c yes">●</td><td class="c no">—</td><td class="c no">—</td></tr>
+        <tr><td>File / manage GST</td><td class="c yes">●</td><td class="c yes">●</td><td class="c no">—</td><td class="c yes">●</td><td class="c no">—</td><td class="c no">—</td></tr>
+        <tr><td>Manage users</td><td class="c yes">●</td><td class="c yes">●</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td></tr>
+        <tr><td>Change settings</td><td class="c yes">●</td><td class="c yes">●</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td></tr>
+        <tr><td>Manage the subscription</td><td class="c yes">●</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="warn">
+    <strong>Six actions ask for the owner PIN even when the role allows them:</strong> cancelling a bill, exceeding a discount limit, managing users, changing settings, exporting reports, and managing the subscription. These are the actions that can rewrite money or take data out of the shop.
+  </div>
+
+  <h3>Setting up the shop's Wi-Fi sync</h3>
+  <ol class="steps">
+    <li><b>Pick a hub</b> Usually the counter device that is always on. <span class="path" style="margin:6px 0 0;">More <em>›</em> Team sync <em>›</em> Run as hub</span></li>
+    <li><b>Generate a pairing code on the hub</b> A single-use 6-digit code, valid for five minutes.</li>
+    <li><b>Enter it on the second device</b> Same Wi-Fi network. Pairing refuses a device that belongs to a different business, so two shops' books can never be stitched together.</li>
+    <li><b>Let the first sync finish</b> A newly paired device pulls the whole catalogue, customers and prices — not just a delta — so it starts from the shop's real book.</li>
+    <li><b>Leave auto-sync on</b> It reconciles every five minutes and again whenever the app comes back to the front, which is exactly when you want fresh figures.</li>
+  </ol>
+
+  <h3>Why each device gets a letter</h3>
+  <p>Invoice numbering is a device-local counter, so two devices billing offline would mint the same number. The hub keeps your plain series (<code>INV/2026-27/0001</code>) and each paired device is allocated a letter at pairing time — <code>INV-B/2026-27/0001</code>, <code>INV-C/…</code>, and so on. GST permits multiple series provided each is consecutive and unique, and unlike a shared counter this needs no connectivity at all.</p>
+
+  <h3>Signing in as a staff member</h3>
+  <p>On a shared tablet, the sign-in screen has two numbered steps and the second does not exist until the first is done:</p>
+  <ol class="steps">
+    <li><b>Connect to the hub</b> A freshly installed tablet holds no team members at all — the team list arrives by replication. Typing a phone number before pairing would be told "no such number", which is both true and useless.</li>
+    <li><b>Enter phone number and PIN</b> Not a name picked off a list: a list would tell anyone holding the tablet who works there. The number is matched on its last ten digits, so <code>+91 98765-43210</code> and <code>9876543210</code> are one person.</li>
+  </ol>
+  <div class="note">
+    <strong>An owner or admin cannot sign in from a staff tablet.</strong> Privileged PIN hashes are stripped before the team table replicates, so the credential simply is not there to check. The screen says "sign in on the hub" rather than sending you chasing a PIN that cannot exist on that device.
+  </div>
+
+  <h3>Removing someone</h3>
+  <p>Deactivate them on your own phone. The next time the devices meet on the shop Wi-Fi, their tablet replaces the whole app with a notice — not four dead tabs inviting them to hunt for one that still works.</p>
+  <div class="warn">
+    <strong>It is a policy lock, not a security boundary.</strong> The shop's records are still on that device. If a device is genuinely lost or stolen, revoke its pairing token <em>and</em> treat the data on it as compromised.
+  </div>
+
+  <h3>When two devices disagree</h3>
+  <p>Nothing merges itself. If the same record was changed in two places, it is flagged and queued for a human.</p>
+  <span class="path">More <em>›</em> Records needing review</span>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Your choice</th><th>What happens</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Keep this device</strong></td><td>This copy is pushed to the others and accepted rather than refused as stale.</td></tr>
+        <tr><td><strong>Use the other device</strong></td><td>The other copy is re-sent and applied here. The peer's position is rewound so the record is actually re-delivered rather than skipped.</td></tr>
+        <tr><td><strong>Dismiss</strong></td><td>No data changes, but the record stops being frozen and rejoins the sync queue.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Every choice writes an audit entry naming who made it, and resolving requires the settings permission — a cashier can see that something needs attention, but only an owner or admin decides which copy of a financial record survives.</p>
+
+  <h3>What Wi-Fi sync does not do</h3>
+  <ul>
+    <li><strong>It is not a background service.</strong> iOS cannot hold a listening socket in the background, and Android battery managers kill foreground services unpredictably. Sync happens while the app is open. Because every device keeps a complete local database, this costs freshness and never costs you a bill.</li>
+    <li><strong>It is not a backup.</strong> Several devices holding copies is resilience, not retention — see <a href="#backup">§12</a>.</li>
+    <li><strong>The traffic is signed but not yet encrypted.</strong> Every request carries a verified signature, so nothing on your network can forge or alter a record — but a co-located attacker on your Wi-Fi could read records in transit. Use a private, properly-passworded shop network, not a shared or open one.</li>
+  </ul>
+</section>
+
+<!-- ═══ 12 ═══ -->
+<section class="doc" id="backup">
+  <h2><span class="n">12</span>Backup &amp; restore</h2>
+  <p class="intro">This is the most important page in the guide. GST records must survive six years; a phone rarely does.</p>
+
+  <div class="warn">
+    <strong>Do this before you have a problem, not after.</strong> An offline-first app keeps your books on your device, which is exactly why the device failing is the one risk you have to plan for yourself.
+  </div>
+
+  <h3>A weekly routine that works</h3>
+  <ol class="steps">
+    <li><b>Local backup, every week</b> <span class="path" style="margin:6px 0 0;">More <em>›</em> Backup</span> Writes a single file containing the whole database.</li>
+    <li><b>Move it off the device</b> Share it to Drive, email it to yourself, or on a desktop save it to a folder that is itself backed up. A backup that lives only on the phone it came from protects you against nothing.</li>
+    <li><b>Export CSVs monthly</b> <span class="path" style="margin:6px 0 0;">More <em>›</em> Import &amp; export</span> Send them to your accountant. A CSV is readable in thirty years; an app file needs the app.</li>
+    <li><b>Turn on cloud backup if you can</b> <span class="path" style="margin:6px 0 0;">More <em>›</em> Cloud sync</span> Off-site, automatic, and the only one of these that does not depend on you remembering.</li>
+  </ol>
+
+  <h3>Restoring</h3>
+  <span class="path">More <em>›</em> Backup <em>›</em> Restore</span>
+  <p>Pick a backup file and the app rebuilds the database from it. Use this on a new device, or after a reinstall.</p>
+  <div class="warn">
+    <strong>Restoring replaces what is currently on the device.</strong> If the device has newer records that are not in the backup, take a fresh backup first — otherwise you are choosing the older book.
+  </div>
+
+  <h3>What each method covers</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Method</th><th>Protects against</th><th>Does not protect against</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Wi-Fi team sync</strong></td><td>One device failing while others survive</td><td>Fire, theft of everything, an accidental deletion that replicates</td></tr>
+        <tr><td><strong>Local backup file</strong></td><td>Reinstall, new phone, a bad restore</td><td>Losing the device the file is stored on</td></tr>
+        <tr><td><strong>Backup file moved off-device</strong></td><td>Losing the device entirely</td><td>Forgetting to do it</td></tr>
+        <tr><td><strong>Cloud backup</strong></td><td>All of the above, automatically</td><td>Nothing much — but it needs an account and a connection</td></tr>
+        <tr><td><strong>CSV / Excel export</strong></td><td>Needing the data in any other tool, ever</td><td>Being a complete restore — it is data, not a database</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tip">
+    <strong>Export is never gated.</strong> Backup, restore, CSV and Excel export work on every plan and keep working after a subscription lapses. Getting your own statutory books out of the app is not a premium feature.
+  </div>
+
+  <h3>Importing</h3>
+  <span class="path">More <em>›</em> Import &amp; export</span>
+  <p>Bring a product catalogue or a customer list in from CSV or Excel. Download the template first — it names the columns the importer expects — and import a handful of rows before you import two thousand.</p>
+</section>
+
+<!-- ═══ 13 ═══ -->
+<section class="doc" id="brand">
+  <h2><span class="n">13</span>Making it yours</h2>
+  <p class="intro">The bill is the thing your customer keeps. It is worth ten minutes making it look like your shop.</p>
+
+  <h3>Invoice designs</h3>
+  <span class="path">More <em>›</em> Invoice template</span>
+  <p>Twenty designs, from a ruled A4 tax invoice to an 80mm thermal roll. The gallery <em>draws</em> each one as a miniature in your own colour and typeface rather than listing twenty names, and <strong>Preview</strong> renders the real PDF.</p>
+  <p>Three things are separate on purpose:</p>
+  <ul>
+    <li><strong>Layout</strong> — paper size, header arrangement, how the table is ruled, where the totals sit.</li>
+    <li><strong>Look</strong> — accent colour, ink, typeface, type size, spacing, corners.</li>
+    <li><strong>Content</strong> — which optional blocks print (terms, notes, signature, UPI QR, per-item tax columns) and their wording.</li>
+  </ul>
+  <p>Your appearance choices are stored as <em>overrides</em>, not as a fixed look. Pin your brand colour and it follows you across all twenty designs, while the typeface you never touched still follows whatever each design intends. "Auto" on any control simply means "whatever this design wants".</p>
+  <div class="note">
+    <strong>Some blocks are hidden rather than disabled.</strong> An 80mm roll has no room for per-item tax columns or a signature line. The editor lists only what the chosen design can physically show — and a block you switched on for one design is remembered if you move to another and back.
+  </div>
+
+  <h3>Your logo and stamp</h3>
+  <span class="path">More <em>›</em> Branding</span>
+  <p>Add a shop logo and a signature or stamp image, from the camera or the gallery. They are cropped and compressed on the device.</p>
+
+  <h3>Printing bills</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Paper</th><th>Behaves like</th><th>Good for</th></tr></thead>
+      <tbody>
+        <tr><td><strong>58 mm</strong></td><td>Continuous roll — the bill is as long as it needs</td><td>A small thermal printer at a kirana counter</td></tr>
+        <tr><td><strong>80 mm</strong></td><td>Continuous roll</td><td>The common POS receipt printer</td></tr>
+        <tr><td><strong>A5</strong></td><td>Sheet</td><td>A tidy half-page invoice</td></tr>
+        <tr><td><strong>A4</strong></td><td>Sheet</td><td>A full tax invoice for a registered buyer</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note">
+    <strong>Why amounts print as <code>Rs.</code> rather than <code>₹</code> on some designs.</strong> Only three typefaces are embedded in every PDF reader on earth, and none of them contains the rupee sign. Using them is what lets a bill render identically on your phone, your customer's laptop and your accountant's printer with nothing to download — a promise a downloaded webfont cannot keep offline.
+  </div>
+
+  <h3>Visiting cards &amp; wall calendars</h3>
+  <p>Two things a shop hands to a customer rather than files with an accountant. Both are reached from the buttons under your shop name in the business drawer, and both end at the share sheet — the point is a PDF you send to your local press or straight to a customer on WhatsApp.</p>
+  <ul>
+    <li><strong>Visiting cards</strong> — eight designs, on the 89 × 51 mm standard card or the squarer 85 × 55 mm Euro card. Choose a card-sized page (for WhatsApp, where an A4 sheet would show the card as a stamp) or ten-up on A4 with crop marks (for the press, where a card-sized page is useless). Printing a reverse lays the backs out mirrored so they line up after a duplex flip.</li>
+    <li><strong>Calendars</strong> — one sheet, two half-years or twelve pages, with your shop name, offer line and UPI QR in the masthead and Indian holidays marked. The month grid is kept deliberately plain and the artwork is capped in strength: a date nobody can read from across a room is a failed calendar.</li>
+  </ul>
+  <div class="warn">
+    <strong>If your shop name is in Hindi or another Indian script</strong>, the design screen will warn you before you order a hundred cards. The embedded print fonts stop at basic Latin, so anything past it is flattened (<code>₹</code> becomes <code>Rs.</code>) or dropped rather than silently breaking the file.
+  </div>
+</section>
+
+<!-- ═══ 14 ═══ -->
+<section class="doc" id="desktop">
+  <h2><span class="n">14</span>On a Windows or Mac counter</h2>
+  <p class="intro">The same books, with a sidebar instead of a bottom bar — and three things a phone cannot do.</p>
+
+  <h3>Keyboard shortcuts</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Action</th><th>macOS</th><th>Windows</th></tr></thead>
+      <tbody>
+        <tr><td>New sale</td><td><kbd>⌘ N</kbd></td><td><kbd>Ctrl N</kbd></td></tr>
+        <tr><td>New purchase</td><td><kbd>⇧ ⌘ N</kbd></td><td><kbd>Ctrl Shift N</kbd></td></tr>
+        <tr><td>Record payment</td><td><kbd>⌘ R</kbd></td><td><kbd>Ctrl R</kbd></td></tr>
+        <tr><td>New product</td><td><kbd>⌘ I</kbd></td><td><kbd>Ctrl I</kbd></td></tr>
+        <tr><td>New customer</td><td><kbd>⌘ U</kbd></td><td><kbd>Ctrl U</kbd></td></tr>
+        <tr><td>Home / Sales / Inventory / More</td><td><kbd>⌘ 1</kbd>–<kbd>⌘ 4</kbd></td><td><kbd>Ctrl 1</kbd>–<kbd>Ctrl 4</kbd></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Shortcuts are checked against your role at the moment you press them — a cashier's <kbd>⇧ ⌘ N</kbd> does nothing, rather than opening a screen that will refuse to save.</p>
+
+  <h3>A USB barcode gun</h3>
+  <span class="path">More <em>›</em> Counter hardware</span>
+  <p>A USB scanner is not a scanner as far as the operating system is concerned — it is a keyboard that types very fast and presses Enter. HisabNova listens for that directly: <strong>while the billing screen is open, pulling the trigger adds the item</strong>, with no button pressed and nothing focused first.</p>
+  <p>It tells a scan from typing by speed. Guns run 5–20 ms per character; a fast typist runs 120–200 ms. The threshold sits in the empty space between, and it errs towards <em>missing</em> a scan rather than inventing one — a missed scan costs one more trigger pull, a false one puts the wrong item on a customer's bill.</p>
+  <p>While a text field has focus the gun is left alone, so scanning into the catalogue search box searches for the code, which is what you meant. The Counter hardware screen shows each code as it arrives, which is the quickest way to check a new gun.</p>
+  <p>This works on macOS as well as Windows — a Mac counter with a gun plugged in is as common as a PC one, and having a camera does not make the gun stop existing.</p>
+
+  <h3>One-press printing</h3>
+  <p>A counter has one printer, and pressing Print should print. Choose the printer and the paper size once under <strong>Counter hardware</strong>; the choice is remembered per device, because two counters in the same shop share the books and each has its own printer. The invoice screen then gets a <strong>Print</strong> button beside Share, and the tooltip names the printer so you know where the paper will come out before you press it.</p>
+  <p>If no printer is set, or the chosen one has been unplugged, it falls back to the system print dialog. A shop must never be unable to print because a setting points at a queue that no longer exists.</p>
+
+  <h3>Exports go to a folder</h3>
+  <p>On a desktop every export — backup, CSV, GSTR-1, e-invoice, report PDF or Excel — opens a Save dialog instead of a share sheet, so the file lands in the folder your accountant collects from. GSTR-1 writes three CSVs and asks once for a folder.</p>
+
+  <h3>What the desktop cannot do</h3>
+  <ul>
+    <li><strong>Bill scanning (OCR)</strong> — no desktop implementation exists, so the menu row is hidden rather than left to fail.</li>
+    <li><strong>Push notifications on Windows</strong> — scheduled local reminders still work.</li>
+    <li><strong>Cloud sign-in</strong> on desktop needs the cloud project to be configured for that platform; the app tells you plainly if it is not.</li>
+  </ul>
+</section>
+
+<!-- ═══ 15 ═══ -->
+<section class="doc" id="ai">
+  <h2><span class="n">15</span>AI assistant &amp; business doctor</h2>
+  <p class="intro">Two screens, both optional, both bounded in what they can see.</p>
+
+  <h3>What they are</h3>
+  <ul>
+    <li><strong>AI Assistant</strong> — a chat you can ask about GST, pricing, cash flow, slow stock or receivables. It is grounded with a short live snapshot of your business so its answers are about your shop rather than shops in general.</li>
+    <li><strong>AI Business Doctor</strong> — a one-shot read of your figures with concrete suggestions, quoting the numbers it reasoned from.</li>
+  </ul>
+
+  <h3>What is sent, and when</h3>
+  <div class="note">
+    <p>Nothing is sent unless you open one of these screens. When you do, the assistant is given a <strong>short summary</strong> — sales, dues, health, top items — not your database, not your customer list, and not individual bills.</p>
+    <p>It is instructed never to invent your numbers, only to reason from what it was given, and to ask one clarifying question rather than guess when it lacks data.</p>
+  </div>
+
+  <h3>What to trust it with</h3>
+  <ul>
+    <li><strong>Good for:</strong> "what does this GST term mean", "why is my margin falling", "which stock is not moving", "how should I price a bundle", "draft a WhatsApp reminder for an overdue customer".</li>
+    <li><strong>Not good for:</strong> anything you would file. It is an advisor, not your accountant, and a tax position it suggests is a starting point for a conversation with a professional — not a ruling.</li>
+  </ul>
+  <p>These screens need a connection. If AI is unavailable the app says so plainly and everything else carries on working.</p>
+</section>
+
+<!-- ═══ 16 ═══ -->
+<section class="doc" id="plans">
+  <h2><span class="n">16</span>Plans &amp; billing</h2>
+  <p class="intro">Thirty days free on the top plan, then three tiers. Five things are never gated at all.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Capability</th><th class="c">Free trial</th><th class="c">Basic<br>₹49</th><th class="c">Pro<br>₹199</th><th class="c">Business<br>₹499</th><th class="c">After expiry</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Billing &amp; all document types</strong></td><td class="c yes">●</td><td class="c yes">●</td><td class="c yes">●</td><td class="c yes">●</td><td class="c">Read only</td></tr>
+        <tr><td><strong>Products &amp; stock</strong></td><td class="c yes">●</td><td class="c yes">●</td><td class="c yes">●</td><td class="c yes">●</td><td class="c">Read only</td></tr>
+        <tr><td><strong>Customers &amp; khata</strong></td><td class="c yes">●</td><td class="c yes">●</td><td class="c yes">●</td><td class="c yes">●</td><td class="c">Read only</td></tr>
+        <tr><td><strong>Core day / month &amp; GST summary</strong></td><td class="c yes">●</td><td class="c yes">●</td><td class="c yes">●</td><td class="c yes">●</td><td class="c">Read only</td></tr>
+        <tr><td><strong>Backup, restore, CSV &amp; Excel</strong></td><td class="c yes">●</td><td class="c yes">●</td><td class="c yes">●</td><td class="c yes">●</td><td class="c yes">● Full</td></tr>
+        <tr><td>PDF, WhatsApp &amp; print sharing</td><td class="c yes">●</td><td class="c no">—</td><td class="c yes">●</td><td class="c yes">●</td><td class="c no">—</td></tr>
+        <tr><td>Purchases, expenses &amp; cash book</td><td class="c yes">●</td><td class="c no">—</td><td class="c yes">●</td><td class="c yes">●</td><td class="c no">—</td></tr>
+        <tr><td>Full reports, charts &amp; GST returns</td><td class="c yes">●</td><td class="c no">—</td><td class="c yes">●</td><td class="c yes">●</td><td class="c no">—</td></tr>
+        <tr><td>Cloud backup &amp; multi-device sync</td><td class="c yes">●</td><td class="c no">—</td><td class="c yes">●</td><td class="c yes">●</td><td class="c no">—</td></tr>
+        <tr><td>UPI collection &amp; payment links</td><td class="c yes">●</td><td class="c no">—</td><td class="c yes">●</td><td class="c yes">●</td><td class="c no">—</td></tr>
+        <tr><td>Reminders &amp; follow-ups</td><td class="c yes">●</td><td class="c no">—</td><td class="c yes">●</td><td class="c yes">●</td><td class="c no">—</td></tr>
+        <tr><td>Branches &amp; warehouses</td><td class="c yes">●</td><td class="c no">—</td><td class="c no">—</td><td class="c yes">●</td><td class="c no">—</td></tr>
+        <tr><td>Staff, roles &amp; permissions</td><td class="c yes">●</td><td class="c no">—</td><td class="c no">—</td><td class="c yes">●</td><td class="c no">—</td></tr>
+        <tr><td>e-Invoice (IRN) &amp; e-way bills</td><td class="c yes">●</td><td class="c no">—</td><td class="c no">—</td><td class="c yes">●</td><td class="c no">—</td></tr>
+        <tr><td>AI assistant &amp; business doctor</td><td class="c yes">●</td><td class="c no">—</td><td class="c no">—</td><td class="c yes">●</td><td class="c no">—</td></tr>
+        <tr><td>Loyalty &amp; benchmark targets</td><td class="c yes">●</td><td class="c no">—</td><td class="c no">—</td><td class="c yes">●</td><td class="c no">—</td></tr>
+        <tr><td>OCR bill capture &amp; voice billing</td><td class="c yes">●</td><td class="c no">—</td><td class="c no">—</td><td class="c yes">●</td><td class="c no">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Why the trial is the top plan</h3>
+  <p>A trial that showed only the ₹49 surface would sell the ₹49 plan. You should meet the whole product in your first month and then choose what you actually want to keep.</p>
+
+  <h3>What "read only" means</h3>
+  <p>An expired subscription stops you <em>adding</em> to the books. It never takes them away: you can still open every bill, read every khata, run the core summary, and export or back up everything. Renewing puts you straight back where you were.</p>
+
+  <h3>Paying</h3>
+  <span class="path">More <em>›</em> Subscription</span>
+  <p>Payment runs through Razorpay in a browser page — in-app on a phone, the system browser on a desktop. The app never tells the server what a plan costs; it names a tier and the server prices it from its own table. That is a deliberate safeguard: a client that could name its own price could buy the top plan for a rupee and produce a perfectly valid payment signature for it.</p>
+  <p>Your entitlement follows the server's record, not the app's. If a payment succeeds but the plan has not appeared yet, give it a moment and reopen the subscription screen — the app polls for the result.</p>
+</section>
+
+<!-- ═══ 17 ═══ -->
+<section class="doc" id="trouble">
+  <h2><span class="n">17</span>Troubleshooting</h2>
+  <p class="intro">The things that actually go wrong at a counter, and what to do about each.</p>
+
+  <details class="q" open>
+    <summary>A bill is showing the wrong tax split (CGST+SGST instead of IGST, or the reverse)</summary>
+    <p>The split is decided by comparing your shop's state code with the bill's <strong>place of supply</strong>. Check both: <span class="path" style="margin:6px 0;">More <em>›</em> Business profile <em>›</em> State</span> and the place of supply on the bill itself. A customer's saved state is used as the default, so a customer saved with the wrong state will keep producing wrong bills until you correct their record.</p>
+  </details>
+
+  <details class="q">
+    <summary>The barcode gun types into the search box instead of adding the item</summary>
+    <p>That is deliberate — while a text field has focus the gun's keystrokes are left to it. Tap somewhere neutral on the billing screen (not in a field) and scan again. If nothing happens at all, open <strong>More › Counter hardware</strong>; it shows each code as it arrives, which tells you whether the gun is reaching the app.</p>
+  </details>
+
+  <details class="q">
+    <summary>Two devices are paired but figures don't match</summary>
+    <p>Check three things in order. <strong>One:</strong> is the hub's app actually open? Sync only runs in the foreground. <strong>Two:</strong> are both on the same Wi-Fi network — not one on Wi-Fi and one on mobile data? <strong>Three:</strong> open <strong>More › Records needing review</strong>. A flagged conflict freezes that record until somebody chooses, and it will not resolve itself.</p>
+    <p>The sync status line is explicit about this: "paired but never synced" is reported as a problem, not a success, because such a device holds none of the shop's records.</p>
+  </details>
+
+  <details class="q">
+    <summary>Sync says it failed and I don't know why</summary>
+    <p>Failures never interrupt billing, so they are kept on the sync screen instead. Open <strong>More › Team sync</strong> to read the last error. The commonest causes are the hub device being asleep, the hub having moved to a different IP after a router restart (re-pair), and the two devices being on different networks.</p>
+  </details>
+
+  <details class="q">
+    <summary>I cancelled a bill but the number is still used</summary>
+    <p>That is correct. A cancelled bill keeps its number and is marked cancelled; the stock and ledger effects are reversed. A missing number in an invoice series is exactly what an audit asks about, so the app never reuses or silently removes one.</p>
+  </details>
+
+  <details class="q">
+    <summary>Stock is negative</summary>
+    <p>Something was sold that the app did not know you had — usually stock that arrived without a purchase being recorded. Record the purchase (or a stock adjustment with a reason) and the balance corrects itself, because the balance is just the sum of the movements. Do not try to "set" the number; there is no number to set.</p>
+  </details>
+
+  <details class="q">
+    <summary>The rupee sign prints as "Rs." on my invoice</summary>
+    <p>Expected on the designs that use the three universally-embedded PDF typefaces, none of which contains <code>₹</code>. It is the trade for a bill that renders identically everywhere, offline, with nothing to download.</p>
+  </details>
+
+  <details class="q">
+    <summary>A staff member can't sign in on the tablet</summary>
+    <p>Work through the four possible answers the sign-in gives you, because they mean different things. <strong>"No such number on this device"</strong> — the team list has not replicated yet; pair with the hub and sync. <strong>"Check the PIN"</strong> — wrong PIN, and repeated attempts are throttled with an escalating lockout. <strong>"No PIN set"</strong> — set one from the owner's device. <strong>"Account deactivated"</strong> — correct credentials on a switched-off account.</p>
+    <p>If they are an owner or admin, they cannot sign in from a staff tablet at all by design — privileged PINs never replicate. They sign in on the hub.</p>
+  </details>
+
+  <details class="q">
+    <summary>I forgot the owner PIN</summary>
+    <p>There is no reset e-mail, because there is no server that knows it — it is stored only as a stretched hash on the device. If you are locked out of owner-PIN actions, your route back is a backup file restored onto a fresh install, where you set a new PIN. This is the cost of a design where no company can read your books.</p>
+  </details>
+
+  <details class="q">
+    <summary>Wrong entries after a bad import</summary>
+    <p>Import a handful of rows before a large file, always. If a large import has already gone wrong, restore the backup you took before it — which is the reason the app asks you to take one first.</p>
+  </details>
+
+  <details class="q">
+    <summary>The dashboard banner slot is empty</summary>
+    <p>That is the correct behaviour when nothing is published — the slot takes up no height rather than showing an empty card. If you want to confirm the wiring is alive, Settings offers a sample-banner toggle that injects two examples on that device only.</p>
+  </details>
+
+  <details class="q">
+    <summary>The app won't open after an update</summary>
+    <p>Do not uninstall — that removes the database. Restart the device first. If it still fails, contact <a href="mailto:support@myappscart.com">support@myappscart.com</a> before uninstalling anything, and mention your platform and the app version from <strong>More › Help</strong>.</p>
+  </details>
+</section>
+
+<!-- ═══ 18 ═══ -->
+<section class="doc" id="ref">
+  <h2><span class="n">18</span>Quick reference</h2>
+
+  <h3>Where things live</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>I want to…</th><th>Go to</th></tr></thead>
+      <tbody>
+        <tr><td>Raise a bill</td><td>＋ › New sale &nbsp;·&nbsp; <kbd>Ctrl/⌘ N</kbd></td></tr>
+        <tr><td>Take a payment</td><td>＋ › Record payment &nbsp;·&nbsp; <kbd>Ctrl/⌘ R</kbd></td></tr>
+        <tr><td>Add stock</td><td>＋ › New purchase &nbsp;·&nbsp; <kbd>Ctrl/⌘ ⇧ N</kbd></td></tr>
+        <tr><td>See who owes me</td><td>More › Reports › Receivables</td></tr>
+        <tr><td>Send a statement</td><td>Customers › pick one › Share</td></tr>
+        <tr><td>Prepare GSTR-1</td><td>More › GST</td></tr>
+        <tr><td>Generate an e-invoice</td><td>More › e-Invoice &amp; e-way bill</td></tr>
+        <tr><td>Change the bill design</td><td>More › Invoice template</td></tr>
+        <tr><td>Add a logo</td><td>More › Branding</td></tr>
+        <tr><td>Set the printer &amp; check the scanner</td><td>More › Counter hardware</td></tr>
+        <tr><td>Add a staff member</td><td>More › Team &amp; users</td></tr>
+        <tr><td>Pair a second device</td><td>More › Team sync</td></tr>
+        <tr><td>Resolve a sync disagreement</td><td>More › Records needing review</td></tr>
+        <tr><td>Back up</td><td>More › Backup</td></tr>
+        <tr><td>Export to CSV / Excel</td><td>More › Import &amp; export</td></tr>
+        <tr><td>Change the language</td><td>More › Language</td></tr>
+        <tr><td>Set the app lock</td><td>More › App lock</td></tr>
+        <tr><td>Check what expires soon</td><td>More › Expiry report</td></tr>
+        <tr><td>Manage the plan</td><td>More › Subscription</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Numbering series</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Looks like</th><th>Means</th></tr></thead>
+      <tbody>
+        <tr><td><code>INV/2026-27/0043</code></td><td>Tax invoice #43 of financial year 2026-27, raised on the hub</td></tr>
+        <tr><td><code>INV-B/2026-27/0007</code></td><td>The same, raised on paired device B</td></tr>
+        <tr><td><code>QTN/…</code></td><td>Quotation</td></tr>
+        <tr><td><code>DCH/…</code></td><td>Delivery challan</td></tr>
+        <tr><td><code>RET/…</code></td><td>Sales return</td></tr>
+        <tr><td><code>CRN/…</code></td><td>Credit note</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Words you'll see</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Term</th><th>What it means here</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Taxable value</strong></td><td>What GST is charged on — after discounts, before tax.</td></tr>
+        <tr><td><strong>Place of supply</strong></td><td>The state the supply is treated as made in. Decides CGST+SGST versus IGST.</td></tr>
+        <tr><td><strong>HSN / SAC</strong></td><td>The classification code for goods / services. Your GST rate follows from it.</td></tr>
+        <tr><td><strong>Khata</strong></td><td>A customer's running account — what they have been billed, paid and returned.</td></tr>
+        <tr><td><strong>FEFO</strong></td><td>First expiring, first out. How batched stock is consumed.</td></tr>
+        <tr><td><strong>Round off</strong></td><td>The few paise between the computed total and the nearest rupee, recorded rather than hidden.</td></tr>
+        <tr><td><strong>Hub</strong></td><td>The device other devices sync through on the shop's Wi-Fi.</td></tr>
+        <tr><td><strong>Conflict</strong></td><td>The same record changed on two devices. Frozen until a person chooses.</td></tr>
+        <tr><td><strong>Soft delete</strong></td><td>A financial row marked deleted but kept, so history survives.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Still stuck?</h3>
+  <p>The <a href="/apps/hisabnova/support.html">support page</a> has the contact details and a short list of what to include so we can help on the first reply rather than the third.</p>
+</section>
+
+</main>
+</div>
+
+<div class="links-row">
+  <a href="/apps/hisabnova/">HisabNova</a>
+  <a href="/apps/hisabnova/tutorial.html">Complete Guide</a>
+  <a href="/apps/hisabnova/privacy.html">Privacy Policy</a>
+  <a href="/apps/hisabnova/terms.html">Terms of Service</a>
+  <a href="/apps/hisabnova/support.html">Support</a>
+  <a href="/apps/hisabnova/delete-account.html">Delete Account</a>
+  <a href="/">← MyAppsCart</a>
+</div>
+
+<footer>
+  <p>&copy; 2026 MyAppsCart &nbsp;·&nbsp; <a href="mailto:support@myappscart.com">support@myappscart.com</a></p>
+</footer>
+
+</body>
+</html>

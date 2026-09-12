@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HisabNova — Privacy Policy</title>
+  <meta name="description" content="Privacy Policy for HisabNova, the offline-first GST billing app by MyAppsCart. Your books stay on your device; cloud features are opt-in." />
+  <link rel="icon" type="image/png" href="/apps/hisabnova/icon-512.png" />
+  <link rel="apple-touch-icon" href="/apps/hisabnova/icon-512.png" />
+  <style>
+    :root {
+      --navy: #0B1E42; --navy-mid: #143A73;
+      --green: #16A34A; --green-br: #22C55E; --gold: #F6C544;
+      --bg: #F4F7FA; --surface: #FFFFFF; --surface-2: #EEF3F8;
+      --text: #0F1B32; --muted: #56657F; --faint: #7A8AA3; --border: #DFE7F0;
+      --radius: 12px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.75; font-size: 15.5px;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--green); }
+    a:hover { text-decoration: underline; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.88em; background: var(--surface-2);
+      border-radius: 5px; padding: 1.5px 6px; color: #23406E;
+    }
+    header {
+      background: linear-gradient(150deg, #06142E 0%, var(--navy) 45%, var(--navy-mid) 100%);
+      color: #fff; padding: 44px 24px 38px; text-align: center;
+    }
+    header .ico {
+      width: 58px; height: 58px; margin: 0 auto 14px; border-radius: 16px;
+      overflow: hidden; border: 1.5px solid rgba(255,255,255,0.2);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.4);
+    }
+    header .ico img { display: block; width: 100%; height: 100%; }
+    header h1 { font-size: clamp(22px, 4.4vw, 28px); font-weight: 800; letter-spacing: -0.5px; }
+    header p { margin-top: 7px; font-size: 14px; opacity: 0.8; max-width: 560px; margin-inline: auto; }
+    main { max-width: 800px; margin: 0 auto; padding: 34px 20px 72px; }
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 26px 28px 24px;
+      margin-bottom: 16px; box-shadow: 0 2px 8px rgba(15,27,50,0.04);
+    }
+    h2 {
+      font-size: 17px; font-weight: 750; color: var(--navy);
+      margin-bottom: 12px; display: flex; align-items: center; gap: 9px;
+    }
+    h3 { font-size: 15px; font-weight: 700; margin: 18px 0 7px; color: #23406E; }
+    p { color: var(--muted); margin-bottom: 12px; }
+    p:last-child, ul:last-child, ol:last-child { margin-bottom: 0; }
+    ul, ol { padding-left: 21px; color: var(--muted); margin-bottom: 13px; }
+    li { margin-bottom: 6px; }
+    li::marker { color: var(--faint); }
+    strong { color: var(--text); font-weight: 650; }
+    .hl {
+      background: #E8F7EF; border-left: 3px solid var(--green);
+      border-radius: 0 9px 9px 0; padding: 13px 17px;
+      margin: 14px 0 0; font-size: 14.5px; color: #135C34;
+    }
+    .hl.amber { background: #FDF6E3; border-left-color: var(--gold); color: #6B4E06; }
+    .hl.blue  { background: #EDF3FB; border-left-color: #2a78d6; color: #1D3E6B; }
+    .hl strong { color: inherit; }
+    .stamp {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 13px 20px; margin-bottom: 22px;
+      font-size: 13.5px; color: var(--muted);
+    }
+    .table-wrap { overflow-x: auto; margin: 14px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 500px; }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+    thead th {
+      font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.7px;
+      color: var(--faint); font-weight: 700; border-bottom: 1.5px solid var(--border);
+    }
+    td { color: var(--muted); }
+    td strong { color: var(--text); }
+    tbody tr:last-child td { border-bottom: none; }
+    .links-row {
+      display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+      padding: 28px 20px; background: var(--surface); border-top: 1px solid var(--border);
+    }
+    .links-row a {
+      background: var(--surface-2); color: #374151; border-radius: 20px;
+      padding: 8px 18px; font-size: 13px; font-weight: 600; text-decoration: none;
+    }
+    .links-row a:hover { background: #DCE7F3; color: var(--green); }
+    footer { background: #0F1B32; color: #9AABC4; text-align: center; padding: 22px; font-size: 13px; }
+    footer a { color: #9AABC4; }
+    footer a:hover { color: #fff; }
+    .mailbtn {
+      display: inline-block; background: var(--green); color: #fff;
+      border-radius: 22px; padding: 11px 26px; font-weight: 700;
+      font-size: 14.5px; text-decoration: none; margin-top: 6px;
+    }
+    .mailbtn:hover { background: #15803D; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="ico"><img src="/apps/hisabnova/icon-512.png" alt="HisabNova icon" width="58" height="58" /></div>
+  <h1>HisabNova — Privacy Policy</h1>
+  <p>The short version: your books live on your device. Everything that could send them anywhere is something you switch on.</p>
+</header>
+
+<main>
+
+  <div class="stamp">
+    📅 &nbsp;<strong>Last updated:</strong> 12 September 2026 &nbsp;·&nbsp; Applies to HisabNova for Android, iOS, macOS and Windows.
+  </div>
+
+  <div class="card">
+    <h2>🧭 Overview</h2>
+    <p>HisabNova is an <strong>offline-first</strong> billing and business-management app. When you install it, it creates a database on your own device and writes every bill, product, customer and ledger entry there. It does not need an account, a server or an internet connection to do its job.</p>
+    <p>Because of that, the honest answer to "what do you collect?" is: <strong>by default, nothing about your business.</strong> The sections below describe the optional features that do involve a network, exactly what each one sends, and how to turn them off.</p>
+    <div class="hl"><strong>We are MyAppsCart</strong>, an independent app studio. We do not sell data, we do not run advertising networks inside the app, and there is no analytics SDK in HisabNova that reports your trading to us.</div>
+  </div>
+
+  <div class="card">
+    <h2>📦 What stays on your device</h2>
+    <p>Unless you deliberately enable a cloud feature, all of the following exists only on the device you are using and on any device you have paired over your own Wi-Fi:</p>
+    <ul>
+      <li>Your business profile, GSTIN, logo and branding</li>
+      <li>Products, prices, purchase costs, stock movements, batches and barcodes</li>
+      <li>Customers, suppliers, phone numbers, khata balances and credit limits</li>
+      <li>Every invoice, quotation, challan, return and credit note</li>
+      <li>Payments, expenses, cash and bank balances</li>
+      <li>Reports, charts, the health score and anything derived from the above</li>
+      <li>Your app-lock PIN and owner PIN, stored only as a salted, stretched hash</li>
+    </ul>
+    <p>We have no ability to read any of this. There is no administrative console anywhere that can open your books.</p>
+  </div>
+
+  <div class="card">
+    <h2>🔌 The optional features that use a network</h2>
+    <p>Each of these is off until you turn it on, and each can be turned off again.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Feature</th><th>What leaves the device</th><th>Who handles it</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Account sign-in</strong></td>
+            <td>Your email address, or the Google account identifier you choose to sign in with. A "guest" sign-in creates an anonymous identifier with no email at all.</td>
+            <td>Google Firebase Authentication</td>
+          </tr>
+          <tr>
+            <td><strong>Cloud backup &amp; sync</strong></td>
+            <td>Your business records — the same rows listed above — copied to a private area tied to your account, so a second device or a replacement phone can restore them.</td>
+            <td>Google Cloud Firestore</td>
+          </tr>
+          <tr>
+            <td><strong>Push notifications</strong></td>
+            <td>A device registration token, so a message can reach this install. No business data.</td>
+            <td>Firebase Cloud Messaging</td>
+          </tr>
+          <tr>
+            <td><strong>AI assistant &amp; business doctor</strong></td>
+            <td>Only when you open the screen: your typed question, plus a short summary of your figures (sales, dues, health score, top items). Not your database, not your customer list, not individual bills.</td>
+            <td>Google Gemini via Firebase AI Logic</td>
+          </tr>
+          <tr>
+            <td><strong>Subscription payment</strong></td>
+            <td>The plan tier you chose and the payment details you enter on the payment page. We never see or store card, UPI or bank credentials.</td>
+            <td>Razorpay</td>
+          </tr>
+          <tr>
+            <td><strong>Dashboard offers</strong></td>
+            <td>Nothing. The app <em>reads</em> a public list of announcements. Nothing about you is sent to fetch it.</td>
+            <td>Google Cloud Firestore</td>
+          </tr>
+          <tr>
+            <td><strong>App updates</strong></td>
+            <td>Whatever your app store normally exchanges to check for a new version.</td>
+            <td>Google Play</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="hl blue"><strong>Same-Wi-Fi team sync is not in this table</strong> because nothing leaves your premises. Paired devices talk directly to each other over your own network. No copy passes through us or through any cloud service.</div>
+  </div>
+
+  <div class="card">
+    <h2>📷 Camera, microphone and photos</h2>
+    <h3>Barcode scanning</h3>
+    <p>The camera is used to read a barcode and nothing else. No image is saved, and none is uploaded.</p>
+    <h3>Bill scanning (OCR)</h3>
+    <p>Text recognition runs <strong>on the device</strong>. The photograph of a supplier's bill is processed locally and is not uploaded to be read. What the app recognised is shown to you for confirmation before anything is saved.</p>
+    <h3>Voice input</h3>
+    <p>Dictation uses your device's own speech-recognition service. HisabNova does not record, store or upload audio. However, on some devices the operating system's speech service processes audio on its vendor's servers under that vendor's privacy policy — if this matters to you, use typing or scanning instead of the microphone.</p>
+    <h3>Logo and stamp images</h3>
+    <p>Pictures you choose for your shop logo or signature are cropped and compressed on the device and stored with your business profile. They leave the device only if you have cloud sync switched on, or if you share a document that contains them.</p>
+  </div>
+
+  <div class="card">
+    <h2>🚫 What we do not do</h2>
+    <ul>
+      <li><strong>No advertising SDK</strong> inside the app, and no ad-targeting profile built from your data.</li>
+      <li><strong>No analytics or crash-reporting SDK</strong> that reports your usage or your trading figures to us.</li>
+      <li><strong>No selling or renting</strong> of personal data to anybody, for any purpose.</li>
+      <li><strong>No reading of your books.</strong> Cloud-synced records sit in an area tied to your account; we do not mine them, and the app has no feature that would let us.</li>
+      <li><strong>No location tracking.</strong> HisabNova does not ask for or use your location.</li>
+      <li><strong>No contact-list access.</strong> Customers are people you type in, not people we read off your phone.</li>
+    </ul>
+    <div class="hl amber"><strong>Benchmark targets are not other shops' data.</strong> The comparison figures on the benchmarking screen are reference targets, not anonymised data gathered from real businesses. Nothing about your shop is pooled with anyone else's.</div>
+  </div>
+
+  <div class="card">
+    <h2>👶 Children</h2>
+    <p>HisabNova is a business tool intended for adults running a business. It is not directed at children, and we do not knowingly collect information from anyone under 18.</p>
+  </div>
+
+  <div class="card">
+    <h2>🗄️ How long anything is kept</h2>
+    <ul>
+      <li><strong>On your device:</strong> for as long as you keep the app installed. Uninstalling removes the local database.</li>
+      <li><strong>In cloud backup:</strong> for as long as your account exists. Delete the account and the synced copy is removed — see the <a href="/apps/hisabnova/delete-account.html">deletion page</a>.</li>
+      <li><strong>Payment records:</strong> Razorpay keeps transaction records for the period their own policy and Indian financial regulation require.</li>
+      <li><strong>Support emails:</strong> kept while we are helping you and for a reasonable period afterwards, then deleted.</li>
+    </ul>
+    <div class="hl amber"><strong>You are responsible for your own statutory retention.</strong> GST records generally have to be kept for six years. Uninstalling the app deletes your books from that device, and neither we nor anyone else holds a copy unless you turned on cloud backup. Take backups — the <a href="/apps/hisabnova/tutorial.html#backup">guide has a page on it</a>.</div>
+  </div>
+
+  <div class="card">
+    <h2>🔐 Security</h2>
+    <ul>
+      <li>The app can be locked with a PIN or your device's biometrics, and a second <strong>owner PIN</strong> gates the actions that can rewrite money.</li>
+      <li>PINs are never stored as text. They are hashed with PBKDF2-HMAC-SHA256 at 100,000 iterations with a random salt, and wrong guesses hit an escalating lockout that survives force-quitting the app.</li>
+      <li>Privileged (owner and admin) PIN hashes are <strong>stripped before the team table replicates</strong>, so they never land on a staff tablet.</li>
+      <li>Wi-Fi sync requests carry a per-device token issued at pairing and a signature verified in constant time, so nothing on your network can forge or alter a record.</li>
+      <li>Cloud traffic uses the transport encryption provided by Google's SDKs.</li>
+    </ul>
+    <div class="hl amber"><strong>One honest limitation.</strong> Same-Wi-Fi sync signs its traffic but does not yet encrypt the message body. Somebody already on your shop's Wi-Fi could read records in transit, though they could not forge or alter them. Use a private, properly-passworded network rather than a shared or open one. We intend to add body encryption in a future release.</div>
+  </div>
+
+  <div class="card">
+    <h2>⚖️ Your rights</h2>
+    <p>Most of these you can exercise yourself, without asking us, because the data is on your device:</p>
+    <ul>
+      <li><strong>Access &amp; portability</strong> — export everything to CSV or Excel from <em>More → Import &amp; export</em>, or take a full backup file. This is never gated behind a plan.</li>
+      <li><strong>Correction</strong> — edit any record in the app, subject to your role's permissions.</li>
+      <li><strong>Erasure</strong> — uninstall for local data; see the <a href="/apps/hisabnova/delete-account.html">deletion page</a> for cloud data and the account itself.</li>
+      <li><strong>Withdraw consent</strong> — turn off cloud sync, sign out, or revoke notification permission at any time in your device settings.</li>
+    </ul>
+    <p>If you are in a jurisdiction with additional statutory rights (for example India's DPDP Act, or the GDPR if you are in the EU), write to us and we will honour them.</p>
+  </div>
+
+  <div class="card">
+    <h2>🔄 Changes to this policy</h2>
+    <p>If we change how data is handled we will update this page and change the date at the top. Material changes — anything that would send data that previously stayed on your device — will also be announced in the app before they take effect.</p>
+  </div>
+
+  <div class="card">
+    <h2>✉️ Contact</h2>
+    <p>Questions about this policy, or about what is stored where:</p>
+    <a class="mailbtn" href="mailto:support@myappscart.com?subject=HisabNova%20privacy%20question">support@myappscart.com</a>
+  </div>
+
+</main>
+
+<div class="links-row">
+  <a href="/apps/hisabnova/">HisabNova</a>
+  <a href="/apps/hisabnova/tutorial.html">Complete Guide</a>
+  <a href="/apps/hisabnova/privacy.html">Privacy Policy</a>
+  <a href="/apps/hisabnova/terms.html">Terms of Service</a>
+  <a href="/apps/hisabnova/support.html">Support</a>
+  <a href="/apps/hisabnova/delete-account.html">Delete Account</a>
+  <a href="/">← MyAppsCart</a>
+</div>
+
+<footer>
+  <p>&copy; 2026 MyAppsCart &nbsp;·&nbsp; <a href="mailto:support@myappscart.com">support@myappscart.com</a></p>
+</footer>
+
+</body>
+</html>
