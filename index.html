@@ -3,28 +3,63 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MyAppsCart — Indie Apps</title>
-  <meta name="description" content="MyAppsCart — small, focused, thoughtfully designed Android apps. No accounts, no bloat, nothing tracked." />
+  <title>MyAppsCart — Indie Apps Built Offline-First</title>
+  <meta name="description" content="MyAppsCart — small, focused, thoughtfully designed apps. Offline-first, no accounts, nothing tracked. Nine apps and twenty-five games inside." />
+  <meta name="theme-color" content="#07061A" />
+  <meta property="og:title" content="MyAppsCart — Indie Apps Built Offline-First" />
+  <meta property="og:description" content="Nine small, focused apps. Offline-first, no accounts, nothing sold." />
+  <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
   <style>
+    /* ═══════════════════════ DESIGN TOKENS ═══════════════════════ */
     :root {
-      --ground:     #0A0E1F;
-      --surface:    #141828;
-      --surface-2:  #1C2238;
-      --text:       #E6EAFF;
-      --text-muted: #7B85B4;
-      --accent:     #FFB020;
-      --blue:       #5B7CFA;
-      --teal:       #14B8A6;
-      --purple:     #8B5CF6;
-      --coral:      #FF6B6B;
-      --radius:     16px;
-      --spring:     cubic-bezier(0.34, 1.56, 0.64, 1);
+      /* surfaces */
+      --ground:      #07061A;
+      --ground-2:    #0B0A22;
+      --surface:     #141329;   /* card + chart surface */
+      --surface-2:   #1C1A3D;
+      --surface-3:   #252248;
+      --line:        rgba(255,255,255,0.07);
+      --line-strong: rgba(255,255,255,0.15);
+
+      /* ink */
+      --text:        #F4F3FF;
+      --text-2:      #ACA7DA;
+      --text-3:      #7B76AE;
+
+      /* brand */
+      --violet:  #8B5CF6;
+      --indigo:  #5B7CFA;
+      --cyan:    #22D3EE;
+      --amber:   #FFB020;
+      --pink:    #FF5C93;
+      --mint:    #34D399;
+
+      --grad-ink:  linear-gradient(100deg, #A78BFA 0%, #FF7FAE 48%, #FFC24D 100%);
+      --grad-btn:  linear-gradient(100deg, #7C5CFF 0%, #5B7CFA 55%, #22D3EE 100%);
+      --grad-rule: linear-gradient(90deg, transparent, #8B5CF6, #FF5C93, #FFB020, transparent);
+
+      /* chart series — validated for the #141329 surface (dark, adjacent pairs) */
+      --s1: #7a5cf0;
+      --s2: #d95926;
+      --s3: #199e70;
+      --s4: #c98500;
+      --s5: #d55181;
+      --grid: #2A2848;
+      --axis: #38355F;
+
+      --radius:  18px;
+      --radius-s: 12px;
+      --spring:  cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease:    cubic-bezier(0.22, 0.85, 0.3, 1);
+      --shell:   1120px;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 86px; }
 
     body {
       background: var(--ground);
@@ -32,935 +67,1515 @@
       font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
       line-height: 1.6;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    #neural-canvas {
-      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    h1, h2, h3, .display { font-family: 'Space Grotesk', system-ui, sans-serif; }
+
+    a { color: inherit; }
+
+    ::selection { background: rgba(139,92,246,0.35); color: #fff; }
+
+    /* ═══════════════════════ AMBIENT BACKDROP ═══════════════════════ */
+    #neural-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.85; }
+
+    .aurora { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .aurora span {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.42;
     }
+    .aurora span:nth-child(1) {
+      width: 620px; height: 620px; top: -220px; left: -160px;
+      background: radial-gradient(circle, #6D28D9, transparent 70%);
+      animation: drift-a 26s ease-in-out infinite;
+    }
+    .aurora span:nth-child(2) {
+      width: 520px; height: 520px; top: 4%; right: -180px;
+      background: radial-gradient(circle, #BE185D, transparent 70%);
+      animation: drift-b 32s ease-in-out infinite;
+    }
+    .aurora span:nth-child(3) {
+      width: 460px; height: 460px; top: 52%; left: 38%;
+      background: radial-gradient(circle, #0E7490, transparent 70%);
+      opacity: 0.3;
+      animation: drift-c 38s ease-in-out infinite;
+    }
+    @keyframes drift-a { 0%,100%{transform:translate(0,0)} 50%{transform:translate(80px,60px)} }
+    @keyframes drift-b { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-70px,90px)} }
+    @keyframes drift-c { 0%,100%{transform:translate(0,0)} 50%{transform:translate(60px,-70px)} }
 
     .wrap { position: relative; z-index: 1; }
 
-    /* ━━━━━━━━━━━━━━━━━━━━━━━━ LOGOMARK ━━━━━━━━━━━━━━━━━━━━━━━━ */
+    .shell { max-width: var(--shell); margin: 0 auto; padding-inline: 32px; }
+
+    /* ═══════════════════════ LOGOMARK ═══════════════════════ */
     .mark {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3px;
-      width: 22px;
-      height: 22px;
-      flex-shrink: 0;
-      cursor: pointer;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3px;
+      width: 24px; height: 24px; flex-shrink: 0;
+    }
+    .mark__sq { border-radius: 4px; transition: transform 0.38s var(--spring), opacity 0.38s ease; }
+    .mark__sq:nth-child(1) { background: var(--violet); }
+    .mark__sq:nth-child(2) { background: var(--amber); }
+    .mark__sq:nth-child(3) { background: var(--pink); }
+    .mark__sq:nth-child(4) { background: var(--cyan); }
+
+    .logo:hover .mark__sq:nth-child(1) { transform: translate(-3px,-3px) rotate(-18deg); }
+    .logo:hover .mark__sq:nth-child(2) { transform: translate(3px,-3px) rotate(18deg); }
+    .logo:hover .mark__sq:nth-child(3) { transform: translate(-3px,3px) rotate(-18deg); }
+    .logo:hover .mark__sq:nth-child(4) { transform: translate(3px,3px) rotate(18deg); }
+
+    /* ═══════════════════════ HEADER ═══════════════════════ */
+    .progress-bar {
+      position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+      background: var(--grad-rule); background-size: 100% 100%;
+      z-index: 60; transition: width 0.08s linear;
+      box-shadow: 0 0 12px rgba(139,92,246,0.6);
     }
 
-    .mark__sq {
-      border-radius: 3.5px;
-      transition: transform 0.38s var(--spring), opacity 0.38s ease;
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(7,6,26,0.62);
+      backdrop-filter: blur(16px) saturate(150%);
+      -webkit-backdrop-filter: blur(16px) saturate(150%);
+      border-bottom: 1px solid transparent;
+      transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .site-header.stuck {
+      background: rgba(7,6,26,0.88);
+      border-bottom-color: var(--line);
+      box-shadow: 0 10px 34px rgba(0,0,0,0.45);
     }
 
-    .mark__sq:nth-child(1) { background: var(--blue); }
-    .mark__sq:nth-child(2) { background: var(--accent); }
-    .mark__sq:nth-child(3) { background: var(--purple); }
-    .mark__sq:nth-child(4) { background: var(--teal); }
-
-    /* nav hover scatter */
-    .logo:hover .mark__sq:nth-child(1) { transform: translate(-3px, -3px) rotate(-18deg); }
-    .logo:hover .mark__sq:nth-child(2) { transform: translate(3px,  -3px) rotate(18deg);  }
-    .logo:hover .mark__sq:nth-child(3) { transform: translate(-3px,  3px) rotate(-18deg); }
-    .logo:hover .mark__sq:nth-child(4) { transform: translate(3px,   3px) rotate(18deg);  }
-
-    /* hero mark — bigger */
-    .hero-mark {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 7px;
-      width: 72px;
-      height: 72px;
-      cursor: pointer;
-      margin-bottom: 36px;
-    }
-
-    .hero-mark .mark__sq {
-      border-radius: 12px;
-      transition: transform 0.45s var(--spring), opacity 0.45s ease;
-    }
-
-    .hero-mark .mark__sq:nth-child(1) {
-      background: var(--blue);
-      box-shadow: 0 6px 18px rgba(91,124,250,0.35);
-      animation: gather-tl 0.7s var(--spring) both;
-    }
-    .hero-mark .mark__sq:nth-child(2) {
-      background: var(--accent);
-      box-shadow: 0 6px 18px rgba(255,176,32,0.3);
-      animation: gather-tr 0.7s var(--spring) 0.07s both;
-    }
-    .hero-mark .mark__sq:nth-child(3) {
-      background: var(--purple);
-      box-shadow: 0 6px 18px rgba(139,92,246,0.3);
-      animation: gather-bl 0.7s var(--spring) 0.14s both;
-    }
-    .hero-mark .mark__sq:nth-child(4) {
-      background: var(--teal);
-      box-shadow: 0 6px 18px rgba(20,184,166,0.3);
-      animation: gather-br 0.7s var(--spring) 0.21s both;
-    }
-
-    @keyframes gather-tl { from { transform: translate(-36px,-36px) rotate(-45deg) scale(0.5); opacity: 0; } to { transform: none; opacity: 1; } }
-    @keyframes gather-tr { from { transform: translate(36px, -36px) rotate(45deg)  scale(0.5); opacity: 0; } to { transform: none; opacity: 1; } }
-    @keyframes gather-bl { from { transform: translate(-36px, 36px) rotate(-45deg) scale(0.5); opacity: 0; } to { transform: none; opacity: 1; } }
-    @keyframes gather-br { from { transform: translate(36px,  36px) rotate(45deg)  scale(0.5); opacity: 0; } to { transform: none; opacity: 1; } }
-
-    .hero-mark:hover .mark__sq:nth-child(1) { transform: translate(-7px,-7px) rotate(-22deg); }
-    .hero-mark:hover .mark__sq:nth-child(2) { transform: translate(7px, -7px) rotate(22deg);  }
-    .hero-mark:hover .mark__sq:nth-child(3) { transform: translate(-7px, 7px) rotate(-22deg); }
-    .hero-mark:hover .mark__sq:nth-child(4) { transform: translate(7px,  7px) rotate(22deg);  }
-
-    .hero-mark.burst .mark__sq:nth-child(1) { transform: translate(-52px,-52px) rotate(-55deg) scale(0.6); opacity: 0.15; }
-    .hero-mark.burst .mark__sq:nth-child(2) { transform: translate(52px, -52px) rotate(55deg)  scale(0.6); opacity: 0.15; }
-    .hero-mark.burst .mark__sq:nth-child(3) { transform: translate(-52px, 52px) rotate(-55deg) scale(0.6); opacity: 0.15; }
-    .hero-mark.burst .mark__sq:nth-child(4) { transform: translate(52px,  52px) rotate(55deg)  scale(0.6); opacity: 0.15; }
-
-    /* ━━━━━━━━━━━━━━━━━━━━━━━━ NAV ━━━━━━━━━━━━━━━━━━━━━━━━ */
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 22px 48px;
-      border-bottom: 1px solid rgba(91,124,250,0.09);
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 20px; height: 70px;
     }
 
     .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: var(--text);
+      display: flex; align-items: center; gap: 11px;
+      text-decoration: none; color: var(--text);
       font-family: 'Space Grotesk', system-ui, sans-serif;
-      font-weight: 700;
-      font-size: 17px;
-      letter-spacing: -0.4px;
+      font-weight: 700; font-size: 18px; letter-spacing: -0.5px;
     }
 
-    .nav-right {
-      font-size: 13px;
-      color: var(--text-muted);
+    .nav-links { display: flex; align-items: center; gap: 4px; }
+    .nav-links a {
+      position: relative;
+      padding: 8px 14px; border-radius: 10px;
+      font-size: 14px; font-weight: 500; color: var(--text-2);
+      text-decoration: none; transition: color 0.18s ease, background 0.18s ease;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; left: 14px; right: 14px; bottom: 3px;
+      height: 2px; border-radius: 2px; background: var(--grad-btn);
+      transform: scaleX(0); transform-origin: left; transition: transform 0.28s var(--ease);
+    }
+    .nav-links a:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+    .nav-links a.active { color: var(--text); }
+
+    .header-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--grad-btn); color: #fff;
+      padding: 10px 18px; border-radius: 12px;
+      font-size: 13.5px; font-weight: 600; text-decoration: none;
+      box-shadow: 0 8px 22px rgba(91,124,250,0.32);
+      transition: transform 0.2s var(--spring), box-shadow 0.2s ease;
+    }
+    .header-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(91,124,250,0.45); }
+
+    .burger {
+      display: none; width: 42px; height: 42px; border-radius: 11px;
+      border: 1px solid var(--line); background: rgba(255,255,255,0.03);
+      cursor: pointer; align-items: center; justify-content: center; flex-direction: column; gap: 4px;
+    }
+    .burger span { display: block; width: 17px; height: 2px; border-radius: 2px; background: var(--text); transition: transform 0.28s var(--ease), opacity 0.2s ease; }
+    .burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    .mobile-panel {
+      display: none; overflow: hidden; max-height: 0;
+      transition: max-height 0.34s var(--ease);
+      border-top: 1px solid var(--line);
+      background: rgba(10,8,32,0.96);
+    }
+    .mobile-panel.open { max-height: 420px; }
+    .mobile-panel nav { display: flex; flex-direction: column; padding: 12px 32px 22px; gap: 2px; }
+    .mobile-panel nav a {
+      padding: 13px 4px; font-size: 15px; font-weight: 500;
+      color: var(--text-2); text-decoration: none;
+      border-bottom: 1px solid var(--line);
+    }
+    .mobile-panel nav a:last-child { border-bottom: none; }
+    .mobile-panel .header-cta { margin-top: 14px; justify-content: center; }
+
+    /* ═══════════════════════ HERO ═══════════════════════ */
+    .hero { padding: 78px 0 64px; }
+    .hero-grid {
+      display: grid; grid-template-columns: 1.08fr 0.92fr;
+      gap: 56px; align-items: center;
     }
 
-    /* ━━━━━━━━━━━━━━━━━━━━━━━━ HERO ━━━━━━━━━━━━━━━━━━━━━━━━ */
-    .hero {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 80px 48px 72px;
+    .pill {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 7px 15px 7px 9px; border-radius: 40px;
+      background: rgba(139,92,246,0.10);
+      border: 1px solid rgba(139,92,246,0.28);
+      font-size: 12.5px; font-weight: 500; color: #C9BEFF;
+      margin-bottom: 26px;
     }
-
-    .hero-eyebrow {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 3.5px;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 22px;
+    .pill .dot {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--mint);
+      box-shadow: 0 0 0 4px rgba(52,211,153,0.18);
+      animation: pulse 2.4s ease-in-out infinite;
     }
+    @keyframes pulse { 0%,100%{box-shadow:0 0 0 3px rgba(52,211,153,0.16)} 50%{box-shadow:0 0 0 7px rgba(52,211,153,0)} }
 
     .hero h1 {
-      font-family: 'Space Grotesk', system-ui, sans-serif;
-      font-size: clamp(44px, 7.5vw, 80px);
-      font-weight: 700;
-      line-height: 1.0;
-      letter-spacing: -2.5px;
-      color: var(--text);
-      margin-bottom: 28px;
+      font-size: clamp(42px, 6.2vw, 76px);
+      font-weight: 700; line-height: 1.02; letter-spacing: -2.6px;
+      margin-bottom: 24px;
+    }
+    .grad-text {
+      background: var(--grad-ink);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
     }
 
-    .hero h1 .blue { color: var(--blue); }
+    .hero-sub { font-size: 17.5px; color: var(--text-2); max-width: 520px; line-height: 1.7; }
 
-    .hero-sub {
-      font-size: 17px;
-      color: var(--text-muted);
-      max-width: 460px;
-      line-height: 1.65;
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 14px 24px; border-radius: 14px;
+      font-size: 14.5px; font-weight: 600; text-decoration: none;
+      transition: transform 0.2s var(--spring), box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      border: 1px solid transparent; cursor: pointer;
     }
+    .btn-primary { background: var(--grad-btn); color: #fff; box-shadow: 0 12px 30px rgba(91,124,250,0.32); }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 18px 40px rgba(91,124,250,0.45); }
+    .btn-ghost { background: rgba(255,255,255,0.04); border-color: var(--line-strong); color: var(--text); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.08); border-color: rgba(139,92,246,0.5); transform: translateY(-3px); }
 
-    /* ━━━━━━━━━━━━━━━━━━━━━━━━ STATS BAND ━━━━━━━━━━━━━━━━━━━━━━━━ */
-    .stats-band {
-      border-top: 1px solid rgba(91,124,250,0.08);
-      border-bottom: 1px solid rgba(91,124,250,0.08);
-      background: rgba(20,24,40,0.6);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      padding: 24px 48px;
+    .trust-row { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 32px; }
+    .trust-row span { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; color: var(--text-3); }
+    .trust-row svg { flex-shrink: 0; }
+
+    /* phone mockup */
+    .hero-visual { display: flex; justify-content: center; position: relative; }
+    .phone {
+      position: relative; width: 268px; padding: 13px;
+      border-radius: 40px;
+      background: linear-gradient(160deg, rgba(255,255,255,0.16), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: 0 40px 90px rgba(0,0,0,0.6), 0 0 0 1px rgba(139,92,246,0.12);
+      animation: float 7s ease-in-out infinite;
     }
+    @keyframes float { 0%,100%{transform:translateY(0) rotate(-1.6deg)} 50%{transform:translateY(-16px) rotate(1.2deg)} }
 
-    .stats-inner {
-      max-width: 960px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      gap: 0;
-      flex-wrap: wrap;
+    .phone-screen {
+      border-radius: 30px; overflow: hidden; padding: 26px 18px 20px;
+      background: linear-gradient(170deg, #1A1838 0%, #0D0B22 100%);
+      min-height: 460px; position: relative;
     }
-
-    .stat {
-      flex: 1;
-      min-width: 120px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2px;
-      padding: 0 16px;
-      border-right: 1px solid rgba(91,124,250,0.1);
+    .phone-notch {
+      position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+      width: 82px; height: 6px; border-radius: 6px; background: rgba(255,255,255,0.12);
     }
+    .phone-time { font-size: 11px; color: var(--text-3); letter-spacing: 0.4px; margin-bottom: 20px; }
+    .phone-head { font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 3px; }
+    .phone-head small { display: block; font-family: 'DM Sans', sans-serif; font-size: 11.5px; font-weight: 400; color: var(--text-3); margin-top: 3px; }
 
-    .stat:last-child { border-right: none; }
-
-    .stat-n {
-      font-family: 'Space Grotesk', system-ui, sans-serif;
-      font-size: 28px;
-      font-weight: 700;
-      letter-spacing: -1px;
-      color: var(--text);
-      line-height: 1;
+    .phone-apps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 10px; margin-top: 24px; }
+    .phone-app { text-align: center; }
+    .phone-app img, .phone-app .glyph {
+      width: 52px; height: 52px; border-radius: 15px; display: block; margin: 0 auto 7px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.45);
     }
+    .phone-app .glyph { display: flex; align-items: center; justify-content: center; font-size: 23px; }
+    .phone-app b { display: block; font-size: 9.5px; font-weight: 500; color: var(--text-2); letter-spacing: 0.1px; }
 
-    .stat-l {
-      font-size: 11px;
-      color: var(--text-muted);
-      font-weight: 500;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
+    .phone-strip {
+      margin-top: 22px; padding: 12px 14px; border-radius: 14px;
+      background: rgba(255,255,255,0.05); border: 1px solid var(--line);
+      display: flex; align-items: center; gap: 10px;
     }
-
-    /* ━━━━━━━━━━━━━━━━━━━━━━━━ APPS SECTION ━━━━━━━━━━━━━━━━━━━━━━━━ */
-    .section {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 72px 48px;
+    .phone-strip .bars { display: flex; align-items: flex-end; gap: 3px; height: 26px; }
+    .phone-strip .bars i {
+      width: 5px; border-radius: 2px 2px 0 0; background: var(--violet); display: block;
+      animation: eq 1.8s ease-in-out infinite;
     }
+    .phone-strip .bars i:nth-child(2){ background: var(--pink); animation-delay: .2s }
+    .phone-strip .bars i:nth-child(3){ background: var(--amber); animation-delay: .4s }
+    .phone-strip .bars i:nth-child(4){ background: var(--cyan); animation-delay: .6s }
+    .phone-strip .bars i:nth-child(5){ background: var(--mint); animation-delay: .8s }
+    @keyframes eq { 0%,100%{height:9px} 50%{height:26px} }
+    .phone-strip p { font-size: 11px; color: var(--text-3); line-height: 1.4; }
+    .phone-strip p b { display: block; color: var(--text); font-size: 12px; font-weight: 600; }
 
-    .section-rule {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      margin-bottom: 40px;
-    }
-
-    .section-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--text-muted);
+    .float-chip {
+      position: absolute; display: inline-flex; align-items: center; gap: 7px;
+      padding: 9px 14px; border-radius: 12px; font-size: 12px; font-weight: 600;
+      background: rgba(20,19,41,0.92); border: 1px solid var(--line-strong);
+      backdrop-filter: blur(10px); box-shadow: 0 14px 34px rgba(0,0,0,0.5);
       white-space: nowrap;
     }
+    .float-chip.c1 { top: 14%; left: -6%; color: var(--mint); animation: float 6s ease-in-out infinite 0.4s; }
+    .float-chip.c2 { bottom: 16%; right: -4%; color: var(--amber); animation: float 6.6s ease-in-out infinite 1.1s; }
 
-    .rule-line {
-      flex: 1;
-      height: 1px;
-      background: rgba(91,124,250,0.12);
+    /* ═══════════════════════ STATS BAND ═══════════════════════ */
+    .stats-band {
+      border-block: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(28,26,61,0.5), rgba(11,10,34,0.5));
+      backdrop-filter: blur(10px);
     }
-
-    .apps-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-      gap: 18px;
+    .stats-inner { display: grid; grid-template-columns: repeat(4, 1fr); padding-block: 30px; }
+    .stat { text-align: center; padding-inline: 14px; border-right: 1px solid var(--line); }
+    .stat:last-child { border-right: none; }
+    .stat-n {
+      font-family: 'Space Grotesk', sans-serif; font-size: clamp(28px, 3.4vw, 40px);
+      font-weight: 700; letter-spacing: -1.4px; line-height: 1.05; display: block;
     }
+    .stat:nth-child(1) .stat-n { color: #A78BFA; }
+    .stat:nth-child(2) .stat-n { color: #FF7FAE; }
+    .stat:nth-child(3) .stat-n { color: #FFC24D; }
+    .stat:nth-child(4) .stat-n { color: #5EEAD4; }
+    .stat-l { font-size: 11.5px; color: var(--text-3); font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; margin-top: 6px; display: block; }
 
-    /* App card */
+    /* ═══════════════════════ SECTION FURNITURE ═══════════════════════ */
+    .section { padding-block: 92px; }
+    .section-head { margin-bottom: 46px; max-width: 640px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 9px;
+      font-size: 11.5px; font-weight: 600; letter-spacing: 2.6px;
+      text-transform: uppercase; color: var(--text-3); margin-bottom: 16px;
+    }
+    .eyebrow::before { content: ''; width: 26px; height: 2px; border-radius: 2px; background: var(--grad-btn); }
+    .section-head h2 {
+      font-size: clamp(30px, 4.2vw, 48px); font-weight: 700;
+      letter-spacing: -1.6px; line-height: 1.08; margin-bottom: 14px;
+    }
+    .section-head p { font-size: 16.5px; color: var(--text-2); line-height: 1.7; }
+
+    .center { margin-inline: auto; text-align: center; }
+    .center .eyebrow { justify-content: center; }
+
+    /* ═══════════════════════ FILTER CHIPS ═══════════════════════ */
+    .filter-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+    .chip {
+      padding: 9px 17px; border-radius: 30px; font-size: 13px; font-weight: 500;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--line);
+      color: var(--text-2); cursor: pointer;
+      transition: all 0.2s var(--ease); font-family: inherit;
+    }
+    .chip:hover { border-color: rgba(139,92,246,0.45); color: var(--text); }
+    .chip.on { background: var(--grad-btn); border-color: transparent; color: #fff; box-shadow: 0 8px 22px rgba(91,124,250,0.3); }
+
+    /* ═══════════════════════ APP CARDS ═══════════════════════ */
+    .apps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 20px; }
+
     .app-card {
-      background: var(--surface);
-      border-radius: var(--radius);
-      border: 1px solid rgba(91,124,250,0.1);
-      padding: 26px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      text-decoration: none;
-      color: inherit;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+      position: relative; isolation: isolate;
+      background: linear-gradient(165deg, rgba(28,26,61,0.9), rgba(20,19,41,0.9));
+      border-radius: var(--radius); border: 1px solid var(--line);
+      padding: 26px; display: flex; flex-direction: column; gap: 15px;
+      text-decoration: none; color: inherit; overflow: hidden;
+      transition: transform 0.3s var(--ease), box-shadow 0.3s ease, border-color 0.3s ease;
     }
-
+    .app-card::before {
+      content: ''; position: absolute; inset: -1px; border-radius: inherit; z-index: -1;
+      background: linear-gradient(140deg, var(--tint, #8B5CF6), transparent 55%);
+      opacity: 0; transition: opacity 0.3s ease;
+    }
     .app-card::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(circle at 28% 18%, rgba(91,124,250,0.08) 0%, transparent 65%);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
+      content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit;
+      background: radial-gradient(420px circle at var(--mx,50%) var(--my,0%), rgba(139,92,246,0.18), transparent 65%);
+      background: radial-gradient(420px circle at var(--mx,50%) var(--my,0%), color-mix(in srgb, var(--tint,#8B5CF6) 24%, transparent), transparent 65%);
+      opacity: 0; transition: opacity 0.35s ease;
     }
-
-    .app-card:hover {
-      transform: translateY(-5px) rotate(-0.4deg);
-      border-color: rgba(91,124,250,0.28);
-      box-shadow: 0 24px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(91,124,250,0.16);
-    }
-
+    .app-card:hover { transform: translateY(-7px); border-color: transparent; box-shadow: 0 30px 60px rgba(0,0,0,0.55); }
+    .app-card:hover::before { opacity: 0.55; }
     .app-card:hover::after { opacity: 1; }
+    .app-card.hidden { display: none; }
 
-    .card-top {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      position: relative;
-      z-index: 1;
-    }
-
+    .card-top { display: flex; align-items: flex-start; gap: 15px; }
     .app-icon {
-      width: 58px; height: 58px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 26px;
-      flex-shrink: 0;
+      width: 60px; height: 60px; border-radius: 16px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 27px;
+      transition: transform 0.35s var(--spring);
     }
+    .app-card:hover .app-icon { transform: scale(1.07) rotate(-4deg); }
+    .app-icon img { width: 100%; height: 100%; border-radius: 16px; display: block; }
 
-    .icon-brain {
-      background: linear-gradient(135deg, #5B7CFA, #8B5CF6);
-      box-shadow: 0 8px 20px rgba(91,124,250,0.28);
-    }
+    .app-info { flex: 1; min-width: 0; }
+    .app-name { font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 4px; }
+    .app-cat { font-size: 12px; color: var(--text-3); }
+    .app-desc { font-size: 13.5px; color: var(--text-2); line-height: 1.65; flex: 1; }
 
-    .app-info { flex: 1; }
-    .app-name {
-      font-family: 'Space Grotesk', system-ui, sans-serif;
-      font-size: 16px; font-weight: 700; letter-spacing: -0.3px;
-      color: var(--text); margin-bottom: 3px;
-    }
-    .app-cat { font-size: 12px; color: var(--text-muted); }
-    .app-desc { font-size: 13.5px; color: var(--text-muted); line-height: 1.6; position: relative; z-index: 1; }
-
-    .tags { display: flex; flex-wrap: wrap; gap: 6px; position: relative; z-index: 1; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
     .tag {
-      background: rgba(91,124,250,0.12); color: #8BA4FF;
-      border-radius: 20px; padding: 3px 9px;
-      font-size: 11px; font-weight: 500;
+      border-radius: 20px; padding: 4px 11px; font-size: 11px; font-weight: 500;
+      background: rgba(139,92,246,0.14);
+      color: #C4B5FD;
+      border: 1px solid rgba(139,92,246,0.24);
+      background: color-mix(in srgb, var(--tint,#8B5CF6) 16%, transparent);
+      color: color-mix(in srgb, var(--tint,#8B5CF6) 58%, #FFFFFF);
+      border-color: color-mix(in srgb, var(--tint,#8B5CF6) 28%, transparent);
     }
-    .tag.gold { background: rgba(255,176,32,0.1); color: var(--accent); }
+    .tag.gold { background: rgba(255,176,32,0.12); color: #FFC24D; border-color: rgba(255,176,32,0.24); }
 
-    .card-footer {
-      display: flex; align-items: center; justify-content: space-between;
-      position: relative; z-index: 1;
-    }
-
+    .card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 4px; border-top: 1px solid var(--line); margin-top: 2px; }
     .cta-btn {
-      background: var(--blue); color: #fff;
-      border-radius: 9px; padding: 7px 14px;
-      font-size: 12px; font-weight: 600;
-      display: inline-block;
-      transition: background 0.15s;
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 14px;
+      font-size: 13px; font-weight: 600; color: var(--text);
     }
-    .app-card:hover .cta-btn { background: #4a6ae8; }
-    .platform { font-size: 11.5px; color: var(--text-muted); }
+    .cta-btn i { display: inline-block; font-style: normal; transition: transform 0.25s var(--ease); }
+    .app-card:hover .cta-btn i { transform: translateX(5px); }
+    .platform { font-size: 11.5px; color: var(--text-3); margin-top: 14px; }
 
-    /* Coming soon */
     .card-soon {
-      background: rgba(20,24,40,0.4);
-      border: 1px dashed rgba(91,124,250,0.12);
-      border-radius: var(--radius);
-      padding: 26px;
-      display: flex; align-items: center; gap: 16px;
+      border: 1px dashed var(--line-strong); border-radius: var(--radius);
+      padding: 26px; display: flex; align-items: center; gap: 16px;
+      background: rgba(20,19,41,0.35);
     }
     .soon-ring {
-      width: 58px; height: 58px; border-radius: 14px;
-      border: 2px dashed rgba(91,124,250,0.16);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px; color: rgba(123,133,180,0.35); flex-shrink: 0;
+      width: 60px; height: 60px; border-radius: 16px; flex-shrink: 0;
+      border: 2px dashed rgba(139,92,246,0.3); color: rgba(167,139,250,0.5);
+      display: flex; align-items: center; justify-content: center; font-size: 24px;
     }
-    .soon-label {
-      font-size: 11px; font-weight: 500; letter-spacing: 2.5px;
-      text-transform: uppercase; color: rgba(123,133,180,0.35); margin-bottom: 5px;
+    .soon-label { font-size: 11px; font-weight: 600; letter-spacing: 2.4px; text-transform: uppercase; color: var(--text-3); }
+    .soon-name { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 700; color: rgba(244,243,255,0.28); }
+
+    /* ═══════════════════════ ONBOARDING ═══════════════════════ */
+    .onboard { background: linear-gradient(180deg, transparent, rgba(28,26,61,0.4) 30%, transparent); }
+
+    .steps {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
+      position: relative; margin-top: 8px;
     }
-    .soon-name {
-      font-family: 'Space Grotesk', system-ui, sans-serif;
-      font-size: 15px; font-weight: 700; color: rgba(230,234,255,0.18);
+    .steps::before {
+      content: ''; position: absolute; top: 29px; left: 16.67%; right: 16.67%; height: 2px;
+      background: var(--line); border-radius: 2px;
+    }
+    .steps::after {
+      content: ''; position: absolute; top: 29px; left: 16.67%; height: 2px; border-radius: 2px;
+      width: 0; background: var(--grad-rule); background-size: 200% 100%;
+      transition: width 1.4s var(--ease); box-shadow: 0 0 10px rgba(139,92,246,0.5);
+    }
+    .steps.lit::after { width: 66.66%; }
+
+    .step { position: relative; text-align: center; display: flex; flex-direction: column; }
+    .step-num {
+      position: relative; z-index: 2; width: 58px; height: 58px; margin: 0 auto 22px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700;
+      background: var(--ground); border: 2px solid var(--line-strong); color: var(--text-3);
+      transition: all 0.5s var(--spring);
+    }
+    .steps.lit .step:nth-child(1) .step-num { transition-delay: 0.15s; }
+    .steps.lit .step:nth-child(2) .step-num { transition-delay: 0.45s; }
+    .steps.lit .step:nth-child(3) .step-num { transition-delay: 0.75s; }
+    .steps.lit .step-num {
+      background: var(--grad-btn); border-color: transparent; color: #fff;
+      box-shadow: 0 0 0 6px rgba(139,92,246,0.14), 0 12px 28px rgba(91,124,250,0.4);
+      transform: scale(1.06);
     }
 
-    /* ━━━━━━━━━━━━━━━━━━━━━━━━ PHILOSOPHY ━━━━━━━━━━━━━━━━━━━━━━━━ */
-    .philosophy {
-      border-top: 1px solid rgba(91,124,250,0.08);
-      background: rgba(14,18,35,0.7);
+    .step-card {
+      background: linear-gradient(165deg, rgba(28,26,61,0.86), rgba(20,19,41,0.86));
+      border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 30px 26px; flex: 1;
+      transition: transform 0.3s var(--ease), border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .step-card:hover { transform: translateY(-6px); border-color: rgba(139,92,246,0.4); box-shadow: 0 26px 54px rgba(0,0,0,0.5); }
+    .step-icon {
+      width: 46px; height: 46px; border-radius: 14px; margin: 0 auto 18px;
+      display: flex; align-items: center; justify-content: center; font-size: 21px;
+    }
+    .step-card h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.4px; margin-bottom: 10px; }
+    .step-card p { font-size: 14px; color: var(--text-2); line-height: 1.68; }
+    .step-meta {
+      display: inline-block; margin-top: 16px; padding: 5px 12px; border-radius: 20px;
+      font-size: 11.5px; font-weight: 600; letter-spacing: 0.3px;
+      background: rgba(52,211,153,0.12); color: #5EEAD4; border: 1px solid rgba(52,211,153,0.22);
     }
 
-    .philosophy-inner {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 72px 48px;
+    .onboard-note {
+      margin-top: 40px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
     }
-
-    .phil-header {
-      margin-bottom: 52px;
+    .note-chip {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 18px; border-radius: 30px; font-size: 13px; color: var(--text-2);
+      background: rgba(255,255,255,0.04); border: 1px solid var(--line);
     }
+    .note-chip b { color: var(--text); font-weight: 600; }
 
-    .phil-title {
-      font-family: 'Space Grotesk', system-ui, sans-serif;
-      font-size: clamp(32px, 4vw, 46px);
-      font-weight: 700;
-      letter-spacing: -1.5px;
-      color: var(--text);
-      margin-bottom: 14px;
-      line-height: 1.1;
-    }
+    /* ═══════════════════════ CHARTS ═══════════════════════ */
+    .viz-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .viz-grid .span-2 { grid-column: 1 / -1; }
 
-    .phil-title .accent { color: var(--accent); }
-
-    .phil-sub {
-      font-size: 16px;
-      color: var(--text-muted);
-      max-width: 520px;
-      line-height: 1.65;
-    }
-
-    .principles {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 2px;
-    }
-
-    .principle {
+    .card {
       background: var(--surface);
-      padding: 32px 28px;
-      transition: background 0.2s ease;
+      border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 28px;
     }
 
-    .principle:first-child { border-radius: var(--radius) 0 0 var(--radius); }
-    .principle:last-child  { border-radius: 0 var(--radius) var(--radius) 0; }
+    .viz-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 6px; }
+    .viz-title { font-family: 'Space Grotesk', sans-serif; font-size: 16.5px; font-weight: 700; letter-spacing: -0.3px; }
+    .viz-sub { font-size: 12.5px; color: var(--text-3); margin-top: 4px; margin-bottom: 22px; line-height: 1.55; }
 
-    .principle:hover { background: var(--surface-2); }
+    .viz-toggle {
+      flex-shrink: 0; font-family: inherit; font-size: 11.5px; font-weight: 600;
+      padding: 6px 12px; border-radius: 8px; cursor: pointer;
+      background: rgba(255,255,255,0.05); border: 1px solid var(--line); color: var(--text-3);
+      transition: all 0.18s ease;
+    }
+    .viz-toggle:hover { color: var(--text); border-color: var(--line-strong); }
 
+    /* donut */
+    .donut-wrap { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+    .donut { position: relative; flex-shrink: 0; }
+    .donut svg { display: block; overflow: visible; }
+    .donut-seg {
+      fill: none; stroke-width: 20; stroke-linecap: butt;
+      transition: stroke-dasharray 1.1s var(--ease), stroke-width 0.22s var(--ease), opacity 0.22s ease;
+      cursor: default;
+    }
+    .donut-center {
+      position: absolute; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; pointer-events: none;
+    }
+    .donut-center b { font-family: 'Space Grotesk', sans-serif; font-size: 40px; font-weight: 700; letter-spacing: -2px; line-height: 1; }
+    .donut-center span { font-size: 10.5px; color: var(--text-3); letter-spacing: 1.6px; text-transform: uppercase; margin-top: 5px; }
+
+    .legend { display: flex; flex-direction: column; gap: 13px; flex: 1; min-width: 168px; }
+    .legend-row { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+    .legend-row .swatch { width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
+    .legend-row .lbl { color: var(--text-2); flex: 1; }
+    .legend-row .val { color: var(--text); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+    /* horizontal bars */
+    .bars { display: flex; flex-direction: column; gap: 16px; }
+    .bar-row { display: grid; grid-template-columns: 104px 1fr 26px; align-items: center; gap: 12px; }
+    .bar-row .name { font-size: 13px; color: var(--text-2); text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bar-track { display: block; height: 14px; background: var(--grid); border-radius: 4px; overflow: hidden; }
+    .bar-fill {
+      display: block; height: 100%; width: 0; border-radius: 0 4px 4px 0; background: var(--s1);
+      transition: width 1s var(--ease);
+    }
+    .bar-row .num { font-size: 13px; font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; text-align: right; }
+
+    .axis-ticks { display: flex; justify-content: space-between; margin: 14px 38px 0 116px; font-size: 10.5px; color: var(--text-3); font-variant-numeric: tabular-nums; }
+
+    /* meters */
+    .meters { display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px 40px; }
+    .meter-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+    .meter-head .m-lbl { font-size: 13.5px; color: var(--text-2); }
+    .meter-head .m-val { font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; }
+    .meter-track { height: 12px; background: var(--grid); border-radius: 4px; overflow: hidden; }
+    .meter-fill { height: 100%; width: 0; border-radius: 0 4px 4px 0; transition: width 1.1s var(--ease); }
+    .meter-note { font-size: 11.5px; color: var(--text-3); margin-top: 8px; }
+
+    /* data table view */
+    .viz-table { display: none; width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 4px; }
+    .viz-table.show { display: table; }
+    .viz-body.hide { display: none; }
+    .viz-table th, .viz-table td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); }
+    .viz-table th { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-3); font-weight: 600; }
+    .viz-table td { color: var(--text-2); }
+    .viz-table td:last-child, .viz-table th:last-child { text-align: right; font-variant-numeric: tabular-nums; color: var(--text); }
+
+    /* tooltip */
+    #tip {
+      position: fixed; z-index: 80; pointer-events: none; opacity: 0;
+      transform: translate(-50%, -125%); transition: opacity 0.14s ease;
+      background: rgba(10,9,28,0.96); border: 1px solid var(--line-strong);
+      border-radius: 10px; padding: 9px 13px; font-size: 12.5px; white-space: nowrap;
+      box-shadow: 0 14px 34px rgba(0,0,0,0.6);
+    }
+    #tip.on { opacity: 1; }
+    #tip b { display: block; font-size: 13px; margin-bottom: 2px; }
+    #tip i { font-style: normal; color: var(--text-3); }
+
+    .viz-foot { font-size: 11.5px; color: var(--text-3); margin-top: 26px; line-height: 1.6; }
+
+    /* ═══════════════════════ PRINCIPLES ═══════════════════════ */
+    .principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+    .principle {
+      background: linear-gradient(165deg, rgba(28,26,61,0.8), rgba(20,19,41,0.8));
+      border: 1px solid var(--line); border-radius: var(--radius); padding: 30px 26px;
+      transition: transform 0.3s var(--ease), border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .principle:hover { transform: translateY(-6px); border-color: rgba(139,92,246,0.35); box-shadow: 0 24px 50px rgba(0,0,0,0.45); }
     .principle-icon {
-      width: 44px; height: 44px;
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px;
-      margin-bottom: 20px;
+      width: 48px; height: 48px; border-radius: 14px; margin-bottom: 20px;
+      display: flex; align-items: center; justify-content: center; font-size: 22px;
     }
+    .p1 { background: linear-gradient(140deg, rgba(139,92,246,0.28), rgba(139,92,246,0.08)); }
+    .p2 { background: linear-gradient(140deg, rgba(255,92,147,0.28), rgba(255,92,147,0.08)); }
+    .p3 { background: linear-gradient(140deg, rgba(255,176,32,0.28), rgba(255,176,32,0.08)); }
+    .p4 { background: linear-gradient(140deg, rgba(34,211,238,0.28), rgba(34,211,238,0.08)); }
+    .principle h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 10px; }
+    .principle p { font-size: 13.5px; color: var(--text-2); line-height: 1.68; }
 
-    .p-icon-1 { background: rgba(91,124,250,0.15); }
-    .p-icon-2 { background: rgba(255,176,32,0.12); }
-    .p-icon-3 { background: rgba(20,184,166,0.12); }
-    .p-icon-4 { background: rgba(139,92,246,0.12); }
-
-    .principle h3 {
-      font-family: 'Space Grotesk', system-ui, sans-serif;
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 10px;
-      letter-spacing: -0.2px;
-    }
-
-    .principle p {
-      font-size: 13.5px;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    /* ━━━━━━━━━━━━━━━━━━━━━━━━ ABOUT ━━━━━━━━━━━━━━━━━━━━━━━━ */
-    .about-section {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 72px 48px;
-      display: grid;
-      grid-template-columns: 1fr 1.6fr;
-      gap: 64px;
-      align-items: start;
-    }
-
-    .about-left h2 {
-      font-family: 'Space Grotesk', system-ui, sans-serif;
-      font-size: clamp(26px, 3.5vw, 36px);
-      font-weight: 700;
-      letter-spacing: -1px;
-      color: var(--text);
-      line-height: 1.15;
-    }
-
-    .about-left .accent-line {
-      width: 36px;
-      height: 3px;
-      background: var(--accent);
-      border-radius: 2px;
-      margin-top: 20px;
-    }
-
-    .about-right p {
-      font-size: 15.5px;
-      color: var(--text-muted);
-      line-height: 1.75;
-      margin-bottom: 18px;
-    }
-
-    .about-right p:last-child { margin-bottom: 0; }
-
-    .about-right strong { color: var(--text); font-weight: 500; }
+    /* ═══════════════════════ ABOUT ═══════════════════════ */
+    .about-grid { display: grid; grid-template-columns: 1fr 1.55fr; gap: 60px; align-items: start; }
+    .about-left h2 { font-size: clamp(28px, 3.6vw, 40px); font-weight: 700; letter-spacing: -1.3px; line-height: 1.12; }
+    .about-left .rule { width: 56px; height: 4px; border-radius: 3px; background: var(--grad-rule); background-size: 100% 100%; margin-top: 22px; }
+    .about-right p { font-size: 15.5px; color: var(--text-2); line-height: 1.8; margin-bottom: 18px; }
+    .about-right strong { color: var(--text); font-weight: 600; }
 
     .contact-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--surface);
-      border: 1px solid rgba(91,124,250,0.15);
-      border-radius: 30px;
-      padding: 10px 18px;
-      font-size: 13.5px;
-      color: var(--text-muted);
-      text-decoration: none;
-      margin-top: 24px;
-      transition: border-color 0.15s, color 0.15s;
+      display: inline-flex; align-items: center; gap: 10px; margin-top: 12px;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--line-strong);
+      border-radius: 30px; padding: 12px 20px; font-size: 14px; color: var(--text-2);
+      text-decoration: none; transition: all 0.2s var(--ease);
+    }
+    .contact-chip:hover { border-color: rgba(139,92,246,0.55); color: var(--text); transform: translateY(-2px); }
+    .contact-chip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--amber); }
+
+    /* ═══════════════════════ CTA BANNER ═══════════════════════ */
+    .cta-banner {
+      position: relative; overflow: hidden; border-radius: 26px; padding: 60px 48px; text-align: center;
+      background: linear-gradient(140deg, rgba(124,92,255,0.22), rgba(255,92,147,0.16) 55%, rgba(255,176,32,0.14));
+      border: 1px solid rgba(139,92,246,0.3);
+    }
+    .cta-banner::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(700px circle at 50% 0%, rgba(139,92,246,0.3), transparent 65%);
+      pointer-events: none;
+    }
+    .cta-banner h2 { position: relative; font-size: clamp(28px, 3.8vw, 42px); font-weight: 700; letter-spacing: -1.4px; margin-bottom: 14px; }
+    .cta-banner p { position: relative; font-size: 16px; color: var(--text-2); max-width: 500px; margin: 0 auto 30px; line-height: 1.7; }
+    .cta-banner .hero-actions { position: relative; justify-content: center; margin-top: 0; }
+
+    /* ═══════════════════════ FOOTER ═══════════════════════ */
+    .site-footer { position: relative; margin-top: 40px; background: linear-gradient(180deg, rgba(11,10,34,0.6), rgba(7,6,26,0.95)); border-top: 1px solid var(--line); }
+    .site-footer::before { content: ''; position: absolute; top: -1px; left: 0; right: 0; height: 2px; background: var(--grad-rule); opacity: 0.85; }
+
+    .footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 44px; padding-block: 60px 40px; }
+    .footer-brand .logo { margin-bottom: 16px; }
+    .footer-brand p { font-size: 13.5px; color: var(--text-3); line-height: 1.7; max-width: 300px; margin-bottom: 20px; }
+    .footer-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .f-badge { font-size: 11.5px; color: var(--text-3); background: rgba(255,255,255,0.04); border: 1px solid var(--line); border-radius: 20px; padding: 5px 12px; }
+
+    .footer-col h4 { font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 1.8px; text-transform: uppercase; color: var(--text); margin-bottom: 18px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .footer-col a { font-size: 13.5px; color: var(--text-3); text-decoration: none; transition: color 0.18s ease, padding-left 0.18s ease; }
+    .footer-col a:hover { color: var(--text); padding-left: 4px; }
+
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;
+      padding-block: 22px; border-top: 1px solid var(--line);
+    }
+    .footer-bottom p { font-size: 12.5px; color: var(--text-3); }
+    .to-top {
+      display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--text-3);
+      text-decoration: none; padding: 8px 14px; border-radius: 10px; border: 1px solid var(--line);
+      transition: all 0.2s var(--ease);
+    }
+    .to-top:hover { color: var(--text); border-color: rgba(139,92,246,0.5); transform: translateY(-2px); }
+
+    /* ═══════════════════════ REVEAL ═══════════════════════ */
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ═══════════════════════ RESPONSIVE ═══════════════════════ */
+    @media (max-width: 980px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+      .hero-sub { max-width: none; }
+      .float-chip.c1 { left: 2%; }
+      .float-chip.c2 { right: 2%; }
+      .about-grid { grid-template-columns: 1fr; gap: 30px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .viz-grid { grid-template-columns: 1fr; }
     }
 
-    .contact-chip:hover {
-      border-color: rgba(91,124,250,0.4);
-      color: var(--text);
+    @media (max-width: 860px) {
+      .nav-links, .header-cta.desktop-only { display: none; }
+      .burger { display: flex; }
+      .mobile-panel { display: block; }
+      .steps { grid-template-columns: 1fr; gap: 16px; }
+      .steps::before, .steps::after { display: none; }
+      .step { display: grid; grid-template-columns: 58px 1fr; gap: 18px; align-items: start; text-align: left; }
+      .step-num { margin: 0; }
+      .step-icon { margin: 0 0 16px; }
+      .step-card { padding: 24px 22px; }
     }
 
-    .contact-chip .dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-    }
-
-    /* ━━━━━━━━━━━━━━━━━━━━━━━━ FOOTER ━━━━━━━━━━━━━━━━━━━━━━━━ */
-    footer {
-      border-top: 1px solid rgba(91,124,250,0.08);
-      padding: 28px 48px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .footer-logo {
-      font-family: 'Space Grotesk', system-ui, sans-serif;
-      font-weight: 700;
-      font-size: 14px;
-      color: var(--text-muted);
-    }
-
-    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; row-gap: 10px; }
-    .footer-links a { font-size: 13px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
-    .footer-links a:hover { color: var(--text); }
-
-    .footer-copy {
-      width: 100%;
-      font-size: 12px;
-      color: rgba(123,133,180,0.35);
-    }
-
-    /* ━━━━━━━━━━━━━━━━━━━━━━━━ RESPONSIVE ━━━━━━━━━━━━━━━━━━━━━━━━ */
     @media (max-width: 720px) {
-      nav, footer { padding: 20px 22px; }
-      .nav-right { display: none; }
-      .hero, .section, .philosophy-inner { padding-left: 22px; padding-right: 22px; }
-      .hero { padding-top: 56px; padding-bottom: 56px; }
-      .hero h1 { letter-spacing: -1.5px; }
-      .stats-band { padding: 20px 22px; }
-      .stat-n { font-size: 22px; }
-      .about-section { grid-template-columns: 1fr; gap: 32px; padding: 56px 22px; }
-      .principle:first-child { border-radius: var(--radius) var(--radius) 0 0; }
-      .principle:last-child  { border-radius: 0 0 var(--radius) var(--radius); }
+      .shell { padding-inline: 20px; }
+      .section { padding-block: 64px; }
+      .hero { padding: 48px 0 40px; }
+      .hero h1 { letter-spacing: -1.6px; }
+      .stats-inner { grid-template-columns: 1fr 1fr; gap: 24px 0; padding-block: 26px; }
+      .stat:nth-child(2) { border-right: none; }
+      .stat:nth-child(1), .stat:nth-child(2) { padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+      .meters { grid-template-columns: 1fr; gap: 22px; }
+      .card { padding: 22px 18px; }
+      .cta-banner { padding: 44px 24px; }
+      .donut-wrap { justify-content: center; }
+      .bar-row { grid-template-columns: 84px 1fr 24px; gap: 9px; }
+      .bar-row .name { font-size: 12px; }
+      .axis-ticks { margin-left: 93px; margin-right: 33px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; padding-block: 44px 30px; }
+      .phone { width: 240px; }
+      .float-chip { display: none; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .hero-mark .mark__sq,
-      .hero-mark.burst .mark__sq,
-      .app-card,
-      .mark__sq { transition: none; animation: none; }
-      .app-card:hover { transform: none; }
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
+      .reveal { opacity: 1; transform: none; }
     }
   </style>
 </head>
 <body>
 
-<canvas id="neural-canvas"></canvas>
+<div class="progress-bar" id="progress"></div>
+<div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+<canvas id="neural-canvas" aria-hidden="true"></canvas>
 
 <div class="wrap">
 
-  <!-- NAV -->
-  <nav>
-    <a class="logo" href="/">
-      <div class="mark" aria-hidden="true">
-        <span class="mark__sq"></span>
-        <span class="mark__sq"></span>
-        <span class="mark__sq"></span>
-        <span class="mark__sq"></span>
-      </div>
-      MyAppsCart
-    </a>
-    <span class="nav-right">Indie apps for curious minds</span>
-  </nav>
+  <!-- ═══════════ HEADER ═══════════ -->
+  <header class="site-header" id="header">
+    <div class="shell header-inner">
+      <a class="logo" href="/">
+        <span class="mark" aria-hidden="true"><span class="mark__sq"></span><span class="mark__sq"></span><span class="mark__sq"></span><span class="mark__sq"></span></span>
+        MyAppsCart
+      </a>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-mark" id="hero-mark" aria-hidden="true" title="Click me">
-      <span class="mark__sq"></span>
-      <span class="mark__sq"></span>
-      <span class="mark__sq"></span>
-      <span class="mark__sq"></span>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#apps">Apps</a>
+        <a href="#start">Get started</a>
+        <a href="#insights">Insights</a>
+        <a href="#why">Why us</a>
+        <a href="#about">About</a>
+      </nav>
+
+      <a class="header-cta desktop-only" href="#apps">
+        Browse apps
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-panel">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-    <p class="hero-eyebrow">Independent App Studio</p>
-    <h1>Small apps.<br><span class="blue">Big ideas.</span></h1>
-    <p class="hero-sub">We build focused, thoughtfully crafted apps for phones and desktops — offline-first wherever they can be, and never paid for with your data.</p>
+
+    <div class="mobile-panel" id="mobile-panel">
+      <nav aria-label="Mobile">
+        <a href="#apps">Apps</a>
+        <a href="#start">Get started</a>
+        <a href="#insights">Insights</a>
+        <a href="#why">Why us</a>
+        <a href="#about">About</a>
+        <a class="header-cta" href="mailto:support@myappscart.com">Contact us</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="hero">
+    <div class="shell hero-grid">
+      <div>
+        <span class="pill"><span class="dot"></span> Independent app studio · 9 apps live</span>
+        <h1>Small apps.<br><span class="grad-text">Big ideas.</span></h1>
+        <p class="hero-sub">We build focused, thoughtfully crafted apps for phones and desktops — offline-first wherever they can be, and never paid for with your data.</p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#apps">
+            Explore the cart
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="#start">How it works</a>
+        </div>
+
+        <div class="trust-row">
+          <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Works offline</span>
+          <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> No sign-up wall</span>
+          <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Your data is never sold</span>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <span class="float-chip c1">● Offline ready</span>
+        <span class="float-chip c2">★ 25 games inside</span>
+        <div class="phone" aria-hidden="true">
+          <div class="phone-screen">
+            <span class="phone-notch"></span>
+            <p class="phone-time">9:41</p>
+            <p class="phone-head">Your cart<small>Nine apps, nothing you didn't ask for</small></p>
+            <div class="phone-apps">
+              <div class="phone-app"><img src="/apps/hisabnova/icon-512.png" alt="" width="52" height="52" /><b>HisabNova</b></div>
+              <div class="phone-app"><img src="/apps/shubhzo/icon-512.png" alt="" width="52" height="52" /><b>Shubhzo</b></div>
+              <div class="phone-app"><img src="/apps/kidsnova/icon-512.png" alt="" width="52" height="52" /><b>KidsNova</b></div>
+              <div class="phone-app"><img src="/apps/cleaniq/icon.svg" alt="" width="52" height="52" /><b>Cleaniq AI</b></div>
+              <div class="phone-app"><span class="glyph" style="background:linear-gradient(135deg,#5B7CFA,#8B5CF6)">🧠</span><b>Brain Battle</b></div>
+              <div class="phone-app"><img src="/game/cv/icon-256.png" alt="" width="52" height="52" /><b>ChessVerse</b></div>
+            </div>
+            <div class="phone-strip">
+              <span class="bars"><i></i><i></i><i></i><i></i><i></i></span>
+              <p><b>0 KB uploaded</b>Everything stays on the device</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- STATS BAND -->
+  <!-- ═══════════ STATS ═══════════ -->
   <div class="stats-band">
-    <div class="stats-inner">
-      <div class="stat">
-        <span class="stat-n">9</span>
-        <span class="stat-l">Apps shipped</span>
-      </div>
-      <div class="stat">
-        <span class="stat-n">25+</span>
-        <span class="stat-l">Games inside</span>
-      </div>
-      <div class="stat">
-        <span class="stat-n">8</span>
-        <span class="stat-l">Need no account</span>
-      </div>
-      <div class="stat">
-        <span class="stat-n">100%</span>
-        <span class="stat-l">Data stays yours</span>
-      </div>
+    <div class="shell stats-inner">
+      <div class="stat"><span class="stat-n" data-count="9">9</span><span class="stat-l">Apps shipped</span></div>
+      <div class="stat"><span class="stat-n" data-count="25" data-suffix="+">25+</span><span class="stat-l">Games inside</span></div>
+      <div class="stat"><span class="stat-n" data-count="8">8</span><span class="stat-l">Need no account</span></div>
+      <div class="stat"><span class="stat-n" data-count="100" data-suffix="%">100%</span><span class="stat-l">Data stays yours</span></div>
     </div>
   </div>
 
-  <!-- APPS -->
-  <section class="section">
-    <div class="section-rule">
-      <span class="section-label">Our Apps</span>
-      <div class="rule-line"></div>
-    </div>
-    <div class="apps-grid">
-
-      <a class="app-card" href="/apps/hisabnova/" style="--card-glow:rgba(22,163,74,0.18);">
-        <div class="card-top">
-          <div class="app-icon" style="padding:0;overflow:hidden;box-shadow:0 8px 20px rgba(11,30,66,0.45);">
-            <img src="/apps/hisabnova/icon-512.png" alt="HisabNova logo" width="58" height="58" style="display:block;width:100%;height:100%;border-radius:14px;" />
-          </div>
-          <div class="app-info">
-            <div class="app-name">HisabNova</div>
-            <div class="app-cat">Business · GST Billing &amp; Inventory</div>
-          </div>
-        </div>
-        <p class="app-desc">Offline-first GST billing, stock and khata for Indian shops. Bills are written to your own device first, so the counter never waits for a signal. 11 Indian languages.</p>
-        <div class="tags">
-          <span class="tag">Works Offline</span>
-          <span class="tag">GST-Ready</span>
-          <span class="tag gold">Free Trial</span>
-        </div>
-        <div class="card-footer">
-          <span class="cta-btn">Learn more →</span>
-          <span class="platform">Mobile · Desktop</span>
-        </div>
-      </a>
-
-      <a class="app-card" href="/apps/shubhzo/" style="--card-glow:rgba(142,21,55,0.20);">
-        <div class="card-top">
-          <div class="app-icon" style="padding:0;overflow:hidden;box-shadow:0 8px 20px rgba(142,21,55,0.38);">
-            <img src="/apps/shubhzo/icon-512.png" alt="Shubhzo logo" width="58" height="58" style="display:block;width:100%;height:100%;border-radius:14px;" />
-          </div>
-          <div class="app-info">
-            <div class="app-name">Shubhzo</div>
-            <div class="app-cat">Events · Weddings &amp; Vendors</div>
-          </div>
-        </div>
-        <p class="app-desc">Plan an Indian wedding, puja or first birthday from one screen — 29 categories, 189 bookable services, and a refundable token that holds your date for 24 hours. Vendors get a partner app in the same install.</p>
-        <div class="tags">
-          <span class="tag">11 Languages</span>
-          <span class="tag">Two apps in one</span>
-          <span class="tag gold">Free</span>
-        </div>
-        <div class="card-footer">
-          <span class="cta-btn">Learn more →</span>
-          <span class="platform">Android</span>
-        </div>
-      </a>
-
-      <a class="app-card" href="/apps/kidsnova/" style="--card-glow:rgba(124,58,237,0.18);">
-        <div class="card-top">
-          <div class="app-icon" style="padding:0;overflow:hidden;box-shadow:0 8px 20px rgba(124,58,237,0.35);">
-            <img src="/apps/kidsnova/icon-512.png" alt="KidsNova logo" width="58" height="58" style="display:block;width:100%;height:100%;border-radius:14px;" />
-          </div>
-          <div class="app-info">
-            <div class="app-name">KidsNova</div>
-            <div class="app-cat">Education · Ages 3–8</div>
-          </div>
-        </div>
-        <p class="app-desc">A learning universe for young children — six worlds, six mini-games and a daily adventure. Fully offline, no ads, and it collects nothing.</p>
-        <div class="tags">
-          <span class="tag">Ad-Free</span>
-          <span class="tag">100% Offline</span>
-          <span class="tag gold">Free</span>
-        </div>
-        <div class="card-footer">
-          <span class="cta-btn">Learn more →</span>
-          <span class="platform">Android</span>
-        </div>
-      </a>
-
-      <a class="app-card" href="/game/bb/">
-        <div class="card-top">
-          <div class="app-icon icon-brain">🧠</div>
-          <div class="app-info">
-            <div class="app-name">Brain Battle</div>
-            <div class="app-cat">Puzzle · Brain Training</div>
-          </div>
-        </div>
-        <p class="app-desc">Four mini-games in one — Word Connect, Number Puzzle, Memory Match, and Color Challenge. 10,000+ levels, daily challenges, fully offline.</p>
-        <div class="tags">
-          <span class="tag">Offline</span>
-          <span class="tag">No account</span>
-          <span class="tag gold">Free</span>
-        </div>
-        <div class="card-footer">
-          <span class="cta-btn">Learn more →</span>
-          <span class="platform">Android</span>
-        </div>
-      </a>
-
-      <a class="app-card" href="/apps/jivault/" style="--card-glow:rgba(26,71,200,0.18);">
-        <div class="card-top">
-          <div class="app-icon" style="background:linear-gradient(135deg,#060F24,#1A47C8);box-shadow:0 8px 20px rgba(26,71,200,0.35);">🔐</div>
-          <div class="app-info">
-            <div class="app-name">JiVault</div>
-            <div class="app-cat">Productivity · Document Scanner</div>
-          </div>
-        </div>
-        <p class="app-desc">AI-powered document scanner with biometric vault, 12-language OCR, PDF tools, cloud backup, digital signatures, and voice transcription.</p>
-        <div class="tags">
-          <span class="tag">AI-Powered</span>
-          <span class="tag">Biometric Vault</span>
-          <span class="tag gold">Free + Premium</span>
-        </div>
-        <div class="card-footer">
-          <span class="cta-btn">Learn more →</span>
-          <span class="platform">Android</span>
-        </div>
-      </a>
-
-      <a class="app-card" href="/apps/cleaniq/" style="--card-glow:rgba(37,99,235,0.18);">
-        <div class="card-top">
-          <div class="app-icon" style="padding:0;overflow:hidden;box-shadow:0 8px 20px rgba(37,99,235,0.35);">
-            <img src="/apps/cleaniq/icon.svg" alt="Cleaniq AI logo" width="58" height="58" style="display:block;width:100%;height:100%;border-radius:14px;" />
-          </div>
-          <div class="app-info">
-            <div class="app-name">Cleaniq AI</div>
-            <div class="app-cat">Utilities · Storage Cleaner</div>
-          </div>
-        </div>
-        <p class="app-desc">Privacy-first AI storage cleaner. Finds duplicate photos, blurry shots, screenshots and junk — all analyzed on-device. Nothing is ever uploaded.</p>
-        <div class="tags">
-          <span class="tag">On-Device AI</span>
-          <span class="tag">100% Offline</span>
-          <span class="tag gold">Free</span>
-        </div>
-        <div class="card-footer">
-          <span class="cta-btn">Learn more →</span>
-          <span class="platform">Android</span>
-        </div>
-      </a>
-
-      <a class="app-card" href="/game/gv/" style="--card-glow:rgba(255,107,53,0.18);">
-        <div class="card-top">
-          <div class="app-icon" style="background:linear-gradient(135deg,#FF6B35,#e05000);box-shadow:0 8px 20px rgba(255,107,53,0.35);">🕹️</div>
-          <div class="app-info">
-            <div class="app-name">GameVault</div>
-            <div class="app-cat">Arcade · Action Games</div>
-          </div>
-        </div>
-        <p class="app-desc">Five action-packed arcade games in one app — Arrow Shooting, Knife Throw, Bubble Shooter, Balloon Pop, and Coin Drop. Hours of fun, zero cost.</p>
-        <div class="tags">
-          <span class="tag" style="background:rgba(255,107,53,0.12);color:#FF9066;">5 Games</span>
-          <span class="tag" style="background:rgba(255,107,53,0.12);color:#FF9066;">Offline</span>
-          <span class="tag gold">Free</span>
-        </div>
-        <div class="card-footer">
-          <span class="cta-btn" style="background:#FF6B35;">Learn more →</span>
-          <span class="platform">Android</span>
-        </div>
-      </a>
-
-      <a class="app-card" href="/game/kg/" style="--card-glow:rgba(220,20,60,0.18);">
-        <div class="card-top">
-          <div class="app-icon" style="background:linear-gradient(135deg,#8B0000,#DC143C);box-shadow:0 8px 20px rgba(220,20,60,0.35);">🃏</div>
-          <div class="app-info">
-            <div class="app-name">Kitty Gaming</div>
-            <div class="app-cat">Card Games · Multiplayer</div>
-          </div>
-        </div>
-        <p class="app-desc">India's most exciting card game platform — Teen Patti, Call Break, 28, and Kitty. Play live with friends or battle smart bots offline.</p>
-        <div class="tags">
-          <span class="tag" style="background:rgba(220,20,60,0.12);color:#FF6B8A;">4 Card Games</span>
-          <span class="tag" style="background:rgba(220,20,60,0.12);color:#FF6B8A;">Multiplayer</span>
-          <span class="tag gold">Free</span>
-        </div>
-        <div class="card-footer">
-          <span class="cta-btn" style="background:#DC143C;">Learn more →</span>
-          <span class="platform">Android</span>
-        </div>
-      </a>
-
-      <a class="app-card" href="/game/cv/" style="--card-glow:rgba(212,175,55,0.18);">
-        <div class="card-top">
-          <div class="app-icon" style="background:linear-gradient(135deg,#6b5312,#D4AF37);box-shadow:0 8px 20px rgba(212,175,55,0.35);">♛</div>
-          <div class="app-info">
-            <div class="app-name">ChessVerse</div>
-            <div class="app-cat">Board · Chess Universe</div>
-          </div>
-        </div>
-        <p class="app-desc">Classic chess vs. a 1000-level AI, a 6-chapter story campaign, offline puzzles, arena tournaments, survival battles, and a chess academy — all in one app.</p>
-        <div class="tags">
-          <span class="tag" style="background:rgba(212,175,55,0.12);color:#F4D03F;">1000-Level AI</span>
-          <span class="tag" style="background:rgba(212,175,55,0.12);color:#F4D03F;">Offline</span>
-          <span class="tag gold">Free</span>
-        </div>
-        <div class="card-footer">
-          <span class="cta-btn" style="background:#D4AF37;color:#1a1400;">Learn more →</span>
-          <span class="platform">Android</span>
-        </div>
-      </a>
-
-      <div class="card-soon">
-        <div class="soon-ring">+</div>
-        <div>
-          <p class="soon-label">Coming soon</p>
-          <p class="soon-name">Next App</p>
-        </div>
+  <!-- ═══════════ APPS ═══════════ -->
+  <section class="section" id="apps">
+    <div class="shell">
+      <div class="section-head reveal">
+        <span class="eyebrow">The cart</span>
+        <h2>Nine apps, each built to do <span class="grad-text">one thing well.</span></h2>
+        <p>Tools for work and money, a learning universe for kids, and a shelf of games — all from the same small studio.</p>
       </div>
 
+      <div class="filter-row reveal" role="group" aria-label="Filter apps">
+        <button class="chip on" data-filter="all">All · 9</button>
+        <button class="chip" data-filter="app">Apps &amp; tools · 5</button>
+        <button class="chip" data-filter="game">Games · 4</button>
+      </div>
+
+      <div class="apps-grid" id="apps-grid">
+
+        <a class="app-card reveal" data-type="app" href="/apps/hisabnova/" style="--tint:#16A34A;">
+          <div class="card-top">
+            <div class="app-icon"><img src="/apps/hisabnova/icon-512.png" alt="HisabNova logo" width="60" height="60" /></div>
+            <div class="app-info">
+              <div class="app-name">HisabNova</div>
+              <div class="app-cat">Business · GST Billing &amp; Inventory</div>
+            </div>
+          </div>
+          <p class="app-desc">Offline-first GST billing, stock and khata for Indian shops. Bills are written to your own device first, so the counter never waits for a signal. 11 Indian languages.</p>
+          <div class="tags"><span class="tag">Works Offline</span><span class="tag">GST-Ready</span><span class="tag gold">Free Trial</span></div>
+          <div class="card-footer"><span class="cta-btn">Learn more <i>→</i></span><span class="platform">Mobile · Desktop</span></div>
+        </a>
+
+        <a class="app-card reveal" data-type="app" href="/apps/shubhzo/" style="--tint:#D6336C;">
+          <div class="card-top">
+            <div class="app-icon"><img src="/apps/shubhzo/icon-512.png" alt="Shubhzo logo" width="60" height="60" /></div>
+            <div class="app-info">
+              <div class="app-name">Shubhzo</div>
+              <div class="app-cat">Events · Weddings &amp; Vendors</div>
+            </div>
+          </div>
+          <p class="app-desc">Plan an Indian wedding, puja or first birthday from one screen — 29 categories, 189 bookable services, and a refundable token that holds your date for 24 hours. Vendors get a partner app in the same install.</p>
+          <div class="tags"><span class="tag">11 Languages</span><span class="tag">Two apps in one</span><span class="tag gold">Free</span></div>
+          <div class="card-footer"><span class="cta-btn">Learn more <i>→</i></span><span class="platform">Android</span></div>
+        </a>
+
+        <a class="app-card reveal" data-type="app" href="/apps/kidsnova/" style="--tint:#8B5CF6;">
+          <div class="card-top">
+            <div class="app-icon"><img src="/apps/kidsnova/icon-512.png" alt="KidsNova logo" width="60" height="60" /></div>
+            <div class="app-info">
+              <div class="app-name">KidsNova</div>
+              <div class="app-cat">Education · Ages 3–8</div>
+            </div>
+          </div>
+          <p class="app-desc">A learning universe for young children — six worlds, six mini-games and a daily adventure. Fully offline, no ads, and it collects nothing.</p>
+          <div class="tags"><span class="tag">Ad-Free</span><span class="tag">100% Offline</span><span class="tag gold">Free</span></div>
+          <div class="card-footer"><span class="cta-btn">Learn more <i>→</i></span><span class="platform">Android</span></div>
+        </a>
+
+        <a class="app-card reveal" data-type="app" href="/apps/jivault/" style="--tint:#3B82F6;">
+          <div class="card-top">
+            <div class="app-icon" style="background:linear-gradient(135deg,#060F24,#1A47C8);">🔐</div>
+            <div class="app-info">
+              <div class="app-name">JiVault</div>
+              <div class="app-cat">Productivity · Document Scanner</div>
+            </div>
+          </div>
+          <p class="app-desc">AI-powered document scanner with biometric vault, 12-language OCR, PDF tools, cloud backup, digital signatures, and voice transcription.</p>
+          <div class="tags"><span class="tag">AI-Powered</span><span class="tag">Biometric Vault</span><span class="tag gold">Free + Premium</span></div>
+          <div class="card-footer"><span class="cta-btn">Learn more <i>→</i></span><span class="platform">Android</span></div>
+        </a>
+
+        <a class="app-card reveal" data-type="app" href="/apps/cleaniq/" style="--tint:#06B6D4;">
+          <div class="card-top">
+            <div class="app-icon"><img src="/apps/cleaniq/icon.svg" alt="Cleaniq AI logo" width="60" height="60" /></div>
+            <div class="app-info">
+              <div class="app-name">Cleaniq AI</div>
+              <div class="app-cat">Utilities · Storage Cleaner</div>
+            </div>
+          </div>
+          <p class="app-desc">Privacy-first AI storage cleaner. Finds duplicate photos, blurry shots, screenshots and junk — all analyzed on-device. Nothing is ever uploaded.</p>
+          <div class="tags"><span class="tag">On-Device AI</span><span class="tag">100% Offline</span><span class="tag gold">Free</span></div>
+          <div class="card-footer"><span class="cta-btn">Learn more <i>→</i></span><span class="platform">Android</span></div>
+        </a>
+
+        <a class="app-card reveal" data-type="game" href="/game/bb/" style="--tint:#6366F1;">
+          <div class="card-top">
+            <div class="app-icon" style="background:linear-gradient(135deg,#5B7CFA,#8B5CF6);">🧠</div>
+            <div class="app-info">
+              <div class="app-name">Brain Battle</div>
+              <div class="app-cat">Puzzle · Brain Training</div>
+            </div>
+          </div>
+          <p class="app-desc">Four mini-games in one — Word Connect, Number Puzzle, Memory Match, and Color Challenge. 10,000+ levels, daily challenges, fully offline.</p>
+          <div class="tags"><span class="tag">Offline</span><span class="tag">No account</span><span class="tag gold">Free</span></div>
+          <div class="card-footer"><span class="cta-btn">Learn more <i>→</i></span><span class="platform">Android</span></div>
+        </a>
+
+        <a class="app-card reveal" data-type="game" href="/game/gv/" style="--tint:#FF6B35;">
+          <div class="card-top">
+            <div class="app-icon" style="background:linear-gradient(135deg,#FF6B35,#e05000);">🕹️</div>
+            <div class="app-info">
+              <div class="app-name">GameVault</div>
+              <div class="app-cat">Arcade · Action Games</div>
+            </div>
+          </div>
+          <p class="app-desc">Five action-packed arcade games in one app — Arrow Shooting, Knife Throw, Bubble Shooter, Balloon Pop, and Coin Drop. Hours of fun, zero cost.</p>
+          <div class="tags"><span class="tag">5 Games</span><span class="tag">Offline</span><span class="tag gold">Free</span></div>
+          <div class="card-footer"><span class="cta-btn">Learn more <i>→</i></span><span class="platform">Android</span></div>
+        </a>
+
+        <a class="app-card reveal" data-type="game" href="/game/kg/" style="--tint:#DC143C;">
+          <div class="card-top">
+            <div class="app-icon" style="background:linear-gradient(135deg,#8B0000,#DC143C);">🃏</div>
+            <div class="app-info">
+              <div class="app-name">Kitty Gaming</div>
+              <div class="app-cat">Card Games · Multiplayer</div>
+            </div>
+          </div>
+          <p class="app-desc">India's most exciting card game platform — Teen Patti, Call Break, 28, and Kitty. Play live with friends or battle smart bots offline.</p>
+          <div class="tags"><span class="tag">4 Card Games</span><span class="tag">Multiplayer</span><span class="tag gold">Free</span></div>
+          <div class="card-footer"><span class="cta-btn">Learn more <i>→</i></span><span class="platform">Android</span></div>
+        </a>
+
+        <a class="app-card reveal" data-type="game" href="/game/cv/" style="--tint:#D4AF37;">
+          <div class="card-top">
+            <div class="app-icon"><img src="/game/cv/icon-256.png" alt="ChessVerse logo" width="60" height="60" /></div>
+            <div class="app-info">
+              <div class="app-name">ChessVerse</div>
+              <div class="app-cat">Board · Chess Universe</div>
+            </div>
+          </div>
+          <p class="app-desc">Classic chess vs. a 1000-level AI, a 6-chapter story campaign, offline puzzles, arena tournaments, survival battles, and a chess academy — all in one app.</p>
+          <div class="tags"><span class="tag">1000-Level AI</span><span class="tag">Offline</span><span class="tag gold">Free</span></div>
+          <div class="card-footer"><span class="cta-btn">Learn more <i>→</i></span><span class="platform">Android</span></div>
+        </a>
+
+        <div class="card-soon reveal" data-type="all">
+          <div class="soon-ring">+</div>
+          <div>
+            <p class="soon-label">Coming soon</p>
+            <p class="soon-name">Next App</p>
+          </div>
+        </div>
+
+      </div>
     </div>
   </section>
 
-  <!-- PHILOSOPHY -->
-  <div class="philosophy">
-    <div class="philosophy-inner">
-      <div class="phil-header">
-        <h2 class="phil-title">Built <span class="accent">different.</span></h2>
-        <p class="phil-sub">Most apps ask too much — sign up, allow notifications, share your location. We build the opposite: lean apps that just work.</p>
+  <!-- ═══════════ ONBOARDING ═══════════ -->
+  <section class="section onboard" id="start">
+    <div class="shell">
+      <div class="section-head center reveal">
+        <span class="eyebrow">Getting started</span>
+        <h2>From nothing to <span class="grad-text">running</span> in three steps.</h2>
+        <p>No onboarding questionnaire, no email verification, no "create your workspace" screen. Pick, install, open.</p>
       </div>
+
+      <div class="steps" id="steps">
+        <div class="step reveal">
+          <div class="step-num">1</div>
+          <div class="step-card">
+            <div class="step-icon" style="background:linear-gradient(140deg,rgba(139,92,246,0.3),rgba(139,92,246,0.08));">🧭</div>
+            <h3>Pick your app</h3>
+            <p>Nine apps, each with a page that tells you exactly what it does, what it stores, and what it costs — before you install anything.</p>
+            <span class="step-meta">Takes 2 minutes</span>
+          </div>
+        </div>
+
+        <div class="step reveal">
+          <div class="step-num">2</div>
+          <div class="step-card">
+            <div class="step-icon" style="background:linear-gradient(140deg,rgba(255,92,147,0.3),rgba(255,92,147,0.08));">⬇️</div>
+            <h3>Install it</h3>
+            <p>One tap from the Play Store. Small download, no companion app to fetch, no permissions requested until the moment a feature actually needs one.</p>
+            <span class="step-meta">No card needed</span>
+          </div>
+        </div>
+
+        <div class="step reveal">
+          <div class="step-num">3</div>
+          <div class="step-card">
+            <div class="step-icon" style="background:linear-gradient(140deg,rgba(255,176,32,0.3),rgba(255,176,32,0.08));">🚀</div>
+            <h3>Open and go</h3>
+            <p>Eight of the nine drop you straight into the app — no sign-up wall. Your data is written to your device first, and stays there unless you turn sync on.</p>
+            <span class="step-meta">Works on aeroplane mode</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="onboard-note reveal">
+        <span class="note-chip">🔓 <b>No account</b> for 8 of 9 apps</span>
+        <span class="note-chip">💳 <b>Free</b> to start, every app</span>
+        <span class="note-chip">📡 <b>Offline</b> by default</span>
+        <span class="note-chip">🗂️ <b>Delete</b> your data anytime</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ INSIGHTS / CHARTS ═══════════ -->
+  <section class="section" id="insights">
+    <div class="shell">
+      <div class="section-head reveal">
+        <span class="eyebrow">By the numbers</span>
+        <h2>What the cart actually <span class="grad-text">holds.</span></h2>
+        <p>Every figure below is counted from the nine apps on this page — no projections, no rounded-up marketing numbers.</p>
+      </div>
+
+      <div class="viz-grid">
+
+        <!-- Donut: portfolio mix -->
+        <div class="card reveal">
+          <div class="viz-head">
+            <div>
+              <p class="viz-title">Portfolio mix</p>
+            </div>
+            <button class="viz-toggle" data-viz="viz-mix" aria-pressed="false">Table</button>
+          </div>
+          <p class="viz-sub">Nine shipped apps, grouped by what they are for.</p>
+
+          <div class="viz-body" id="viz-mix-body">
+            <div class="donut-wrap">
+              <div class="donut">
+                <svg width="176" height="176" viewBox="0 0 176 176" role="img" aria-label="Donut chart: games and play 4 apps, everyday tools 2, business and events 2, learning 1.">
+                  <circle cx="88" cy="88" r="62" fill="none" stroke="#2A2848" stroke-width="20"></circle>
+                  <g transform="rotate(-90 88 88)">
+                    <circle class="donut-seg" cx="88" cy="88" r="62" stroke="var(--s1)" stroke-dasharray="0 1000" data-dash="170.14 1000" stroke-dashoffset="0"       data-name="Games &amp; play"      data-val="4 apps · 44%"></circle>
+                    <circle class="donut-seg" cx="88" cy="88" r="62" stroke="var(--s2)" stroke-dasharray="0 1000" data-dash="83.57 1000"  stroke-dashoffset="-173.14" data-name="Everyday tools"     data-val="2 apps · 22%"></circle>
+                    <circle class="donut-seg" cx="88" cy="88" r="62" stroke="var(--s3)" stroke-dasharray="0 1000" data-dash="83.57 1000"  stroke-dashoffset="-259.71" data-name="Business &amp; events" data-val="2 apps · 22%"></circle>
+                    <circle class="donut-seg" cx="88" cy="88" r="62" stroke="var(--s4)" stroke-dasharray="0 1000" data-dash="40.28 1000"  stroke-dashoffset="-346.27" data-name="Learning"           data-val="1 app · 11%"></circle>
+                  </g>
+                </svg>
+                <div class="donut-center"><b>9</b><span>Apps</span></div>
+              </div>
+
+              <div class="legend">
+                <div class="legend-row"><span class="swatch" style="background:var(--s1)"></span><span class="lbl">Games &amp; play</span><span class="val">4</span></div>
+                <div class="legend-row"><span class="swatch" style="background:var(--s2)"></span><span class="lbl">Everyday tools</span><span class="val">2</span></div>
+                <div class="legend-row"><span class="swatch" style="background:var(--s3)"></span><span class="lbl">Business &amp; events</span><span class="val">2</span></div>
+                <div class="legend-row"><span class="swatch" style="background:var(--s4)"></span><span class="lbl">Learning</span><span class="val">1</span></div>
+              </div>
+            </div>
+          </div>
+
+          <table class="viz-table" id="viz-mix-table">
+            <thead><tr><th>Group</th><th>Apps</th></tr></thead>
+            <tbody>
+              <tr><td>Games &amp; play</td><td>4</td></tr>
+              <tr><td>Everyday tools</td><td>2</td></tr>
+              <tr><td>Business &amp; events</td><td>2</td></tr>
+              <tr><td>Learning</td><td>1</td></tr>
+              <tr><td><strong>Total</strong></td><td><strong>9</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Bars: games bundled -->
+        <div class="card reveal">
+          <div class="viz-head">
+            <div>
+              <p class="viz-title">Games &amp; modes bundled per app</p>
+            </div>
+            <button class="viz-toggle" data-viz="viz-games" aria-pressed="false">Table</button>
+          </div>
+          <p class="viz-sub">Five of the nine apps are bundles. Together they hold 25 playable games and modes.</p>
+
+          <div class="viz-body" id="viz-games-body">
+            <div class="bars" id="bars-games">
+              <div class="bar-row"><span class="name">KidsNova</span><span class="bar-track"><span class="bar-fill" data-w="100" data-name="KidsNova" data-val="6 mini-games"></span></span><span class="num">6</span></div>
+              <div class="bar-row"><span class="name">ChessVerse</span><span class="bar-track"><span class="bar-fill" data-w="100" data-name="ChessVerse" data-val="6 modes"></span></span><span class="num">6</span></div>
+              <div class="bar-row"><span class="name">GameVault</span><span class="bar-track"><span class="bar-fill" data-w="83.3" data-name="GameVault" data-val="5 arcade games"></span></span><span class="num">5</span></div>
+              <div class="bar-row"><span class="name">Brain Battle</span><span class="bar-track"><span class="bar-fill" data-w="66.7" data-name="Brain Battle" data-val="4 mini-games"></span></span><span class="num">4</span></div>
+              <div class="bar-row"><span class="name">Kitty Gaming</span><span class="bar-track"><span class="bar-fill" data-w="66.7" data-name="Kitty Gaming" data-val="4 card games"></span></span><span class="num">4</span></div>
+            </div>
+            <div class="axis-ticks"><span>0</span><span>2</span><span>4</span><span>6</span></div>
+          </div>
+
+          <table class="viz-table" id="viz-games-table">
+            <thead><tr><th>App</th><th>Games / modes</th></tr></thead>
+            <tbody>
+              <tr><td>KidsNova</td><td>6</td></tr>
+              <tr><td>ChessVerse</td><td>6</td></tr>
+              <tr><td>GameVault</td><td>5</td></tr>
+              <tr><td>Brain Battle</td><td>4</td></tr>
+              <tr><td>Kitty Gaming</td><td>4</td></tr>
+              <tr><td><strong>Total</strong></td><td><strong>25</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Meters: the promise -->
+        <div class="card span-2 reveal">
+          <div class="viz-head">
+            <div>
+              <p class="viz-title">The promise, measured</p>
+            </div>
+            <button class="viz-toggle" data-viz="viz-promise" aria-pressed="false">Table</button>
+          </div>
+          <p class="viz-sub">How many of the nine apps keep each promise. Shubhzo is the one exception on the first two — it connects you to real vendors and real money, so it needs a server and a sign-in.</p>
+
+          <div class="viz-body" id="viz-promise-body">
+            <div class="meters" id="meters">
+              <div class="meter">
+                <div class="meter-head"><span class="m-lbl">Works fully offline</span><span class="m-val">8<span style="color:var(--text-3);font-size:13px;font-weight:500"> / 9</span></span></div>
+                <div class="meter-track"><div class="meter-fill" data-w="88.9" style="background:var(--s1)"></div></div>
+                <p class="meter-note">Every app but Shubhzo runs with the radio off.</p>
+              </div>
+
+              <div class="meter">
+                <div class="meter-head"><span class="m-lbl">Opens without an account</span><span class="m-val">8<span style="color:var(--text-3);font-size:13px;font-weight:500"> / 9</span></span></div>
+                <div class="meter-track"><div class="meter-fill" data-w="88.9" style="background:var(--s1)"></div></div>
+                <p class="meter-note">Install, tap the icon, start using it.</p>
+              </div>
+
+              <div class="meter">
+                <div class="meter-head"><span class="m-lbl">Free to start</span><span class="m-val">9<span style="color:var(--text-3);font-size:13px;font-weight:500"> / 9</span></span></div>
+                <div class="meter-track"><div class="meter-fill" data-w="100" style="background:var(--s1)"></div></div>
+                <p class="meter-note">Two have paid tiers; none charges before you try it.</p>
+              </div>
+
+              <div class="meter">
+                <div class="meter-head"><span class="m-lbl">Sells your data</span><span class="m-val">0<span style="color:var(--text-3);font-size:13px;font-weight:500"> / 9</span></span></div>
+                <div class="meter-track"><div class="meter-fill" data-w="0" style="background:var(--s1)"></div></div>
+                <p class="meter-note">Not now, not on any future update. The empty bar is the point.</p>
+              </div>
+            </div>
+          </div>
+
+          <table class="viz-table" id="viz-promise-table">
+            <thead><tr><th>Promise</th><th>Apps out of 9</th></tr></thead>
+            <tbody>
+              <tr><td>Works fully offline</td><td>8</td></tr>
+              <tr><td>Opens without an account</td><td>8</td></tr>
+              <tr><td>Free to start</td><td>9</td></tr>
+              <tr><td>Sells your data</td><td>0</td></tr>
+            </tbody>
+          </table>
+
+          <p class="viz-foot">Counted September 2026 across the nine apps listed on this page. "Games &amp; modes" counts distinct playable games in a bundle; for ChessVerse it counts its six game modes.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ WHY US ═══════════ -->
+  <section class="section" id="why">
+    <div class="shell">
+      <div class="section-head reveal">
+        <span class="eyebrow">Our principles</span>
+        <h2>Built <span class="grad-text">different.</span></h2>
+        <p>Most apps ask too much — sign up, allow notifications, share your location. We build the opposite: lean apps that just work.</p>
+      </div>
+
       <div class="principles">
-        <div class="principle">
-          <div class="principle-icon p-icon-1">✈️</div>
+        <div class="principle reveal">
+          <div class="principle-icon p1">✈️</div>
           <h3>Offline first</h3>
           <p>Every app works without an internet connection. No loading spinners, no "check your network" — just open and use.</p>
         </div>
-        <div class="principle">
-          <div class="principle-icon p-icon-2">🔒</div>
+        <div class="principle reveal">
+          <div class="principle-icon p2">🔒</div>
           <h3>No accounts</h3>
           <p>Download and start — no sign-up wall. Your data lives on your device, and anything that syncs off it is something you switch on. We never sell it.</p>
         </div>
-        <div class="principle">
-          <div class="principle-icon p-icon-3">🎯</div>
+        <div class="principle reveal">
+          <div class="principle-icon p3">🎯</div>
           <h3>One thing well</h3>
           <p>Each app has a clear, focused purpose. No feature bloat, no upsell loops — just the experience you came for.</p>
         </div>
-        <div class="principle">
-          <div class="principle-icon p-icon-4">♾️</div>
+        <div class="principle reveal">
+          <div class="principle-icon p4">♾️</div>
           <h3>Keep growing</h3>
           <p>We ship, listen, and improve. Each update makes the app better — not bigger for the sake of it.</p>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- ABOUT -->
-  <div class="about-section">
-    <div class="about-left">
-      <h2>The idea behind MyAppsCart</h2>
-      <div class="accent-line"></div>
+  <!-- ═══════════ ABOUT ═══════════ -->
+  <section class="section" id="about">
+    <div class="shell about-grid">
+      <div class="about-left reveal">
+        <h2>The idea behind MyAppsCart</h2>
+        <div class="rule"></div>
+      </div>
+      <div class="about-right reveal">
+        <p>MyAppsCart started with a simple frustration: <strong>most mobile apps are cluttered, demand too much, and break the moment you go offline.</strong> We set out to build the opposite — lean, honest apps that respect your time, your storage, and your privacy.</p>
+        <p>The name comes from the idea of a curated cart: a small collection of hand-picked apps, each built with care, each with a clear purpose. No filler. We'd rather ship one app that does its job beautifully than ten that feel rushed.</p>
+        <p>Almost every app we release follows the same rules: <strong>works offline</strong>, <strong>needs no account</strong>, and <strong>has no hidden tracking</strong>. Where an app genuinely cannot — Shubhzo connects you to real vendors and real money, so it needs a server and a sign-in — the contract becomes <strong>collect only what the job needs, and never sell it</strong>. That much holds for everything in the cart.</p>
+        <a class="contact-chip" href="mailto:support@myappscart.com"><span class="dot"></span> support@myappscart.com</a>
+      </div>
     </div>
-    <div class="about-right">
-      <p>MyAppsCart started with a simple frustration: <strong>most mobile apps are cluttered, demand too much, and break the moment you go offline.</strong> We set out to build the opposite — lean, honest apps that respect your time, your storage, and your privacy.</p>
-      <p>The name comes from the idea of a curated cart: a small collection of hand-picked apps, each built with care, each with a clear purpose. No filler. We'd rather ship one app that does its job beautifully than ten that feel rushed.</p>
-      <p>Almost every app we release follows the same rules: <strong>works offline</strong>, <strong>needs no account</strong>, and <strong>has no hidden tracking</strong>. Where an app genuinely cannot — Shubhzo connects you to real vendors and real money, so it needs a server and a sign-in — the contract becomes <strong>collect only what the job needs, and never sell it</strong>. That much holds for everything in the cart.</p>
-      <a class="contact-chip" href="mailto:support@myappscart.com">
-        <span class="dot"></span>
-        support@myappscart.com
-      </a>
-    </div>
-  </div>
+  </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <span class="footer-logo">MyAppsCart</span>
-    <div class="footer-links">
-      <a href="mailto:support@myappscart.com">Contact</a>
-      <a href="/apps/hisabnova/">HisabNova</a>
-      <a href="/game/bb/">Brain Battle</a>
-      <a href="/apps/shubhzo/">Shubhzo</a>
-      <a href="/apps/jivault/">JiVault</a>
-      <a href="/apps/cleaniq/">Cleaniq AI</a>
-      <a href="/game/gv/">GameVault</a>
-      <a href="/game/kg/">Kitty Gaming</a>
-      <a href="/game/cv/">ChessVerse</a>
-      <a href="/apps/jivault/privacy.html">Privacy</a>
+  <!-- ═══════════ CTA ═══════════ -->
+  <section class="shell" style="padding-bottom:20px;">
+    <div class="cta-banner reveal">
+      <h2>Pick one. It'll take two minutes.</h2>
+      <p>Nine apps, nothing to sign up for, and every one of them free to start.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#apps">Browse the cart</a>
+        <a class="btn btn-ghost" href="mailto:support@myappscart.com">Talk to us</a>
+      </div>
     </div>
-    <p class="footer-copy">© 2026 MyAppsCart · All rights reserved</p>
+  </section>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="site-footer">
+    <div class="shell">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="logo" href="/">
+            <span class="mark" aria-hidden="true"><span class="mark__sq"></span><span class="mark__sq"></span><span class="mark__sq"></span><span class="mark__sq"></span></span>
+            MyAppsCart
+          </a>
+          <p>An independent studio building small, focused apps — offline-first wherever they can be, and never paid for with your data.</p>
+          <a class="contact-chip" href="mailto:support@myappscart.com" style="margin-top:0;"><span class="dot"></span> support@myappscart.com</a>
+          <div class="footer-badges">
+            <span class="f-badge">🇮🇳 Made in India</span>
+            <span class="f-badge">Offline-first</span>
+            <span class="f-badge">No data resale</span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Apps</h4>
+          <ul>
+            <li><a href="/apps/hisabnova/">HisabNova</a></li>
+            <li><a href="/apps/shubhzo/">Shubhzo</a></li>
+            <li><a href="/apps/kidsnova/">KidsNova</a></li>
+            <li><a href="/apps/jivault/">JiVault</a></li>
+            <li><a href="/apps/cleaniq/">Cleaniq AI</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Games</h4>
+          <ul>
+            <li><a href="/game/bb/">Brain Battle</a></li>
+            <li><a href="/game/gv/">GameVault</a></li>
+            <li><a href="/game/kg/">Kitty Gaming</a></li>
+            <li><a href="/game/cv/">ChessVerse</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#start">Get started</a></li>
+            <li><a href="#insights">By the numbers</a></li>
+            <li><a href="#about">About us</a></li>
+            <li><a href="mailto:support@myappscart.com">Support</a></li>
+            <li><a href="/apps/jivault/privacy.html">Privacy policy</a></li>
+            <li><a href="/apps/jivault/terms.html">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 MyAppsCart · All rights reserved</p>
+        <a class="to-top" href="#top">
+          Back to top
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+        </a>
+      </div>
+    </div>
   </footer>
 
 </div>
 
+<div id="tip" role="status" aria-live="polite"></div>
+
 <script>
-  /* ── Neural canvas ── */
-  const canvas = document.getElementById('neural-canvas');
-  const ctx    = canvas.getContext('2d');
-  const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let W, H, nodes;
+(function () {
+  'use strict';
+  var noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  /* ───────── ambient neural canvas ───────── */
+  (function neural() {
+    var canvas = document.getElementById('neural-canvas');
+    if (!canvas || noMotion) return;
+    var ctx = canvas.getContext('2d');
+    var W, H, nodes;
 
-  function spawn() {
-    nodes = Array.from({ length: 55 }, () => ({
-      x: Math.random() * W, y: Math.random() * H,
-      vx: (Math.random() - 0.5) * 0.26, vy: (Math.random() - 0.5) * 0.26,
-      r: Math.random() * 1.4 + 0.4,
-    }));
-  }
-
-  function tick() {
-    ctx.clearRect(0, 0, W, H);
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const dx = nodes[i].x - nodes[j].x;
-        const dy = nodes[i].y - nodes[j].y;
-        const d  = Math.sqrt(dx * dx + dy * dy);
-        if (d < 135) {
-          ctx.beginPath();
-          ctx.strokeStyle = `rgba(91,124,250,${(1 - d / 135) * 0.1})`;
-          ctx.lineWidth = 0.7;
-          ctx.moveTo(nodes[i].x, nodes[i].y);
-          ctx.lineTo(nodes[j].x, nodes[j].y);
-          ctx.stroke();
-        }
+    function resize() {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+    function spawn() {
+      var count = W < 700 ? 30 : 58;
+      nodes = [];
+      for (var i = 0; i < count; i++) {
+        nodes.push({
+          x: Math.random() * W, y: Math.random() * H,
+          vx: (Math.random() - 0.5) * 0.24, vy: (Math.random() - 0.5) * 0.24,
+          r: Math.random() * 1.5 + 0.4
+        });
       }
     }
-    nodes.forEach(n => {
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(91,124,250,0.3)';
-      ctx.fill();
-      n.x += n.vx; n.y += n.vy;
-      if (n.x < 0 || n.x > W) n.vx *= -1;
-      if (n.y < 0 || n.y > H) n.vy *= -1;
-    });
-    requestAnimationFrame(tick);
-  }
-
-  if (!noMotion) {
+    function tick() {
+      ctx.clearRect(0, 0, W, H);
+      for (var i = 0; i < nodes.length; i++) {
+        for (var j = i + 1; j < nodes.length; j++) {
+          var dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
+          var d = Math.sqrt(dx * dx + dy * dy);
+          if (d < 140) {
+            ctx.beginPath();
+            ctx.strokeStyle = 'rgba(139,92,246,' + ((1 - d / 140) * 0.12) + ')';
+            ctx.lineWidth = 0.7;
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      for (var k = 0; k < nodes.length; k++) {
+        var n = nodes[k];
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(167,139,250,0.32)';
+        ctx.fill();
+        n.x += n.vx; n.y += n.vy;
+        if (n.x < 0 || n.x > W) n.vx *= -1;
+        if (n.y < 0 || n.y > H) n.vy *= -1;
+      }
+      requestAnimationFrame(tick);
+    }
     resize(); spawn(); tick();
-    window.addEventListener('resize', () => { resize(); spawn(); });
-  }
+    var t;
+    window.addEventListener('resize', function () {
+      clearTimeout(t);
+      t = setTimeout(function () { resize(); spawn(); }, 180);
+    });
+  })();
 
-  /* ── Hero mark burst interaction ── */
-  const heroMark = document.getElementById('hero-mark');
-  if (heroMark && !noMotion) {
-    heroMark.addEventListener('click', () => {
-      heroMark.classList.add('burst');
-      setTimeout(() => heroMark.classList.remove('burst'), 420);
+  /* ───────── header: progress + stuck state ───────── */
+  var header = document.getElementById('header');
+  var progress = document.getElementById('progress');
+  function onScroll() {
+    var y = window.scrollY || document.documentElement.scrollTop;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    if (progress) progress.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
+    if (header) header.classList.toggle('stuck', y > 12);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ───────── mobile menu ───────── */
+  var burger = document.getElementById('burger');
+  var panel = document.getElementById('mobile-panel');
+  if (burger && panel) {
+    burger.addEventListener('click', function () {
+      var open = panel.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    });
+    panel.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') {
+        panel.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+      }
     });
   }
+
+  /* ───────── back to top ───────── */
+  var toTop = document.querySelector('.to-top');
+  if (toTop) {
+    toTop.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: noMotion ? 'auto' : 'smooth' });
+    });
+  }
+
+  /* ───────── active nav link ───────── */
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-links a'));
+  var sections = navLinks
+    .map(function (a) { return document.querySelector(a.getAttribute('href')); })
+    .filter(Boolean);
+
+  if (sections.length && 'IntersectionObserver' in window) {
+    var navObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        navLinks.forEach(function (a) {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id);
+        });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    sections.forEach(function (s) { navObs.observe(s); });
+  }
+
+  /* ───────── counters ───────── */
+  function countUp(el) {
+    var target = parseInt(el.getAttribute('data-count'), 10);
+    var suffix = el.getAttribute('data-suffix') || '';
+    if (isNaN(target) || noMotion) { return; }
+    var dur = 1100, start = null;
+    function frame(ts) {
+      if (start === null) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if (p < 1) requestAnimationFrame(frame);
+    }
+    el.textContent = '0' + suffix;
+    requestAnimationFrame(frame);
+  }
+
+  /* ───────── reveal + chart animation ───────── */
+  function activate(el) {
+    el.classList.add('in');
+
+    el.querySelectorAll('[data-count]').forEach(countUp);
+
+    el.querySelectorAll('.donut-seg').forEach(function (seg, i) {
+      var dash = seg.getAttribute('data-dash');
+      if (!dash) return;
+      setTimeout(function () { seg.setAttribute('stroke-dasharray', dash); }, noMotion ? 0 : 110 * i);
+    });
+
+    el.querySelectorAll('.bar-fill, .meter-fill').forEach(function (bar, i) {
+      var w = bar.getAttribute('data-w');
+      if (w === null) return;
+      setTimeout(function () { bar.style.width = w + '%'; }, noMotion ? 0 : 90 * i);
+    });
+  }
+
+  var revealables = document.querySelectorAll('.reveal');
+  var steps = document.getElementById('steps');
+
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        activate(en.target);
+        obs.unobserve(en.target);
+      });
+    }, { threshold: 0.18, rootMargin: '0px 0px -40px 0px' });
+    revealables.forEach(function (el) { obs.observe(el); });
+
+    if (steps) {
+      var stepObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          steps.classList.add('lit');
+          stepObs.unobserve(en.target);
+        });
+      }, { threshold: 0.3 });
+      stepObs.observe(steps);
+    }
+  } else {
+    revealables.forEach(activate);
+    if (steps) steps.classList.add('lit');
+  }
+
+  /* ───────── app filter ───────── */
+  var chips = document.querySelectorAll('.chip[data-filter]');
+  var cards = document.querySelectorAll('#apps-grid [data-type]');
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      var f = chip.getAttribute('data-filter');
+      chips.forEach(function (c) { c.classList.toggle('on', c === chip); });
+      cards.forEach(function (card) {
+        var t = card.getAttribute('data-type');
+        var show = f === 'all' || t === f || t === 'all';
+        card.classList.toggle('hidden', !show);
+      });
+    });
+  });
+
+  /* ───────── card cursor glow ───────── */
+  if (!noMotion && window.matchMedia('(hover: hover)').matches) {
+    document.querySelectorAll('.app-card').forEach(function (card) {
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+        card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+      });
+    });
+  }
+
+  /* ───────── chart tooltips ───────── */
+  var tip = document.getElementById('tip');
+  function showTip(e, name, val) {
+    if (!tip) return;
+    tip.innerHTML = '<b></b><i></i>';
+    tip.querySelector('b').textContent = name;
+    tip.querySelector('i').textContent = val;
+    tip.style.left = e.clientX + 'px';
+    tip.style.top = e.clientY + 'px';
+    tip.classList.add('on');
+  }
+  function hideTip() { if (tip) tip.classList.remove('on'); }
+
+  document.querySelectorAll('.donut-seg[data-name]').forEach(function (seg) {
+    seg.addEventListener('pointerenter', function () { seg.setAttribute('stroke-width', '26'); });
+    seg.addEventListener('pointermove', function (e) {
+      showTip(e, seg.getAttribute('data-name'), seg.getAttribute('data-val'));
+    });
+    seg.addEventListener('pointerleave', function () {
+      seg.setAttribute('stroke-width', '20');
+      hideTip();
+    });
+  });
+
+  document.querySelectorAll('.bar-row').forEach(function (row) {
+    var fill = row.querySelector('.bar-fill[data-name]');
+    if (!fill) return;
+    row.addEventListener('pointermove', function (e) {
+      showTip(e, fill.getAttribute('data-name'), fill.getAttribute('data-val'));
+    });
+    row.addEventListener('pointerleave', hideTip);
+  });
+
+  /* ───────── chart table toggles ───────── */
+  document.querySelectorAll('.viz-toggle[data-viz]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var key = btn.getAttribute('data-viz');
+      var body = document.getElementById(key + '-body');
+      var table = document.getElementById(key + '-table');
+      if (!body || !table) return;
+      var showTable = !table.classList.contains('show');
+      table.classList.toggle('show', showTable);
+      body.classList.toggle('hide', showTable);
+      btn.textContent = showTable ? 'Chart' : 'Table';
+      btn.setAttribute('aria-pressed', showTable ? 'true' : 'false');
+      hideTip();
+    });
+  });
+
+  /* ───────── logomark easter egg ───────── */
+  document.querySelectorAll('.logo .mark').forEach(function (mark) {
+    mark.addEventListener('click', function () {
+      if (noMotion) return;
+      mark.style.transform = 'rotate(90deg)';
+      setTimeout(function () { mark.style.transform = ''; }, 420);
+    });
+  });
+})();
 </script>
 
 </body>
