@@ -112,6 +112,45 @@
     .btn-ghost:hover { background: rgba(255,255,255,0.18); text-decoration: none; }
     .store-note { margin-top: 14px; font-size: 13px; opacity: 0.66; }
 
+    /* ══ Downloads ══ */
+    .dl-grid {
+      display: grid; gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(268px, 1fr));
+      margin-top: 26px;
+    }
+    .dl-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 26px 24px;
+      display: flex; flex-direction: column;
+    }
+    .dl-os { font-size: 17px; font-weight: 800; letter-spacing: -0.3px; }
+    .dl-req { font-size: 13px; color: var(--muted); margin-top: 3px; }
+    .dl-btn {
+      display: inline-block; margin-top: 18px; text-align: center;
+      background: var(--green); color: #fff; font-weight: 700; font-size: 15px;
+      border-radius: 26px; padding: 13px 22px;
+      box-shadow: 0 8px 22px rgba(22,163,74,0.30);
+    }
+    .dl-btn:hover { background: #15803D; text-decoration: none; }
+    .dl-btn.pending {
+      background: var(--surface-2); color: var(--faint);
+      box-shadow: none; cursor: default; border: 1px dashed var(--border);
+    }
+    .dl-meta {
+      margin-top: 12px; font-size: 12px; color: var(--faint);
+      font-variant-numeric: tabular-nums; word-break: break-all;
+    }
+    .dl-note {
+      margin-top: 26px; background: var(--surface-2);
+      border: 1px solid var(--border); border-left: 4px solid var(--gold);
+      border-radius: 12px; padding: 18px 20px; font-size: 14px; color: var(--muted);
+    }
+    .dl-note strong { color: var(--text); }
+    .dl-note code {
+      background: rgba(11,30,66,0.07); padding: 1px 6px;
+      border-radius: 5px; font-size: 13px;
+    }
+
     /* ══ Stats band ══ */
     .stats {
       background: #08172F; color: #fff;
@@ -387,7 +426,7 @@
       <a class="btn btn-primary" href="/apps/hisabnova/tutorial.html">Read the full guide →</a>
       <a class="btn btn-ghost" href="#features">See every feature</a>
     </div>
-    <p class="store-note">Coming soon to Google Play, the App Store, and as a Mac &amp; Windows download</p>
+    <p class="store-note"><a href="#download" style="color:inherit;text-decoration:underline">Download for Mac</a> · Windows shortly · Google Play and the App Store to follow</p>
   </div>
 </div>
 
@@ -1652,6 +1691,56 @@
 </div>
 
 <!-- ════════ PRICING ════════ -->
+<!-- ════════ DOWNLOAD ════════ -->
+<section id="download">
+  <p class="sec-eyebrow">Download</p>
+  <h2>Put it on the counter</h2>
+  <p style="max-width:620px;color:var(--muted);margin-top:10px;">
+    The desktop builds are the whole app — billing, GST, stock, the khata, reports,
+    printing and same-WiFi sync between counters. No account, and no internet
+    needed after the download.
+  </p>
+
+  <div class="dl-grid">
+    <div class="dl-card">
+      <span class="dl-os">macOS</span>
+      <span class="dl-req">macOS 11 Big Sur or newer · Apple silicon &amp; Intel</span>
+      <a class="dl-btn"
+         href="https://github.com/rajeshratann/myappscart-web/releases/download/hisabnova-v1.0.0/HisabNova-1.0.0-macos.dmg">
+        Download .dmg — 56 MB
+      </a>
+      <span class="dl-meta">Version 1.0.0<br>SHA-256 40b0c0cd9993d10bccc252f2442c5c1bfe4b01b69bfbe3d569bbc4e90d5e08e9</span>
+    </div>
+
+    <div class="dl-card">
+      <span class="dl-os">Windows</span>
+      <span class="dl-req">Windows 10 or newer · 64-bit</span>
+      <span class="dl-btn pending">Building — available shortly</span>
+      <span class="dl-meta">An installer and a portable .zip, both 64-bit.</span>
+    </div>
+
+    <div class="dl-card">
+      <span class="dl-os">Android &amp; iOS</span>
+      <span class="dl-req">The same books, in your pocket</span>
+      <span class="dl-btn pending">Coming to Google Play &amp; the App Store</span>
+      <span class="dl-meta">Sync between the counter PC and the phone works over
+        your shop WiFi, with no cloud account.</span>
+    </div>
+  </div>
+
+  <div class="dl-note">
+    <strong>First launch on a Mac.</strong> The app is not yet notarised by Apple,
+    so a double-click will say it "cannot be opened because the developer cannot be
+    verified". That is macOS not recognising us yet — not a problem with the file.
+    <strong>Right-click the app → Open</strong>, then confirm once. Every launch
+    after that is a normal double-click.
+    <br><br>
+    Worth checking the download is intact before you install it — paste this in
+    Terminal and the number should match the one above:
+    <br><code>shasum -a 256 ~/Downloads/HisabNova-1.0.0-macos.dmg</code>
+  </div>
+</section>
+
 <section id="pricing">
   <div class="sec-eyebrow">Plans</div>
   <h2>Start free for 30 days, on the top plan</h2>

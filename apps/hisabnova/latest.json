@@ -1,0 +1,9 @@
+{
+  "version": "1.0.0",
+  "buildNumber": 1,
+  "critical": false,
+  "notes": "First desktop release.",
+  "downloads": {
+    "macos": "https://github.com/rajeshratann/myappscart-web/releases/download/hisabnova-v1.0.0/HisabNova-1.0.0-macos.dmg"
+  }
+}
