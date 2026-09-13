@@ -4,6 +4,7 @@
   "critical": false,
   "notes": "Purchase returns and refunds, loose-item billing, and a barcode gun that works the moment you plug it in.",
   "downloads": {
-    "macos": "https://github.com/rajeshratann/myappscart-web/releases/download/hisabnova-v1.1.0/HisabNova-1.1.0-macos.dmg"
+    "macos": "https://github.com/rajeshratann/myappscart-web/releases/download/hisabnova-v1.1.0/HisabNova-1.1.0-macos.dmg",
+    "windows": "https://github.com/rajeshratann/myappscart-web/releases/download/hisabnova-v1.1.0/HisabNova-1.1.0-setup.exe"
   }
 }
