@@ -4,6 +4,7 @@
   "critical": false,
   "notes": "Customers can return items and get their money back, Google sign-in works on a Mac, and a slow subscription payment is no longer lost.",
   "downloads": {
-    "macos": "https://github.com/rajeshratann/myappscart-web/releases/download/hisabnova-v1.2.0/HisabNova-1.2.0-macos.dmg"
+    "macos": "https://github.com/rajeshratann/myappscart-web/releases/download/hisabnova-v1.2.0/HisabNova-1.2.0-macos.dmg",
+    "windows": "https://github.com/rajeshratann/myappscart-web/releases/download/hisabnova-v1.2.0/HisabNova-1.2.0-setup.exe"
   }
 }
