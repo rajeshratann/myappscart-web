@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HisabNova — Payment</title>
+<!--
+  Razorpay Standard Checkout, served from myappscart.com.
+
+  This page used to be returned by the Cloud Function that creates the order,
+  which was simpler but wrong: Razorpay validates the domain the checkout page
+  is served from against the merchant's registered websites, and refuses the
+  payment otherwise —
+
+      payment attempted ... from web domain -
+      asia-south1-hisabnova.cloudfunctions.net has failed as it is not registered
+
+  A *.cloudfunctions.net subdomain is not something a merchant can register, and
+  it has no terms or refund policy on it either. The product site does. So the
+  page lives here and fetches what it needs from the function over CORS; the
+  API call's domain is not what Razorpay checks, only the page's.
+-->
+<style>
+  :root { color-scheme: light dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; display: grid; place-items: center;
+    background: #0B1E42; padding: 24px;
+    font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #fff;
+  }
+  .card {
+    width: 100%; max-width: 380px; background: #12315C; border-radius: 16px;
+    border: 1px solid rgba(255,255,255,.14); padding: 28px; text-align: center;
+  }
+  h1 { margin: 0 0 4px; font-size: 19px; font-weight: 800; }
+  .plan { color: #B9C7DE; font-size: 13px; margin: 0 0 20px; }
+  .amount { font-size: 34px; font-weight: 900; margin: 0 0 24px; letter-spacing: -.5px; }
+  button {
+    width: 100%; padding: 14px 18px; font-size: 15px; font-weight: 800;
+    color: #fff; background: #16A34A; border: 0; border-radius: 10px;
+    cursor: pointer; font-family: inherit;
+  }
+  button:hover { background: #22C55E; }
+  button:disabled { opacity: .55; cursor: default; }
+  .note { margin: 18px 0 0; font-size: 12.5px; color: #8393B4; }
+  .note.error { color: #FCA5A5; }
+  .note.done { color: #86EFAC; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1 id="title">HisabNova</h1>
+    <p class="plan" id="plan">Loading your order…</p>
+    <p class="amount" id="amount">—</p>
+    <button id="pay" disabled>Pay now</button>
+    <p class="note" id="note">One moment.</p>
+  </div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+(function () {
+  var API = 'https://asia-south1-hisabnova.cloudfunctions.net';
+  var button = document.getElementById('pay');
+  var note = document.getElementById('note');
+
+  function say(text, kind) {
+    note.textContent = text;
+    note.className = 'note' + (kind ? ' ' + kind : '');
+  }
+
+  var orderId = new URLSearchParams(location.search).get('orderId');
+  if (!orderId) { say('This link is missing its order.', 'error'); return; }
+
+  fetch(API + '/orderStatus?orderId=' + encodeURIComponent(orderId))
+    .then(function (r) { return r.json(); })
+    .then(function (cfg) {
+      if (!cfg || !cfg.keyId) throw new Error('order not found');
+
+      // Already settled — someone reopened the link after paying. Saying so
+      // beats charging them a second time.
+      if (cfg.paid) {
+        document.getElementById('plan').textContent = 'Already paid';
+        document.getElementById('amount').textContent = '✓';
+        say('This payment is done. Return to HisabNova.', 'done');
+        return;
+      }
+
+      var months = cfg.months || 1;
+      var period = months === 1 ? '1 month' : months + ' months';
+      var rupees = (cfg.amount / 100).toLocaleString('en-IN', {
+        minimumFractionDigits: 2, maximumFractionDigits: 2
+      });
+      document.getElementById('title').textContent = 'HisabNova ' + cfg.planLabel;
+      document.getElementById('plan').textContent = period + ' of ' + cfg.planLabel;
+      document.getElementById('amount').textContent = '₹' + rupees;
+      say('You will return to the app once this is done.');
+      button.disabled = false;
+
+      var razorpay = new Razorpay({
+        key: cfg.keyId,
+        order_id: orderId,
+        amount: cfg.amount,
+        currency: cfg.currency || 'INR',
+        name: 'HisabNova',
+        description: period + ' of ' + cfg.planLabel,
+        theme: { color: '#143176' },
+        prefill: cfg.prefill || {},
+        handler: function (payment) {
+          button.disabled = true;
+          say('Confirming your payment…');
+          fetch(API + '/verifyPayment', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              razorpay_order_id: payment.razorpay_order_id,
+              razorpay_payment_id: payment.razorpay_payment_id,
+              razorpay_signature: payment.razorpay_signature
+            })
+          })
+            .then(function (r) { return r.json().then(function (b) { return { ok: r.ok, body: b }; }); })
+            .then(function (res) {
+              if (res.ok) {
+                say('Payment confirmed. You can close this window and return to HisabNova.', 'done');
+              } else {
+                say((res.body && res.body.message) ||
+                  'We could not confirm this payment. Contact support with payment id ' +
+                  payment.razorpay_payment_id + '.', 'error');
+              }
+            })
+            .catch(function () {
+              // The money left their account; "failed" here would be a lie.
+              say('Payment taken, but confirmation did not reach us. Reopen ' +
+                'HisabNova — it checks again. Payment id: ' +
+                payment.razorpay_payment_id, 'error');
+            });
+        },
+        modal: {
+          ondismiss: function () {
+            button.disabled = false;
+            say('Payment cancelled. Nothing has been charged.');
+          }
+        }
+      });
+
+      razorpay.on('payment.failed', function (e) {
+        button.disabled = false;
+        say((e && e.error && e.error.description) ||
+          'The payment did not go through. Nothing has been charged.', 'error');
+      });
+
+      button.addEventListener('click', function () {
+        say('Opening the payment window…');
+        razorpay.open();
+      });
+      razorpay.open();
+    })
+    .catch(function () {
+      say('Could not load this order. Please start the payment again from the app.', 'error');
+    });
+})();
+</script>
+</body>
+</html>
