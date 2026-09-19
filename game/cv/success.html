@@ -92,13 +92,29 @@
       <p><button class="btn" id="retryBtn" type="button">Check again</button></p>
     </div>
 
+    <!-- Razorpay Payment Pages redirect here without a payment reference in
+         the URL, so this is the *normal* landing state after a successful
+         purchase, not an error. It used to say "No payment reference" in
+         warning colours, which read as a failure to someone whose money had
+         just been taken. The code has already been emailed by this point. -->
     <div id="noref" class="state hide">
-      <h2 class="warn">No payment reference</h2>
+      <p style="font-size:42px;margin:0 0 6px;">✉️</p>
+      <h2>Payment received — check your email</h2>
       <p>
-        This page needs the payment reference Razorpay adds when it sends you
-        here. If you have paid, check your email for the receipt and contact
+        Your unlock code has been sent to the email address you entered at
+        checkout. It usually arrives within a minute.
+      </p>
+      <h3>Then, in the app</h3>
+      <ul style="text-align:left;">
+        <li>Open <strong>ChessVerse</strong> on your phone</li>
+        <li>Go to <strong>Settings</strong> → <strong>Have a coupon code?</strong></li>
+        <li>Enter the code from the email and tap <strong>Redeem</strong></li>
+      </ul>
+      <p>
+        Nothing after a few minutes? Check your spam folder, then email
         <a href="mailto:support@myappscart.com">support@myappscart.com</a>
-        with that reference.
+        with the payment id from your Razorpay receipt and we will send it by
+        hand.
       </p>
       <p><a href="/game/cv/pricing.html">← Back to pricing</a></p>
     </div>
