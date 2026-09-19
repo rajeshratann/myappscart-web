@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChessVerse – Your Unlock Code</title>
+  <link rel="icon" type="image/png" href="/game/cv/icon-256.png" />
+  <link rel="apple-touch-icon" href="/game/cv/icon-1024.png" />
+  <style>
+    :root { --primary:#D4AF37; --gold2:#F4D03F; --bg:#05070E; --surface:#0D1220; --text:#EDEAE0; --muted:#8A92A8; --radius:12px; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.75; font-size:15px; }
+    header { background:linear-gradient(135deg,#05070E 0%,#0A0E1C 50%,#120A05 100%); border-bottom:1px solid rgba(212,175,55,0.3); color:#fff; padding:44px 24px 36px; text-align:center; }
+    header .icon { font-size:52px; margin-bottom:14px; display:block; filter:drop-shadow(0 0 20px rgba(212,175,55,0.5)); }
+    header h1 { font-size:28px; font-weight:900; background:linear-gradient(135deg,var(--primary),var(--gold2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    header p { margin-top:6px; font-size:14px; color:rgba(255,255,255,0.6); }
+    main { max-width:760px; margin:0 auto; padding:40px 20px 72px; }
+    .card { background:var(--surface); border:1px solid rgba(212,175,55,0.12); border-radius:var(--radius); padding:28px 28px 24px; margin-bottom:16px; }
+    h2 { font-size:17px; font-weight:700; color:var(--primary); margin-bottom:14px; }
+    h3 { font-size:15px; font-weight:700; color:var(--text); margin-top:18px; margin-bottom:6px; }
+    h3:first-child { margin-top:0; }
+    p { color:#c4c8d6; font-size:14.5px; margin-bottom:10px; }
+    ul { margin:8px 0 10px 20px; }
+    li { color:#c4c8d6; font-size:14.5px; margin-bottom:5px; }
+    strong { color:var(--text); }
+    a { color:var(--primary); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    .effective { background:rgba(212,175,55,0.08); border:1px solid rgba(212,175,55,0.22); border-radius:8px; padding:12px 16px; font-size:13px; color:#c4c8d6; margin-bottom:20px; }
+    .page-links { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:32px; }
+    .page-links a { background:rgba(212,175,55,0.1); color:var(--primary); border:1px solid rgba(212,175,55,0.28); border-radius:20px; padding:7px 16px; font-size:13px; font-weight:600; }
+    .page-links a:hover { background:rgba(212,175,55,0.2); text-decoration:none; }
+    footer { background:#030408; color:#6b7280; text-align:center; padding:24px; font-size:13px; border-top:1px solid rgba(255,255,255,0.04); }
+    footer a { color:#6b7280; }
+    footer a:hover { color:var(--primary); }
+    .state { text-align:center; padding:8px 0 4px; }
+    .spinner { width:34px; height:34px; margin:6px auto 14px; border:3px solid rgba(212,175,55,0.2); border-top-color:var(--primary); border-radius:50%; animation:spin 0.9s linear infinite; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:27px; font-weight:800; letter-spacing:3px; color:#05070E; background:linear-gradient(135deg,var(--primary),var(--gold2)); border-radius:10px; padding:16px 10px; margin:10px 0 6px; word-break:break-all; }
+    .btn { display:inline-block; background:rgba(212,175,55,0.12); color:var(--primary); border:1px solid rgba(212,175,55,0.4); border-radius:8px; padding:9px 18px; font-size:14px; font-weight:700; cursor:pointer; font-family:inherit; }
+    .btn:hover { background:rgba(212,175,55,0.22); }
+    .hide { display:none; }
+    .warn { color:#E9B44C; }
+  </style>
+</head>
+<body>
+
+<header>
+  <span class="icon">♛</span>
+  <h1>ChessVerse</h1>
+  <p>Your unlock code</p>
+</header>
+
+<main>
+
+  <div class="card">
+
+    <!-- Waiting: the webhook and this redirect race each other, and either
+         can win. Showing an error while the payment is still settling would
+         alarm someone whose money has already been taken. -->
+    <div id="waiting" class="state">
+      <div class="spinner"></div>
+      <h2>Payment received — fetching your code</h2>
+      <p>This usually takes a few seconds. Please keep this page open.</p>
+    </div>
+
+    <div id="ready" class="state hide">
+      <h2>Your unlock code</h2>
+      <div class="code" id="codeValue">—</div>
+      <p><button class="btn" id="copyBtn" type="button">Copy code</button></p>
+      <h3>How to use it</h3>
+      <ul style="text-align:left;">
+        <li>Open <strong>ChessVerse</strong> on your phone</li>
+        <li>Go to <strong>Settings</strong> → <strong>Have a coupon code?</strong></li>
+        <li>Enter the code above and tap <strong>Redeem</strong></li>
+      </ul>
+      <p><strong>Save this code now.</strong> It also appears on your payment
+         receipt email from Razorpay. One code unlocks one account.</p>
+    </div>
+
+    <div id="slow" class="state hide">
+      <h2 class="warn">Still working on it</h2>
+      <p>
+        Your payment went through, but the code has not arrived yet. This is
+        usually a short delay, not a problem — nothing is lost.
+      </p>
+      <p>
+        Keep this page open, or email
+        <a href="mailto:support@myappscart.com">support@myappscart.com</a>
+        with your payment reference and we will send the code by hand.
+      </p>
+      <p>Payment reference: <strong id="refSlow">—</strong></p>
+      <p><button class="btn" id="retryBtn" type="button">Check again</button></p>
+    </div>
+
+    <div id="noref" class="state hide">
+      <h2 class="warn">No payment reference</h2>
+      <p>
+        This page needs the payment reference Razorpay adds when it sends you
+        here. If you have paid, check your email for the receipt and contact
+        <a href="mailto:support@myappscart.com">support@myappscart.com</a>
+        with that reference.
+      </p>
+      <p><a href="/game/cv/pricing.html">← Back to pricing</a></p>
+    </div>
+
+  </div>
+
+  <div class="page-links">
+    <a href="/game/cv/">← ChessVerse Home</a>
+    <a href="/game/cv/pricing.html">Pricing</a>
+    <a href="/game/cv/refund.html">Refund Policy</a>
+    <a href="/game/cv/support.html">Support</a>
+  </div>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 MyAppsCart &nbsp;·&nbsp; <a href="mailto:support@myappscart.com">support@myappscart.com</a></p>
+  <p>A <a href="https://kirosys.in" target="_blank" rel="noopener">Kirosys Technologies Private Limited</a> company</p>
+</footer>
+
+<script>
+(function () {
+  var ENDPOINT = 'https://asia-south1-chessverse-8694b.cloudfunctions.net/couponCode';
+
+  // Razorpay names the parameter differently depending on whether the buyer
+  // came from a Payment Link, a Payment Page or Checkout, so accept all of
+  // them rather than guessing one.
+  var params = new URLSearchParams(location.search);
+  var paymentId =
+    params.get('razorpay_payment_id') ||
+    params.get('payment_id') ||
+    params.get('rzp_paymentid') ||
+    '';
+
+  function show(id) {
+    ['waiting', 'ready', 'slow', 'noref'].forEach(function (k) {
+      document.getElementById(k).classList.toggle('hide', k !== id);
+    });
+  }
+
+  if (!/^pay_[A-Za-z0-9]{10,20}$/.test(paymentId)) { show('noref'); return; }
+  document.getElementById('refSlow').textContent = paymentId;
+
+  // Backs off instead of hammering: the code normally lands within seconds,
+  // and a fixed 1s poll would send 60 requests a minute for a buyer whose
+  // webhook is genuinely delayed.
+  var delays = [1000, 1000, 1500, 2000, 3000, 4000, 5000, 6000, 8000, 10000, 12000, 15000];
+  var attempt = 0;
+
+  function poll() {
+    fetch(ENDPOINT + '?payment_id=' + encodeURIComponent(paymentId), { cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data && data.status === 'ready' && data.code) {
+          document.getElementById('codeValue').textContent = data.code;
+          show('ready');
+          return;
+        }
+        next();
+      })
+      .catch(next); // offline or blocked — keep trying, the money is real
+  }
+
+  function next() {
+    if (attempt >= delays.length) { show('slow'); return; }
+    setTimeout(poll, delays[attempt++]);
+  }
+
+  document.getElementById('retryBtn').addEventListener('click', function () {
+    attempt = 0; show('waiting'); poll();
+  });
+
+  document.getElementById('copyBtn').addEventListener('click', function () {
+    var code = document.getElementById('codeValue').textContent;
+    var btn = document.getElementById('copyBtn');
+    function done() { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy code'; }, 1600); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(code).then(done, done);
+    } else {
+      // Older mobile browsers, and any page not served over HTTPS.
+      var t = document.createElement('textarea');
+      t.value = code; document.body.appendChild(t); t.select();
+      try { document.execCommand('copy'); } catch (e) { /* nothing to do */ }
+      document.body.removeChild(t); done();
+    }
+  });
+
+  poll();
+})();
+</script>
+
+</body>
+</html>
