@@ -100,6 +100,20 @@
   </div>
 
   <div class="card">
+    <h2>Not a real-money game</h2>
+    <p>
+      ChessVerse does not offer real-money gaming in any form. There is no wagering, staking or
+      betting, no deposits and no withdrawals, no cash or cash-equivalent prizes, and no
+      entry-fee tournaments.
+    </p>
+    <p>
+      In-game coins and gems are game content only. They have no monetary value, cannot be
+      exchanged for money, and cannot be transferred or cashed out. The only thing sold on this
+      page is a one-time software unlock code for the app.
+    </p>
+  </div>
+
+  <div class="card">
     <h2>Refunds</h2>
     <p>
       Full refund if you are charged and receive no code, or within 7 days if the code has not been
@@ -133,8 +147,16 @@
   //  set its callback / redirect URL to:
   //      https://myappscart.com/game/cv/success.html
   //  so the buyer lands on the page that shows their code.
+  //
+  //  EMPTY ON PURPOSE. Razorpay declined this URL as an additional website on
+  //  the MyAppsCart account (business-model deviation: the account is
+  //  registered as SaaS, the reviewer read this as esports/digital games).
+  //  Collecting here while the URL is unapproved risks the primary account,
+  //  which settles every other MyAppsCart product — so the button stays down
+  //  until the URL is approved under Digital Goods / Software, or the unlock
+  //  moves to Play Billing. Until then the email fallback below is the shop.
   // ─────────────────────────────────────────────────────────────────────────
-  var PAYMENT_LINK = 'https://rzp.io/rzp/02qoCAQ';
+  var PAYMENT_LINK = '';
 
   // Until the link exists the button stays hidden and the page says so. A
   // Buy button that goes nowhere is worse than no button: it reads as a
