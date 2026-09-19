@@ -35,6 +35,10 @@
     .price { font-size:38px; font-weight:900; color:var(--gold2); line-height:1.1; }
     .price small { font-size:14px; font-weight:600; color:var(--muted); display:block; margin-top:4px; }
     .free { border-left:3px solid rgba(212,175,55,0.35); padding-left:14px; }
+    .buy { display:inline-block; background:linear-gradient(135deg,var(--primary),var(--gold2)); color:#05070E; border-radius:10px; padding:13px 30px; font-size:16px; font-weight:800; margin:6px 0 4px; }
+    .buy:hover { text-decoration:none; filter:brightness(1.08); }
+    .soon { background:rgba(212,175,55,0.08); border:1px solid rgba(212,175,55,0.22); border-radius:8px; padding:12px 16px; font-size:14px; color:#c4c8d6; }
+    .hide { display:none; }
   </style>
 </head>
 <body>
@@ -73,8 +77,16 @@
       <li>Open ChessVerse → <strong>Settings</strong> → <strong>Have a coupon code?</strong> and enter it.</li>
       <li>One code unlocks one account.</li>
     </ul>
+    <p id="buyWrap">
+      <a class="buy hide" id="buyBtn" href="#">Buy unlock code — ₹99</a>
+      <span class="soon" id="buySoon">
+        Online purchase is being set up. To buy a code now, email
+        <a href="mailto:support@myappscart.com">support@myappscart.com</a>.
+      </span>
+    </p>
     <p>
       Payments are processed by <strong>Razorpay</strong>. We never see or store your card details.
+      Your code is shown immediately after payment.
     </p>
   </div>
 
@@ -111,6 +123,30 @@
   <p>&copy; 2026 MyAppsCart &nbsp;·&nbsp; <a href="mailto:support@myappscart.com">support@myappscart.com</a></p>
   <p>A <a href="https://kirosys.in" target="_blank" rel="noopener">Kirosys Technologies Private Limited</a> company</p>
 </footer>
+
+<script>
+(function () {
+  // ─────────────────────────────────────────────────────────────────────────
+  //  PASTE YOUR RAZORPAY PAYMENT LINK HERE. That is the only edit needed.
+  //
+  //  Create it in Razorpay → Payment Links (or Payment Pages) for ₹99, and
+  //  set its callback / redirect URL to:
+  //      https://myappscart.com/game/cv/success.html
+  //  so the buyer lands on the page that shows their code.
+  // ─────────────────────────────────────────────────────────────────────────
+  var PAYMENT_LINK = '';
+
+  // Until the link exists the button stays hidden and the page says so. A
+  // Buy button that goes nowhere is worse than no button: it reads as a
+  // broken shop rather than one that is not open yet.
+  if (/^https:\/\/\S+$/.test(PAYMENT_LINK)) {
+    var btn = document.getElementById('buyBtn');
+    btn.href = PAYMENT_LINK;
+    btn.classList.remove('hide');
+    document.getElementById('buySoon').classList.add('hide');
+  }
+})();
+</script>
 
 </body>
 </html>
