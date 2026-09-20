@@ -148,15 +148,17 @@
   //      https://myappscart.com/game/cv/success.html
   //  so the buyer lands on the page that shows their code.
   //
-  //  EMPTY ON PURPOSE. Razorpay declined this URL as an additional website on
-  //  the MyAppsCart account (business-model deviation: the account is
-  //  registered as SaaS, the reviewer read this as esports/digital games).
-  //  Collecting here while the URL is unapproved risks the primary account,
-  //  which settles every other MyAppsCart product — so the button stays down
-  //  until the URL is approved under Digital Goods / Software, or the unlock
-  //  moves to Play Billing. Until then the email fallback below is the shop.
+  //  Razorpay first declined this URL as an additional website (the account
+  //  is registered as SaaS and the reviewer read the page as esports/digital
+  //  games), and the button was taken down rather than risk the primary
+  //  account, which settles every other MyAppsCart product. Razorpay approved
+  //  myappscart.com/game/cv/pricing.html on 20 Sep 2026, so it is back up.
+  //
+  //  Keep the "Not a real-money game" card above: it is the answer to the
+  //  objection that got this declined the first time, and removing it invites
+  //  the same review a second time.
   // ─────────────────────────────────────────────────────────────────────────
-  var PAYMENT_LINK = '';
+  var PAYMENT_LINK = 'https://rzp.io/rzp/02qoCAQ';
 
   // Until the link exists the button stays hidden and the page says so. A
   // Buy button that goes nowhere is worse than no button: it reads as a
