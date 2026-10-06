@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gully Cricket Scorer – Support</title>
+  <meta name="description" content="Support, FAQ, and contact information for Gully Cricket Scorer — offline-first cricket scoring with one-tap WhatsApp scorecards." />
+  <link rel="icon" type="image/png" href="/apps/gully-cricket-scorer/icon-512.png" />
+  <link rel="apple-touch-icon" href="/apps/gully-cricket-scorer/icon-512.png" />
+  <style>
+    :root {
+      --primary: #1B5E20;
+      --green: #2E7D32;
+      --bg: #F3F8F2;
+      --surface: #FFFFFF;
+      --text: #12261A;
+      --muted: #56665B;
+      --border: #DDE8DD;
+      --radius: 12px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.7; font-size: 15px;
+    }
+    a { color: var(--primary); }
+    a:hover { text-decoration: underline; }
+    header {
+      background: linear-gradient(135deg, #072A0E 0%, #2E7D32 100%);
+      color: #fff; padding: 44px 24px 36px; text-align: center;
+    }
+    header .icon { font-size: 44px; margin-bottom: 12px; }
+    header h1 { font-size: 26px; font-weight: 800; letter-spacing: -0.4px; }
+    header p { margin-top: 6px; font-size: 13.5px; opacity: 0.78; }
+    main { max-width: 780px; margin: 0 auto; padding: 36px 20px 72px; }
+
+    /* Contact card */
+    .contact-card {
+      background: linear-gradient(135deg, #14501C, #2E7D32);
+      border-radius: 16px; padding: 28px 28px 24px;
+      color: #fff; margin-bottom: 28px; text-align: center;
+    }
+    .contact-card h2 { font-size: 20px; font-weight: 800; margin-bottom: 8px; color: #fff; }
+    .contact-card p { opacity: 0.85; margin-bottom: 20px; }
+    .email-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #fff; color: var(--primary); font-weight: 700; font-size: 14px;
+      padding: 12px 24px; border-radius: 30px; text-decoration: none;
+      transition: transform .15s;
+    }
+    .email-btn:hover { transform: translateY(-1px); text-decoration: none; }
+    .response-note { margin-top: 14px; font-size: 12.5px; opacity: 0.65; }
+
+    /* Section label */
+    .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--primary); margin-bottom: 16px;
+    }
+
+    /* FAQ */
+    .faq { margin-bottom: 28px; }
+    details {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); margin-bottom: 10px; overflow: hidden;
+    }
+    summary {
+      padding: 18px 20px; font-size: 14.5px; font-weight: 600;
+      cursor: pointer; list-style: none; display: flex;
+      justify-content: space-between; align-items: center; gap: 12px;
+      transition: background .12s;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary:hover { background: #F4FAF4; }
+    summary::after { content: '+'; font-size: 18px; font-weight: 400; color: var(--primary); transition: transform .2s; }
+    details[open] summary::after { transform: rotate(45deg); }
+    .faq-body { padding: 0 20px 18px; font-size: 14px; color: var(--muted); line-height: 1.65; }
+    .faq-body p { margin-bottom: 8px; }
+    .faq-body p:last-child { margin-bottom: 0; }
+    .faq-body strong { color: var(--text); font-weight: 600; }
+    .faq-body ol, .faq-body ul { padding-left: 18px; margin-top: 6px; }
+    .faq-body li { margin-bottom: 4px; }
+
+    /* Tips grid */
+    .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; margin-top: 16px; }
+    .tip {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px;
+    }
+    .tip-icon { font-size: 24px; margin-bottom: 8px; }
+    .tip h3 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .tip p { font-size: 13px; color: var(--muted); }
+
+    .links-row {
+      display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+      padding: 28px 20px; background: var(--surface); border-top: 1px solid var(--border);
+    }
+    .links-row a {
+      background: #E8F3E8; color: #374151; border-radius: 20px; padding: 8px 18px;
+      font-size: 13px; font-weight: 600; transition: background .12s;
+    }
+    .links-row a:hover { background: #D3E9D4; color: var(--primary); text-decoration: none; }
+    footer { background: #12261A; color: #9DB3A2; text-align: center; padding: 20px; font-size: 13px; }
+    footer a { color: #9DB3A2; }
+    footer a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="icon">💬</div>
+  <h1>Gully Cricket Scorer Support</h1>
+  <p>Find answers or reach us directly — we're here to help.</p>
+</header>
+
+<main>
+
+  <!-- Contact card -->
+  <div class="contact-card">
+    <h2>Get in touch</h2>
+    <p>Can't find what you need below? Email our support team directly.</p>
+    <a class="email-btn" href="mailto:support@myappscart.com?subject=Gully%20Cricket%20Scorer%20support">
+      ✉️ support@myappscart.com
+    </a>
+    <p class="response-note">We respond within 2 business days</p>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq">
+    <div class="section-label">Frequently Asked Questions</div>
+
+    <details>
+      <summary>Do I need to log in to score a match?</summary>
+      <div class="faq-body">
+        <p><strong>No.</strong> Open the app, pick a preset and start scoring — no account, no phone number, no email. You can score as many matches as you like without ever signing in.</p>
+        <p>Signing in (with your phone number or Google account) is optional. It's only needed for cloud backup and sync, tournaments, and live score links.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Does it work without internet?</summary>
+      <div class="faq-body">
+        <p>Yes. Scoring is offline-first: every ball is saved on your phone as you score it, so you can score a full match in aeroplane mode or at a ground with no signal.</p>
+        <p>Features that have to reach other people or the cloud — live score links, tournament sync and cloud backup — need a connection. If you're signed in, your matches sync when you're back online.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>I tapped the wrong button. How do I undo or edit a ball?</summary>
+      <div class="faq-body">
+        <p><strong>Undo:</strong> tap <strong>Undo</strong> on the scoring screen to take back the last ball. Tap <strong>Redo</strong> if you change your mind.</p>
+        <p><strong>Edit an older ball:</strong> on the scoring screen, open the <strong>⋮ menu → Edit past ball</strong>, pick the ball and change it. The scorecard updates to match.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>How do I share the scorecard to WhatsApp?</summary>
+      <div class="faq-body">
+        <ol>
+          <li>Open the match and tap <strong>Share scorecard</strong>.</li>
+          <li>Pick a format — <strong>Square</strong>, <strong>Status</strong>, <strong>Full scorecard</strong> or <strong>PDF report</strong> — and a theme.</li>
+          <li>Tap <strong>Share to WhatsApp</strong> and choose the chat or group.</li>
+        </ol>
+        <p>Want friends to follow along while you score? Start a <strong>live score link</strong> instead — they open it in any browser, no app needed. (Live links need you to be signed in.)</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>I got a new phone. How do I move my matches?</summary>
+      <div class="faq-body">
+        <p>There are two ways:</p>
+        <ul>
+          <li><strong>Backup file (no account needed):</strong> on your old phone go to <strong>History → Backup &amp; restore → Back up</strong> and send the file to yourself on WhatsApp, Drive or email. On the new phone, open <strong>History → Backup &amp; restore → Restore</strong> and choose that file.</li>
+          <li><strong>Sign in:</strong> if you were signed in on your old phone, sign in with the same phone number or Google account on the new one. Then go to <strong>Settings → Account → Restore from cloud</strong> to bring back the matches and players saved with your account.</li>
+        </ul>
+        <p>Matches already on the new phone are kept when you restore.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Which languages does the app support?</summary>
+      <div class="faq-body">
+        <p>Eight: <span lang="en">English</span>, <span lang="hi">हिन्दी</span>, <span lang="mr">मराठी</span>, <span lang="ta">தமிழ்</span>, <span lang="te">తెలుగు</span>, <span lang="bn">বাংলা</span>, <span lang="gu">ગુજરાતી</span> and <span lang="kn">ಕನ್ನಡ</span>.</p>
+        <p>Change it anytime from <strong>Settings → Language</strong>.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>I bought Gully Pro. How do I get it back after reinstalling?</summary>
+      <div class="faq-body">
+        <p>Open the <strong>Gully Pro</strong> screen and tap <strong>Restore purchases</strong>. Make sure the phone is signed in to the same Google Play account you bought with, and that you're online.</p>
+        <p>If it still says "No previous purchases found", email <a href="mailto:support@myappscart.com">support@myappscart.com</a> with your Google Play order ID (it starts with <strong>GPA.</strong> and is in your purchase receipt email).</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Why do I see ads? Will they interrupt my scoring?</summary>
+      <div class="faq-body">
+        <p>The free version is supported by ads, but they appear only at natural breaks — <strong>never while you're scoring a ball</strong>.</p>
+        <p><strong>Gully Pro</strong> (₹149 lifetime or ₹99/year) removes ads and unlocks all scorecard themes, full stats and PDF export.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Who can see my live score link?</summary>
+      <div class="faq-body">
+        <p>Anyone who has the link can open the live page and see the score, team names and player names. Share it only with the groups you want to. See our <a href="/apps/gully-cricket-scorer/privacy.html">Privacy Policy</a> for details.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>The app crashed or something looks wrong. What should I do?</summary>
+      <div class="faq-body">
+        <p>Your score is saved ball by ball, so reopening the app takes you back to where you were. If the problem continues:</p>
+        <ol>
+          <li>Check for an app update in the Play Store</li>
+          <li>Restart your phone</li>
+          <li>Email <a href="mailto:support@myappscart.com">support@myappscart.com</a> with your phone model, Android version, app version and what you were doing when it happened. A screenshot helps.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details>
+      <summary>How do I delete my account and data?</summary>
+      <div class="faq-body">
+        <p>In the app go to <strong>Settings → Account → Delete account</strong>. You'll be asked whether to also delete the matches stored on your phone. See our <a href="/apps/gully-cricket-scorer/delete-account.html">Delete Account page</a> for exactly what is removed, or email us if you no longer have the app.</p>
+      </div>
+    </details>
+  </div>
+
+  <!-- Tips -->
+  <div class="section-label">Tips for Match Day</div>
+  <div class="tips-grid">
+    <div class="tip">
+      <div class="tip-icon">⚡</div>
+      <h3>Start from a preset</h3>
+      <p>Society match, Box cricket, Tennis-ball tournament or Standard cricket gets you scoring in seconds.</p>
+    </div>
+    <div class="tip">
+      <div class="tip-icon">🏠</div>
+      <h3>Set house rules first</h3>
+      <p>Agree on wides, last man stands or one-tip-one-hand before the toss, and set them in the match rules.</p>
+    </div>
+    <div class="tip">
+      <div class="tip-icon">💾</div>
+      <h3>Keep a backup</h3>
+      <p>Not signing in? Save a backup file from History every now and then, so a lost phone doesn't mean lost stats.</p>
+    </div>
+    <div class="tip">
+      <div class="tip-icon">📲</div>
+      <h3>Share the moment</h3>
+      <p>Post the scorecard to the group while everyone's still at the ground.</p>
+    </div>
+  </div>
+
+</main>
+
+<div class="links-row">
+  <a href="/apps/gully-cricket-scorer/">Home</a>
+  <a href="/apps/gully-cricket-scorer/privacy.html">Privacy Policy</a>
+  <a href="/apps/gully-cricket-scorer/terms.html">Terms of Service</a>
+  <a href="/apps/gully-cricket-scorer/support.html">Support</a>
+  <a href="/apps/gully-cricket-scorer/delete-account.html">Delete Account</a>
+  <a href="/">← MyAppsCart</a>
+</div>
+
+<footer>
+  <p>&copy; 2026 MyAppsCart &nbsp;·&nbsp; <a href="mailto:support@myappscart.com">support@myappscart.com</a></p>
+  <p>A <a href="https://kirosys.in" target="_blank" rel="noopener">Kirosys Technologies Private Limited</a> company</p>
+</footer>
+
+</body>
+</html>
