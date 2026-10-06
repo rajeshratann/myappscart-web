@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KidsNova — A Learning Universe for Ages 3–8</title>
-  <meta name="description" content="KidsNova: six learning worlds, six games and a daily adventure for ages 3–8. Fully offline, no ads, no accounts, no data collected — just play that teaches." />
+  <title>KidsNova — A Learning Universe for Ages 3–12</title>
+  <meta name="description" content="KidsNova: ten learning worlds, 238 lessons and 118 games for ages 3–12, in English and Hindi. Fully offline, no ads, no accounts, no data collected — just play that teaches." />
   <link rel="icon" type="image/png" href="/apps/kidsnova/icon-512.png" />
   <link rel="apple-touch-icon" href="/apps/kidsnova/icon-512.png" />
-  <meta property="og:title" content="KidsNova — A Learning Universe for Ages 3–8" />
-  <meta property="og:description" content="Six worlds, six games and a daily adventure. Fully offline, ad-free, and it collects nothing." />
+  <meta property="og:title" content="KidsNova — A Learning Universe for Ages 3–12" />
+  <meta property="og:description" content="Ten worlds, 118 games and a daily adventure, in English and Hindi. Fully offline, ad-free, and it collects nothing." />
   <meta property="og:image" content="https://myappscart.com/apps/kidsnova/icon-512.png" />
   <meta property="og:type" content="website" />
   <style>
@@ -110,6 +110,7 @@
     }
     .store:hover { background: #16A34A; text-decoration: none; }
     .store-note { margin-top: 12px; font-size: 13px; opacity: 0.7; }
+    .store-note a { color: #fff; text-decoration: underline; }
 
     /* ── Sections ── */
     section { max-width: 1080px; margin: 0 auto; padding: 62px 22px; }
@@ -159,6 +160,38 @@
     .w-shapes  { background: rgba(29,161,242,0.14); }
     .w-animals { background: rgba(255,152,0,0.15); }
     .w-fruits  { background: rgba(255,107,0,0.13); }
+    .w-reading { background: rgba(34,197,94,0.14); }
+    .w-maths   { background: rgba(29,161,242,0.14); }
+    .w-hindi   { background: rgba(255,210,30,0.24); }
+    .w-world   { background: rgba(124,58,237,0.13); }
+    .world .new {
+      display: inline-block; margin-left: 6px; vertical-align: 2px;
+      background: var(--orange); color: #fff; border-radius: 10px;
+      padding: 1px 8px; font-size: 11px; font-weight: 700; letter-spacing: 0.3px;
+    }
+
+    /* ── What's new ── */
+    .whatsnew {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 30px 28px;
+      box-shadow: 0 2px 10px rgba(30,39,73,0.05);
+    }
+    .whatsnew-head {
+      display: flex; flex-wrap: wrap; align-items: baseline;
+      justify-content: space-between; gap: 6px 16px; margin-bottom: 18px;
+    }
+    .whatsnew-head h2 { font-size: clamp(21px, 3.4vw, 27px); font-weight: 800; letter-spacing: -0.5px; }
+    .whatsnew-head span { color: var(--muted); font-size: 14px; font-weight: 600; }
+    .whatsnew ul {
+      list-style: none;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+      gap: 12px 24px;
+    }
+    .whatsnew li { display: flex; gap: 10px; font-size: 15px; color: var(--text); }
+    .whatsnew li b { font-weight: 700; }
+    .whatsnew li .e { flex: 0 0 26px; font-size: 20px; line-height: 1.3; }
 
     /* ── Features ── */
     .feat-grid {
@@ -342,22 +375,44 @@
     </div>
     <h1>KidsNova</h1>
     <div class="tagline">Learn · Play · Discover</div>
-    <p class="sub">A universe where every game teaches something. Six worlds, six games and a daily adventure for children aged 3–8 — working entirely offline, with no ads and no account.</p>
+    <p class="sub">A universe where every game teaches something. Ten worlds, 118 games and a daily adventure for children aged 3–12, in English and Hindi — working entirely offline, with no ads and no account.</p>
     <div class="badges">
       <span class="badge">✈️ Works offline</span>
       <span class="badge">🚫 No ads</span>
       <span class="badge">🔒 No data collected</span>
+      <span class="badge">🇮🇳 English &amp; हिंदी</span>
       <span class="badge">👨‍👩‍👧 Parent gate</span>
       <span class="badge">🆓 Free</span>
     </div>
-    <a class="store" href="#worlds">Explore the worlds</a>
-    <p class="store-note">Coming soon to Google Play</p>
+    <a class="store" href="https://play.google.com/store/apps/details?id=com.kidsnova.kidsnova" target="_blank" rel="noopener">▶ Get it on Google Play</a>
+    <p class="store-note">Free on Android · Version 2.0.1 · <a href="#worlds">Explore the worlds</a></p>
   </div>
 </div>
 
+<!-- What's new -->
+<section id="whats-new" style="padding-bottom:0;">
+  <div class="whatsnew">
+    <div class="whatsnew-head">
+      <h2>New in KidsNova 2.0</h2>
+      <span>Version 2.0.1</span>
+    </div>
+    <ul>
+      <li><span class="e">🎂</span><span><b>Ages 3–12</b>: new 8–10 and 10–12 age bands</span></li>
+      <li><span class="e">🇮🇳</span><span><b>Hindi mode</b>: Novi teaches and speaks in Hindi</span></li>
+      <li><span class="e">🌍</span><span><b>Four new worlds</b>: reading, maths, Hindi letters and everyday words</span></li>
+      <li><span class="e">🎮</span><span><b>107 new games</b>, 118 in all, most with 100+ levels</span></li>
+      <li><span class="e">🚙</span><span><b>Zoo Safari</b>: tap the animals to hear them roar, eat, nap and play</span></li>
+      <li><span class="e">🖍️</span><span><b>1008 colouring pages</b> and a gallery of your child's art</span></li>
+      <li><span class="e">🐶</span><span><b>A 3D pet</b> to feed, tickle and play ball with</span></li>
+      <li><span class="e">🧠</span><span><b>Spaced review</b> and difficulty that adapts as your child plays</span></li>
+      <li><span class="e">📝</span><span><b>For parents</b>: a weekly summary and printable worksheets</span></li>
+    </ul>
+  </div>
+</section>
+
 <!-- Worlds -->
 <section id="worlds">
-  <h2>Six worlds, 91 lessons</h2>
+  <h2>Ten worlds, 238 lessons</h2>
   <p class="lead">Each world is a self-contained slice of early learning, with its own colours, scenery and characters — recognisable from across the room. Every lesson ships inside the app.</p>
   <div class="worlds-grid">
 
@@ -388,13 +443,37 @@
     <div class="world">
       <div class="emoji w-animals">🦁</div>
       <h3>Animal Jungle</h3>
-      <p>Meet the animals, learn their names and their sounds.</p>
+      <p>Meet the animals, then drive through the Zoo Safari to hear them roar.</p>
     </div>
 
     <div class="world">
       <div class="emoji w-fruits">🍎</div>
       <h3>Fruit Garden</h3>
       <p>Fruits and growing things, from seed to snack.</p>
+    </div>
+
+    <div class="world">
+      <div class="emoji w-reading">📖</div>
+      <h3>Word Woods<span class="new">NEW</span></h3>
+      <p>First words, sight words and read-along stories.</p>
+    </div>
+
+    <div class="world">
+      <div class="emoji w-maths">➕</div>
+      <h3>Maths Mountain<span class="new">NEW</span></h3>
+      <p>Adding, taking away, telling the time and Indian money.</p>
+    </div>
+
+    <div class="world">
+      <div class="emoji w-hindi">अ</div>
+      <h3>Akshar Garden<span class="new">NEW</span></h3>
+      <p>All the Hindi swar and vyanjan, with tracing and matras.</p>
+    </div>
+
+    <div class="world">
+      <div class="emoji w-world">🌍</div>
+      <h3>My World<span class="new">NEW</span></h3>
+      <p>Body parts, family, vehicles and the weather.</p>
     </div>
 
   </div>
@@ -413,7 +492,7 @@
     </div>
     <div class="shot">
       <img src="/apps/kidsnova/shots/2-play.jpg" alt="The Play and Learn screen with six mini-game tiles" width="232" height="516" loading="lazy" />
-      <span>Six games to play</span>
+      <span>Games to play</span>
     </div>
     <div class="shot">
       <img src="/apps/kidsnova/shots/3-world.jpg" alt="Colour Garden world screen listing colour lessons with star ratings" width="232" height="516" loading="lazy" />
@@ -438,8 +517,8 @@
 
     <div class="feat">
       <div class="feat-icon ic-purple">🎮</div>
-      <h3>Six games</h3>
-      <p>Matching, Memory, Counting, Colouring, Shape Puzzle and a Daily Quiz — each one quietly practising a skill from the worlds.</p>
+      <h3>118 games</h3>
+      <p>Words, maths, logic, puzzles, memory, science and music — from Matching and Counting to Sudoku, Word Search and Times Table Race, with a For you shelf picked for your child.</p>
     </div>
 
     <div class="feat">
@@ -450,8 +529,8 @@
 
     <div class="feat">
       <div class="feat-icon ic-orange">⭐</div>
-      <h3>Stars, XP &amp; 15 badges</h3>
-      <p>Stars, coins, levels, a daily streak with streak freezes, and 15 badges to earn — practice turned into something a child wants to come back to.</p>
+      <h3>Stars, levels &amp; 23 badges</h3>
+      <p>Stars, coins, 500 player levels, level maps in the games, a daily streak with streak freezes and 23 badges to earn — practice turned into something a child wants to come back to.</p>
     </div>
 
     <div class="feat">
@@ -469,25 +548,37 @@
     <div class="feat">
       <div class="feat-icon ic-pink">🐾</div>
       <h3>A pet to look after</h3>
-      <p>A companion that grows as lessons are finished — a gentle reason to come back tomorrow.</p>
+      <p>A 3D companion to feed, tickle and play ball with, that grows as lessons are finished — a gentle reason to come back tomorrow.</p>
     </div>
 
     <div class="feat">
       <div class="feat-icon ic-purple">📊</div>
       <h3>Parent dashboard</h3>
-      <p>Minutes learned, lessons completed and progress per world — showing what was learned, not just time spent.</p>
+      <p>Minutes learned, progress per world, a written weekly summary and printable worksheets — showing what was learned, not just time spent.</p>
     </div>
 
     <div class="feat">
       <div class="feat-icon ic-blue">🎚️</div>
-      <h3>Age-tuned difficulty</h3>
-      <p>Enter your child's age once and every lesson adjusts to match, from first letters to early reading.</p>
+      <h3>Difficulty that adapts</h3>
+      <p>Lessons match your child's age from 3 to 12, games get easier or harder as they play, and spaced review brings back what they're about to forget.</p>
     </div>
 
     <div class="feat">
       <div class="feat-icon ic-green">👧👦</div>
       <h3>Multiple children</h3>
       <p>Add a profile for each child. Everyone keeps their own stars, streak and daily goal.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-orange">🇮🇳</div>
+      <h3>English and Hindi</h3>
+      <p>Choose Hindi and Novi's instructions, questions, praise and facts switch to Hindi, spoken in a Hindi voice.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-pink">🖍️</div>
+      <h3>1008 colouring pages</h3>
+      <p>Animals, vehicles, festivals, space and more, plus mandalas and patterns, with every picture saved to your child's own gallery.</p>
     </div>
 
   </div>
@@ -503,7 +594,7 @@
       <div class="perks">
         <div class="perk">Zero advertising anywhere in the app</div>
         <div class="perk">No account, no email, no sign-in</div>
-        <div class="perk">No analytics, trackers or third-party SDKs</div>
+        <div class="perk">No analytics or tracking SDKs</div>
         <div class="perk">No in-app purchases — everything is included</div>
         <div class="perk">Settings sit behind a PIN or maths parent gate</div>
         <div class="perk">Works fully offline, even in aeroplane mode</div>
