@@ -116,19 +116,6 @@
       box-shadow: 0 8px 22px rgba(0,0,0,0.25);
     }
     .store:hover { text-decoration: none; }
-    /* Pre-launch state: looks like the store button but is not a link. */
-    .store-soon {
-      background: rgba(255,255,255,0.10);
-      color: #fff;
-      border: 1.5px dashed rgba(245,230,196,0.6);
-      box-shadow: none;
-      cursor: default;
-    }
-    .store-soon .soon-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--gold);
-      box-shadow: 0 0 0 4px rgba(246,197,68,0.22);
-    }
     .store-note { margin-top: 12px; font-size: 13px; opacity: 0.75; }
     .store-note a { color: #fff; text-decoration: underline; }
 
@@ -441,13 +428,8 @@
       <span class="badge">🗣️ 8 languages</span>
       <span class="badge">🆓 Free</span>
     </div>
-    <!--
-      LAUNCH: replace the <span class="store store-soon"> below with
-      <a class="store" href="https://play.google.com/store/apps/details?id=com.myappscart.gullyscorer" target="_blank" rel="noopener">▶ Get it on Google Play</a>
-      and change the store-note text to "Android · iOS later".
-    -->
-    <span class="store store-soon" role="status" data-play-url="https://play.google.com/store/apps/details?id=com.myappscart.gullyscorer"><span class="soon-dot" aria-hidden="true"></span> Coming soon to Google Play</span>
-    <p class="store-note">Android first · iOS later · <a href="#features">See what it does</a></p>
+    <a class="store" href="https://play.google.com/store/apps/details?id=com.myappscart.gullyscorer" target="_blank" rel="noopener">▶ Get it on Google Play</a>
+    <p class="store-note">Free on Android · Version 1.0.0 · iOS later · <a href="#features">See what it does</a></p>
     <div class="hero-scene">
       <img src="/apps/gully-cricket-scorer/scene.jpg" alt="Street cricket in a gully: a batter lofts the ball over the stumps" width="1440" height="640" loading="lazy" />
       <span>Gully cricket, bigger moments!</span>
