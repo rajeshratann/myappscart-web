@@ -224,7 +224,8 @@
           prefill: {
             name: view.customerName || '',
             email: view.customerEmail || '',
-            contact: view.customerMobile || ''
+            // Razorpay's form has its own +91 picker; it fills only from the bare number.
+            contact: (view.customerMobile || '').replace(/\D/g, '').slice(-10)
           },
           notes: { paymentNumber: view.paymentNumber },
           theme: { color: '#8E1537' },
