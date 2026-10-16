@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="referrer" content="no-referrer" />
+  <title>Shubhzo Payment</title>
+  <link rel="icon" type="image/png" href="/apps/shubhzo/icon-512.png" />
+  <style>
+    :root {
+      --maroon: #8E1537;
+      --maroon-d: #6B0F29;
+      --gold: #C9A227;
+      --teal: #00957E;
+      --danger: #B3261E;
+      --bg: #FDF6EC;
+      --surface: #FFFFFF;
+      --text: #171A1F;
+      --muted: #5A6270;
+      --border: #E9E0D2;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #17110F;
+        --surface: #231B18;
+        --text: #F3EDE6;
+        --muted: #B5ABA2;
+        --border: #3A2F2A;
+      }
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: linear-gradient(155deg, #4A0A1D 0%, #8E1537 52%, #B10201 100%);
+      color: #fff;
+      padding: 18px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    header img { width: 34px; height: 34px; border-radius: 9px; }
+    header strong { font-size: 18px; letter-spacing: .2px; }
+    header span { display: block; font-size: 12px; opacity: .8; }
+    main { flex: 1; width: 100%; max-width: 440px; margin: 0 auto; padding: 20px 16px 32px; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+    }
+    .label { font-size: 13px; color: var(--muted); }
+    .amount { font-size: 34px; font-weight: 800; margin: 2px 0 6px; font-variant-numeric: tabular-nums; }
+    .row { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; padding: 7px 0; border-top: 1px solid var(--border); }
+    .row span:first-child { color: var(--muted); }
+    .row span:last-child { text-align: right; overflow-wrap: anywhere; }
+    .btn {
+      display: block; width: 100%; margin-top: 18px; padding: 15px 16px;
+      border: 0; border-radius: 12px; font-size: 16px; font-weight: 700;
+      background: var(--maroon); color: #fff; cursor: pointer; text-align: center; text-decoration: none;
+    }
+    .btn:active { background: var(--maroon-d); }
+    .btn[disabled] { opacity: .55; cursor: default; }
+    .btn.secondary { background: transparent; color: var(--maroon); border: 1.5px solid var(--maroon); }
+    @media (prefers-color-scheme: dark) { .btn.secondary { color: #F0A8BC; border-color: #F0A8BC; } }
+    .state { text-align: center; padding: 8px 0 4px; }
+    .state .icon {
+      width: 64px; height: 64px; border-radius: 50%; margin: 4px auto 12px;
+      display: grid; place-items: center; font-size: 32px; color: #fff;
+    }
+    .state.ok .icon { background: var(--teal); }
+    .state.bad .icon { background: var(--danger); }
+    .state h1 { font-size: 21px; margin-bottom: 6px; }
+    .state p { color: var(--muted); font-size: 14.5px; }
+    .note { margin-top: 16px; font-size: 12.5px; color: var(--muted); text-align: center; }
+    .spinner {
+      width: 34px; height: 34px; margin: 18px auto; border-radius: 50%;
+      border: 3px solid var(--border); border-top-color: var(--maroon);
+      animation: spin .8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="/apps/shubhzo/icon-512.png" alt="" />
+    <div><strong>Shubhzo</strong><span>Secure payment</span></div>
+  </header>
+
+  <main>
+    <div class="card" id="loading">
+      <div class="spinner" aria-hidden="true"></div>
+      <p class="note" style="margin-top:0">Loading your payment…</p>
+    </div>
+
+    <div class="card" id="details" hidden>
+      <div class="label" id="what">Amount to pay</div>
+      <div class="amount" id="amount"></div>
+      <div class="row"><span>For</span><span id="description"></span></div>
+      <div class="row" id="vendorRow" hidden><span>Vendor</span><span id="vendor"></span></div>
+      <div class="row" id="bookingRow" hidden><span>Booking</span><span id="booking"></span></div>
+      <div class="row"><span>Reference</span><span id="reference"></span></div>
+      <button class="btn" id="pay" type="button">Pay</button>
+      <p class="note">UPI, cards, net banking and wallets, processed by Razorpay.
+        Shubhzo never sees your card or UPI PIN.</p>
+    </div>
+
+    <div class="card" id="result" hidden>
+      <div class="state" id="state">
+        <div class="icon" id="stateIcon"></div>
+        <h1 id="stateTitle"></h1>
+        <p id="stateBody"></p>
+      </div>
+      <a class="btn" id="backToApp" href="#">Back to the Shubhzo app</a>
+      <button class="btn secondary" id="retry" type="button" hidden>Try again</button>
+    </div>
+  </main>
+
+  <script>
+    // The Shubhzo API. Fixed here on purpose: the page must never be pointed at
+    // another server through its link.
+    var API = 'https://shubhzo-api-4b2gtecc7q-el.a.run.app/api/v1';
+    var RETURN_TO_APP = 'intent://payment-done#Intent;scheme=shubhzo;package=com.shubhzo.app;end';
+
+    var params = new URLSearchParams(location.search);
+    var paymentId = params.get('p');
+    var token = params.get('t');
+    var view = null;
+    var checkoutLoaded = false;
+
+    function $(id) { return document.getElementById(id); }
+    function show(id) {
+      ['loading', 'details', 'result'].forEach(function (s) { $(s).hidden = s !== id; });
+    }
+    function money(amount, currency) {
+      try {
+        return new Intl.NumberFormat('en-IN', { style: 'currency', currency: currency || 'INR' }).format(amount);
+      } catch (e) {
+        return '₹' + amount;
+      }
+    }
+    function result(kind, title, body, canRetry) {
+      $('state').className = 'state ' + (kind === 'ok' ? 'ok' : 'bad');
+      $('stateIcon').textContent = kind === 'ok' ? '✓' : '!';
+      $('stateTitle').textContent = title;
+      $('stateBody').textContent = body;
+      $('retry').hidden = !canRetry;
+      show('result');
+    }
+
+    // Android opens the app through an intent link; elsewhere the customer
+    // switches back themselves, and the app checks the payment when they do.
+    var isAndroid = /Android/i.test(navigator.userAgent);
+    $('backToApp').href = isAndroid ? RETURN_TO_APP : '#';
+    $('backToApp').addEventListener('click', function (e) {
+      if (!isAndroid) {
+        e.preventDefault();
+        $('stateBody').textContent = 'You can close this tab and go back to the Shubhzo app now.';
+      }
+    });
+
+    function api(path, options) {
+      return fetch(API + path, options).then(function (response) {
+        return response.json().catch(function () { return {}; }).then(function (body) {
+          if (!response.ok || body.success === false) {
+            var message = (body && (body.message || (body.error && body.error.detail))) || 'Something went wrong.';
+            throw new Error(message);
+          }
+          return body.data;
+        });
+      });
+    }
+
+    function loadCheckout() {
+      if (checkoutLoaded) return Promise.resolve();
+      return new Promise(function (resolve, reject) {
+        var script = document.createElement('script');
+        script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+        script.onload = function () { checkoutLoaded = true; resolve(); };
+        script.onerror = function () { reject(new Error('Could not reach Razorpay. Check your connection and try again.')); };
+        document.head.appendChild(script);
+      });
+    }
+
+    function complete(response) {
+      show('loading');
+      return api('/public/checkout/' + encodeURIComponent(paymentId) + '/complete?t=' + encodeURIComponent(token), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          gatewayPaymentId: response.razorpay_payment_id,
+          gatewayOrderId: response.razorpay_order_id,
+          signature: response.razorpay_signature
+        })
+      }).then(function () {
+        result('ok', 'Payment successful', money(view.amount, view.currency) + ' paid. Go back to the app to continue.', false);
+      }).catch(function (error) {
+        // The webhook confirms a real payment even if this check could not.
+        result('bad', 'We are confirming your payment',
+          error.message + ' If money left your account, it will show in the app within a few minutes.', false);
+      });
+    }
+
+    function pay() {
+      $('pay').disabled = true;
+      loadCheckout().then(function () {
+        var rzp = new window.Razorpay({
+          key: view.keyId,
+          order_id: view.gatewayOrderId,
+          amount: Math.round(view.amount * 100),
+          currency: view.currency || 'INR',
+          name: 'Shubhzo',
+          description: view.description || 'Booking payment',
+          image: 'https://myappscart.com/apps/shubhzo/icon-512.png',
+          prefill: {
+            name: view.customerName || '',
+            email: view.customerEmail || '',
+            contact: view.customerMobile || ''
+          },
+          notes: { paymentNumber: view.paymentNumber },
+          theme: { color: '#8E1537' },
+          handler: complete,
+          modal: {
+            ondismiss: function () { $('pay').disabled = false; }
+          }
+        });
+        rzp.on('payment.failed', function (response) {
+          var reason = response && response.error && response.error.description;
+          result('bad', 'Payment failed', (reason || 'The payment did not go through.') + ' No money was taken.', true);
+        });
+        rzp.open();
+      }).catch(function (error) {
+        $('pay').disabled = false;
+        result('bad', 'Could not open the payment', error.message, true);
+      });
+    }
+
+    function load() {
+      if (!paymentId || !token) {
+        result('bad', 'This link is incomplete', 'Go back to the Shubhzo app and tap Pay again.', false);
+        return;
+      }
+      show('loading');
+      api('/public/checkout/' + encodeURIComponent(paymentId) + '?t=' + encodeURIComponent(token))
+        .then(function (data) {
+          view = data;
+          if (data.status === 'SUCCESS') {
+            result('ok', 'Already paid', money(data.amount, data.currency) + ' was paid for this booking.', false);
+            return;
+          }
+          if (data.status === 'CANCELLED' || data.status === 'EXPIRED' || data.status === 'REFUNDED') {
+            result('bad', 'This payment is closed', 'Go back to the Shubhzo app and tap Pay again.', false);
+            return;
+          }
+          if (!data.keyId || !data.gatewayOrderId) {
+            result('bad', 'Online payment is not switched on yet', 'Please try again later.', false);
+            return;
+          }
+          var stage = {
+            TOKEN: 'Token amount', ADVANCE: 'Advance', PARTIAL: 'Part payment', FINAL: 'Final payment', ADD_ON: 'Add-on'
+          }[data.paymentType];
+          $('what').textContent = stage ? stage + ' to pay' : 'Amount to pay';
+          $('amount').textContent = money(data.amount, data.currency);
+          $('description').textContent = data.description || 'Booking payment';
+          $('reference').textContent = data.paymentNumber || '';
+          if (data.providerName) { $('vendor').textContent = data.providerName; $('vendorRow').hidden = false; }
+          if (data.bookingNumber) { $('booking').textContent = data.bookingNumber; $('bookingRow').hidden = false; }
+          $('pay').textContent = 'Pay ' + money(data.amount, data.currency);
+          show('details');
+        })
+        .catch(function (error) {
+          result('bad', 'Could not load this payment', error.message, false);
+        });
+    }
+
+    $('pay').addEventListener('click', pay);
+    $('retry').addEventListener('click', function () { $('pay').disabled = false; load(); });
+    load();
+  </script>
+</body>
+</html>
