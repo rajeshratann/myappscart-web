@@ -212,6 +212,13 @@
 
     function pay() {
       $('pay').disabled = true;
+      // The app already knows who is paying: hand Razorpay the mobile and email
+      // so its contact screen is skipped. Razorpay's form has its own +91
+      // picker and fills only from the bare 10-digit number.
+      var mobile = (view.customerMobile || '').replace(/\D/g, '').slice(-10);
+      var email = (view.customerEmail || '').trim();
+      var hasMobile = mobile.length === 10;
+      var hasEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
       loadCheckout().then(function () {
         var rzp = new window.Razorpay({
           key: view.keyId,
@@ -223,10 +230,12 @@
           image: 'https://myappscart.com/apps/shubhzo/icon-512.png',
           prefill: {
             name: view.customerName || '',
-            email: view.customerEmail || '',
-            // Razorpay's form has its own +91 picker; it fills only from the bare number.
-            contact: (view.customerMobile || '').replace(/\D/g, '').slice(-10)
+            email: hasEmail ? email : '',
+            contact: hasMobile ? mobile : ''
           },
+          // Only what is known is locked and hidden; a missing email is still asked for.
+          readonly: { contact: hasMobile, email: hasEmail },
+          hidden: { contact: hasMobile, email: hasEmail },
           notes: { paymentNumber: view.paymentNumber },
           theme: { color: '#8E1537' },
           handler: complete,
