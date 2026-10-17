@@ -355,6 +355,13 @@
     .note strong { color: #4A3900; }
 
     /* ── Links / footer ── */
+    .official { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 8px 24px; margin-top: 20px; }
+    .official dl { margin: 0; }
+    .official .row { display: grid; grid-template-columns: 240px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .official .row:last-child { border-bottom: 0; }
+    .official dt { font-weight: 700; color: var(--text); }
+    .official dd { margin: 0; color: var(--muted); overflow-wrap: anywhere; }
+    @media (max-width: 640px) { .official .row { grid-template-columns: 1fr; gap: 4px; } }
     .links-row {
       display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
       padding: 28px 20px; background: var(--surface); border-top: 1px solid var(--border);
@@ -1040,6 +1047,22 @@
   </div>
 </section>
 
+<!-- ═══════════ OFFICIAL APP ═══════════ -->
+<section id="official">
+  <h2>SHUBHZO — Official App</h2>
+  <div class="official">
+    <dl>
+      <div class="row"><dt>Brand Name</dt><dd>SHUBHZO</dd></div>
+      <div class="row"><dt>Registered Entity Name</dt><dd>Rajesh Kumar</dd></div>
+      <div class="row"><dt>Brand Website</dt><dd><a href="https://myappscart.com/">https://myappscart.com/</a></dd></div>
+      <div class="row"><dt>Official App Page</dt><dd><a href="https://myappscart.com/apps/shubhzo/">https://myappscart.com/apps/shubhzo/</a></dd></div>
+      <div class="row"><dt>App Ownership and Operation</dt><dd>SHUBHZO is operated by Rajesh Kumar under the SHUBHZO brand.</dd></div>
+      <div class="row"><dt>Customer Support</dt><dd><a href="mailto:support@myappscart.com">support@myappscart.com</a></dd></div>
+      <div class="row"><dt>Privacy Policy</dt><dd><a href="https://myappscart.com/apps/shubhzo/privacy.html">https://myappscart.com/apps/shubhzo/privacy.html</a></dd></div>
+    </dl>
+  </div>
+</section>
+
 <div class="links-row">
   <a href="/apps/shubhzo/">Home</a>
   <a href="/apps/shubhzo/tutorial.html">Tutorial</a>
@@ -1052,7 +1075,7 @@
 
 <footer>
   <p>&copy; 2026 MyAppsCart &nbsp;·&nbsp; <a href="mailto:support@myappscart.com">support@myappscart.com</a></p>
-  <p>A <a href="https://kirosys.in" target="_blank" rel="noopener">Kirosys Technology</a> company</p>
+  <p>SHUBHZO is operated by Rajesh Kumar under the SHUBHZO brand</p>
 </footer>
 
 </body>
