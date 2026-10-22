@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChandaKhata — Terms of Service</title>
+  <meta name="description" content="Terms of Service for ChandaKhata, the donation receipt and community accounts app by MyAppsCart." />
+  <link rel="icon" type="image/png" href="/apps/chandakhata/icon-512.png" />
+  <link rel="apple-touch-icon" href="/apps/chandakhata/icon-512.png" />
+  <style>
+    :root {
+      --maroon: #5A1E00; --maroon-mid: #8A3300;
+      --saffron: #E65100; --saffron-d: #B83C00; --gold: #F6C544;
+      --bg: #FFF8F2; --surface: #FFFFFF; --surface-2: #FBEFE5;
+      --text: #2B1A10; --muted: #6A5546; --faint: #8C7766; --border: #F0E2D6;
+      --radius: 12px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.75; font-size: 15.5px;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--saffron-d); }
+    a:hover { text-decoration: underline; }
+    header {
+      background: linear-gradient(150deg, #2E0F00 0%, #7A2E00 50%, #C24400 100%);
+      color: #fff; padding: 44px 24px 38px; text-align: center;
+    }
+    header .ico {
+      width: 58px; height: 58px; margin: 0 auto 14px; border-radius: 16px;
+      overflow: hidden; border: 1.5px solid rgba(255,255,255,0.2);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.4);
+    }
+    header .ico img { display: block; width: 100%; height: 100%; }
+    header h1 { font-size: clamp(22px, 4.4vw, 28px); font-weight: 800; letter-spacing: -0.5px; }
+    header p { margin-top: 7px; font-size: 14px; color: #fff; opacity: 0.85; max-width: 560px; margin-inline: auto; }
+    main { max-width: 800px; margin: 0 auto; padding: 34px 20px 72px; }
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 26px 28px 24px;
+      margin-bottom: 16px; box-shadow: 0 2px 8px rgba(90,30,0,0.04);
+    }
+    h2 {
+      font-size: 17px; font-weight: 750; color: var(--maroon);
+      margin-bottom: 12px; display: flex; align-items: center; gap: 9px;
+    }
+    h3 { font-size: 15px; font-weight: 700; margin: 18px 0 7px; color: var(--maroon-mid); }
+    p { color: var(--muted); margin-bottom: 12px; }
+    p:last-child, ul:last-child, ol:last-child { margin-bottom: 0; }
+    ul, ol { padding-left: 21px; color: var(--muted); margin-bottom: 13px; }
+    li { margin-bottom: 6px; }
+    li::marker { color: var(--faint); }
+    strong { color: var(--text); font-weight: 650; }
+    .hl {
+      background: #FFF1E3; border-left: 3px solid var(--saffron);
+      border-radius: 0 9px 9px 0; padding: 13px 17px;
+      margin: 14px 0 0; font-size: 14.5px; color: #6B2C00;
+    }
+    .hl.amber { background: #FDF6E3; border-left-color: var(--gold); color: #6B4E06; }
+    .hl.blue  { background: #EDF3FB; border-left-color: #2a78d6; color: #1D3E6B; }
+    .hl strong { color: inherit; }
+    .hl p { color: inherit; }
+    .stamp {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 13px 20px; margin-bottom: 22px;
+      font-size: 13.5px; color: var(--muted);
+    }
+    .table-wrap { overflow-x: auto; margin: 14px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 500px; }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+    thead th {
+      font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.7px;
+      color: var(--faint); font-weight: 700; border-bottom: 1.5px solid var(--border);
+    }
+    td { color: var(--muted); }
+    td strong { color: var(--text); }
+    tbody tr:last-child td { border-bottom: none; }
+    details.qa { border-bottom: 1px solid var(--border); padding: 12px 0; }
+    details.qa:last-of-type { border-bottom: none; }
+    details.qa summary {
+      font-weight: 650; font-size: 15px; color: var(--text); cursor: pointer;
+      list-style: none; display: flex; justify-content: space-between; gap: 14px;
+    }
+    details.qa summary::-webkit-details-marker { display: none; }
+    details.qa summary::after { content: '+'; color: var(--saffron-d); font-weight: 700; font-size: 20px; line-height: 1; }
+    details.qa[open] summary::after { content: '−'; }
+    details.qa p { font-size: 14.5px; margin-top: 9px; margin-bottom: 0; }
+    .links-row {
+      display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+      padding: 28px 20px; background: var(--surface); border-top: 1px solid var(--border);
+    }
+    .links-row a {
+      background: var(--surface-2); color: #374151; border-radius: 20px;
+      padding: 8px 18px; font-size: 13px; font-weight: 600; text-decoration: none;
+    }
+    .links-row a:hover { background: #F9D9C0; color: var(--saffron-d); }
+    footer { background: #2B1A10; color: #C9B5A6; text-align: center; padding: 22px; font-size: 13px; }
+    footer p { color: inherit; margin-bottom: 0; }
+    footer a { color: #C9B5A6; }
+    footer a:hover { color: #fff; }
+    .mailbtn {
+      display: inline-block; background: var(--saffron-d); color: #fff;
+      border-radius: 22px; padding: 11px 26px; font-weight: 700;
+      font-size: 14.5px; text-decoration: none; margin-top: 6px;
+    }
+    .mailbtn:hover { background: #9A3200; text-decoration: none; }
+    @media (max-width: 480px) {
+      .card { padding: 22px 18px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="ico"><img src="/apps/chandakhata/icon-512.png" alt="ChandaKhata icon" width="58" height="58" /></div>
+  <h1>ChandaKhata — Terms of Service</h1>
+  <p>The agreement between you and MyAppsCart for using the app. Written to be read, not to be skipped.</p>
+</header>
+
+<main>
+
+  <div class="stamp">
+    📅 &nbsp;<strong>Last updated:</strong> 22 October 2026 &nbsp;·&nbsp; Applies to the ChandaKhata app and its public receipt and accounts pages.
+  </div>
+
+  <div class="card">
+    <h2>1 · Accepting these terms</h2>
+    <p>By installing or using ChandaKhata ("the app") you agree to these terms. If you do not agree, please do not use the app. The app is published by <strong>MyAppsCart</strong>, a Kirosys Technology company ("we", "us").</p>
+    <p>If you use the app on behalf of a committee, temple, society, trust or other group, you confirm you are authorised to do so for that group.</p>
+  </div>
+
+  <div class="card">
+    <h2>2 · What the app is — and is not</h2>
+    <p>ChandaKhata is a <strong>record-keeping tool</strong>. It helps a group record donations, pledges and expenses, send receipts, and show its accounts.</p>
+    <ul>
+      <li><strong>We do not collect, hold or transfer donation money.</strong> Donations are paid directly to the group, in cash or by UPI. The app records what the group tells it.</li>
+      <li><strong>The public accounts page is not an audit.</strong> It shows figures reported by the organizer and team. Neither we nor anyone else has checked them.</li>
+      <li><strong>ChandaKhata does not issue 80G certificates</strong> or any other tax-exemption document. A receipt from the app is a record of a donation, not a tax certificate.</li>
+    </ul>
+    <div class="hl amber">
+      <strong>It is not a substitute for professional advice.</strong> We are not your accountant, auditor or lawyer. Whether your group needs registration, audited accounts, 80G or 12A status, or must follow any other rule is for you and your advisers to decide.
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>3 · Organizer responsibilities</h2>
+    <p>The organizer of an event, and every team member they add, is responsible for:</p>
+    <ul>
+      <li><strong>Accuracy</strong> — that donations, pledges, expenses and handovers are recorded truthfully and completely.</li>
+      <li><strong>Legal compliance</strong> — any law that applies to raising and spending money for your cause, including tax, trust, society and local-permission rules.</li>
+      <li><strong>Donor consent</strong> — entering donors' details only for the event's receipts and accounts, and listing a donor by name on the public page only where they agreed.</li>
+      <li><strong>Your team</strong> — who you invite, which role you give them, and removing people who should no longer have access.</li>
+      <li><strong>Keeping your own copy</strong> — exporting reports you are required to keep.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>4 · Acceptable use</h2>
+    <p>You agree not to:</p>
+    <ul>
+      <li>Collect money under false pretences, or record fake, inflated or backdated donations or expenses</li>
+      <li>Send SMS, email or messages to people who did not donate, or use receipts for advertising or spam</li>
+      <li>Enter anyone's personal details without a genuine reason connected to the event</li>
+      <li>Attempt to access another group's records, or to interfere with the app or its servers</li>
+      <li>Reverse-engineer, resell or redistribute the app, except where law expressly permits it</li>
+      <li>Use the app in a way that breaks any law that applies to you</li>
+    </ul>
+    <p>We may limit messaging, suspend an event, or end an account for abuse, suspected fraud or a serious or repeated breach of this section. Where we reasonably can, we will tell you why first.</p>
+  </div>
+
+  <div class="card">
+    <h2>5 · Plans, credits and payment</h2>
+    <ul>
+      <li><strong>Free</strong> includes the core features with up to 3 events at a time. Receipts, PDF and WhatsApp sharing, and email receipts are free on every plan.</li>
+      <li><strong>Premium</strong> is <strong>₹199 per month</strong> or <strong>₹1,499 per year</strong>, and adds unlimited events, all 20 designs, charts and the audit report, and organizations.</li>
+      <li><strong>Premium does not renew automatically.</strong> When a period ends you choose whether to buy another. Nothing is charged without your action.</li>
+      <li><strong>Messaging credits</strong> pay for automatic SMS receipts only: 1 credit = 1 SMS receipt. Packs are 100 credits for ₹30, 500 for ₹125 and 2,000 for ₹440, including GST.</li>
+      <li>Payments are processed by <strong>Razorpay</strong>. We do not receive or store your card, UPI or bank credentials.</li>
+      <li>Prices may change with notice; a change never applies to a period or a pack already paid for.</li>
+    </ul>
+    <h3>Refunds</h3>
+    <p><strong>Messaging credits are non-refundable</strong>, except that a credit spent on an SMS that fails to send is returned to your balance automatically. For any problem with a Premium or credits payment, write to <a href="mailto:support@myappscart.com">support@myappscart.com</a> with your registered mobile number and we will look into it.</p>
+    <h3>When Premium ends</h3>
+    <p>Your records stay. Nothing you recorded is deleted because a Premium period ended, and you can still view your events and export their reports. Premium-only features pause until you renew.</p>
+  </div>
+
+  <div class="card">
+    <h2>6 · Availability and changes</h2>
+    <p>Recording donations works offline on your phone and syncs later. Delivery of SMS and email, sign-in, and the public pages depend on our servers and third-party providers, and may sometimes be unavailable. We do not promise uninterrupted availability.</p>
+    <p>We may add, change or remove features. If we remove something you depend on, we will say so in advance where we reasonably can.</p>
+  </div>
+
+  <div class="card">
+    <h2>7 · Third-party services</h2>
+    <p>Some features rely on services we do not control — Google Firebase, MSG91 (SMS), Resend (email), Razorpay (payments), WhatsApp, and your app store. Your use of those features is also subject to the relevant provider's terms. See the <a href="/apps/chandakhata/privacy.html">privacy policy</a> for what each one receives.</p>
+  </div>
+
+  <div class="card">
+    <h2>8 · Warranty and liability</h2>
+    <p>The app is provided <strong>"as is"</strong>. To the maximum extent the law allows, we disclaim implied warranties of merchantability, fitness for a particular purpose and non-infringement.</p>
+    <p>We are not responsible for money collected or spent by any group, for disputes between a group and its donors or members, or for figures a group reports. We are not liable for indirect or consequential loss, loss of funds, or loss of data. Where liability cannot be excluded, our total liability is limited to the amount you paid us for the app in the twelve months before the claim.</p>
+    <div class="hl blue"><strong>Nothing here removes a right you have that cannot lawfully be excluded</strong>, including consumer rights under Indian law.</div>
+  </div>
+
+  <div class="card">
+    <h2>9 · Intellectual property</h2>
+    <p>The app, its name, its icon and its designs remain ours. You get a personal, non-exclusive, non-transferable licence to use it for your group, for as long as you comply with these terms. The records you enter and the reports the app produces for you are yours.</p>
+  </div>
+
+  <div class="card">
+    <h2>10 · Ending the agreement</h2>
+    <p>You may stop at any time. See the <a href="/apps/chandakhata/delete-account.html">deletion page</a> for removing your account. We may end access if you breach these terms materially. Sections 3, 8 and 9 survive termination.</p>
+  </div>
+
+  <div class="card">
+    <h2>11 · Governing law</h2>
+    <p>These terms are governed by the laws of India, and the courts of India have jurisdiction over any dispute — without affecting any right you have to bring a claim in your local consumer forum.</p>
+  </div>
+
+  <div class="card">
+    <h2>12 · Changes to these terms</h2>
+    <p>We will update this page and its date if these terms change. Continuing to use the app after a change means you accept the updated terms. If a change materially reduces what you get, we will tell you in the app before it applies.</p>
+  </div>
+
+  <div class="card">
+    <h2>✉️ Contact</h2>
+    <p>Questions about these terms:</p>
+    <a class="mailbtn" href="mailto:support@myappscart.com?subject=ChandaKhata%20terms%20question">support@myappscart.com</a>
+  </div>
+
+</main>
+
+<div class="links-row">
+  <a href="/apps/chandakhata/">ChandaKhata</a>
+  <a href="/apps/chandakhata/privacy.html">Privacy Policy</a>
+  <a href="/apps/chandakhata/terms.html">Terms of Service</a>
+  <a href="/apps/chandakhata/support.html">Support</a>
+  <a href="/apps/chandakhata/delete-account.html">Delete Account</a>
+  <a href="/">← MyAppsCart</a>
+</div>
+
+<footer>
+  <p>&copy; 2026 MyAppsCart &nbsp;·&nbsp; <a href="mailto:support@myappscart.com">support@myappscart.com</a></p>
+  <p>A <a href="https://kirosys.in" target="_blank" rel="noopener">Kirosys Technology</a> company</p>
+</footer>
+
+</body>
+</html>

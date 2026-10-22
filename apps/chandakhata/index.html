@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChandaKhata (चंदाखाता) — Festival Chanda, Donations &amp; Accounts</title>
+  <meta name="description" content="ChandaKhata: record a cash or UPI donation and send the receipt in under 10 seconds — even offline. Pledges, expenses, cash handover, a public accounts page and reports for festival committees, temples, societies and community causes. 11 Indian languages." />
+  <link rel="icon" type="image/png" href="/apps/chandakhata/icon-512.png" />
+  <link rel="apple-touch-icon" href="/apps/chandakhata/icon-512.png" />
+  <meta property="og:title" content="ChandaKhata (चंदाखाता) — उत्सव, दान और हिसाब — सब एक जगह" />
+  <meta property="og:description" content="Festivals, donations and accounts — all in one place. Receipts in under 10 seconds, offline-ready, and donors need no app." />
+  <meta property="og:image" content="https://myappscart.com/apps/chandakhata/icon-512.png" />
+  <meta property="og:type" content="website" />
+  <style>
+    :root {
+      --saffron:   #E65100;
+      --saffron-d: #B83C00;
+      --maroon:    #5A1E00;
+      --gold:      #FFC163;
+      --green:     #2E7D32;
+      --primary:   #B83C00;
+      --bg:        #FFF8F2;
+      --surface:   #FFFFFF;
+      --text:      #2B1A10;
+      --muted:     #6A5546;
+      --faint:     #8C7766;
+      --border:    #F0E2D6;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(150deg, #2E0F00 0%, #7A2E00 46%, #E65100 100%);
+      color: #fff;
+      padding: 64px 24px 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(255,193,99,0.20) 0%, transparent 58%),
+                  radial-gradient(ellipse at 85% 90%, rgba(255,235,205,0.12) 0%, transparent 50%),
+                  radial-gradient(ellipse at 12% 70%, rgba(255,152,0,0.16) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 1; }
+    .hero-icon {
+      width: 104px; height: 104px;
+      margin: 0 auto 24px;
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: 0 10px 34px rgba(0,0,0,0.34), inset 0 1px 0 rgba(255,255,255,0.15);
+      border: 1.5px solid rgba(255,255,255,0.22);
+    }
+    .hero-icon img { display: block; width: 100%; height: 100%; }
+    .hero h1 {
+      font-size: clamp(34px, 7vw, 56px);
+      font-weight: 800;
+      letter-spacing: -1.2px;
+      line-height: 1.1;
+    }
+    .hero h1 .hi { display: block; font-size: 0.5em; letter-spacing: 0; font-weight: 700; margin-top: 8px; opacity: 0.92; }
+    .hero .tagline {
+      margin-top: 14px;
+      font-size: clamp(17px, 3vw, 22px);
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .hero .tagline-en {
+      margin-top: 2px;
+      font-size: clamp(14px, 2.4vw, 16px);
+      font-weight: 600;
+      opacity: 0.85;
+      letter-spacing: 0.3px;
+    }
+    .hero .sub {
+      margin: 18px auto 0;
+      max-width: 640px;
+      font-size: clamp(15px, 2.4vw, 17.5px);
+      opacity: 0.88;
+    }
+    .badges {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      justify-content: center; margin-top: 28px;
+    }
+    .badge {
+      background: rgba(255,255,255,0.13);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 22px;
+      padding: 8px 18px;
+      font-size: 13.5px;
+      font-weight: 600;
+      backdrop-filter: blur(6px);
+    }
+    .store {
+      margin-top: 30px;
+      display: inline-block;
+      background: rgba(255,255,255,0.14);
+      border: 1.5px dashed rgba(255,255,255,0.55);
+      color: #fff;
+      border-radius: 26px;
+      padding: 12px 30px;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: default;
+    }
+    .store-note { margin-top: 12px; font-size: 13px; opacity: 0.8; }
+    .store-note a { color: #fff; text-decoration: underline; }
+
+    /* ── Sections ── */
+    section { max-width: 1080px; margin: 0 auto; padding: 62px 22px; }
+    section > h2 {
+      text-align: center;
+      font-size: clamp(24px, 4vw, 33px);
+      font-weight: 800;
+      letter-spacing: -0.6px;
+      margin-bottom: 10px;
+    }
+    section > h2 .en { display: block; font-size: 0.55em; font-weight: 600; color: var(--muted); letter-spacing: 0; margin-top: 4px; }
+    section > .lead {
+      text-align: center;
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 auto 40px;
+      font-size: 16px;
+    }
+
+    /* ── Who it's for ── */
+    .who-row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+    .who {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 22px; padding: 9px 18px;
+      font-size: 14.5px; font-weight: 600; color: var(--text);
+    }
+
+    /* ── Features ── */
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(268px, 100%), 1fr));
+      gap: 18px;
+    }
+    .feat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 26px 24px;
+      box-shadow: 0 2px 10px rgba(90,30,0,0.05);
+    }
+    .feat-icon {
+      width: 50px; height: 50px;
+      border-radius: 15px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 25px;
+      margin-bottom: 15px;
+    }
+    .ic-saffron { background: rgba(230,81,0,0.12); }
+    .ic-gold    { background: rgba(255,193,99,0.28); }
+    .ic-green   { background: rgba(46,125,50,0.12); }
+    .ic-blue    { background: rgba(29,111,200,0.11); }
+    .ic-maroon  { background: rgba(122,46,0,0.10); }
+    .feat h3 { font-size: 17px; font-weight: 700; margin-bottom: 2px; }
+    .feat h3 .en { display: block; font-size: 13.5px; font-weight: 600; color: var(--faint); margin-top: 1px; }
+    .feat p { font-size: 14.5px; color: var(--muted); margin-top: 8px; }
+
+    /* ── Transparency band ── */
+    .band { background: #2A0F02; color: #fff; }
+    .band-inner {
+      max-width: 1080px; margin: 0 auto;
+      padding: 66px 22px;
+      display: grid; grid-template-columns: 1fr 1.05fr; gap: 52px;
+      align-items: center;
+    }
+    .band-badge {
+      display: inline-block;
+      background: rgba(255,193,99,0.14);
+      color: var(--gold);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 12.5px; font-weight: 700;
+      letter-spacing: 0.3px;
+      margin-bottom: 16px;
+    }
+    .band h2 {
+      font-size: clamp(23px, 3.6vw, 32px);
+      font-weight: 800; letter-spacing: -0.6px;
+      line-height: 1.22; margin-bottom: 14px;
+    }
+    .band h2 .en { display: block; font-size: 0.6em; font-weight: 600; color: #E3C9B4; letter-spacing: 0; margin-top: 4px; }
+    .band p { color: #E0CBBB; font-size: 15.5px; margin-bottom: 20px; }
+    .perks { display: flex; flex-direction: column; gap: 11px; }
+    .perk {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 14.5px; color: #F6E9DF;
+    }
+    .perk::before {
+      content: '✓';
+      flex: 0 0 20px;
+      width: 20px; height: 20px; margin-top: 2px;
+      background: var(--green); color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700;
+    }
+    .band-note {
+      margin-top: 20px; font-size: 13.5px; color: #F2D9C4;
+      border-left: 3px solid var(--gold); padding: 4px 0 4px 12px;
+    }
+    .band-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .bcard {
+      background: rgba(255,255,255,0.055);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 22px 18px;
+      text-align: center;
+    }
+    .bcard .vc-icon { font-size: 30px; margin-bottom: 10px; }
+    .bcard h3 { font-size: 15px; font-weight: 700; margin-bottom: 5px; }
+    .bcard p { font-size: 13px; color: #D6BEAC; margin: 0; }
+
+    /* ── Steps ── */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(230px, 100%), 1fr));
+      gap: 18px;
+    }
+    .stepc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 26px 22px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(90,30,0,0.05);
+    }
+    .stepc .n {
+      width: 38px; height: 38px; margin: 0 auto 14px;
+      background: var(--saffron-d); color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 16px;
+    }
+    .stepc h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .stepc p { font-size: 14px; color: var(--muted); }
+
+    /* ── Roles ── */
+    .roles { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(230px, 100%), 1fr)); gap: 14px; margin-top: 8px; }
+    .role {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 18px 20px;
+    }
+    .role b { display: block; font-size: 15.5px; }
+    .role span { display: block; font-size: 13.5px; color: var(--muted); margin-top: 4px; }
+
+    /* ── Pricing ── */
+    .plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); gap: 18px; align-items: start; }
+    .plan {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 26px 24px;
+      box-shadow: 0 2px 10px rgba(90,30,0,0.05);
+      position: relative;
+    }
+    .plan.featured { border-color: var(--saffron); box-shadow: 0 10px 28px rgba(230,81,0,0.14); }
+    .plan .ribbon {
+      position: absolute; top: -11px; left: 24px;
+      background: var(--saffron-d); color: #fff;
+      font-size: 11px; font-weight: 800; letter-spacing: 0.7px;
+      border-radius: 11px; padding: 3px 12px; text-transform: uppercase;
+    }
+    .plan h3 { font-size: 17px; font-weight: 800; }
+    .plan .price { font-size: 32px; font-weight: 800; letter-spacing: -1px; margin-top: 6px; line-height: 1.2; }
+    .plan .price small { font-size: 14px; font-weight: 600; color: var(--muted); letter-spacing: 0; }
+    .plan .alt { font-size: 14px; color: var(--muted); margin-top: 2px; }
+    .plan .alt strong { color: var(--text); }
+    .plan .who-for { font-size: 13.5px; color: var(--muted); margin-top: 6px; }
+    .plan ul { list-style: none; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+    .plan li { font-size: 14px; color: var(--muted); padding-left: 23px; position: relative; margin-bottom: 8px; }
+    .plan li::before {
+      content: '✓'; position: absolute; left: 0; top: 0;
+      color: var(--green); font-weight: 800; font-size: 13px;
+    }
+    .plan li.plus { color: var(--text); font-weight: 600; }
+    .packs { list-style: none; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border); }
+    .packs li { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; font-size: 14.5px; color: var(--text); padding-left: 0; }
+    .packs li::before { content: none; }
+    .packs li span { color: var(--muted); }
+    .packs li b { font-weight: 700; }
+    .callout {
+      background: #FFF1E3; border-left: 3px solid var(--saffron);
+      border-radius: 0 10px 10px 0; padding: 14px 18px;
+      margin-top: 22px; font-size: 14.5px; color: #6B2C00;
+    }
+    .fine { text-align: center; font-size: 13px; color: var(--faint); margin-top: 18px; }
+
+    /* ── Languages ── */
+    .langs { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+    .lang {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 12px 18px; text-align: center; min-width: 118px;
+    }
+    .lang b { display: block; font-size: 17px; font-weight: 700; }
+    .lang span { display: block; font-size: 12px; color: var(--faint); margin-top: 1px; }
+
+    /* ── Download ── */
+    .dl {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 32px 28px; text-align: center;
+      box-shadow: 0 2px 10px rgba(90,30,0,0.05);
+    }
+    .dl h2 { font-size: clamp(21px, 3.4vw, 27px); font-weight: 800; letter-spacing: -0.5px; }
+    .dl p { color: var(--muted); max-width: 580px; margin: 10px auto 0; font-size: 15px; }
+    .soon-pill {
+      display: inline-block; margin-top: 20px;
+      background: #FFF1E3; color: #8A3300; border: 1.5px dashed #F0A46B;
+      border-radius: 24px; padding: 11px 26px; font-weight: 700; font-size: 15px;
+    }
+    .mailbtn {
+      display: inline-block; background: var(--saffron-d); color: #fff;
+      border-radius: 22px; padding: 11px 26px; font-weight: 700;
+      font-size: 14.5px; margin-top: 16px;
+    }
+    .mailbtn:hover { background: #9A3200; text-decoration: none; }
+
+    /* ── Links / footer ── */
+    .links-row {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      justify-content: center; padding: 28px 20px;
+      background: var(--surface); border-top: 1px solid var(--border);
+    }
+    .links-row a {
+      background: #FDEBDD; color: #374151; border-radius: 20px;
+      padding: 8px 18px; font-size: 13px; font-weight: 600;
+      transition: background .12s;
+    }
+    .links-row a:hover { background: #F9D9C0; color: var(--primary); text-decoration: none; }
+    footer {
+      background: #2B1A10; color: #C9B5A6;
+      text-align: center; padding: 20px; font-size: 13px;
+    }
+    footer a { color: #C9B5A6; }
+    footer a:hover { color: #fff; }
+
+    @media (max-width: 820px) {
+      .band-inner { grid-template-columns: 1fr; gap: 34px; padding: 54px 22px; }
+    }
+    @media (max-width: 480px) {
+      .band-cards { grid-template-columns: 1fr; }
+      .dl { padding: 26px 18px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .links-row a { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-icon">
+      <img src="/apps/chandakhata/icon-512.png" alt="ChandaKhata app icon" width="104" height="104" />
+    </div>
+    <h1>ChandaKhata <span class="hi" lang="hi">चंदाखाता</span></h1>
+    <div class="tagline" lang="hi">उत्सव, दान और हिसाब — सब एक जगह</div>
+    <div class="tagline-en">Festivals, donations and accounts — all in one place</div>
+    <p class="sub">Chanda collection and accounts for festival committees, temples, societies and community causes. Record a cash or UPI donation and the donor has a receipt in under 10 seconds — on an ordinary Android phone, with or without internet.</p>
+    <div class="badges">
+      <span class="badge">⚡ Receipt in &lt;10 sec</span>
+      <span class="badge">📶 Works offline</span>
+      <span class="badge">📲 Donors need no app</span>
+      <span class="badge">🔍 Public accounts page</span>
+      <span class="badge">🇮🇳 11 Indian languages</span>
+      <span class="badge">🆓 Free to start</span>
+    </div>
+    <p class="store" role="note">⏳ Coming soon on Google Play</p>
+    <p class="store-note">Android app in final testing · <a href="#download">Get notified</a> · <a href="#pricing">See pricing</a></p>
+  </div>
+</div>
+
+<!-- Who it's for -->
+<section style="padding-bottom:0;">
+  <h2><span lang="hi">किसके लिए?</span><span class="en">Built for every kind of collection</span></h2>
+  <p class="lead">Anywhere money is collected from many people and the accounts have to be shown afterwards.</p>
+  <div class="who-row">
+    <span class="who">🪔 Festival committees — Ganesh, Durga Puja, Navratri, Chhath</span>
+    <span class="who">🛕 Temples</span>
+    <span class="who">🏘️ Housing societies</span>
+    <span class="who">🙏 Gurudwaras</span>
+    <span class="who">🕌 Masjid communities</span>
+    <span class="who">⛪ Church communities</span>
+    <span class="who">🍛 Bhandaras &amp; langars</span>
+    <span class="who">🤝 Social causes &amp; relief drives</span>
+  </div>
+</section>
+
+<!-- Features -->
+<section id="features">
+  <h2><span lang="hi">चंदा से हिसाब तक</span><span class="en">From collection to final accounts</span></h2>
+  <p class="lead">Every feature is built around the doorstep: a collector with a phone, a donor in a hurry, and a treasurer who has to answer for every rupee.</p>
+  <div class="feat-grid">
+
+    <div class="feat">
+      <div class="feat-icon ic-saffron">⚡</div>
+      <h3><span lang="hi">10 सेकंड में रसीद</span><span class="en">Receipt in under 10 seconds</span></h3>
+      <p>Name, amount, cash or UPI, save. The receipt has its number and is on its way to the donor before they have closed the door.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-blue">📶</div>
+      <h3><span lang="hi">बिना इंटरनेट भी</span><span class="en">Works offline</span></h3>
+      <p>Each phone holds a block of receipt numbers issued in advance, so a receipt written with no signal is final — not a temporary slip. Everything syncs when the network returns. UPI payments recorded offline are marked for the treasurer to verify.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-green">📲</div>
+      <h3><span lang="hi">दानदाता को ऐप नहीं चाहिए</span><span class="en">Donors need no app</span></h3>
+      <p>Receipts go by WhatsApp share, an SMS link or email, and open in any browser. Nobody is asked to install anything or sign up.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-gold">🤝</div>
+      <h3><span lang="hi">वादा अलग, रकम अलग</span><span class="en">Pledges kept separate</span></h3>
+      <p>"I'll give ₹5,000 next week" is recorded as a vaada, not as money. Pledged and received are tracked separately, so the totals never overstate what is in hand.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-maroon">🧾</div>
+      <h3><span lang="hi">खर्च और बिल</span><span class="en">Expenses with bill photos</span></h3>
+      <p>Log an expense with a photo of the bill. The treasurer reviews it and swipes to approve — no loose papers in a carry bag.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-saffron">💵</div>
+      <h3><span lang="hi">नकद हैंडओवर</span><span class="en">Cash handover by QR</span></h3>
+      <p>When a collector hands cash to the treasurer, a QR scan records who handed over how much — and it works offline too. Everyone knows whose hands the money is in.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-green">🔍</div>
+      <h3><span lang="hi">पारदर्शिता</span><span class="en">Transparency QR &amp; public accounts</span></h3>
+      <p>Put a QR on the pandal and anyone can see collections and spending. Donor names appear only with consent; <span lang="hi">गुप्त दान</span> (Gupt Daan) stays anonymous. Phone numbers and addresses are never shown.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-blue">📊</div>
+      <h3><span lang="hi">रिपोर्ट</span><span class="en">Reports in PDF &amp; Excel</span></h3>
+      <p>Collection, expense and collector-wise reports as PDF or Excel, with charts for the committee meeting and an audit report for Premium.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-gold">🎨</div>
+      <h3><span lang="hi">20 डिज़ाइन</span><span class="en">20 receipt &amp; invitation designs</span></h3>
+      <p>Receipts and invitations in designs suited to a puja, a festival, a langar or a fund drive — with your committee's name on them.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-maroon">👥</div>
+      <h3><span lang="hi">भूमिकाएँ</span><span class="en">Roles for the whole team</span></h3>
+      <p>Organizer, treasurer, collector and member — each sees and does only what their role allows.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-saffron">🏛️</div>
+      <h3><span lang="hi">संस्था</span><span class="en">Organizations for committees</span></h3>
+      <p>Keep a committee's events together under one organization, year after year, with the same team and the same history.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon ic-blue">🗣️</div>
+      <h3><span lang="hi">11 भाषाएँ</span><span class="en">11 Indian languages</span></h3>
+      <p>The whole app, in the language your collectors are comfortable in — from Hindi and Bengali to Tamil and Urdu.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Transparency band -->
+<div class="band">
+  <div class="band-inner">
+    <div>
+      <div class="band-badge">Trust, shown — not claimed</div>
+      <h2><span lang="hi">हर रुपये का हिसाब</span><span class="en">Every rupee, accounted for</span></h2>
+      <p>The question every committee hears is "where did the money go?" ChandaKhata lets you answer it with a QR code instead of an argument — while keeping donors' personal details private.</p>
+      <div class="perks">
+        <div class="perk">A public page with totals collected, spent and in hand</div>
+        <div class="perk">Donor names only where the donor agreed to be listed</div>
+        <div class="perk"><span><span lang="hi">गुप्त दान</span> — Gupt Daan donations stay anonymous</span></div>
+        <div class="perk">Phone numbers, emails and addresses are never shown</div>
+        <div class="perk">Expenses backed by bill photos and treasurer approval</div>
+      </div>
+      <p class="band-note">The public page shows organizer-reported figures. It is not an independent audit.</p>
+    </div>
+    <div class="band-cards">
+      <div class="bcard">
+        <div class="vc-icon">🔢</div>
+        <h3>Final receipt numbers</h3>
+        <p>Even offline — no duplicate or temporary numbers</p>
+      </div>
+      <div class="bcard">
+        <div class="vc-icon">✅</div>
+        <h3>Treasurer approval</h3>
+        <p>Expenses count once they are approved</p>
+      </div>
+      <div class="bcard">
+        <div class="vc-icon">💵</div>
+        <h3>Cash trail</h3>
+        <p>Every handover recorded by QR</p>
+      </div>
+      <div class="bcard">
+        <div class="vc-icon">🙈</div>
+        <h3>Private by default</h3>
+        <p>Listed by name only with consent</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- How it works -->
+<section>
+  <h2><span lang="hi">शुरू करना आसान</span><span class="en">Up and running before the first door</span></h2>
+  <div class="steps-grid">
+    <div class="stepc">
+      <div class="n">1</div>
+      <h3>Create the event</h3>
+      <p>Sign in with your mobile number, name the festival or cause, and set a target if you have one.</p>
+    </div>
+    <div class="stepc">
+      <div class="n">2</div>
+      <h3>Add your team</h3>
+      <p>Invite the treasurer and collectors with a link or QR, and give each a role.</p>
+    </div>
+    <div class="stepc">
+      <div class="n">3</div>
+      <h3>Collect &amp; send receipts</h3>
+      <p>Record each donation or pledge; the donor gets a receipt by WhatsApp, SMS link or email.</p>
+    </div>
+    <div class="stepc">
+      <div class="n">4</div>
+      <h3>Close the accounts</h3>
+      <p>Hand over cash, approve expenses, share the transparency QR and export the reports.</p>
+    </div>
+  </div>
+
+  <div class="roles" style="margin-top:28px;">
+    <div class="role"><b>Organizer</b><span>Creates the event, manages the team and settings.</span></div>
+    <div class="role"><b>Treasurer</b><span>Receives cash, verifies UPI, approves expenses.</span></div>
+    <div class="role"><b>Collector</b><span>Records donations and pledges, hands over cash.</span></div>
+    <div class="role"><b>Member</b><span>Follows the event and its accounts.</span></div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<div style="background:#FFF1E6;border-block:1px solid var(--border);">
+<section id="pricing">
+  <h2><span lang="hi">कीमत</span><span class="en">Simple pricing</span></h2>
+  <p class="lead">Most committees never need to pay. Receipts, PDFs and WhatsApp sharing are free on every plan, always.</p>
+  <div class="plans">
+    <div class="plan">
+      <h3>Free</h3>
+      <div class="price">₹0</div>
+      <p class="who-for">A single committee running its festival.</p>
+      <ul>
+        <li>All core features — donations, pledges, expenses, handover</li>
+        <li>Up to 3 events at a time</li>
+        <li>Receipts, PDF &amp; WhatsApp sharing — always free</li>
+        <li>Email receipts — free</li>
+        <li>Transparency QR &amp; public accounts page</li>
+        <li>Reports in PDF &amp; Excel</li>
+      </ul>
+    </div>
+    <div class="plan featured">
+      <span class="ribbon">Unlimited events</span>
+      <h3>Premium</h3>
+      <div class="price">₹199<small> / month</small></div>
+      <p class="alt">or <strong>₹1,499 / year</strong></p>
+      <p class="who-for">Committees that run many events or several groups.</p>
+      <ul>
+        <li class="plus">Everything in Free, plus:</li>
+        <li>Unlimited events</li>
+        <li>All 20 receipt &amp; invitation designs</li>
+        <li>Charts &amp; audit report</li>
+        <li>Organizations for committees</li>
+      </ul>
+    </div>
+    <div class="plan">
+      <h3>Messaging credits</h3>
+      <p class="who-for">1 credit = 1 SMS receipt. Only needed for automatic SMS.</p>
+      <ul class="packs">
+        <li><span>100 credits</span><b>₹30</b></li>
+        <li><span>500 credits</span><b>₹125</b></li>
+        <li><span>2,000 credits</span><b>₹440</b></li>
+      </ul>
+      <p class="who-for">Prices include GST. A send that fails is credited back automatically.</p>
+    </div>
+  </div>
+  <div class="callout">
+    <strong>Credits are only for automatic SMS receipts.</strong> Nothing else in the app needs them — WhatsApp sharing, PDF receipts and email receipts cost nothing.
+  </div>
+  <p class="fine">Prices in Indian rupees. Payments are handled by Razorpay. Premium does not renew automatically — you choose whether to renew.</p>
+</section>
+</div>
+
+<!-- Languages -->
+<section>
+  <h2><span lang="hi">अपनी भाषा में</span><span class="en">In your language</span></h2>
+  <p class="lead">Eleven Indian languages, switchable at any time from Settings.</p>
+  <div class="langs">
+    <div class="lang"><b lang="hi">हिन्दी</b><span>Hindi</span></div>
+    <div class="lang"><b>English</b><span>English</span></div>
+    <div class="lang"><b lang="bn">বাংলা</b><span>Bengali</span></div>
+    <div class="lang"><b lang="gu">ગુજરાતી</b><span>Gujarati</span></div>
+    <div class="lang"><b lang="kn">ಕನ್ನಡ</b><span>Kannada</span></div>
+    <div class="lang"><b lang="ml">മലയാളം</b><span>Malayalam</span></div>
+    <div class="lang"><b lang="mr">मराठी</b><span>Marathi</span></div>
+    <div class="lang"><b lang="or">ଓଡ଼ିଆ</b><span>Odia</span></div>
+    <div class="lang"><b lang="ta">தமிழ்</b><span>Tamil</span></div>
+    <div class="lang"><b lang="te">తెలుగు</b><span>Telugu</span></div>
+    <div class="lang"><b lang="ur" dir="rtl">اردو</b><span>Urdu</span></div>
+  </div>
+</section>
+
+<!-- Download -->
+<section id="download" style="padding-top:0;">
+  <div class="dl">
+    <h2>Coming soon to Android</h2>
+    <p>ChandaKhata is in final testing and is not on the Play Store yet. Want to use it for your next festival, or be told the day it goes live? Write to us.</p>
+    <p class="soon-pill" role="note">⏳ Coming soon on Google Play</p>
+    <br />
+    <a class="mailbtn" href="mailto:support@myappscart.com?subject=ChandaKhata%20%E2%80%94%20notify%20me">support@myappscart.com</a>
+  </div>
+</section>
+
+<!-- Links -->
+<div class="links-row">
+  <a href="/apps/chandakhata/">Home</a>
+  <a href="/apps/chandakhata/privacy.html">Privacy Policy</a>
+  <a href="/apps/chandakhata/terms.html">Terms of Service</a>
+  <a href="/apps/chandakhata/support.html">Support</a>
+  <a href="/apps/chandakhata/delete-account.html">Delete Account</a>
+  <a href="/">← MyAppsCart</a>
+</div>
+
+<footer>
+  <p>&copy; 2026 MyAppsCart &nbsp;·&nbsp; <a href="mailto:support@myappscart.com">support@myappscart.com</a></p>
+  <p>A <a href="https://kirosys.in" target="_blank" rel="noopener">Kirosys Technology</a> company</p>
+</footer>
+
+</body>
+</html>
