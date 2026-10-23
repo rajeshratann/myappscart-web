@@ -1,10 +1,10 @@
 {
-  "version": "1.0.0",
-  "buildNumber": 1,
+  "version": "1.0.1",
+  "buildNumber": 2,
   "critical": false,
-  "notes": "First release: donations, pledges, expenses, receipts, public accounts and reports in 11 languages.",
+  "notes": "A few ads on the free plan (never on receipts or payments; none with Premium), and watch an ad to get 1 free messaging credit.",
   "downloads": {
-    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/chandakhata-v1.0.0/ChandaKhata-1.0.0-android-arm64.apk",
-    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/chandakhata-v1.0.0/ChandaKhata-1.0.0-android-armv7.apk"
+    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/chandakhata-v1.0.1/ChandaKhata-1.0.1-android-arm64.apk",
+    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/chandakhata-v1.0.1/ChandaKhata-1.0.1-android-armv7.apk"
   }
 }
