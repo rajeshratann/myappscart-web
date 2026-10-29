@@ -12,6 +12,14 @@
   <meta property="og:image" content="https://myappscart.com/apps/chandakhata/icon-512.png" />
   <meta property="og:type" content="website" />
   <style>
+    .couponform{max-width:520px;margin:20px auto 0;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;display:grid;gap:14px}
+    .couponform fieldset{border:0;display:grid;gap:8px}
+    .couponform legend{font-weight:700;margin-bottom:6px}
+    .couponform .opt{display:flex;gap:10px;align-items:center;border:1px solid var(--border);border-radius:12px;padding:10px 12px;cursor:pointer}
+    .couponform label:not(.opt){display:grid;gap:6px;font-weight:600;font-size:14px}
+    .couponform input[type=email],.couponform input[type=tel],.couponform input[name=name]{font:inherit;padding:12px;border:1px solid var(--border);border-radius:12px;background:#fff}
+    .couponform button{border:0;cursor:pointer;justify-self:start}
+    .couponmsg{min-height:1.4em;font-weight:600;color:var(--saffron-d)}
     :root {
       --saffron:   #E65100;
       --saffron-d: #B83C00;
@@ -606,7 +614,26 @@
   <div class="callout">
     <strong>Credits are only for automatic SMS and WhatsApp messages.</strong> Nothing else in the app needs them — sharing on WhatsApp yourself, PDF receipts and email receipts cost nothing.
   </div>
-  <p class="fine">Prices in Indian rupees. Payments are handled by Razorpay. Premium does not renew automatically — you choose whether to renew.</p>
+  <p class="fine">Prices in Indian rupees. Payments are handled securely by Cashfree. Premium does not renew automatically — you choose whether to renew.</p>
+</section>
+
+<!-- Premium coupon (gift) -->
+<section id="coupon">
+  <h2><span lang="hi">प्रीमियम उपहार कूपन</span><span class="en">Gift Premium with a coupon</span></h2>
+  <p class="lead">Buy a Premium coupon for your mandal, temple trust or society. We email the code to you; whoever enters it in the app (Premium → Redeem coupon) gets Premium. Each code works once.</p>
+  <form id="couponForm" class="couponform" novalidate>
+    <fieldset>
+      <legend>Plan</legend>
+      <label class="opt"><input type="radio" name="plan" value="yearly" checked> <b>1 year</b> · ₹1,499</label>
+      <label class="opt"><input type="radio" name="plan" value="monthly"> <b>1 month</b> · ₹199</label>
+    </fieldset>
+    <label>Your name <input name="name" autocomplete="name" maxlength="80"></label>
+    <label>Email (the code is sent here) <input name="email" type="email" autocomplete="email" required></label>
+    <label>Mobile number <input name="phone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="98765 43210" required></label>
+    <button class="mailbtn" type="submit">Buy coupon · <span lang="hi">कूपन खरीदें</span></button>
+    <p id="couponMsg" class="couponmsg" role="status" aria-live="polite"></p>
+    <p class="fine">You pay on Cashfree's secure page (UPI, cards, net banking). After paying, the code is shown on screen and emailed to you. Prices include GST.</p>
+  </form>
 </section>
 </div>
 
@@ -660,5 +687,44 @@
   <p>A <a href="https://kirosys.in" target="_blank" rel="noopener">Kirosys Technology</a> company</p>
 </footer>
 
+<script>
+// Starts a coupon purchase: the server creates a Cashfree payment link.
+(function () {
+  var form = document.getElementById('couponForm');
+  if (!form) return;
+  var msg = document.getElementById('couponMsg');
+  var ENDPOINT = 'https://asia-south1-chandakhata.cloudfunctions.net/buyCoupon';
+  var ERRORS = {
+    'bad-email': 'Please enter a valid email address.',
+    'bad-phone': 'Please enter a 10-digit Indian mobile number.',
+    'too-many': 'Too many attempts. Please try again in an hour.',
+    'payments-not-configured': 'Coupon sales open soon. Please check back later.'
+  };
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = form.querySelector('button');
+    var data = {
+      plan: form.plan.value,
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      phone: form.phone.value.trim(),
+      lang: (navigator.language || 'hi').slice(0, 2)
+    };
+    btn.disabled = true;
+    msg.textContent = 'Opening secure payment…';
+    fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (res) {
+        if (res.ok && res.j.url) { window.location.href = res.j.url; return; }
+        msg.textContent = ERRORS[res.j.error] || 'Could not start the payment. Please try again.';
+        btn.disabled = false;
+      })
+      .catch(function () {
+        msg.textContent = 'No connection. Please check your internet and try again.';
+        btn.disabled = false;
+      });
+  });
+})();
+</script>
 </body>
 </html>
