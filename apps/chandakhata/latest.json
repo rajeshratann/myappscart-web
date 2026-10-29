@@ -1,10 +1,10 @@
 {
-  "version": "1.0.5",
-  "buildNumber": 6,
+  "version": "1.0.6",
+  "buildNumber": 7,
   "critical": false,
-  "notes": "App in your language plus English; buy credits and Premium with Cashfree; Premium coupon codes; an invoice for every purchase.",
+  "notes": "Backup to Google Drive and restore; Sync now with offline receipts; delete notifications; Google and OTP sign-in fixed.",
   "downloads": {
-    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/chandakhata-v1.0.5/ChandaKhata-1.0.5-android-arm64.apk",
-    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/chandakhata-v1.0.5/ChandaKhata-1.0.5-android-armv7.apk"
+    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/chandakhata-v1.0.6/ChandaKhata-1.0.6-android-arm64.apk",
+    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/chandakhata-v1.0.6/ChandaKhata-1.0.6-android-armv7.apk"
   }
 }
