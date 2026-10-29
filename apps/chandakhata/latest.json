@@ -1,10 +1,10 @@
 {
-  "version": "1.0.3",
-  "buildNumber": 4,
+  "version": "1.0.4",
+  "buildNumber": 5,
   "critical": false,
-  "notes": "New traditional receipt designs with colours and festival themes, karyakarta photo on receipts, My profile with total balance, clearer text and a fresh look.",
+  "notes": "Design every event's receipt, invitation and calendar; web receipts match the app; donor address with location fill; Finish setup fixed.",
   "downloads": {
-    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/chandakhata-v1.0.3/ChandaKhata-1.0.3-android-arm64.apk",
-    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/chandakhata-v1.0.3/ChandaKhata-1.0.3-android-armv7.apk"
+    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/chandakhata-v1.0.4/ChandaKhata-1.0.4-android-arm64.apk",
+    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/chandakhata-v1.0.4/ChandaKhata-1.0.4-android-armv7.apk"
   }
 }
