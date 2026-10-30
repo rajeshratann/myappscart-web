@@ -1,10 +1,10 @@
 {
-  "version": "1.0.7",
-  "buildNumber": 8,
+  "version": "1.0.8",
+  "buildNumber": 9,
   "critical": false,
-  "notes": "One language by default with the intro in it; neater receipts; PDF download saves to the phone; report PDF fixed.",
+  "notes": "One-language receipts; joiners can collect; fits every screen; crop images; pledge progress; neater QR codes.",
   "downloads": {
-    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/chandakhata-v1.0.7/ChandaKhata-1.0.7-android-arm64.apk",
-    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/chandakhata-v1.0.7/ChandaKhata-1.0.7-android-armv7.apk"
+    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/chandakhata-v1.0.8/ChandaKhata-1.0.8-android-arm64.apk",
+    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/chandakhata-v1.0.8/ChandaKhata-1.0.8-android-armv7.apk"
   }
 }
