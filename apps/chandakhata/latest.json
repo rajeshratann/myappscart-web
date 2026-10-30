@@ -1,10 +1,10 @@
 {
-  "version": "1.0.6",
-  "buildNumber": 7,
+  "version": "1.0.7",
+  "buildNumber": 8,
   "critical": false,
-  "notes": "Backup to Google Drive and restore; Sync now with offline receipts; delete notifications; Google and OTP sign-in fixed.",
+  "notes": "One language by default with the intro in it; neater receipts; PDF download saves to the phone; report PDF fixed.",
   "downloads": {
-    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/chandakhata-v1.0.6/ChandaKhata-1.0.6-android-arm64.apk",
-    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/chandakhata-v1.0.6/ChandaKhata-1.0.6-android-armv7.apk"
+    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/chandakhata-v1.0.7/ChandaKhata-1.0.7-android-arm64.apk",
+    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/chandakhata-v1.0.7/ChandaKhata-1.0.7-android-armv7.apk"
   }
 }
