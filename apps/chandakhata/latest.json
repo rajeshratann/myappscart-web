@@ -1,10 +1,10 @@
 {
-  "version": "1.0.8",
-  "buildNumber": 9,
+  "version": "1.0.9",
+  "buildNumber": 10,
   "critical": false,
-  "notes": "One-language receipts; joiners can collect; fits every screen; crop images; pledge progress; neater QR codes.",
+  "notes": "New receipt designs with ornate borders and Royal layout; header photo and logo on every layout; watermark; four invitation layouts with their own colour.",
   "downloads": {
-    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/chandakhata-v1.0.8/ChandaKhata-1.0.8-android-arm64.apk",
-    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/chandakhata-v1.0.8/ChandaKhata-1.0.8-android-armv7.apk"
+    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/chandakhata-v1.0.9/ChandaKhata-1.0.9-android-arm64.apk",
+    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/chandakhata-v1.0.9/ChandaKhata-1.0.9-android-armv7.apk"
   }
 }
