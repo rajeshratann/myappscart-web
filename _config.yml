@@ -1,0 +1,4 @@
+# GitHub Pages skips dot-folders unless they are listed here.
+# .well-known/assetlinks.json lets Android open myappscart.com/j/ links in ChandaKhata.
+include:
+  - .well-known
