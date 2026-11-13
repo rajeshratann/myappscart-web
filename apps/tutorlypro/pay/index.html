@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Pay — TutorlyPro</title>
+<style>
+:root{--c:#3730A3;--bg:#f4f4fb;--fg:#1f2330;--muted:#6b7080;--card:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#12131a;--fg:#eceef5;--muted:#a3a7b6;--card:#1d1f29}}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--fg)}
+.wrap{max-width:520px;margin:0 auto;padding:16px}.card{background:var(--card);border-radius:16px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,.08);margin-bottom:12px}
+h1{font-size:20px;margin:0 0 6px;color:var(--c)}.muted{color:var(--muted);font-size:13px}.amt{font-size:30px;font-weight:700;margin:12px 0}
+.btn{display:inline-block;width:100%;background:var(--c);color:#fff;border:0;border-radius:12px;padding:14px;font-size:16px;font-weight:600;cursor:pointer;text-align:center;text-decoration:none}
+.btn[disabled]{opacity:.6}.ok{color:#16A34A}.bad{color:#DC2626}.row{display:flex;gap:12px;align-items:center}
+.logo{width:44px;height:44px;border-radius:10px;object-fit:contain;background:#fff}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card row"><img id="logo" class="logo" alt="" hidden><div><h1 id="payee">TutorlyPro</h1><div class="muted">Secure payment by Cashfree</div></div></div>
+  <div class="card" id="box"><p id="msg">Loading…</p></div>
+  <p class="muted" style="text-align:center">Powered by TutorlyPro · <a href="/apps/tutorlypro/privacy.html">Privacy</a></p>
+</div>
+<script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
+<script>
+(function () {
+  var API = 'https://asia-south1-tutorlypro-990e1.cloudfunctions.net/checkoutApi';
+  var q = new URLSearchParams(location.search);
+  var t = q.get('t') || '';
+  var done = q.get('done') === '1';
+  var box = document.getElementById('box');
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function show(html) { box.innerHTML = html; }
+  function load(tries) {
+    fetch(API + '?t=' + encodeURIComponent(t) + (done ? '&done=1' : ''), { cache: 'no-store' })
+      .then(function (r) { if (r.status === 404) throw new Error('nf'); if (!r.ok) throw new Error('err'); return r.json(); })
+      .then(function (d) { render(d, tries); })
+      .catch(function (e) {
+        show(e.message === 'nf'
+          ? '<h1 class="bad">Link not valid</h1><p>This payment link is invalid or has expired. Please start again from the app.</p>'
+          : '<h1 class="bad">Could not load</h1><p>Please check your internet connection.</p><button class="btn" onclick="location.reload()">Try again</button>');
+      });
+  }
+  function render(d, tries) {
+    document.getElementById('payee').textContent = d.payee || 'TutorlyPro';
+    if (d.logoUrl) { var l = document.getElementById('logo'); l.src = d.logoUrl; l.hidden = false; }
+    document.title = (d.title || 'Pay') + ' — TutorlyPro';
+    var head = '<h1>' + esc(d.title) + '</h1><div class="muted">' + esc(d.subtitle) + '</div><div class="amt">' + esc(d.amountText) + '</div>';
+    if (d.status === 'paid') {
+      show(head + '<p class="ok"><b>' + esc(d.message || 'Payment received') + '</b></p>' +
+        (d.receiptUrl ? '<a class="btn" href="' + esc(d.receiptUrl) + '">View receipt</a>' : ''));
+      return;
+    }
+    if (d.status === 'authorised' || d.status === 'closed') { show(head + '<p>' + esc(d.message || '') + '</p>'); return; }
+    if (d.status === 'processing') {
+      show(head + '<p>' + esc(d.message || 'Confirming…') + '</p>');
+      if (tries < 24) setTimeout(function () { load(tries + 1); }, 5000);
+      else show(head + '<p>Still waiting for confirmation. If money was debited, the receipt will appear in the app shortly.</p>');
+      return;
+    }
+    show(head + '<button class="btn" id="pay">Pay now</button><p class="muted">Paid directly to ' + esc(d.payee) + ' through Cashfree.</p>');
+    var btn = document.getElementById('pay');
+    btn.onclick = function () {
+      btn.disabled = true;
+      try {
+        var cf = Cashfree({ mode: d.env === 'sandbox' ? 'sandbox' : 'production' });
+        var p = d.subscription
+          ? cf.subscriptionsCheckout({ subsSessionId: d.sessionId, redirectTarget: '_self' })
+          : cf.checkout({ paymentSessionId: d.sessionId, redirectTarget: '_self' });
+        if (p && p.then) p.then(function (r) { if (r && r.error) { alert(r.error.message || 'Payment failed'); btn.disabled = false; } });
+      } catch (e) { alert('Could not open the payment page. Please try again.'); btn.disabled = false; }
+    };
+  }
+  if (!t) { show('<h1 class="bad">Link not valid</h1><p>Open this page from the TutorlyPro app.</p>'); return; }
+  load(0);
+})();
+</script>
+</body>
+</html>
