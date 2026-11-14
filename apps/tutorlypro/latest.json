@@ -1,0 +1,10 @@
+{
+  "version": "1.0.0",
+  "buildNumber": 1,
+  "critical": false,
+  "notes": "First release: students, batches, attendance, fees with receipts, exams, homework, announcements and parent app, in Hindi and English.",
+  "downloads": {
+    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.0/TutorlyPro-1.0.0-android-arm64.apk",
+    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.0/TutorlyPro-1.0.0-android-armv7.apk"
+  }
+}
