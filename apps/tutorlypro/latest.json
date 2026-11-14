@@ -1,10 +1,10 @@
 {
-  "version": "1.0.0",
-  "buildNumber": 1,
+  "version": "1.0.1",
+  "buildNumber": 2,
   "critical": false,
-  "notes": "First release: students, batches, attendance, fees with receipts, exams, homework, announcements and parent app, in Hindi and English.",
+  "notes": "Fixes from end-to-end testing: clearer form errors that scroll to the first problem, marks save before Review, logout clears local data, teacher fee totals scoped to their batches, first-student checklist ticks, absent alert on corrected closed days, and subscription prices shown including GST.",
   "downloads": {
-    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.0/TutorlyPro-1.0.0-android-arm64.apk",
-    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.0/TutorlyPro-1.0.0-android-armv7.apk"
+    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.1/TutorlyPro-1.0.1-android-arm64.apk",
+    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.1/TutorlyPro-1.0.1-android-armv7.apk"
   }
 }
