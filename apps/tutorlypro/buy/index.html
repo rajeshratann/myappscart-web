@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Buy a plan — TutorlyPro</title>
+<link rel="icon" href="/apps/tutorlypro/icon-512.png">
+<style>
+:root{--c:#3730A3;--accent:#3730A3;--amber:#F59E0B;--bg:#f4f4fb;--fg:#1f2330;--muted:#6b7080;--card:#fff;--line:#e3e4ee}
+@media (prefers-color-scheme:dark){:root{--accent:#A5B4FC;--bg:#12131a;--fg:#eceef5;--muted:#a3a7b6;--card:#1d1f29;--line:#2c2f3d}}
+a{color:var(--accent);font-weight:600;text-decoration:none}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--fg)}
+.wrap{max-width:520px;margin:0 auto;padding:16px}.card{background:var(--card);border-radius:16px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,.08);margin-bottom:12px}
+h1{font-size:20px;margin:0 0 6px;color:var(--accent)}h2{font-size:17px;margin:0 0 12px}.muted{color:var(--muted);font-size:13px}
+.btn{display:inline-block;width:100%;background:var(--c);color:#fff;border:0;border-radius:12px;padding:14px;font-size:16px;font-weight:600;cursor:pointer;text-align:center;text-decoration:none;margin-top:12px}
+.btn[disabled]{opacity:.6;cursor:default}.link{background:none;border:0;color:var(--accent);font-weight:600;cursor:pointer;padding:8px 0;font-size:14px}
+.bad{color:#DC2626;font-size:14px;margin-top:10px}.row{display:flex;gap:12px;align-items:center}.row>div{min-width:0}
+.logo{width:44px;height:44px;border-radius:10px}
+label{display:block;font-size:13px;font-weight:600;margin:4px 0 6px}
+input{width:100%;padding:13px;font-size:17px;border:1.5px solid var(--line);border-radius:12px;background:var(--bg);color:var(--fg)}
+input:focus{outline:2px solid var(--accent);border-color:transparent}
+.phone{display:flex;gap:8px;align-items:center}.phone span{font-weight:600}
+.opts{display:grid;gap:8px}
+.opt{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px 14px;border:1.5px solid var(--line);border-radius:12px;cursor:pointer}
+.opt input{width:auto;margin:0 8px 0 0}.opt.on{border-color:var(--accent);background:rgba(55,48,163,.06)}
+.opt b{font-size:15px}.opt small{color:var(--muted)}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.total{display:flex;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:15px}
+.total b{font-size:20px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card row"><img class="logo" src="/apps/tutorlypro/icon-512.png" alt=""><div><h1>TutorlyPro</h1><div class="muted">Buy or upgrade your institute's plan · Secure payment by Cashfree</div></div></div>
+
+  <div class="card">
+    <h2>1. Choose a plan</h2>
+    <div class="opts" id="plans"></div>
+    <h2 style="margin-top:18px">Billing</h2>
+    <div class="seg" id="periods"></div>
+    <div class="total"><span id="breakup" class="muted"></span><b id="total"></b></div>
+  </div>
+
+  <div class="card" id="box"></div>
+
+  <p class="muted" style="text-align:center">Don't have TutorlyPro yet? <a href="/apps/tutorlypro/#download">Download the app</a>, create your institute (free 14-day Professional trial), then come back here.<br><br>
+  <a href="/apps/tutorlypro/terms.html">Terms</a> · <a href="/apps/tutorlypro/refund.html">Refund policy</a> · <a href="/apps/tutorlypro/privacy.html">Privacy</a> · <a href="mailto:support@myappscart.com">support@myappscart.com</a><br>A <a href="https://kirosys.in" target="_blank" rel="noopener">Kirosys Technology</a> company</p>
+</div>
+<script>
+(function () {
+  'use strict';
+  var FN = 'https://asia-south1-tutorlypro-990e1.cloudfunctions.net/';
+  var API_KEY = 'AIzaSyDHX2txNpq0TH7FSGKlJ3zgEGZj1KBWZEc';
+  var PROJECT = 'tutorlypro-990e1';
+  // Prices before 18% GST, in paise (server re-prices; this is display only).
+  var PLANS = {
+    starter: { name: 'Starter', note: '10 batches · 2 staff', monthly: 29900, annual: 299000 },
+    professional: { name: 'Professional', note: 'Unlimited batches · 10 staff · online fees', monthly: 69900, annual: 699000 },
+    business: { name: 'Business', note: 'Unlimited staff · multiple branches', monthly: 149900, annual: 1499000 }
+  };
+  var q = new URLSearchParams(location.search);
+  var plan = PLANS[q.get('plan')] ? q.get('plan') : 'professional';
+  var period = q.get('period') === 'annual' ? 'annual' : 'monthly';
+  var phone = '', idToken = '', institutes = [], iid = '';
+  var box = document.getElementById('box');
+
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return '&#' + c.charCodeAt(0) + ';'; }); }
+  function rs(p) { return '₹' + (p / 100).toLocaleString('en-IN', { minimumFractionDigits: p % 100 ? 2 : 0, maximumFractionDigits: 2 }); }
+  function gst(p) { return Math.floor((p * 1800 + 5000) / 10000); }
+
+  function renderPlans() {
+    var h = '';
+    Object.keys(PLANS).forEach(function (k) {
+      var p = PLANS[k];
+      h += '<label class="opt' + (k === plan ? ' on' : '') + '"><span><input type="radio" name="plan" value="' + k + '"' + (k === plan ? ' checked' : '') + '><b>' + p.name + '</b><br><small>' + p.note + '</small></span><span>' + rs(p.monthly) + '<small>/mo</small></span></label>';
+    });
+    document.getElementById('plans').innerHTML = h;
+    document.getElementById('periods').innerHTML =
+      '<label class="opt' + (period === 'monthly' ? ' on' : '') + '"><span><input type="radio" name="period" value="monthly"' + (period === 'monthly' ? ' checked' : '') + '><b>Monthly</b></span></label>' +
+      '<label class="opt' + (period === 'annual' ? ' on' : '') + '"><span><input type="radio" name="period" value="annual"' + (period === 'annual' ? ' checked' : '') + '><b>Yearly</b><br><small>2 months free</small></span></label>';
+    var base = PLANS[plan][period], g = gst(base);
+    document.getElementById('breakup').textContent = rs(base) + ' + ' + rs(g) + ' GST (18%)';
+    document.getElementById('total').textContent = rs(base + g) + (period === 'annual' ? '/year' : '/month');
+  }
+  document.addEventListener('change', function (e) {
+    if (e.target.name === 'plan') { plan = e.target.value; renderPlans(); }
+    if (e.target.name === 'period') { period = e.target.value; renderPlans(); }
+    if (e.target.name === 'inst') { iid = e.target.value; renderInstitutes(); }
+  });
+
+  function call(name, data, auth) {
+    var headers = { 'Content-Type': 'application/json' };
+    if (auth) headers.Authorization = 'Bearer ' + idToken;
+    return fetch(FN + name, { method: 'POST', headers: headers, body: JSON.stringify({ data: data }) })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { if (j.error) throw new Error(j.error.message || 'Something went wrong'); return j.result; });
+  }
+  function friendly(e) {
+    var m = String(e && e.message || e);
+    if (/failed to fetch|network/i.test(m)) return 'No internet connection. Please try again.';
+    if (/too many/i.test(m)) return 'Too many tries. Please wait a few minutes and try again.';
+    if (/otp-not-configured/.test(m)) return 'Login is not available right now. Please try again later.';
+    return m;
+  }
+  function deviceId() {
+    try {
+      var d = localStorage.getItem('tp_device');
+      if (!d) { d = 'web-' + Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem('tp_device', d); }
+      return d;
+    } catch (e) { return undefined; }
+  }
+  function busy(btn, on, label) { btn.disabled = on; btn.textContent = on ? 'Please wait…' : label; }
+  function err(msg) { var el = document.getElementById('err'); if (el) el.textContent = msg || ''; }
+
+  function stepPhone() {
+    box.innerHTML = '<h2>2. Log in as the institute owner</h2><label for="ph">Mobile number used in the app</label>' +
+      '<div class="phone"><span>+91</span><input id="ph" type="tel" inputmode="numeric" maxlength="10" placeholder="98765 43210" autocomplete="tel-national" value="' + esc(phone.slice(3)) + '"></div>' +
+      '<button class="btn" id="send">Send OTP</button><div class="bad" id="err"></div>';
+    var btn = document.getElementById('send'), ph = document.getElementById('ph');
+    ph.focus();
+    btn.onclick = function () {
+      var n = ph.value.replace(/\D/g, '').replace(/^(91|0)(?=\d{10}$)/, '');
+      if (!/^[6-9]\d{9}$/.test(n)) return err('Enter a valid 10-digit Indian mobile number.');
+      phone = '+91' + n; busy(btn, true); err();
+      call('sendLoginOtp', { phone: phone, deviceId: deviceId() }).then(stepCode, function (e) { busy(btn, false, 'Send OTP'); err(friendly(e)); });
+    };
+    ph.onkeydown = function (e) { if (e.key === 'Enter') btn.click(); };
+  }
+
+  function stepCode() {
+    box.innerHTML = '<h2>2. Enter the OTP</h2><p class="muted">Sent by SMS to ' + esc(phone) + '. <button class="link" id="chg">Change</button></p>' +
+      '<input id="code" type="text" inputmode="numeric" maxlength="6" placeholder="6-digit OTP" autocomplete="one-time-code">' +
+      '<button class="btn" id="ver">Verify and continue</button><div class="bad" id="err"></div>';
+    var btn = document.getElementById('ver'), code = document.getElementById('code');
+    document.getElementById('chg').onclick = stepPhone;
+    code.focus();
+    btn.onclick = function () {
+      var c = code.value.replace(/\D/g, '');
+      if (c.length !== 6) return err('Enter the 6-digit OTP.');
+      busy(btn, true); err();
+      call('verifyLoginOtp', { phone: phone, code: c })
+        .then(function (r) {
+          return fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=' + API_KEY, {
+            method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token: r.token, returnSecureToken: true })
+          }).then(function (x) { return x.json(); });
+        })
+        .then(function (s) {
+          if (!s.idToken) throw new Error('Could not log in. Please try again.');
+          idToken = s.idToken;
+          return fetch('https://firestore.googleapis.com/v1/projects/' + PROJECT + '/databases/(default)/documents/users/' + s.localId + '/profiles?pageSize=100',
+            { headers: { Authorization: 'Bearer ' + idToken } }).then(function (x) { return x.json(); });
+        })
+        .then(function (res) {
+          institutes = (res.documents || []).map(function (d) {
+            var f = d.fields || {}, v = function (k) { return f[k] && f[k].stringValue; };
+            return { id: v('instituteId'), name: v('instituteName') || 'Institute', role: v('role'), status: v('status'), kind: v('kind') };
+          }).filter(function (p) { return p.kind === 'staff' && p.role === 'owner' && p.status !== 'removed' && p.id; });
+          iid = institutes.length ? institutes[0].id : '';
+          renderInstitutes();
+        })
+        .catch(function (e) { busy(btn, false, 'Verify and continue'); err(friendly(e)); });
+    };
+    code.onkeydown = function (e) { if (e.key === 'Enter') btn.click(); };
+  }
+
+  function renderInstitutes() {
+    if (!institutes.length) {
+      box.innerHTML = '<h2>No institute found</h2><p>' + esc(phone) + ' is not the owner of any TutorlyPro institute. Only the owner can buy a plan.</p>' +
+        '<p class="muted">New to TutorlyPro? Download the app, log in with this number and create your institute. It starts with a free 14-day Professional trial.</p>' +
+        '<a class="btn" href="/apps/tutorlypro/#download">Download the app</a><button class="link" id="chg">Use a different number</button>';
+      document.getElementById('chg').onclick = function () { idToken = ''; stepPhone(); };
+      return;
+    }
+    var h = '<h2>3. Institute</h2><div class="opts">';
+    institutes.forEach(function (p) {
+      h += '<label class="opt' + (p.id === iid ? ' on' : '') + '"><span><input type="radio" name="inst" value="' + esc(p.id) + '"' + (p.id === iid ? ' checked' : '') + '><b>' + esc(p.name) + '</b></span></label>';
+    });
+    h += '</div><button class="btn" id="pay">Continue to payment</button><div class="bad" id="err"></div>' +
+      '<p class="muted">You pay ' + '<b id="amt"></b> to Kirosys Technology through Cashfree. A GST invoice is sent after payment.</p>';
+    box.innerHTML = h;
+    var base = PLANS[plan][period];
+    document.getElementById('amt').textContent = rs(base + gst(base));
+    var btn = document.getElementById('pay');
+    btn.onclick = function () {
+      busy(btn, true); err();
+      call('createPlanOrder', { instituteId: iid, planId: plan, period: period }, true)
+        .then(function (r) { location.href = r.url; })
+        .catch(function (e) { busy(btn, false, 'Continue to payment'); err(friendly(e)); });
+    };
+  }
+
+  // Plan/period changes after login update the amount shown on the pay step.
+  var _render = renderPlans;
+  renderPlans = function () { _render(); if (idToken && institutes.length) renderInstitutes(); };
+
+  renderPlans();
+  stepPhone();
+})();
+</script>
+</body>
+</html>
