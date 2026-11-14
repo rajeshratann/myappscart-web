@@ -73,7 +73,7 @@ input:focus{outline:2px solid var(--accent);border-color:transparent}
     var h = '';
     Object.keys(PLANS).forEach(function (k) {
       var p = PLANS[k];
-      h += '<label class="opt' + (k === plan ? ' on' : '') + '"><span><input type="radio" name="plan" value="' + k + '"' + (k === plan ? ' checked' : '') + '><b>' + p.name + '</b><br><small>' + p.note + '</small></span><span>' + rs(p.monthly) + '<small>/mo</small></span></label>';
+      h += '<label class="opt' + (k === plan ? ' on' : '') + '"><span><input type="radio" name="plan" value="' + k + '"' + (k === plan ? ' checked' : '') + '><b>' + p.name + '</b><br><small>' + p.note + '</small></span><span>' + rs(p.monthly + gst(p.monthly)) + '<small>/mo incl. GST</small></span></label>';
     });
     document.getElementById('plans').innerHTML = h;
     document.getElementById('periods').innerHTML =
@@ -81,7 +81,7 @@ input:focus{outline:2px solid var(--accent);border-color:transparent}
       '<label class="opt' + (period === 'annual' ? ' on' : '') + '"><span><input type="radio" name="period" value="annual"' + (period === 'annual' ? ' checked' : '') + '><b>Yearly</b><br><small>2 months free</small></span></label>';
     var base = PLANS[plan][period], g = gst(base);
     document.getElementById('breakup').textContent = rs(base) + ' + ' + rs(g) + ' GST (18%)';
-    document.getElementById('total').textContent = rs(base + g) + (period === 'annual' ? '/year' : '/month');
+    document.getElementById('total').textContent = rs(base + g) + (period === 'annual' ? '/year' : '/month') + ' incl. GST';
   }
   document.addEventListener('change', function (e) {
     if (e.target.name === 'plan') { plan = e.target.value; renderPlans(); }
