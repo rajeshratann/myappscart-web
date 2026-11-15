@@ -1,10 +1,10 @@
 {
-  "version": "1.0.1",
-  "buildNumber": 2,
+  "version": "1.0.3",
+  "buildNumber": 4,
   "critical": false,
-  "notes": "Fixes from end-to-end testing: clearer form errors that scroll to the first problem, marks save before Review, logout clears local data, teacher fee totals scoped to their batches, first-student checklist ticks, absent alert on corrected closed days, and subscription prices shown including GST.",
+  "notes": "New: receipt and birthday template editor. Receipt emails and PDFs use your chosen template; birthday wishes use your chosen template and can be emailed. Email goes out by default on notifications, plan-locked features show the upgrade option, and platform plan prices include GST.",
   "downloads": {
-    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.1/TutorlyPro-1.0.1-android-arm64.apk",
-    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.1/TutorlyPro-1.0.1-android-armv7.apk"
+    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.3/TutorlyPro-1.0.3-android-arm64.apk",
+    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.3/TutorlyPro-1.0.3-android-armv7.apk"
   }
 }
