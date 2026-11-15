@@ -1,10 +1,10 @@
 {
-  "version": "1.0.3",
-  "buildNumber": 4,
+  "version": "1.0.4",
+  "buildNumber": 5,
   "critical": false,
-  "notes": "New: receipt and birthday template editor. Receipt emails and PDFs use your chosen template; birthday wishes use your chosen template and can be emailed. Email goes out by default on notifications, plan-locked features show the upgrade option, and platform plan prices include GST.",
+  "notes": "Professional email for every notification, with the institute logo and footer. Receipt, birthday, festival, result and ID card templates you can edit. Upgrade prompt for plan-locked features. Profile photos now show on staff and member lists.",
   "downloads": {
-    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.3/TutorlyPro-1.0.3-android-arm64.apk",
-    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.3/TutorlyPro-1.0.3-android-armv7.apk"
+    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.4/TutorlyPro-1.0.4-android-arm64.apk",
+    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.4/TutorlyPro-1.0.4-android-armv7.apk"
   }
 }
