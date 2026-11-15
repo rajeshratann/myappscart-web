@@ -1,10 +1,10 @@
 {
-  "version": "1.0.4",
-  "buildNumber": 5,
+  "version": "1.0.5",
+  "buildNumber": 6,
   "critical": false,
-  "notes": "Professional email for every notification, with the institute logo and footer. Receipt, birthday, festival, result and ID card templates you can edit. Upgrade prompt for plan-locked features. Profile photos now show on staff and member lists.",
+  "notes": "Switch to the Free plan from the upgrade screen. Student form: School or College, parent ID document required and student ID document optional. Plus the earlier fixes: professional emails, receipt PDFs, editable templates, upgrade prompts and profile photos.",
   "downloads": {
-    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.4/TutorlyPro-1.0.4-android-arm64.apk",
-    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.4/TutorlyPro-1.0.4-android-armv7.apk"
+    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.5/TutorlyPro-1.0.5-android-arm64.apk",
+    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.5/TutorlyPro-1.0.5-android-armv7.apk"
   }
 }
