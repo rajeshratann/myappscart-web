@@ -1,10 +1,10 @@
 {
-  "version": "1.0.5",
-  "buildNumber": 6,
+  "version": "1.0.6",
+  "buildNumber": 7,
   "critical": false,
-  "notes": "Switch to the Free plan from the upgrade screen. Student form: School or College, parent ID document required and student ID document optional. Plus the earlier fixes: professional emails, receipt PDFs, editable templates, upgrade prompts and profile photos.",
+  "notes": "Self-registration by batch code: students and parents attach a parent ID (required) and their own ID (optional); teachers attach an ID to join. Students appear once approved. Class is optional and School or College can be chosen.",
   "downloads": {
-    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.5/TutorlyPro-1.0.5-android-arm64.apk",
-    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.5/TutorlyPro-1.0.5-android-armv7.apk"
+    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.6/TutorlyPro-1.0.6-android-arm64.apk",
+    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.6/TutorlyPro-1.0.6-android-armv7.apk"
   }
 }
