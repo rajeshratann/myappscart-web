@@ -1,10 +1,10 @@
 {
-  "version": "1.0.8",
-  "buildNumber": 9,
+  "version": "1.0.9",
+  "buildNumber": 10,
   "critical": false,
-  "notes": "Pictures are compressed automatically under 2 MB, profile and student photos are cropped to a square automatically, and staff can upload assignment submissions for students.",
+  "notes": "Batch screen redesigned with a summary card and a card for every module. Includes the picture upload fixes from 1.0.8.",
   "downloads": {
-    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.8/TutorlyPro-1.0.8-android-arm64.apk",
-    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.8/TutorlyPro-1.0.8-android-armv7.apk"
+    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.9/TutorlyPro-1.0.9-android-arm64.apk",
+    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.9/TutorlyPro-1.0.9-android-armv7.apk"
   }
 }
