@@ -1,10 +1,10 @@
 {
-  "version": "1.0.12",
-  "buildNumber": 13,
+  "version": "1.0.13",
+  "buildNumber": 14,
   "critical": false,
-  "notes": "Choose an app theme in Settings, set a photo or illustration on each batch card, and a fresh look for the Batches, Students and Fees tabs. Back button asks before closing the app, and the fingerprint lock is fixed. Parents now see attendance and batch fees.",
+  "notes": "Log in with your mobile number or Google. New login, intro and language screens. Photos and files now open inside the app with download and share. Tablet layout with a side menu, and faster loading.",
   "downloads": {
-    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.12/TutorlyPro-1.0.12-android-arm64.apk",
-    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.12/TutorlyPro-1.0.12-android-armv7.apk"
+    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.13/TutorlyPro-1.0.13-android-arm64.apk",
+    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.13/TutorlyPro-1.0.13-android-armv7.apk"
   }
 }
