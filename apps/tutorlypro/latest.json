@@ -1,10 +1,10 @@
 {
-  "version": "1.0.11",
-  "buildNumber": 12,
+  "version": "1.0.12",
+  "buildNumber": 13,
   "critical": false,
-  "notes": "Mobile numbers take exactly 10 digits everywhere in the app.",
+  "notes": "Choose an app theme in Settings, set a photo or illustration on each batch card, and a fresh look for the Batches, Students and Fees tabs. Back button asks before closing the app, and the fingerprint lock is fixed. Parents now see attendance and batch fees.",
   "downloads": {
-    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.11/TutorlyPro-1.0.11-android-arm64.apk",
-    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.11/TutorlyPro-1.0.11-android-armv7.apk"
+    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.12/TutorlyPro-1.0.12-android-arm64.apk",
+    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.12/TutorlyPro-1.0.12-android-armv7.apk"
   }
 }
