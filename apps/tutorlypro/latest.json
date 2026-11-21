@@ -1,10 +1,10 @@
 {
-  "version": "1.0.14",
-  "buildNumber": 15,
-  "critical": false,
-  "notes": "New orange app icon. Log in with your mobile number or Google. Photos and files open inside the app with download and share. Tablet layout and faster loading.",
+  "version": "1.0.15",
+  "buildNumber": 16,
+  "critical": true,
+  "notes": "Fixes the app closing on launch in 1.0.13 and 1.0.14. New orange app icon, mobile or Google login, files open inside the app, tablet layout and faster loading.",
   "downloads": {
-    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.14/TutorlyPro-1.0.14-android-arm64.apk",
-    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.14/TutorlyPro-1.0.14-android-armv7.apk"
+    "android": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.15/TutorlyPro-1.0.15-android-arm64.apk",
+    "androidArmv7": "https://github.com/rajeshratann/myappscart-web/releases/download/tutorlypro-v1.0.15/TutorlyPro-1.0.15-android-armv7.apk"
   }
 }
