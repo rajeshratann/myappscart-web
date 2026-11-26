@@ -47,61 +47,78 @@
 
 <main>
 
-  <p class="effective">Effective date: July 12, 2026 &nbsp;·&nbsp; Last updated: July 12, 2026</p>
+  <p class="effective">Effective date: July 12, 2026 &nbsp;·&nbsp; Last updated: November 26, 2026</p>
 
   <div class="card">
     <h2>Overview</h2>
     <p>
       ChessVerse ("the App") is published by MyAppsCart, a brand of Kirosys Technology. This Privacy Policy
       explains what information we collect, why, and how you can control it. By using the App, you
-      agree to the terms described here.
+      agree to the terms described here. It applies to the App on Android and on iPhone and iPad.
     </p>
     <p>
-      ChessVerse is designed to be safe for players of every age: there is no chat, no user-generated
-      content, and no player-to-player communication of any kind — only chess against the AI, the
-      story campaign, puzzles, and a shared leaderboard.
+      Every offline mode — playing the computer, puzzles, the story campaign, survival and Pass &amp; Play
+      on one device — works without an account. If you choose to sign in, you can also add friends,
+      chat with them, play online against other people and appear on the global leaderboard.
     </p>
   </div>
 
   <div class="card">
-    <h2>Play as Guest — nothing leaves your device</h2>
+    <h2>Play as Guest — no account, progress stays on your device</h2>
     <p>
       If you choose <strong>Guest</strong> at the sign-in screen, the App never creates an account and
-      never contacts our servers. Progress (coins, gems, unlocked levels, puzzle history, settings) is
-      stored only in the app's private storage on your device and is deleted if you uninstall the App.
+      never uploads your progress or any personal data to us. Progress (coins, gems, unlocked levels,
+      puzzle history, game history, settings) is stored only in the app's private storage on your
+      device and is deleted if you uninstall the App. Ads are still shown, as described below.
     </p>
   </div>
 
   <div class="card">
     <h2>Information We Collect</h2>
-    <h3>If you sign in with Google or Play Games</h3>
+    <h3>If you sign in with Apple, Google or Play Games</h3>
     <table>
       <tr><th>Data</th><th>Why we collect it</th><th>Where it's stored</th></tr>
-      <tr><td>Display name, email, profile photo</td><td>To create your account and show your name/photo on the leaderboard</td><td>Firebase Authentication</td></tr>
+      <tr><td>Display name, email, profile photo. With Sign in with Apple you can choose to hide your email, and we then receive only Apple's private relay address.</td><td>To create your account and show your name/photo on the leaderboard and to your friends</td><td>Firebase Authentication</td></tr>
       <tr><td>Leaderboard row: name, XP/points, rating, games won, photo</td><td>To power the public global leaderboard</td><td>Cloud Firestore, readable by other signed-in players</td></tr>
-      <tr><td>Private save: coins, gems, unlocked levels, solved puzzles, completed lessons, story progress, theme settings</td><td>To back up and restore your progress across devices</td><td>Cloud Firestore, readable only by you</td></tr>
+      <tr><td>Private save: coins, gems, unlocked levels, solved puzzles, completed lessons, story progress, theme settings, and your coin wallet balance</td><td>To back up and restore your progress across devices</td><td>Cloud Firestore, readable only by you</td></tr>
+      <tr><td>Friends: your friend code, friends list, friend requests and whether you are online</td><td>To let you add friends and see when they can play</td><td>Cloud Firestore, visible to your friends</td></tr>
+      <tr><td>Messages: direct messages between friends, and chat inside an online game</td><td>To deliver your messages</td><td>Cloud Firestore, readable only by the players in that conversation or game</td></tr>
+      <tr><td>Online games: the moves, the two players and any coin stake</td><td>To run the game and settle the result</td><td>Cloud Firestore, readable by both players</td></tr>
+      <tr><td>Notification token for your device</td><td>To notify you of friend requests, messages and game invitations, if you allow notifications</td><td>Cloud Firestore, readable only by you</td></tr>
     </table>
-    <p>We never see your Google account password — sign-in is handled entirely by Google's/Play Games' own sign-in flow.</p>
+    <p>
+      <strong>Chat is limited by design.</strong> With players who are not your friends — for example an
+      online opponent — you can only send a fixed set of preset phrases. Typed messages (up to 200
+      characters) are only possible between two players who have both accepted a friend request, and
+      you can remove or block a friend at any time.
+    </p>
+    <p>We never see your Apple or Google password — sign-in is handled entirely by Apple's, Google's or Play Games' own sign-in flow.</p>
     <h3>Automatically collected</h3>
     <ul>
-      <li><strong>Advertising identifiers</strong> — Google AdMob may collect an advertising ID and device/usage data to select and measure ads. Because ChessVerse may be played by children as well as adults, <strong>every ad request is marked child-directed and only non-personalized, general-audience ads are served — to every player, regardless of age.</strong></li>
-      <li><strong>Purchase status</strong> — if you buy the optional "Remove Ads" subscription, Google Play Billing tells us only whether the purchase succeeded. We never see your payment details.</li>
+      <li><strong>Advertising identifiers</strong> — Google AdMob may collect an advertising ID and device/usage data to select and measure ads. Because ChessVerse may be played by children as well as adults, <strong>every ad request is marked child-directed and only non-personalized, general-audience ads are served — to every player, regardless of age.</strong> The App does not track you across other companies' apps or websites, and on iPhone and iPad it never asks for permission to.</li>
+      <li><strong>Purchases</strong> — if you buy the optional "Remove Ads" subscription or a gem pack, Google Play or the App Store sends us a record of the purchase. We verify it on our server and keep it, linked to your account, so your purchase is honoured and can't be credited twice. We never see your payment details.</li>
+    </ul>
+    <h3>Kept only on your device</h3>
+    <ul>
+      <li>Your game history (including games you export as PGN)</li>
+      <li>Daily reminder notifications, which are scheduled on your device and never sent to us</li>
+      <li>Pass &amp; Play games and the player names you type for them</li>
     </ul>
     <h3>Information we do NOT collect</h3>
     <ul>
-      <li>Payment or card details — Google Play Billing handles all payments directly</li>
+      <li>Payment or card details — Google Play and the App Store handle all payments directly</li>
       <li>Precise location data</li>
       <li>Contacts, camera, microphone, or file access</li>
-      <li>Any chat messages or player-to-player communication — there is none in the App</li>
     </ul>
   </div>
 
   <div class="card">
     <h2>Redeeming a Coupon Code</h2>
     <p>
-      Settings → Redeem Coupon Code links a single-use code to your signed-in account ID so it can't be
-      reused by someone else. The code text itself is not personal data, and redemption requires you to
-      be signed in with Google or Play Games first (Guests are prompted to sign in).
+      On Android, Settings → Redeem Coupon Code links a single-use code to your signed-in account ID so
+      it can't be reused by someone else. The code text itself is not personal data, and redemption
+      requires you to be signed in first (Guests are prompted to sign in). Coupon codes are not
+      available in the iPhone and iPad version.
     </p>
   </div>
 
@@ -111,8 +128,10 @@
       <li>To create and maintain your account, if you choose to sign in</li>
       <li>To back up and restore your coins, gems, unlocks, and progress across devices</li>
       <li>To display your name/photo on the public leaderboard (you can change your display name anytime)</li>
+      <li>To let you add friends, chat with them and play online</li>
+      <li>To send the notifications you have allowed</li>
       <li>To show non-personalized, family-safe ads via Google AdMob</li>
-      <li>To unlock the "Remove Ads" subscription or a redeemed coupon code</li>
+      <li>To honour the "Remove Ads" subscription, gem packs you buy, or a redeemed coupon code</li>
       <li>To respond to support requests</li>
     </ul>
   </div>
@@ -121,11 +140,14 @@
     <h2>Third-Party Services</h2>
     <p>The App integrates the following third-party services, each governed by its own privacy policy:</p>
     <ul>
-      <li><strong>Firebase Authentication &amp; Cloud Firestore</strong> (Google) — sign-in, cloud save, leaderboard</li>
+      <li><strong>Firebase Authentication, Cloud Firestore &amp; Cloud Functions</strong> (Google) — sign-in, cloud save, friends, messages, online games, leaderboard and purchase verification</li>
+      <li><strong>Firebase Cloud Messaging</strong> (Google) — notifications, delivered on iPhone and iPad through the Apple Push Notification service</li>
+      <li><strong>Sign in with Apple</strong> (Apple) — optional authentication on iPhone and iPad</li>
       <li><strong>Google Sign-In</strong> — optional authentication</li>
-      <li><strong>Google Play Games Services</strong> — optional authentication</li>
+      <li><strong>Google Play Games Services</strong> — optional authentication on Android</li>
       <li><strong>Google AdMob</strong> — advertising (banner, interstitial, rewarded), always non-personalized</li>
-      <li><strong>Google Play Billing</strong> — the optional Remove Ads subscription</li>
+      <li><strong>Google Play Billing</strong> — the optional Remove Ads subscription and gem packs on Android</li>
+      <li><strong>App Store In-App Purchase</strong> (Apple) — the optional Remove Ads subscription and gem packs on iPhone and iPad</li>
     </ul>
     <p>We do not sell or rent your personal data to any third party.</p>
   </div>
@@ -133,24 +155,28 @@
   <div class="card">
     <h2>Children's Privacy</h2>
     <p>
-      ChessVerse is a mixed-audience app that may be played by both children and adults. There is no
-      chat, no user-generated content, and no player-to-player contact of any kind. As described above,
-      every ad shown in the App is treated as child-directed and non-personalized, for every player,
-      regardless of age, since the App has no age-verification step.
+      ChessVerse is a mixed-audience app that may be played by both children and adults. Players who are
+      not friends can only exchange preset phrases; typed messages are only possible between players
+      who have both accepted a friend request, and any friend can be removed or blocked at any time.
+      As described above, every ad shown in the App is treated as child-directed and non-personalized,
+      for every player, regardless of age, since the App has no age-verification step.
     </p>
     <p>
       If you are a parent or guardian and believe your child has an account with personal data (from
-      Google/Play Games sign-in) that you'd like removed, contact us using the details below and we
-      will delete it.
+      Apple, Google or Play Games sign-in) that you'd like removed, you can delete it in the App as
+      described below, or contact us using the details below and we will delete it.
     </p>
   </div>
 
   <div class="card">
     <h2>Your Choices</h2>
     <ul>
-      <li><strong>Play as Guest</strong> to avoid creating any account or sending any data off your device</li>
+      <li><strong>Play as Guest</strong> to avoid creating any account or uploading any progress</li>
       <li><strong>Sign out / switch accounts</strong> anytime from Settings → Account</li>
-      <li><strong>Restore purchases</strong> and <strong>manage/cancel your subscription</strong> anytime through the Google Play Store app (Play Store → Payments &amp; subscriptions)</li>
+      <li><strong>Delete your account</strong> anytime from Settings → Account → Delete account</li>
+      <li><strong>Remove or block a friend</strong> from the Friends screen</li>
+      <li><strong>Turn notifications off</strong> anytime in your device's settings</li>
+      <li><strong>Restore purchases</strong> in the App, and <strong>manage/cancel your subscription</strong> through the Google Play Store app (Play Store → Payments &amp; subscriptions) or, on iPhone and iPad, Settings → your name → Subscriptions</li>
       <li><strong>Opt out of personalized advertising</strong> — not applicable here, since the App never requests personalized ads for anyone</li>
     </ul>
   </div>
@@ -158,9 +184,20 @@
   <div class="card">
     <h2>Data Retention &amp; Deletion</h2>
     <p>
-      Cloud data (your leaderboard row and save backup) is kept for as long as your account exists, so
-      we can restore your progress on a new device. To request deletion of your account and all
-      associated cloud data, email us at
+      Cloud data is kept for as long as your account exists, so we can restore your progress on a new
+      device. You can delete your account at any time in the App: <strong>Settings → Account → Delete
+      account</strong>. This immediately and permanently deletes your account, profile, leaderboard
+      entry, save backup, wallet, friends, records, notification tokens, and the conversations and
+      online games you took part in — conversations and games are removed for both players. For Sign
+      in with Apple accounts we also revoke the App's access with Apple.
+    </p>
+    <p>
+      Records of completed purchases and redeemed coupon codes are kept after deletion, with your
+      account ID replaced by an irreversible code, so that the same purchase cannot be credited twice.
+      They no longer identify you.
+    </p>
+    <p>
+      You can also ask us to delete your account by emailing
       <a href="mailto:support@myappscart.com?subject=Delete%20ChessVerse%20Account">support@myappscart.com</a>
       with the subject "Delete ChessVerse Account" and the email/profile you signed in with. We will
       process your request within 30 days.
